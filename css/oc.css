@@ -1,0 +1,54 @@
+.blue-section {
+    position: relative;
+    padding: 20px;
+    text-align: center;
+    background-color: #e6f3fa;
+}
+
+.blue-bg {
+    width: 100%;
+    height: auto;
+    opacity: 0.5;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.latest-posts {
+    margin-top: 20px;
+}
+
+.latest-posts h4 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.posts-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.post-thumbnail {
+    width: 150px;
+    height: 150px;
+    border: 2px solid #0000ff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+}
+
+.post-thumbnail img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.post-thumbnail p {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
+}

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>永續小站 - 編輯區</title>
-    <link rel="stylesheet" href="css/2.css">
+    <link rel="stylesheet" href="../css/2.css">
 </head>
 <body>
     <!-- 主導航欄 -->
@@ -86,9 +86,9 @@
 
     <!-- 外部控制按鈕（水平排列，靜態放置在底部） -->
     <div class="external-controls">
-        <button class="external-btn view-all">查看所有題目</button>
+        <button class="external-btn view-all" onclick="window.location.href='view-all-qusetion.php'">查看所有題目</button>
         <button class="external-btn save">確認儲存</button>
     </div>
-    <script src="script.js"></script>
+    <script src="../js/script.js"></script>
 </body>
 </html>

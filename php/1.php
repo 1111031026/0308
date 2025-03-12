@@ -12,7 +12,11 @@
         <ul class="sidebar-links">
             <li><a href="#"><img src="../img/share.png" alt="分享" title="分享"></a></li>
             <li><a href="#"><img src="../img/quiz.png" alt="測驗" title="測驗"></a></li>
+<<<<<<< HEAD:php/1.php
             <li><a href="2.php"><img src="../img/new-quiz.png" alt="新增測驗" title="新增測驗"></a></li>
+=======
+            <li><a href="2.html"><img src="../img/new-quiz.png" alt="新增測驗" title="新增測驗"></a></li>
+>>>>>>> 50cbe918afac19ca8a23f3191085b3e90ab5a1be:php/1.html
         </ul>
     </nav>
 

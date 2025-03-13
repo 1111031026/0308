@@ -40,34 +40,38 @@
         <section class="content">
             <div class="blue-section">
                 <!-- 海洋圖片 -->
-                <div class="ocean-image-container">
-                    <img src="ocean-image.jpg" alt="海洋圖片" class="ocean-image">
-                </div>
                 <!-- 標題 -->
                 <h3>關於海洋的評論和文章</h3>
-                <!-- 滑動文章區域 -->
-                <div class="article-slider">
-                    <div class="article-content">
-                        <div class="article-card">
-                            <h4>海洋污染的現況</h4>
-                            <p>海洋污染問題日益嚴重，塑料垃圾成為主要威脅。本文探討如何透過個人行動減少污染。</p>
-                        </div>
-                        <div class="article-card">
-                            <h4>珊瑚礁的保護</h4>
-                            <p>全球珊瑚礁面臨白化危機，了解科學家們的保護策略與未來展望。</p>
-                        </div>
-                        <div class="article-card">
-                            <h4>海龜的生存挑戰</h4>
-                            <p>海龜因棲地破壞和漁網纏繞面臨生存危機，探討可能的救援方法。</p>
-                        </div>
-                        <div class="article-card">
-                            <h4>海洋能源的未來</h4>
-                            <p>潮汐與波浪能或成為可再生能源的重要來源，分析其發展潛力。</p>
-                        </div>
+                <div class="container">
+                    <!-- 海洋圖片區塊 -->
+                    <div class="ocean-image-container">
+                        <img src="../img/ocean1.jpg" alt="海洋圖片" class="ocean-image">
                     </div>
-                    <!-- 左右按鈕 -->
-                    <button class="slider-btn2 prev-btn">◄</button>
-                    <button class="slider-btn2 next-btn">►</button>
+
+                    <!-- 滾動文章區域 -->
+                    <div class="article-slider">
+                        <div class="article-content">
+                            <div class="article-card">
+                                <h4>海洋污染的現況</h4>
+                                <p>海洋污染問題日益嚴重，塑料垃圾成為主要威脅。本文探討如何透過個人行動減少污染。</p>
+                            </div>
+                            <div class="article-card">
+                                <h4>珊瑚礁的保護</h4>
+                                <p>全球珊瑚礁面臨白化危機，了解科學家們的保護策略與未來展望。</p>
+                            </div>
+                            <div class="article-card">
+                                <h4>海龜的生存挑戰</h4>
+                                <p>海龜因棲地破壞和漁網纏繞面臨生存危機，探討可能的救援方法。</p>
+                            </div>
+                            <div class="article-card">
+                                <h4>海洋能源的未來</h4>
+                                <p>潮汐與波浪能或成為可再生能源的重要來源，分析其發展潛力。</p>
+                            </div>
+                        </div>
+                        <!-- 左右按鈕 -->
+                        <button class="slider-btn2 prev-btn">◄</button>
+                        <button class="slider-btn2 next-btn">►</button>
+                    </div>
                 </div>
             </div>
         </section>

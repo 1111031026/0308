@@ -131,39 +131,59 @@ body {
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
 
+.container {
+    display: flex; /* 使用 Flexbox 讓圖片與清單並排 */
+    align-items: center; /* 垂直置中 */
+    justify-content: space-between; /* 左右排列 */
+    gap: 20px; /* 設定間距 */
+    width: 100%;
+    padding: 20px;
+}
+
+
+
 /* 海洋圖片樣式 */
 .ocean-image-container {
     text-align: left; /* 圖片靠左 */
     margin-bottom: 1rem; /* 與標題的間距 */
+    flex: none; /* 取消 flex 影響 */
+    width: 300px; /* 直接指定寬度 */
+    max-width: 50%; /* 限制最大寬度 */
 }
+
 
 .ocean-image {
     width: 200px; /* 設置圖片寬度 */
     height: auto; /* 自動高度 */
     border-radius: 10px; /* 可選：圓角 */
+    width: 100%; /* 讓圖片填滿區塊 */
+    border-radius: 10px; /* 圓角美化 */
 }
 
-/* 文章滑動區域 */
 .article-slider {
-    margin: 20px 0;
-    text-align: left; /* 文章區域靠左 */
+    flex: 2; /* 增加相對寬度 */
+    max-width: 80%; /* 增加最大寬度 */
+    overflow: hidden;
+    position: relative;
 }
 
+/* 文章內容（橫向滾動） */
 .article-content {
-    margin: 0 -10px; /* 調整卡片間距 */
+    display: flex;
+    scroll-behavior: smooth;
+    gap: 30px; /* 稍微加大間距 */
+    white-space: nowrap;
+    padding-bottom: 20px; /* 增加底部內邊距 */
+    width: 100%; /* 讓寬度佔滿容器 */
 }
 
+/* 文章卡片 */
 .article-card {
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    min-width: 200px; /* 設定最小寬度 */
+    background: #f8f8f8;
     padding: 15px;
-    margin: 0 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    height: 200px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .article-card h4 {

@@ -25,11 +25,11 @@
             <h2>最新報導</h2>
             <div class="hero-slider">
                 <div class="hero-content">
-                    <div><img src="desert.jpg" alt="沙漠圖片" class="hero-item"></div>
-                    <div><img src="turtle.jpg" alt="海龜圖片" class="hero-item"></div>
-                    <div><img src="forest.jpg" alt="森林圖片" class="hero-item"></div>
-                    <div><img src="mountain.jpg" alt="山脈圖片" class="hero-item"></div>
-                    <div><img src="ocean.jpg" alt="海洋圖片" class="hero-item"></div>
+                    <div><img src="../img/desert.jpg" alt="沙漠圖片" class="hero-item"></div>
+                    <div><img src="../img/turtle.jpg" alt="海龜圖片" class="hero-item"></div>
+                    <div><img src="../img/forest.jpg" alt="森林圖片" class="hero-item"></div>
+                    <div><img src="../img/mountain.jpg" alt="山脈圖片" class="hero-item"></div>
+                    <div><img src="../img/ocean.jpg" alt="海洋圖片" class="hero-item"></div>
                 </div>
                 <!-- 左右按鈕 -->
                 <button class="slider-btn prev-btn"><</button>

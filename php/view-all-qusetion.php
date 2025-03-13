@@ -7,24 +7,12 @@
     <link rel="stylesheet" href="../css/view-all-qusetion.css">
 </head>
 <body>
-    <!-- 主導航欄 -->
-    <nav class="navbar">
-        <div class="logo">
-            <img src="logo.png" alt="永續小站 Logo">
-            <h1>永續小站</h1>
-        </div>
-        <ul class="nav-links">
-            <li><a href="#climate">氣候永續</a></li>
-            <li><a href="#ocean">海洋永續</a></li>
-            <li><a href="#energy">海洋能源</a></li>
-            <li><a href="#land">陸域永續</a></li>
-            <li><a href="#news">高斯</a></li>
-        </ul>
-        <div class="nav-icons">
-            <a href="#"><img src="achieve-icon.png" alt="成就"></a>
-            <a href="#"><img src="user-icon.png" alt="用戶"></a>
-        </div>
-    </nav>
+    <header>
+        <?php
+        include "nav.html";
+        ?>
+    </header>
+
 
     <!-- 題目表格 -->
     <div class="table-container">

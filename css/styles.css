@@ -118,7 +118,7 @@ body {
 .blue-section {
     background-color: #1E90FF;
     color: white;
-    padding: 2rem;
+    padding: 1.8rem;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -137,7 +137,6 @@ body {
     justify-content: space-between; /* 左右排列 */
     gap: 20px; /* 設定間距 */
     width: 100%;
-    padding: 20px;
 }
 
 
@@ -203,9 +202,9 @@ body {
     position: absolute;
     top: 30%;
     transform: translateY(-50%);
-    background-color: rgba(76, 175, 80, 0.8);
-    color: white;
-    border: none;
+    background-color: transparent; /* 透明背景 */
+    color: rgb(0, 0, 0); /* 文字顏色，可根據需要調整 */
+    border: 2px solid white; /* 可選：添加邊框 */
     padding: 10px 15px;
     cursor: pointer;
     font-size: 1.5rem;
@@ -214,8 +213,9 @@ body {
     z-index: 1000;
 }
 
+/* hover 效果（可選） */
 .slider-btn:hover {
-    background-color: #45a049;
+    background-color: rgba(0, 0, 0, 0.2); /* 半透明背景 */
 }
 
 .prev-btn {

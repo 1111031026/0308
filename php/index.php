@@ -32,15 +32,14 @@
                     <div><img src="ocean.jpg" alt="海洋圖片" class="hero-item"></div>
                 </div>
                 <!-- 左右按鈕 -->
-                <button class="slider-btn prev-btn">◄</button>
-                <button class="slider-btn next-btn">►</button>
+                <button class="slider-btn prev-btn"><</button>
+                <button class="slider-btn next-btn">></button>
             </div>
         </section>
 
         <section class="content">
             <div class="blue-section">
-                <!-- 海洋圖片 -->
-                <!-- 標題 -->
+
                 <h3>關於海洋的評論和文章</h3>
                 <div class="container">
                     <!-- 海洋圖片區塊 -->
@@ -69,8 +68,8 @@
                             </div>
                         </div>
                         <!-- 左右按鈕 -->
-                        <button class="slider-btn2 prev-btn">◄</button>
-                        <button class="slider-btn2 next-btn">►</button>
+                        <button class="slider-btn2 prev-btn"><</button>
+                        <button class="slider-btn2 next-btn">></button>
                     </div>
                 </div>
             </div>

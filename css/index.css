@@ -68,6 +68,19 @@ body {
 }
 
 /* Slick.js 幻燈片樣式 */
+.hero-content .slick-slide img {
+    width: 100%; /* 圖片寬度自適應 */
+    height: 400px; /* 固定高度 */
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero-content .slick-slide img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
 .slick-slide img {
     width: 100%; /* 圖片寬度自適應 */
     height: 200px; /* 固定高度 */
@@ -114,11 +127,37 @@ body {
     background-color: #45a049;
 }
 
+.article-slider .slick-dots li {
+    margin: 0 5px;
+}
+
+.article-slider .slick-dots li button {
+    font-size: 0; /* 隱藏數字，只顯示點 */
+    width: 12px;
+    height: 12px;
+    background-color: #ccc;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.article-slider .slick-dots li.slick-active button {
+    background-color: #29427f;
+}
+
+.article-slider .slick-dots li button:hover {
+    background-color: #29427f;
+}
+.article-slider .slick-dots li {
+    margin: 0 5px;
+}
+
 /* Blue Section 樣式 */
 .blue-section {
     background-color: #1E90FF;
     color: white;
-    padding: 1.8rem;
+    padding: 1.5rem;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -170,7 +209,7 @@ body {
 .article-content {
     display: flex;
     scroll-behavior: smooth;
-    gap: 30px; /* 稍微加大間距 */
+    gap: 30px;  /* 稍微加大間距 */
     white-space: nowrap;
     padding-bottom: 20px; /* 增加底部內邊距 */
     width: 100%; /* 讓寬度佔滿容器 */
@@ -178,11 +217,27 @@ body {
 
 /* 文章卡片 */
 .article-card {
-    min-width: 200px; /* 設定最小寬度 */
+    max-width: 450px; 
     background: #f8f8f8;
     padding: 15px;
     border-radius: 8px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.article-slider .slick-slide {
+    margin-right: 50px; /* 在卡片之間添加 30px 間距 */
+}
+.article-slider .slick-slide:last-child {
+    margin-right: 0; /* 最後一個卡片不需要右邊距 */
+}
+
+.read-more {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;  /* 藍色按鈕 */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
 }
 
 .article-card h4 {
@@ -192,9 +247,14 @@ body {
 }
 
 .article-card p {
-    font-size: 14px;
+    font-size: 16px;
     color: #666;
     flex-grow: 1;
+    width: 400px; /* 設置寬度，可根據需求調整 */
+    white-space: nowrap; /* 強制文字單行顯示 */
+    overflow: hidden; /* 隱藏超出部分 */
+    text-overflow: ellipsis; /* 超出時顯示省略號 */
+    text-align: center; /* 文字水平置中 */
 }
 
 /* 滑動按鈕樣式 */

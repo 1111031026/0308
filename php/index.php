@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>永續小站</title>
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="../css/nav.css">
     <!-- 引入 Slick.js 和 jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -52,18 +52,31 @@
                         <div class="article-content">
                             <div class="article-card">
                                 <h4>海洋污染的現況</h4>
+                                <img src="path/to/ocean-pollution.jpg" alt="海洋污染">
                                 <p>海洋污染問題日益嚴重，塑料垃圾成為主要威脅。本文探討如何透過個人行動減少污染。</p>
+                                <a href="link/to/ocean-pollution" class="read-more">閱讀更多</a>
                             </div>
                             <div class="article-card">
                                 <h4>珊瑚礁的保護</h4>
+                                <img src="path/to/ocean-pollution.jpg" alt="海洋污染">
                                 <p>全球珊瑚礁面臨白化危機，了解科學家們的保護策略與未來展望。</p>
+                                <a href="link/to/ocean-pollution" class="read-more">閱讀更多</a>
                             </div>
                             <div class="article-card">
                                 <h4>海龜的生存挑戰</h4>
+                                <img src="path/to/ocean-pollution.jpg" alt="海洋污染">
                                 <p>海龜因棲地破壞和漁網纏繞面臨生存危機，探討可能的救援方法。</p>
+                                <a href="link/to/ocean-pollution" class="read-more">閱讀更多</a>
                             </div>
                             <div class="article-card">
                                 <h4>海洋能源的未來</h4>
+                                <img src="path/to/ocean-pollution.jpg" alt="海洋污染">
+                                <p>潮汐與波浪能或成為可再生能源的重要來源，分析其發展潛力。</p>
+                                <a href="link/to/ocean-pollution" class="read-more">閱讀更多</a>
+                            </div>
+                            <div class="article-card">
+                                <h4>海洋能源的未來</h4>
+                                <img src="path/to/ocean-pollution.jpg" alt="海洋污染">
                                 <p>潮汐與波浪能或成為可再生能源的重要來源，分析其發展潛力。</p>
                             </div>
                         </div>

@@ -1,0 +1,410 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+    /* 防止橫向滾動 */
+}
+
+/* Navbar 樣式 */
+.navbar {
+    background-color: #4CAF50;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: background-color 0.3s ease;
+}
+
+.navbar:hover {
+    background-color: #45a049;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+    transform: rotate(15deg);
+}
+
+/* Hero 樣式 */
+.hero {
+    text-align: center;
+    animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.hero-content {
+    margin-bottom: 2rem;
+}
+
+.hero h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+/* Slick.js 幻燈片樣式 */
+.hero-content .slick-slide img {
+    width: 100%;
+    /* 圖片寬度自適應 */
+    height: 400px;
+    /* 固定高度 */
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero-content .slick-slide img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.slick-slide img {
+    width: 100%;
+    /* 圖片寬度自適應 */
+    height: 200px;
+    /* 固定高度 */
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.slick-slide img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.slick-dots {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin: 10px 0 0 0;
+}
+
+.slick-dots li {
+    margin: 0 5px;
+}
+
+.slick-dots li button {
+    font-size: 0;
+    /* 隱藏數字，只顯示點 */
+    width: 12px;
+    height: 12px;
+    background-color: #ccc;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.slick-dots li.slick-active button {
+    background-color: #4CAF50;
+    /* 與 Navbar 一致 */
+}
+
+.slick-dots li button:hover {
+    background-color: #45a049;
+}
+
+.article-slider .slick-dots li {
+    margin: 0 5px;
+}
+
+.article-slider .slick-dots li button {
+    font-size: 0;
+    /* 隱藏數字，只顯示點 */
+    width: 12px;
+    height: 12px;
+    background-color: #ccc;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.article-slider .slick-dots li.slick-active button {
+    background-color: #29427f;
+}
+
+.article-slider .slick-dots li button:hover {
+    background-color: #29427f;
+}
+
+.article-slider .slick-dots li {
+    margin: 0 5px;
+}
+
+/* Blue Section 樣式 */
+.blue-section {
+    background-color: #1E90FF;
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.blue-section h3 {
+    text-align: left;
+    /* 標題靠左 */
+    margin-top: 0;
+    /* 移除上邊距 */
+    font-size: 1.8rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.container {
+    display: flex;
+    /* 使用 Flexbox 讓圖片與清單並排 */
+    align-items: center;
+    /* 垂直置中 */
+    justify-content: space-between;
+    /* 左右排列 */
+    gap: 20px;
+    /* 設定間距 */
+    width: 100%;
+}
+
+
+
+/* 海洋圖片樣式 */
+.ocean-image-container {
+    text-align: left;
+    /* 圖片靠左 */
+    margin-bottom: 1rem;
+    /* 與標題的間距 */
+    flex: none;
+    /* 取消 flex 影響 */
+    width: 300px;
+    /* 直接指定寬度 */
+    max-width: 50%;
+    /* 限制最大寬度 */
+}
+
+
+.ocean-image {
+    width: 200px;
+    /* 設置圖片寬度 */
+    height: auto;
+    /* 自動高度 */
+    border-radius: 10px;
+    /* 可選：圓角 */
+    width: 100%;
+    /* 讓圖片填滿區塊 */
+    border-radius: 10px;
+    /* 圓角美化 */
+}
+
+.article-slider {
+    flex: 2;
+    /* 增加相對寬度 */
+    max-width: 80%;
+    /* 增加最大寬度 */
+    overflow: hidden;
+    position: relative;
+}
+
+/* 文章內容（橫向滾動） */
+.article-content {
+    display: flex;
+    scroll-behavior: smooth;
+    gap: 30px;
+    /* 稍微加大間距 */
+    white-space: nowrap;
+    padding-bottom: 20px;
+    /* 增加底部內邊距 */
+    width: 100%;
+    /* 讓寬度佔滿容器 */
+}
+
+/* 文章卡片 */
+.article-card {
+    max-width: 450px;
+    background: #f8f8f8;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.article-slider .slick-slide {
+    margin-right: 50px;
+    /* 在卡片之間添加 30px 間距 */
+}
+
+.article-slider .slick-slide:last-child {
+    margin-right: 0;
+    /* 最後一個卡片不需要右邊距 */
+}
+
+.read-more {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    /* 藍色按鈕 */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.article-card h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.article-card p {
+    font-size: 16px;
+    color: #666;
+    flex-grow: 1;
+    width: 400px;
+    /* 設置寬度，可根據需求調整 */
+    white-space: nowrap;
+    /* 強制文字單行顯示 */
+    overflow: hidden;
+    /* 隱藏超出部分 */
+    text-overflow: ellipsis;
+    /* 超出時顯示省略號 */
+    text-align: center;
+    /* 文字水平置中 */
+}
+
+/* 滑動按鈕樣式 */
+.slider-btn {
+    position: absolute;
+    top: 30%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    /* 透明背景 */
+    color: rgb(0, 0, 0);
+    /* 文字顏色，可根據需要調整 */
+    border: 2px solid white;
+    /* 可選：添加邊框 */
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+    z-index: 1000;
+}
+
+/* hover 效果（可選） */
+.slider-btn:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+    /* 半透明背景 */
+}
+
+.prev-btn {
+    left: 10px;
+}
+
+.next-btn {
+    right: 10px;
+}
+
+.slider-btn2 {
+    background-color: white;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 70%;
+    /* 調整為 50% 以垂直居中 */
+    transform: translateY(-50%);
+    box-shadow: 0px 0px 5px 0px rgba(215, 215, 215, 0.75);
+    border-radius: 4px;
+    height: 60px;
+    /* 縮小高度 */
+    width: 40px;
+    /* 縮小寬度 */
+    z-index: 1;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    /* 縮小箭頭大小 */
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+    /* 添加透明度過渡 */
+    opacity: 0.5;
+    /* 初始透明度設為半透明 */
+}
+
+.slider-btn2:hover {
+    opacity: 1;
+    /* 懸停時完全不透明 */
+    background-color: #f0f0f0;
+    /* 懸停時背景變淡 */
+}
+
+/* 左側按鈕 */
+.prev-btn {
+    left: 0;
+    /* 靠左 */
+}
+
+/* 右側按鈕 */
+.next-btn {
+    right: 0;
+    /* 靠右 */
+}
+
+/* 確保箭頭居中並清晰 */
+.slider-btn::before {
+    content: '';
+    /* 清除預設內容 */
+}
+
+.slider-btn:focus {
+    outline: none;
+    /* 移除焦點邊框 */
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .slick-slide img {
+        height: 150px;
+    }
+
+    .prev-btn {
+        left: 10px;
+    }
+
+    .next-btn {
+        right: 10px;
+    }
+
+    .article-card {
+        margin: 0 5px;
+    }
+}

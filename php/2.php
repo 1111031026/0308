@@ -4,27 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>永續小站 - 編輯區</title>
-    <link rel="stylesheet" href="css/2.css">
+    <link rel="stylesheet" href="../css/2.css">
 </head>
 <body>
-    <!-- 主導航欄 -->
-    <nav class="navbar">
-        <div class="logo">
-            <img src="logo.png" alt="永續小站 Logo">
-            <h1>永續小站</h1>
-        </div>
-        <ul class="nav-links">
-            <li><a href="#climate">氣候永續</a></li>
-            <li><a href="#ocean">海洋永續</a></li>
-            <li><a href="#energy">海洋能源</a></li>
-            <li><a href="#land">陸域永續</a></li>
-            <li><a href="#news">高斯</a></li>
-        </ul>
-        <div class="nav-icons">
-            <a href="#"><img src="achieve-icon.png" alt="成就"></a>
-            <a href="#"><img src="user-icon.png" alt="用戶"></a>
-        </div>
-    </nav>
+    <header>
+        <?php
+        include "nav.html";
+        ?>
+    </header>
+    
 
     <!-- 編輯區 -->
     <div class="edit-container">
@@ -86,9 +74,9 @@
 
     <!-- 外部控制按鈕（水平排列，靜態放置在底部） -->
     <div class="external-controls">
-        <button class="external-btn view-all">查看所有題目</button>
+        <button class="external-btn view-all" onclick="window.location.href='view-all-qusetion.php'">查看所有題目</button>
         <button class="external-btn save">確認儲存</button>
     </div>
-    <script src="script.js"></script>
+    <script src="../js/script.js"></script>
 </body>
 </html>

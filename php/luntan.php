@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>永續小站 - 文章1</title>
     <link rel="stylesheet" href="../css/luntan.css">
 </head>
+
 <body>
     <!-- 主導航欄 -->
     <header>
@@ -26,7 +28,7 @@
         <div class="comment-section">
             <h2>留言區</h2>
             <div class="comments-container">
-                <!-- 假資料模擬留言 -->
+                <!-- 增加更多假資料模擬留言 -->
                 <div class="comment">
                     <span class="comment-user">user001:</span>
                     <span class="comment-text">------</span>
@@ -43,17 +45,54 @@
                     <span class="comment-user">user003:</span>
                     <span class="comment-text">------</span>
                 </div>
-                <!-- 可添加更多假留言 -->
+                <div class="comment">
+                    <span class="comment-user">user004:</span>
+                    <span class="comment-text">------</span>
+                </div>
+                <div class="comment">
+                    <span class="comment-user">user005:</span>
+                    <span class="comment-text">------</span>
+                </div>
+                <div class="comment">
+                    <span class="comment-user">user006:</span>
+                    <span class="comment-text">------</span>
+                </div>
+                <div class="comment">
+                    <span class="comment-user">user007:</span>
+                    <span class="comment-text">------</span>
+                </div>
+                <div class="comment">
+                    <span class="comment-user">user008:</span>
+                    <span class="comment-text">------</span>
+                </div>
+                <div class="comment">
+                    <span class="comment-user">user009:</span>
+                    <span class="comment-text">------</span>
+                </div>
+                <div class="comment">
+                    <span class="comment-user">user010:</span>
+                    <span class="comment-text">------</span>
+                </div>
+                <div class="comment">
+                    <span class="comment-user">user011:</span>
+                    <span class="comment-text">------</span>
+                </div>
+                <div class="comment">
+                    <span class="comment-user">user012:</span>
+                    <span class="comment-text">------</span>
+                </div>
+                <div class="comment-input-container">
+                    <textarea class="comment-input" placeholder="輸入您的留言..."></textarea>
+                    <button class="comment-submit">提交</button>
+                </div>
+                <!-- 更多假留言 -->
             </div>
-        </div>
+            <!-- 留言輸入框（嵌入留言區） -->
 
-        <!-- 留言輸入框（懸浮） -->
-        <div class="comment-input-container">
-            <textarea class="comment-input" placeholder="輸入您的留言..."></textarea>
-            <button class="comment-submit">提交</button>
         </div>
     </div>
 
     <script src="../js/luntanscript.js"></script>
 </body>
+
 </html>

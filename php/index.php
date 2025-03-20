@@ -26,9 +26,9 @@
             <div class="hero-slider">
                 <div class="hero-content">
                     <div><img src="../img/desert.jpg" alt="沙漠圖片" class="hero-item"></div>
-                    <div><img src="../img/turtle.jpg" alt="海龜圖片" class="hero-item"></div>
-                    <div><img src="../img/forest.jpg" alt="森林圖片" class="hero-item"></div>
-                    <div><img src="../img/mountain.jpg" alt="山脈圖片" class="hero-item"></div>
+                    <div><img src="../img/turtle.jpeg" alt="海龜圖片" class="hero-item"></div>
+                    <div><img src="../img/forest.png" alt="森林圖片" class="hero-item"></div>
+                    <div><img src="../img/mountain.png" alt="山脈圖片" class="hero-item"></div>
                     <div><img src="../img/ocean.jpg" alt="海洋圖片" class="hero-item"></div>
                 </div>
                 <!-- 左右按鈕 -->
@@ -40,7 +40,7 @@
         <section class="content">
             <div class="blue-section">
 
-                <h3>關於海洋的評論和文章</h3>
+                <h3>關於海洋永續的文章</h3>
                 <div class="container">
                     <!-- 海洋圖片區塊 -->
                     <div class="ocean-image-container">
@@ -78,6 +78,7 @@
                                 <h4>海洋能源的未來</h4>
                                 <img src="path/to/ocean-pollution.jpg" alt="海洋污染">
                                 <p>潮汐與波浪能或成為可再生能源的重要來源，分析其發展潛力。</p>
+                                <a href="link/to/ocean-pollution" class="read-more">閱讀更多</a>
                             </div>
                         </div>
                         <!-- 左右按鈕 -->

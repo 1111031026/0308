@@ -68,7 +68,6 @@ body {
 
 .hero h2 {
     font-size: 1.5rem;
-    margin-bottom: 1rem;
     color: #333;
 }
 
@@ -103,7 +102,7 @@ body {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-.slick-dots {
+.hero-content .slick-dots {
     position: absolute;
     bottom: 10px;
     left: 50%;
@@ -167,12 +166,19 @@ body {
 .article-slider .slick-dots li {
     margin: 0 5px;
 }
+.article-slider .slick-dots {
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
 
 /* Blue Section 樣式 */
 .blue-section {
     background-color: #1E90FF;
     color: white;
-    padding: 1.5rem;
+    padding: 0.8rem;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -219,7 +225,7 @@ body {
 .ocean-image {
     width: 200px;
     /* 設置圖片寬度 */
-    height: auto;
+    height: 250px;
     /* 自動高度 */
     border-radius: 10px;
     /* 可選：圓角 */
@@ -253,7 +259,7 @@ body {
 
 /* 文章卡片 */
 .article-card {
-    max-width: 450px;
+    max-width: 460px;
     background: #f8f8f8;
     padding: 15px;
     border-radius: 8px;
@@ -305,27 +311,24 @@ body {
 /* 滑動按鈕樣式 */
 .slider-btn {
     position: absolute;
-    top: 30%;
+    top: 35%;
     transform: translateY(-50%);
-    background-color: transparent;
-    /* 透明背景 */
-    color: rgb(0, 0, 0);
-    /* 文字顏色，可根據需要調整 */
-    border: 2px solid white;
-    /* 可選：添加邊框 */
+    background-color: transparent; /* 透明背景 */
+    color: rgb(0, 0, 0); /* 文字顏色，可根據需要調整 */
+    border: 2px solid transparent; /* 可選：添加邊框 */
     padding: 10px 15px;
     cursor: pointer;
     font-size: 1.5rem;
     border-radius: 50%;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease; /* 背景色過渡效果 */
     z-index: 1000;
 }
 
-/* hover 效果（可選） */
+/* 滑鼠懸停時的樣式 */
 .slider-btn:hover {
-    background-color: rgba(0, 0, 0, 0.2);
-    /* 半透明背景 */
+    background-color: white; /* 白底 */
 }
+
 
 .prev-btn {
     left: 10px;

@@ -178,7 +178,7 @@ body {
 .blue-section {
     background-color: #1E90FF;
     color: white;
-    padding: 0.4rem;  /* 減少上下內邊距 */
+    padding: 0.8rem;  /* 減少上下內邊距 */
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -200,7 +200,7 @@ body {
     /* 移除上邊距 */
     font-size: 1.8rem;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
-    margin-left: 25px; 
+    margin-left: 20px; 
 }
 
 .container {

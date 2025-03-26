@@ -75,7 +75,7 @@ body {
 .hero-content .slick-slide img {
     width: 100%;
     /* 圖片寬度自適應 */
-    height: 400px;
+    height: 600px;
     /* 固定高度 */
     object-fit: cover;
     border-radius: 10px;
@@ -178,10 +178,19 @@ body {
 .blue-section {
     background-color: #1E90FF;
     color: white;
-    padding: 0.8rem;
+    padding: 0.4rem;  /* 減少上下內邊距 */
     text-align: center;
     position: relative;
     overflow: hidden;
+}
+
+/* 調整內部元素以配合新高度 */
+.ocean-image {
+    height: 200px;  /* 調整圖片高度 */
+}
+
+.article-card {
+    min-height: 200px;  /* 調整卡片最小高度 */
 }
 
 .blue-section h3 {
@@ -191,6 +200,7 @@ body {
     /* 移除上邊距 */
     font-size: 1.8rem;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    margin-left: 25px; 
 }
 
 .container {
@@ -264,11 +274,104 @@ body {
     padding: 15px;
     border-radius: 8px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .article-slider .slick-slide {
-    margin-right: 50px;
-    /* 在卡片之間添加 30px 間距 */
+    margin-right: 25px;
+    margin-left: 25px;
+}
+
+.article-slider .slick-slide:last-child {
+    margin-right: 0;
+    /* 最後一個卡片不需要右邊距 */
+}
+
+.read-more {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    /* 藍色按鈕 */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.article-card h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+    white-space: nowrap; /* 防止標題換行 */
+    overflow: hidden; /* 隱藏超出部分 */
+    text-overflow: ellipsis; /* 顯示省略號 */
+    width: 100%; /* 確保寬度與卡片一致 */
+    text-align: center; /* 居中對齊 */
+}
+
+.article-card p {
+    font-size: 16px;
+    color: #666;
+    flex-grow: 1;
+    width: 100%; 
+    white-space: normal; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    max-height: 3.2em;
+    line-height: 1.6em;
+    margin-bottom: 15px;
+}
+
+/* 文章卡片統一尺寸 */
+.article-card {
+    max-width: 460px;
+    width: 300px;  /* 固定寬度 */
+    height: 350px;  /* 固定高度 */
+    background: #f8f8f8;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    margin: 0 10px;
+}
+
+.article-card img {
+    width: 100%;
+    height: 150px;  /* 固定圖片高度 */
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.article-card p {
+    font-size: 16px;
+    color: #666;
+    flex-grow: 1;
+    width: 100%;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    height: 70px;  /* 固定文字區域高度 */
+    margin-bottom: 15px;
+}
+
+.article-card .read-more {
+    margin-top: auto;  /* 將按鈕推到底部 */
+}
+
+.article-slider .slick-slide {
+    margin-right: 25px;
+    margin-left: 25px;
 }
 
 .article-slider .slick-slide:last-child {
@@ -296,22 +399,21 @@ body {
     font-size: 16px;
     color: #666;
     flex-grow: 1;
-    width: 400px;
-    /* 設置寬度，可根據需求調整 */
-    white-space: nowrap;
-    /* 強制文字單行顯示 */
+    width: 100%; /* 改為100%寬度，適應卡片大小 */
+    white-space: normal; /* 允許文字換行 */
     overflow: hidden;
-    /* 隱藏超出部分 */
     text-overflow: ellipsis;
-    /* 超出時顯示省略號 */
     text-align: center;
-    /* 文字水平置中 */
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* 限制顯示3行 */
+    -webkit-box-orient: vertical;
+    max-height: 4.8em; /* 約3行文字的高度 */
 }
 
 /* 滑動按鈕樣式 */
 .slider-btn {
     position: absolute;
-    top: 35%;
+    top: 45%;
     transform: translateY(-50%);
     background-color: transparent; /* 透明背景 */
     color: rgb(0, 0, 0); /* 文字顏色，可根據需要調整 */

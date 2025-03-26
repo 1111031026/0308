@@ -16,7 +16,7 @@
 <body>
     <header>
         <?php
-        include "nav.html";
+        include "nav.php";
         ?>
     </header>
 
@@ -36,12 +36,10 @@
                 <button class="slider-btn next-btn">></button>
             </div>
         </section>
-
         <section class="content">
             <div class="blue-section">
-
-                <h3>關於海洋永續的文章</h3>
                 <div class="container">
+                    <h3>關於海洋永續的文章</h3>
                     <!-- 海洋圖片區塊 -->
                     <div class="ocean-image-container">
                         <img src="../img/ocean1.jpg" alt="海洋圖片" class="ocean-image">

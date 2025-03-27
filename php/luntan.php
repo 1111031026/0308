@@ -11,7 +11,7 @@
 <body>
     <!-- 主導航欄 -->
     <header>
-        <?php include "nav.html"; ?>
+        <?php include "nav.php"; ?>
     </header>
 
     <!-- 文章內容區 -->

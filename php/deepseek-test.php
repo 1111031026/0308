@@ -14,8 +14,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_question'])) {
     include 'db_connect.php';
     
     // 準備SQL語句
-    $stmt = $conn->prepare("INSERT INTO questions (title, content, answer) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $title, $content, $answer);
+    $stmt = $conn->prepare("INSERT INTO questions (title, content, answer, question_type) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $title, $content, $answer, $question_type);
+    
+    // 獲取選擇的題型
+    $question_type = $_POST['question_type'] ?? '問答題';
     
     // 執行SQL
     if ($stmt->execute()) {
@@ -88,15 +91,69 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="question-editor">
             <h2>新增題目</h2>
             <form method="post" action="">
+                <select name="question_type" id="question_type" required>
+                    <option value="選擇題">選擇題</option>
+                    <option value="是非題">是非題</option>
+                    <option value="問答題">問答題</option>
+                </select>
                 <input type="text" name="question_title" placeholder="題目標題" required>
                 <textarea name="question_content" placeholder="題目內容" required></textarea>
-                <input type="text" name="question_answer" placeholder="正確答案" required>
+                <div id="answer_section">
+                    <!-- 動態內容將由JavaScript生成 -->
+                    <input type="text" name="question_answer" placeholder="正確答案" required>
+                </div>
                 <button type="submit" name="save_question">儲存題目</button>
             </form>
+            <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const questionType = document.getElementById('question_type');
+                const answerSection = document.getElementById('answer_section');
+                
+                // 觸發一次change事件來初始化答案區域
+                const event = new Event('change');
+                questionType.dispatchEvent(event);
+            });
+            
+            document.getElementById('question_type').addEventListener('change', function() {
+                const answerSection = document.getElementById('answer_section');
+                const type = this.value;
+                
+                let html = '';
+                if (type === '選擇題') {
+                    html = `
+                        <div class="options">
+                            <input type="text" name="option_a" placeholder="選項A" required>
+                            <input type="text" name="option_b" placeholder="選項B" required>
+                            <input type="text" name="option_c" placeholder="選項C" required>
+                            <input type="text" name="option_d" placeholder="選項D" required>
+                        </div>
+                        <label>選擇答案：</label>
+                        <select name="question_answer" required>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                        </select>
+                    `;
+                } else if (type === '是非題') {
+                    html = `
+                        <label>選擇答案：</label>
+                        <select name="question_answer" required>
+                            <option value="是">是</option>
+                            <option value="否">否</option>
+                        </select>
+                    `;
+                } else {
+                    html = '<input type="text" name="question_answer" placeholder="正確答案" required>';
+                }
+                
+                answerSection.innerHTML = html;
+            });
+            </script>
         </div>
 
         <div class="api-chat">
-            <h2>問 DeepSeek 一個問題</h2>
+            <h2>出題助手</h2>
             <form method="post">
                 <input type="text" name="user_input" placeholder="輸入你的問題..." required>
                 <button type="submit">送出</button>

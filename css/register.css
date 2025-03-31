@@ -1,81 +1,220 @@
+/* 全局樣式 */
 body {
-    background-image: url('../img/index3.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    height: 100vh;
-    margin: 0;
-    display: flex;
-    flex-direction: column;  
-    justify-content: center;  
-    align-items: center;  
-    font-family: Arial, sans-serif;
-    color: white;
-    text-align: center; 
-  }
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  color: white;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 動態背景效果 */
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  animation: backgroundSlide 20s infinite;
+  z-index: -1;
+}
+
+body::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: -1;
+}
+
+@keyframes backgroundSlide {
+  0%, 100% { background-image: url('../img/index9.jpg'); opacity: 1; }
+  22% { background-image: url('../img/index9.jpg'); opacity: 1; }
+  24% { background-image: url('../img/index7.jpg'); opacity: 0.8; }
+  25% { background-image: url('../img/index7.jpg'); opacity: 1; }
+  47% { background-image: url('../img/index7.jpg'); opacity: 1; }
+  49% { background-image: url('../img/index8.jpg'); opacity: 0.8; }
+  50% { background-image: url('../img/index8.jpg'); opacity: 1; }
+  72% { background-image: url('../img/index8.jpg'); opacity: 1; }
+  74% { background-image: url('../img/index4.jpg'); opacity: 0.8; }
+  75% { background-image: url('../img/index4.jpg'); opacity: 1; }
+  97% { background-image: url('../img/index4.jpg'); opacity: 1; }
+  99% { background-image: url('../img/index9.jpg'); opacity: 0.8; }
+}
+
+/* 粒子效果容器 */
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+/* 基礎粒子樣式 */
+.particle {
+  position: absolute;
+  background: rgba(241, 255, 114, 0.8);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: float var(--duration) infinite;
+  width: var(--size);
+  height: var(--size);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+  --size: 4px;
+  --duration: 8s;
+  --start-pos: 0;
+  --end-pos: 0;
+  --direction: 1;
+}
+
+/* 粒子變體 */
+.particle:nth-child(2n) { --size: 6px; --duration: 12s; --start-pos: -100; --end-pos: 100; --direction: 1; background: rgba(255, 255, 255, 0.9); box-shadow: 0 0 25px rgba(255, 255, 255, 0.9); }
+.particle:nth-child(3n) { --size: 3px; --duration: 10s; --start-pos: 100; --end-pos: -100; --direction: -1; background: rgba(255, 255, 255, 0.7); box-shadow: 0 0 15px rgba(255, 255, 255, 0.7); }
+.particle:nth-child(4n) { --size: 5px; --duration: 15s; --start-pos: -50; --end-pos: 150; --direction: 1; background: rgba(255, 255, 255, 0.85); box-shadow: 0 0 22px rgba(255, 255, 255, 0.85); }
+.particle:nth-child(5n) { --size: 7px; --duration: 14s; --start-pos: 150; --end-pos: -50; --direction: -1; background: rgba(255, 255, 255, 0.95); box-shadow: 0 0 30px rgba(255, 255, 255, 0.95); }
+.particle:nth-child(6n) { --size: 8px; --duration: 11s; --start-pos: 0; --end-pos: 200; --direction: 1; background: rgba(255, 255, 255, 0.92); box-shadow: 0 0 28px rgba(255, 255, 255, 0.92); }
+.particle:nth-child(7n) { --size: 5px; --duration: 13s; --start-pos: 200; --end-pos: 0; --direction: -1; background: rgba(255, 255, 255, 0.88); box-shadow: 0 0 20px rgba(255, 255, 255, 0.88); }
+.particle:nth-child(8n) { --size: 6px; --duration: 16s; --start-pos: -150; --end-pos: 50; --direction: 1; background: rgba(255, 255, 255, 0.9); box-shadow: 0 0 24px rgba(255, 255, 255, 0.9); }
+
+@keyframes float {
+  0% { transform: translate(calc(var(--start-pos) * 1vw), calc(var(--direction) * 110vh)); opacity: 0; }
+  10% { opacity: 0.3; }
+  30% { opacity: 0.8; }
+  70% { opacity: 0.8; }
+  90% { opacity: 0.3; }
+  100% { transform: translate(calc(var(--end-pos) * 1vw), calc(var(--direction) * -10vh)); opacity: 0; }
+}
+
+/* 表單樣式 */
 form {
-    background: rgba(0, 0, 0, 0.6); 
-    padding: 30px;
-    border-radius: 10px;
-    width: 300px;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-    margin: 0 auto; 
-  }
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 30px;
+  border-radius: 15px;
+  width: 300px;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  margin: 0 auto;
+  animation: formGlow 2s infinite alternate;
+}
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
+@keyframes formGlow {
+  from { box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37); }
+  to { box-shadow: 0 8px 32px rgba(31, 38, 135, 0.6); }
+}
 
-  td {
-    padding: 10px;
-  }
+/* 表單內元素 */
+table { width: 100%; border-collapse: collapse; }
+td { padding: 10px; }
 
-  input[type="text"],
-  input[type="password"],
-  input[type="email"] {
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0;
-    border: none;
-    border-radius: 5px;
-    background: #333;
-    color: white;
-    font-size: 14px;
-  }
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
 
-  input[type="submit"] {
-    background-color: #3498db;
-    color: white;
-    padding: 15px 0;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 100%;
-    transition: background-color 0.3s ease;
-  }
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
 
-  input[type="submit"]:hover {
-    background-color: #2980b9;
-  }
+input[type="submit"] {
+  background: linear-gradient(45deg, #3498db, #2ecc71);
+  color: white;
+  padding: 15px 0;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
 
-  
-  .center {
-    margin-top: 20px;
-  }
+input[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
+}
 
-  .center a {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #2ecc71;
-    color: white;
-    font-size: 16px;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-  }
+input[type="submit"]::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  height: 300%;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  transition: transform 0.6s, opacity 0.3s;
+}
 
-  .center a:hover {
-    background-color: #27ae60;
-  }
+input[type="submit"]:active::after {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
+
+/* 底部鏈接 */
+.center {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.center a {
+  display: inline-block;
+  padding: 12px 25px;
+  margin-bottom: 20px;
+  background: linear-gradient(45deg, rgba(46, 204, 113, 0.8), rgba(52, 152, 219, 0.8));
+  color: white;
+  font-size: 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  margin-top: 15px;
+}
+
+.center a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(46, 204, 113, 0.4);
+  background: linear-gradient(45deg, rgba(46, 204, 113, 0.9), rgba(52, 152, 219, 0.9));
+  border-color: rgba(255, 255, 255, 0.3);
+  transition: background-color 0.3s ease;
+}
+
+.center a:hover {
+  background-color: #27ae60;
+}

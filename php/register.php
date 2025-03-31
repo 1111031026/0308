@@ -1,42 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>註冊頁面</title>
     <link rel="stylesheet" href="../css/register.css" media="all">
+    <style>
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: -100%; /* 改為百分比，確保完全隱藏 */
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            color: white;
+            font-size: 16px;
+            transition: right 0.5s ease; /* 只過渡 right 屬性 */
+            z-index: 1000;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 200px; /* 確保內容不會太窄 */
+            box-sizing: border-box;
+        }
+        .toast.success {
+            border-left: 4px solid #2ecc71;
+        }
+        .toast.error {
+            border-left: 4px solid #e74c3c;
+        }
+        .toast.show {
+            right: 20px; /* 顯示時的位置 */
+        }
+        .toast-icon {
+            font-size: 20px;
+        }
+    </style>
 </head>
-
 <body>
+    <div class="particles">
+        <?php
+        for ($i = 0; $i < 50; $i++) {
+            $size = rand(8, 12);
+            $left = rand(0, 100);
+            $animationDelay = (rand(0, 1000) / 100);
+            echo "<div class='particle' style='width: {$size}px; height: {$size}px; left: {$left}%; animation-delay: {$animationDelay}s;'></div>";
+        }
+        ?>
+    </div>
+    
     <?php
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "sustain";
+
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    $conn->set_charset("utf8mb4");
+
+    if ($conn->connect_error) {
+        die("連接失敗: " . $conn->connect_error);
+    }
+
     if (isset($_POST["Username"]) && isset($_POST["Password"]) && isset($_POST["Email"])) {
-        $username = $_POST["Username"];
+        $username = $conn->real_escape_string($_POST["Username"]);
         $password = $_POST["Password"];
-        $email = $_POST["Email"];
+        $email = $conn->real_escape_string($_POST["Email"]);
+        $role = isset($_POST["role"]) ? $_POST["role"] : 'Student';
 
-        require_once("DB_open.php");
-
-        // 確認用戶名是否已經存在
-        $sql = "SELECT * FROM users WHERE username='$username'";
-        $result = mysqli_query($link, $sql);
-        if (mysqli_num_rows($result) > 0) {
-            echo "<center><font color='red'>用戶名稱已存在，請選擇其他名稱。</font></center>";
+        $sql = "SELECT * FROM user WHERE Username='$username'";
+        $result = $conn->query($sql);
+        
+        if ($result->num_rows > 0) {
+            echo "<div class='toast error'><span class='toast-icon'>❌</span>用戶名稱已存在，請選擇其他名稱。</div>";
         } else {
-            // 插入新用戶資料
-            $hashed_password = password_hash($password, PASSWORD_DEFAULT); // 加密密碼
-            $sql = "INSERT INTO users (username, password, email) VALUES ('$username', '$hashed_password', '$email')";
-            if (mysqli_query($link, $sql)) {
-                echo "<center><font color='green'>註冊成功！請登入。</font></center>";
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+            $sql = "INSERT INTO user (Username, Password, Email, Status) VALUES ('$username', '$hashed_password', '$email', '$role')";
+            
+            if ($conn->query($sql) === TRUE) {
+                echo "<div class='toast success'><span class='toast-icon'>✅</span>註冊成功！請登入。</div>";
                 echo "<div class='center'><a class='login-button' href='user_login.php'>登入</a></div>";
             } else {
-                echo "<center><font color='red'>註冊失敗，請稍後再試。</font></center>";
+                echo "<div class='toast error'><span class='toast-icon'>❌</span>註冊失敗，請稍後再試。</div>";
             }
         }
-
-        require_once("DB_close.php");
     }
+    $conn->close();
     ?>
+
     <form action="register.php" method="post">
         <table>
         <h2>註冊一個帳號</h2>
@@ -53,12 +107,45 @@
                 <td><input type="email" name="Email" size="15" maxlength="100" required /></td>
             </tr>
             <tr>
+                <td style="font-size: 14px;">身分：</td>
+                <td>
+                    <input type="radio" name="role" value="Student" id="student" checked>
+                    <label for="student" style="font-size: 14px;">學生</label>
+                    <input type="radio" name="role" value="Teacher" id="teacher">
+                    <label for="teacher" style="font-size: 14px;">老師</label>
+                </td>
+            </tr>
+            <tr>
                 <td colspan="2" style="text-align: center;">
                     <input type="submit" value="註冊帳戶" />
                 </td>
             </tr>
         </table>
     </form>
-</body>
 
+    <script>
+    function showToast() {
+        const toasts = document.querySelectorAll('.toast');
+        toasts.forEach(toast => {
+            setTimeout(() => {
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                    setTimeout(() => {
+                        toast.remove();
+                    }, 500); // 與 CSS transition 時間一致
+                }, 5000); // 顯示3秒
+            }, 100); // 初始延遲
+        });
+    }
+
+    // 頁面載入時檢查是否有 toast 元素並觸發
+    document.addEventListener('DOMContentLoaded', () => {
+        const toasts = document.querySelectorAll('.toast');
+        if (toasts.length > 0) {
+            showToast();
+        }
+    });
+    </script>
+</body>
 </html>

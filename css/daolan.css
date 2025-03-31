@@ -58,14 +58,18 @@ html, body {
 
 @keyframes backgroundSlide {
   0% { background-image: url('../img/index9.jpg'); opacity: 1; }
-  23% { background-image: url('../img/index9.jpg'); opacity: 1; }
-  25% { background-image: url('../img/index7.jpg'); opacity: 0; }
-  48% { background-image: url('../img/index7.jpg'); opacity: 1; }
-  50% { background-image: url('../img/index8.jpg'); opacity: 0; }
-  73% { background-image: url('../img/index8.jpg'); opacity: 1; }
-  75% { background-image: url('../img/index4.jpg'); opacity: 0; }
-  98% { background-image: url('../img/index4.jpg'); opacity: 1; }
-  100% { background-image: url('../img/index9.jpg'); opacity: 0; }
+  22% { background-image: url('../img/index9.jpg'); opacity: 1; }
+  24% { background-image: url('../img/index7.jpg'); opacity: 0.8; }
+  25% { background-image: url('../img/index7.jpg'); opacity: 1; }
+  47% { background-image: url('../img/index7.jpg'); opacity: 1; }
+  49% { background-image: url('../img/index8.jpg'); opacity: 0.8; }
+  50% { background-image: url('../img/index8.jpg'); opacity: 1; }
+  72% { background-image: url('../img/index8.jpg'); opacity: 1; }
+  74% { background-image: url('../img/index4.jpg'); opacity: 0.8; }
+  75% { background-image: url('../img/index4.jpg'); opacity: 1; }
+  97% { background-image: url('../img/index4.jpg'); opacity: 1; }
+  99% { background-image: url('../img/index9.jpg'); opacity: 0.8; }
+  100% { background-image: url('../img/index9.jpg'); opacity: 1; }
 }
 
 /* 第二區塊：功能介紹 */

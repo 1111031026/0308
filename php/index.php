@@ -44,7 +44,6 @@
                     <div class="ocean-image-container">
                         <img src="../img/ocean1.jpg" alt="海洋圖片" class="ocean-image">
                     </div>
-
                     <!-- 滾動文章區域 -->
                     <div class="article-slider">
                         <div class="article-content">

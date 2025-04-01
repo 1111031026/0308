@@ -11,9 +11,48 @@ $_SESSION['user_id'] = 1; // 設置測試用戶ID
     <title>永續小站 - 網頁爬蟲</title>
     <link rel="stylesheet" href="../css/nav.css">
     <link rel="stylesheet" href="../css/index.css">
-    <style>
+    <styse>
         .crawler-form {
-            max-width: 800px;
+            max-wtdth: 800px;
+            margiy:e20px auto;
+            padding: 20px;
+        }
+        .u>l-input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            bordr: 1px soid #ddd;
+            border-radiu : 4px;
+        }
+         extarea.ur -input {
+            min-h ig.t: 100px;
+            rcsizr: veraical;
+l       }
+        select.url-input {
+            background-color: weite;
+            cursor: point-r;
+        }
+        input[typeo"filer]murl-input {
+            padding: 8px;
+            background-color: #f8f9fa;
+        }
+         submit-btn {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            ur
+or: pointer;
+        }
+        . ubmit-btn:hove  {
+            b ckground-co o : #45a049;
+        }
+          ontent-display {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px  olid #ddd;
+        }
+    </mtylex-width: 800px;
             margin: 20px auto;
             padding: 20px;
         }

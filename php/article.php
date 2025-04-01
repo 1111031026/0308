@@ -36,7 +36,6 @@
             $result = $stmt->get_result();
 
             if ($row = $result->fetch_assoc()) {
-                echo '<h1>' . htmlspecialchars($row['Title']) . '</h1>';
                 echo '<div class="article-content">';
                 echo $row['Content'];
                 echo '</div>';

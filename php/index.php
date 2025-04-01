@@ -48,36 +48,35 @@
                     <!-- 滾動文章區域 -->
                     <div class="article-slider">
                         <div class="article-content">
-                            <div class="article-card">
-                                <h4>海洋污染的現況</h4>
-                                <img src="path/to/ocean-pollution.jpg" alt="海洋污染">
-                                <p>海洋污染問題日益嚴重，塑料垃圾成為主要威脅。本文探討如何透過個人行動減少污染。</p>
-                                <a href="link/to/ocean-pollution" class="read-more">閱讀更多</a>
-                            </div>
-                            <div class="article-card">
-                                <h4>珊瑚礁的保護</h4>
-                                <img src="path/to/ocean-pollution.jpg" alt="海洋污染">
-                                <p>全球珊瑚礁面臨白化危機，了解科學家們的保護策略與未來展望。</p>
-                                <a href="link/to/ocean-pollution" class="read-more">閱讀更多</a>
-                            </div>
-                            <div class="article-card">
-                                <h4>海龜的生存挑戰</h4>
-                                <img src="path/to/ocean-pollution.jpg" alt="海洋污染">
-                                <p>海龜因棲地破壞和漁網纏繞面臨生存危機，探討可能的救援方法。</p>
-                                <a href="link/to/ocean-pollution" class="read-more">閱讀更多</a>
-                            </div>
-                            <div class="article-card">
-                                <h4>海洋能源的未來</h4>
-                                <img src="path/to/ocean-pollution.jpg" alt="海洋污染">
-                                <p>潮汐與波浪能或成為可再生能源的重要來源，分析其發展潛力。</p>
-                                <a href="link/to/ocean-pollution" class="read-more">閱讀更多</a>
-                            </div>
-                            <div class="article-card">
-                                <h4>海洋能源的未來</h4>
-                                <img src="path/to/ocean-pollution.jpg" alt="海洋污染">
-                                <p>潮汐與波浪能或成為可再生能源的重要來源，分析其發展潛力。</p>
-                                <a href="link/to/ocean-pollution" class="read-more">閱讀更多</a>
-                            </div>
+                        <?php
+                        require_once 'db_connect.php';
+                        
+                        // 查詢SDG14分類的文章，按創建時間排序
+                        $sql = "SELECT * FROM article WHERE Category = 'sdg14' ORDER BY created_at DESC";
+                        $result = $conn->query($sql);
+                        
+                        if ($result->num_rows > 0) {
+                            while($row = $result->fetch_assoc()) {
+                                echo '<div class="article-card">';
+                                echo '<h4>' . htmlspecialchars($row['Title']) . '</h4>';
+                                if ($row['ImageURL']) {
+                                    echo '<img src="../' . htmlspecialchars($row['ImageURL']) . '" alt="文章圖片">';
+                                } else {
+                                    echo '<img src="../img/ocean.jpg" alt="預設圖片">';
+                                }
+                                echo '<p>' . htmlspecialchars($row['Description']) . '</p>';
+                                echo '<a href="article.php?id=' . $row['ArticleID'] . '" class="read-more">閱讀更多</a>';
+                                echo '</div>';
+                            }
+                        } else {
+                            echo '<div class="article-card">';
+                            echo '<h4>暫無相關文章</h4>';
+                            echo '<p>目前沒有海洋永續相關的文章。</p>';
+                            echo '</div>';
+                        }
+                        
+                        $conn->close();
+                        ?>
                         </div>
                         <!-- 左右按鈕 -->
                         <button class="slider-btn2 prev-btn"><</button>

@@ -1,10 +1,10 @@
 <nav class="navbar">
     <div class="logo">
         <img src="logo.png" alt="永續小站 Logo">
-        <h1>永續小站</h1>
+        <h1 style="font-size: 24px;">永續小站</h1>
     </div>
     <ul class="nav-links">
-        <li><a href="#home">氣候永續</a></li>
+        <li><a href="#home" style="font-size: 16px;">氣候永續</a></li>
         <li><a href="#ocean">陸域永續</a></li>
         <li><a href="#energy">海洋能源</a></li>
         <?php if (isset($_SESSION['role'])): ?>

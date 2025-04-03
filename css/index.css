@@ -152,6 +152,27 @@ main {
     text-align: center;
     position: relative;
     overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.green-section {
+    background-color: #4CAF50;
+    color: white;
+    padding: 0.8rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.brown-section {
+    background-color: #795548;
+    color: white;
+    padding: 0.8rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 20px;
 }
 
 /* 調整內部元素以配合新高度 */
@@ -482,4 +503,87 @@ main {
     .article-card {
         margin: 0 5px;
     }
+}
+/* Green Section 樣式（氣候永續） */
+.green-section {
+    background-color: #2ECC71; /* 綠色，代表氣候永續 */
+    color: white;
+    padding: 0.8rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.green-section h3 {
+    text-align: left;
+    margin-top: 0;
+    font-size: 1.8rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    margin-left: 20px;
+}
+
+/* 氣候圖片樣式 */
+.climate-image-container {
+    text-align: left;
+    margin-bottom: 1rem;
+    flex: none;
+    width: 300px;
+    max-width: 50%;
+}
+
+.climate-image {
+    width: 100%;
+    height: 250px;
+    border-radius: 10px;
+}
+
+/* 調整氣候永續的點點顏色 */
+.green-section .article-slider .slick-dots li.slick-active button {
+    background-color: #27AE60; /* 深綠色 */
+}
+
+.green-section .article-slider .slick-dots li button:hover {
+    background-color: #27AE60;
+}
+
+/* Brown Section 樣式（陸域永續） */
+.brown-section {
+    background-color: #8B4513; /* 棕色，代表陸域永續 */
+    color: white;
+    padding: 0.8rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.brown-section h3 {
+    text-align: left;
+    margin-top: 0;
+    font-size: 1.8rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    margin-left: 20px;
+}
+
+/* 陸域圖片樣式 */
+.land-image-container {
+    text-align: left;
+    margin-bottom: 1rem;
+    flex: none;
+    width: 300px;
+    max-width: 50%;
+}
+
+.land-image {
+    width: 100%;
+    height: 250px;
+    border-radius: 10px;
+}
+
+/* 調整陸域永續的點點顏色 */
+.brown-section .article-slider .slick-dots li.slick-active button {
+    background-color: #6D360F; /* 深棕色 */
+}
+
+.brown-section .article-slider .slick-dots li button:hover {
+    background-color: #6D360F;
 }

@@ -25,9 +25,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($result->num_rows > 0) {
             $user = $result->fetch_assoc();
             if (password_verify($password, $user['Password'])) {
+                // Store user details in session
                 $_SESSION["login_session"] = true;
                 $_SESSION["username"] = $username;
-                $_SESSION["user_id"] = $user['Username'];
+                $_SESSION["user_id"] = $user['UserID']; // Use UserID instead of Username for consistency
+                $_SESSION["role"] = $user['Status']; // Store the user's role (Teacher or Student)
                 header("Location: index.php");
                 exit();
             } else {
@@ -53,7 +55,7 @@ $conn->close();
         .toast {
             position: fixed;
             top: 20px;
-            right: -100%; /* 改為百分比，確保完全隱藏 */
+            right: -100%;
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(10px);
             padding: 15px 25px;
@@ -61,13 +63,13 @@ $conn->close();
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             color: white;
             font-size: 16px;
-            transition: right 0.5s ease; /* 只過渡 right 屬性 */
+            transition: right 0.5s ease;
             z-index: 1000;
             border: 1px solid rgba(255, 255, 255, 0.2);
             display: flex;
             align-items: center;
             gap: 10px;
-            min-width: 200px; /* 確保內容不會太窄 */
+            min-width: 200px;
             box-sizing: border-box;
         }
         .toast.success {
@@ -77,7 +79,7 @@ $conn->close();
             border-left: 4px solid #e74c3c;
         }
         .toast.show {
-            right: 20px; /* 顯示時的位置 */
+            right: 20px;
         }
         .toast-icon {
             font-size: 20px;

@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>永續小站 - 查看所有題目</title>
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/nav.css">
     <link rel="stylesheet" href="../css/view-all-qusetion.css">
 </head>
 <body>
@@ -64,7 +66,7 @@
     <!-- 控制按鈕 -->
     <div class="control-buttons">
         <button class="control-btn add-new" onclick="window.location.href='2.php'">增加新的題目</button>
-        <button class="control-btn submit-all" onclick="window.location.href='1.php'">確認送出所有題目</button>
+        <button class="control-btn submit-all" onclick="window.location.href='index.php'">確認送出所有題目</button>
     </div>
 </body>
 </html>

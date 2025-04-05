@@ -1,3 +1,6 @@
+<?php
+require_once 'db_connect.php';
+?>
 <!DOCTYPE html>
 <html lang="zh-TW">
 
@@ -25,21 +28,35 @@
             <h2>最新報導</h2>
             <div class="hero-slider">
                 <div class="hero-content">
-                    <div><img src="../img/desert.jpg" alt="沙漠圖片" class="hero-item"></div>
-                    <div><img src="../img/turtle.jpeg" alt="海龜圖片" class="hero-item"></div>
-                    <div><img src="../img/forest.png" alt="森林圖片" class="hero-item"></div>
-                    <div><img src="../img/mountain.png" alt="山脈圖片" class="hero-item"></div>
-                    <div><img src="../img/ocean.jpg" alt="海洋圖片" class="hero-item"></div>
+                    <?php
+                    // 查詢最新的五篇文章
+                    $sql = "SELECT * FROM article ORDER BY created_at DESC LIMIT 5";
+                    $result = $conn->query($sql);
+
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            echo '<div>';
+                            echo '<a href="article.php?id=' . $row['ArticleID'] . '">';
+                            if ($row['ImageURL']) {
+                                echo '<img src="../' . htmlspecialchars($row['ImageURL']) . '" alt="文章圖片" class="hero-item">';
+                            } else {
+                                echo '<img src="../img/ocean.jpg" alt="預設圖片" class="hero-item">';
+                            }
+                            echo '</a>';
+                            echo '</div>';
+                        }
+                    } else {
+                        // 如果沒有文章，顯示預設圖片
+                        echo '<div><img src="../img/ocean.jpg" alt="預設圖片" class="hero-item"></div>';
+                    }
+                    ?>
                 </div>
                 <!-- 左右按鈕 -->
-                <button class="slider-btn prev-btn">
-                    <</button>
-                        <button class="slider-btn next-btn">></button>
+                <button class="slider-btn prev-btn"><</button>
+                <button class="slider-btn next-btn">></button>
             </div>
         </section>
-        <?php
-        require_once 'db_connect.php';
-        ?>
+
         <section class="content">
             <div class="blue-section">
                 <h3>關於海洋永續的文章</h3>

@@ -88,8 +88,8 @@ body, html {
 }
 
 .nav-icons img {
-    height: 24px;
-    width: 24px;
+    height: 40px;
+    width: 40px;
     filter: brightness(100%);
     transition: filter 0.3s ease;
 }

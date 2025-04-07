@@ -16,8 +16,9 @@ if (session_status() === PHP_SESSION_NONE) {
         <li><a href="#energy">海洋永續</a></li>
         <?php if (isset($_SESSION['login_session']) && $_SESSION['login_session'] === true): ?>
             <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'Teacher'): ?>
-                <li><a href="#edit">題目編輯區</a></li>
+                <li><a href="deepseek-test.php">題目編輯區</a></li>
                 <li><a href="crawler.php">文章編輯區</a></li>
+                <li><a href="view-all-qusetion.php">查看所有題目</a></li>
             <?php elseif (isset($_SESSION['role']) && $_SESSION['role'] === 'Student'): ?>
                 <li><a href="#land">商城</a></li>
             <?php endif; ?>

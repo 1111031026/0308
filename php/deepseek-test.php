@@ -1,4 +1,47 @@
 <?php
+session_start();
+// 初始化變數
+$edit_content = '';
+$edit_type = '';
+$edit_answer = '';
+$edit_option_a = '';
+$edit_option_b = '';
+$edit_option_c = '';
+$edit_option_d = '';
+$edit_correct_answer = false;
+
+// 如果是編輯模式，從資料庫獲取題目信息
+if (isset($_GET['edit_id'])) {
+    include 'db_connect.php';
+    $edit_id = intval($_GET['edit_id']);
+    
+    $stmt = $conn->prepare("SELECT * FROM teacher_questions WHERE question_id = ?");
+    $stmt->bind_param("i", $edit_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if ($row = $result->fetch_assoc()) {
+        $edit_content = $row['content'];
+        $edit_type = $row['question_type'];
+        
+        if ($edit_type === '選擇題') {
+            $edit_answer = $row['answer'];
+            $edit_option_a = $row['option_a'];
+            $edit_option_b = $row['option_b'];
+            $edit_option_c = $row['option_c'];
+            $edit_option_d = $row['option_d'];
+        } elseif ($edit_type === '是非題') {
+            $edit_correct_answer = $row['correct_answer'];
+            $edit_answer = $edit_correct_answer ? 'true' : 'false';
+        } else {
+            $edit_answer = $row['answer'];
+        }
+    }
+    
+    $stmt->close();
+    $conn->close();
+}
+
 // 設定 API 金鑰
 $apiKey = 'sk-9483cae29d5644318c39537d786410f7'; // <<< 換成你的 DeepSeek API Key
 
@@ -6,23 +49,59 @@ $responseText = '';
 
 // 儲存題目到資料庫
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_question'])) {
-    $title = $_POST['question_title'] ?? '';
     $content = $_POST['question_content'] ?? '';
     $answer = $_POST['question_answer'] ?? '';
+    $question_type = $_POST['question_type'] ?? '問答題';
     
     // 連接資料庫
     include 'db_connect.php';
     
-    // 準備SQL語句
-    $stmt = $conn->prepare("INSERT INTO questions (title, content, answer, question_type) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $title, $content, $answer, $question_type);
-    
-    // 獲取選擇的題型
-    $question_type = $_POST['question_type'] ?? '問答題';
+    // 獲取文章ID
+    $article_id = isset($_GET['article_id']) ? intval($_GET['article_id']) : null;
+
+    // 檢查是否為編輯模式
+    if (isset($_GET['edit_id'])) {
+        $edit_id = intval($_GET['edit_id']);
+        
+        if ($question_type === '選擇題') {
+            $stmt = $conn->prepare("UPDATE teacher_questions SET content = ?, answer = ?, question_type = ?, option_a = ?, option_b = ?, option_c = ?, option_d = ? WHERE question_id = ?");
+            $option_a = $_POST['option_a'] ?? '';
+            $option_b = $_POST['option_b'] ?? '';
+            $option_c = $_POST['option_c'] ?? '';
+            $option_d = $_POST['option_d'] ?? '';
+            $stmt->bind_param("sssssssi", $content, $answer, $question_type, $option_a, $option_b, $option_c, $option_d, $edit_id);
+        } elseif ($question_type === '是非題') {
+            $stmt = $conn->prepare("UPDATE teacher_questions SET content = ?, question_type = ?, correct_answer = ? WHERE question_id = ?");
+            $correct_answer = $_POST['answer'] === 'true' ? 1 : 0;
+            $stmt->bind_param("ssii", $content, $question_type, $correct_answer, $edit_id);
+        } else {
+            $stmt = $conn->prepare("UPDATE teacher_questions SET content = ?, answer = ?, question_type = ? WHERE question_id = ?");
+            $stmt->bind_param("sssi", $content, $answer, $question_type, $edit_id);
+        }
+    } else {
+        if ($question_type === '選擇題') {
+            $stmt = $conn->prepare("INSERT INTO teacher_questions (content, answer, question_type, option_a, option_b, option_c, option_d, article_id, UserID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $option_a = $_POST['option_a'] ?? '';
+            $option_b = $_POST['option_b'] ?? '';
+            $option_c = $_POST['option_c'] ?? '';
+            $option_d = $_POST['option_d'] ?? '';
+            $user_id = $_SESSION['user_id'] ?? null;
+            $stmt->bind_param("sssssssii", $content, $answer, $question_type, $option_a, $option_b, $option_c, $option_d, $article_id, $user_id);
+        } elseif ($question_type === '是非題') {
+            $stmt = $conn->prepare("INSERT INTO teacher_questions (content, question_type, correct_answer, article_id, UserID) VALUES (?, ?, ?, ?, ?)");
+            $correct_answer = $_POST['answer'] === 'true' ? 1 : 0;
+            $user_id = $_SESSION['user_id'] ?? null;
+            $stmt->bind_param("ssiii", $content, $question_type, $correct_answer, $article_id, $user_id);
+        } else {
+            $stmt = $conn->prepare("INSERT INTO teacher_questions (content, answer, question_type, article_id, UserID) VALUES (?, ?, ?, ?, ?)");
+            $user_id = $_SESSION['user_id'] ?? null;
+            $stmt->bind_param("sssii", $content, $answer, $question_type, $article_id, $user_id);
+        }
+    }
     
     // 執行SQL
     if ($stmt->execute()) {
-        echo '<script>alert("題目儲存成功！");</script>';
+        echo '<script>alert("題目儲存成功！"); window.location.href = "view-all-qusetion.php";</script>';
     } else {
         echo '<script>alert("儲存失敗: ' . $conn->error . '");</script>';
     }
@@ -32,42 +111,67 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_question'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $userInput = $_POST['user_input'] ?? '';
-
-    $url = 'https://api.deepseek.com/chat/completions';
-
-    $data = [
-        'model' => 'deepseek-chat',
-        'messages' => [
-            ['role' => 'system', 'content' => 'You are a helpful assistant.'],
-            ['role' => 'user', 'content' => $userInput],
-        ],
-        'stream' => false,
-    ];
-
-    $headers = [
-        'Content-Type: application/json',
-        'Authorization: ' . 'Bearer ' . $apiKey,
-    ];
-
-    $ch = curl_init($url);
-
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-
-    $response = curl_exec($ch);
-
-    if (curl_errno($ch)) {
-        $responseText = '錯誤: ' . curl_error($ch);
-    } else {
-        $result = json_decode($response, true);
-        $responseText = $result['choices'][0]['message']['content'] ?? '沒有回應';
+    // 獲取文章URL
+    $article_id = isset($_GET['article_id']) ? intval($_GET['article_id']) : null;
+    $article_url = '';
+    
+    if ($article_id) {
+        include 'db_connect.php';
+        $stmt = $conn->prepare("SELECT ArticleURL FROM article WHERE ArticleID = ?");
+        $stmt->bind_param("i", $article_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        if ($row = $result->fetch_assoc()) {
+            $article_url = $row['ArticleURL'];
+        }
+        
+        $stmt->close();
+        $conn->close();
     }
+    
+    if (isset($_POST['user_input'])) {
+        $userInput = $_POST['user_input'];
+        if ($article_url) {
+            $userInput .= "\n\n請根據這篇文章的內容來出題：" . $article_url;
+        }
 
-    curl_close($ch);
+        $url = 'https://api.deepseek.com/chat/completions';
+
+        $data = [
+            'model' => 'deepseek-chat',
+            'messages' => [
+                ['role' => 'system', 'content' => 'You are a helpful assistant.'],
+                ['role' => 'user', 'content' => $userInput],
+            ],
+            'stream' => false,
+        ];
+
+        $headers = [
+            'Content-Type: application/json',
+            'Authorization: Bearer ' . $apiKey,
+        ];
+
+        $ch = curl_init($url);
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+
+        $response = curl_exec($ch);
+
+        if (curl_errno($ch)) {
+            $responseText = '錯誤: ' . curl_error($ch);
+        } else {
+            $result = json_decode($response, true);
+            $responseText = $result['choices'][0]['message']['content'] ?? '沒有回應';
+        }
+
+        curl_close($ch);
+    }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -92,12 +196,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <h2>新增題目</h2>
             <form method="post" action="">
                 <select name="question_type" id="question_type" required>
-                    <option value="選擇題">選擇題</option>
-                    <option value="是非題">是非題</option>
-                    <option value="問答題">問答題</option>
+                    <option value="選擇題" <?php echo ($edit_type === '選擇題') ? 'selected' : ''; ?>>選擇題</option>
+                    <option value="是非題" <?php echo ($edit_type === '是非題') ? 'selected' : ''; ?>>是非題</option>
+                    <option value="問答題" <?php echo ($edit_type === '問答題') ? 'selected' : ''; ?>>問答題</option>
                 </select>
-                <input type="text" name="question_title" placeholder="題目標題" required>
-                <textarea name="question_content" placeholder="題目內容" required></textarea>
+
+                <textarea name="question_content" placeholder="題目內容" required><?php echo htmlspecialchars($edit_content); ?></textarea>
                 <div id="answer_section">
                     <!-- 動態內容將由JavaScript生成 -->
                     <input type="text" name="question_answer" placeholder="正確答案" required>
@@ -109,9 +213,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 const questionType = document.getElementById('question_type');
                 const answerSection = document.getElementById('answer_section');
                 
+                // 設置初始值
+                const editType = '<?php echo $edit_type; ?>';
+                const editAnswer = '<?php echo addslashes($edit_answer); ?>';
+                const editOptionA = '<?php echo addslashes($edit_option_a); ?>';
+                const editOptionB = '<?php echo addslashes($edit_option_b); ?>';
+                const editOptionC = '<?php echo addslashes($edit_option_c); ?>';
+                const editOptionD = '<?php echo addslashes($edit_option_d); ?>';
+                
                 // 觸發一次change事件來初始化答案區域
                 const event = new Event('change');
                 questionType.dispatchEvent(event);
+                
+                // 設置已保存的值
+                setTimeout(() => {
+                    if (editType === '選擇題') {
+                        document.querySelector('input[name="option_a"]').value = editOptionA;
+                        document.querySelector('input[name="option_b"]').value = editOptionB;
+                        document.querySelector('input[name="option_c"]').value = editOptionC;
+                        document.querySelector('input[name="option_d"]').value = editOptionD;
+                        document.querySelector('select[name="question_answer"]').value = editAnswer;
+                    } else if (editType === '是非題') {
+                        document.querySelector('select[name="question_answer"]').value = editAnswer === 'true' ? '是' : '否';
+                    } else if (editType === '問答題') {
+                        document.querySelector('input[name="question_answer"]').value = editAnswer;
+                    }
+                }, 0);
             });
             
             document.getElementById('question_type').addEventListener('change', function() {

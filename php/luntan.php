@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>永續小站 - 文章1</title>
     <link rel="icon" type="image/png" href="../img/icon.png">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/nav.css">
     <link rel="stylesheet" href="../css/luntan.css">
 </head>
 

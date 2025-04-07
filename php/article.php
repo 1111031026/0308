@@ -7,6 +7,22 @@
     <link rel="icon" type="image/png" href="../img/icon.png">
     <link rel="stylesheet" href="../css/1.css">
     <link rel="stylesheet" href="../css/nav.css">
+    <style>
+    .article-source {
+        background-color: #f8f9fa;
+        padding: 10px 20px;
+        margin-bottom: 20px;
+        border-left: 4px solid #4CAF50;
+        font-size: 14px;
+    }
+    .article-source a {
+        color: #2196F3;
+        text-decoration: none;
+    }
+    .article-source a:hover {
+        text-decoration: underline;
+    }
+    </style>
 </head>
 <body>
     <header>
@@ -19,7 +35,7 @@
         <ul class="sidebar-links">
             <li><a href="#"><img src="../img/share.png" alt="分享" title="分享"></a></li>
             <li><a href="#"><img src="../img/quiz.png" alt="測驗" title="測驗"></a></li>
-            <li><a href="2.php"><img src="../img/new-quiz.png" alt="新增測驗" title="新增測驗"></a></li>
+            <li><a href="deepseek-test.php?article_id=<?php echo $_GET['id']; ?>"><img src="../img/new-quiz.png" alt="新增測驗" title="新增測驗"></a></li>
         </ul>
     </nav>
 
@@ -32,12 +48,13 @@
 
         if (isset($_GET['id'])) {
             $id = intval($_GET['id']);
-            $stmt = $conn->prepare("SELECT Title, Content FROM article WHERE ArticleID = ?");
+            $stmt = $conn->prepare("SELECT Title, Content, ArticleURL FROM article WHERE ArticleID = ?");
             $stmt->bind_param("i", $id);
             $stmt->execute();
             $result = $stmt->get_result();
 
             if ($row = $result->fetch_assoc()) {
+                echo '<div class="article-source">文章來源：<a href="' . htmlspecialchars($row['ArticleURL']) . '" target="_blank">' . htmlspecialchars($row['ArticleURL']) . '</a></div>';
                 echo '<div class="article-content">';
                 echo $row['Content'];
                 echo '</div>';

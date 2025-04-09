@@ -9,35 +9,50 @@ $_SESSION['user_id'] = 1; // 設置測試用戶ID
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>永續小站 - 網頁爬蟲</title>
+    <link rel="icon" type="image/png" href="../img/icon.png">
     <link rel="stylesheet" href="../css/nav.css">
     <link rel="stylesheet" href="../css/index.css">
     <style>
-        .crawler-form {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-        }
-        .url-input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-        }
-        .submit-btn {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        .submit-btn:hover {
-            background-color: #45a049;
-        }
-        .content-display {
-            margin-top: 20px;
-            padding: 20px;
-            border: 1px solid #ddd;
-        }
-    </style>
+         .crawler-form {
+             max-width: 800px;
+             margin: 20px auto;
+             padding: 20px;
+         }
+         .url-input {
+             width: 100%;
+             padding: 10px;
+             margin-bottom: 10px;
+             border: 1px solid #ddd;
+             border-radius: 4px;
+         }
+         textarea.url-input {
+             min-height: 100px;
+             resize: vertical;
+         }
+         select.url-input {
+             background-color: white;
+             cursor: pointer;
+         }
+         input[type="file"].url-input {
+             padding: 8px;
+             background-color: #f8f9fa;
+         }
+         .submit-btn {
+             padding: 10px 20px;
+             background-color: #4CAF50;
+             color: white;
+             border: none;
+             cursor: pointer;
+         }
+         .submit-btn:hover {
+             background-color: #45a049;
+         }
+         .content-display {
+             margin-top: 20px;
+             padding: 20px;
+             border: 1px solid #ddd;
+         }
+     </style>
 </head>
 <body>
     <header>
@@ -46,7 +61,16 @@ $_SESSION['user_id'] = 1; // 設置測試用戶ID
 
     <main>
         <div class="crawler-form">
-            <form method="POST" action="">
+            <form method="POST" action="" enctype="multipart/form-data">
+                <input type="text" name="title" class="url-input" placeholder="請輸入文章標題" required>
+                <textarea name="description" class="url-input" placeholder="請輸入文章簡介" required></textarea>
+                <select name="category" class="url-input" required>
+                    <option value="">請選擇分類</option>
+                    <option value="sdg13">SDG13 氣候永續</option>
+                    <option value="sdg14">SDG14 海洋能源</option>
+                    <option value="sdg15">SDG15 陸域永續</option>
+                </select>
+                <input type="file" name="image" class="url-input" accept="image/*">
                 <input type="url" name="target_url" class="url-input" placeholder="請輸入要爬取的網址" required>
                 <button type="submit" class="submit-btn">開始爬取</button>
             </form>
@@ -94,8 +118,22 @@ $_SESSION['user_id'] = 1; // 設置測試用戶ID
                     // 連接資料庫
                     require_once 'db_connect.php';
                     
+                    // 處理上傳的圖片
+                    $imageURL = null;
+                    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+                        $uploadDir = '../uploads/';
+                        if (!file_exists($uploadDir)) {
+                            mkdir($uploadDir, 0777, true);
+                        }
+                        $imageFileName = uniqid() . '_' . basename($_FILES['image']['name']);
+                        $targetPath = $uploadDir . $imageFileName;
+                        if (move_uploaded_file($_FILES['image']['tmp_name'], $targetPath)) {
+                            $imageURL = 'uploads/' . $imageFileName;
+                        }
+                    }
+
                     // 準備SQL語句
-                    $stmt = $conn->prepare("INSERT INTO article (ArticleURL, title, content, UserID) VALUES (?, ?, ?, ?)");
+                    $stmt = $conn->prepare("INSERT INTO article (ArticleURL, Title, Description, Category, ImageURL, Content, UserID) VALUES (?, ?, ?, ?, ?, ?, ?)");
                     $content = $dom->saveHTML();
                     if (isset($_SESSION['user_id'])) {
                         $user_id = $_SESSION['user_id'];
@@ -104,7 +142,10 @@ $_SESSION['user_id'] = 1; // 設置測試用戶ID
                         echo '<div class="content-display">錯誤：請先登入後再進行文章保存。</div>';
                         exit();
                     }
-                    $stmt->bind_param("ssss", $url, $title, $content, $user_id);
+                    $userTitle = $_POST['title'];
+                    $description = $_POST['description'];
+                    $category = $_POST['category'];
+                    $stmt->bind_param("ssssssi", $url, $userTitle, $description, $category, $imageURL, $content, $user_id);
                     
                     // 執行SQL
                     if ($stmt->execute()) {

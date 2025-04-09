@@ -7,9 +7,13 @@
 
 html, body {
     height: 100%;
-    overflow: hidden;
     font-family: 'Noto Sans TC', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
 }
+
+/* 簡介區塊樣式 */
+
 
 .page-container {
     height: 100vh;

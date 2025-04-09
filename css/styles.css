@@ -100,16 +100,6 @@ body {
     margin-top: -30px; /* 調整位置，使文字出現在圖片上方 */
 }
 
-/* 主導航欄樣式 */
-.navbar {
-    background-color: #4CAF50; /* 綠色背景，與圖片匹配 */
-    padding: 15px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: white;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
 
 .logo img {
     height: 30px;
@@ -123,33 +113,6 @@ body {
     vertical-align: middle;
     margin-left: 10px;
 }
-
-.nav-links {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    gap: 20px;
-}
-
-.nav-links li a {
-    text-decoration: none;
-    color: white;
-    font-size: 16px;
-}
-
-.nav-links li a:hover {
-    color: #f5f5f5;
-}
-
-.nav-icons a {
-    margin-left: 15px;
-}
-
-.nav-icons img {
-    height: 24px;
-}
-
 /* 文章內容區域樣式 */
 .content {
     margin: 150px 20px 20px 60px; /* 調整 margin，貼近左邊緣後縮小左邊距 */

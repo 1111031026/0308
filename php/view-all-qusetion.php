@@ -59,7 +59,27 @@
     <!-- 控制按鈕 -->
     <div class="control-buttons">
         <button class="control-btn add-new" onclick="window.location.href='deepseek-test.php'">增加新的題目</button>
-        <button class="control-btn submit-all" onclick="window.location.href='index.php'">確認送出所有題目</button>
+        <button class="control-btn submit-all" onclick="submitAllQuestions()">確認送出所有題目</button>
+        <script>
+        function submitAllQuestions() {
+            fetch('submit_questions.php', {
+                method: 'POST'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('所有題目已成功提交！');
+                    window.location.href = 'index.php';
+                } else {
+                    alert('提交失敗：' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('提交過程中發生錯誤');
+            });
+        }
+        </script>
     </div>
 </body>
 </html>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2025-04-07 19:25:07
+-- 產生時間： 2025-04-09 18:49:59
 -- 伺服器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -52,7 +52,6 @@ TRUNCATE TABLE `achievement`;
 -- 資料表結構 `article`
 --
 -- 建立時間： 2025-04-01 13:34:10
--- 最後更新： 2025-04-07 13:55:35
 --
 
 DROP TABLE IF EXISTS `article`;
@@ -122,7 +121,6 @@ TRUNCATE TABLE `articleimage`;
 -- 資料表結構 `choicequiz`
 --
 -- 建立時間： 2025-04-07 15:16:54
--- 最後更新： 2025-04-07 15:16:54
 --
 
 DROP TABLE IF EXISTS `choicequiz`;
@@ -148,12 +146,13 @@ TRUNCATE TABLE `choicequiz`;
 --
 -- 資料表結構 `choicequizstagingarea`
 --
--- 建立時間： 2025-04-07 15:16:54
--- 最後更新： 2025-04-07 15:16:54
+-- 建立時間： 2025-04-09 16:46:34
+-- 最後更新： 2025-04-09 16:47:12
 --
 
 DROP TABLE IF EXISTS `choicequizstagingarea`;
 CREATE TABLE `choicequizstagingarea` (
+  `QuestionID` int(11) NOT NULL,
   `UserID` int(11) NOT NULL COMMENT 'FK to User',
   `ArticleID` int(11) DEFAULT NULL COMMENT 'FK to Article',
   `QuestionText` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '問題文字',
@@ -169,6 +168,13 @@ CREATE TABLE `choicequizstagingarea` (
 --
 
 TRUNCATE TABLE `choicequizstagingarea`;
+--
+-- 傾印資料表的資料 `choicequizstagingarea`
+--
+
+INSERT INTO `choicequizstagingarea` (`QuestionID`, `UserID`, `ArticleID`, `QuestionText`, `OptionA`, `OptionB`, `OptionC`, `OptionD`, `CorrectAnswer`) VALUES
+(1, 1, 23, '根據加納公民社會組織(CSOs)的呼籲，政府應採取什麼關鍵行動來提高公眾對氣候變化的認識？', '增加對化石燃料的補貼以降低能源成本 ', '創建更多宣傳管道並將氣候教育納入學校課程  ', '優先發展重工業以刺激經濟增長', '減少國際合作以專注於國內議題 ', 'B');
+
 -- --------------------------------------------------------
 
 --
@@ -242,7 +248,6 @@ TRUNCATE TABLE `communitypost`;
 -- 資料表結構 `fillquiz`
 --
 -- 建立時間： 2025-04-07 15:16:54
--- 最後更新： 2025-04-07 15:16:54
 --
 
 DROP TABLE IF EXISTS `fillquiz`;
@@ -264,12 +269,13 @@ TRUNCATE TABLE `fillquiz`;
 --
 -- 資料表結構 `fillquizstagingarea`
 --
--- 建立時間： 2025-04-07 15:16:54
--- 最後更新： 2025-04-07 15:16:54
+-- 建立時間： 2025-04-09 16:46:34
+-- 最後更新： 2025-04-09 16:47:12
 --
 
 DROP TABLE IF EXISTS `fillquizstagingarea`;
 CREATE TABLE `fillquizstagingarea` (
+  `QuestionID` int(11) NOT NULL,
   `UserID` int(11) NOT NULL COMMENT 'FK to User',
   `ArticleID` int(11) DEFAULT NULL COMMENT 'FK to Article',
   `QuestionText` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '問題文字',
@@ -281,6 +287,13 @@ CREATE TABLE `fillquizstagingarea` (
 --
 
 TRUNCATE TABLE `fillquizstagingarea`;
+--
+-- 傾印資料表的資料 `fillquizstagingarea`
+--
+
+INSERT INTO `fillquizstagingarea` (`QuestionID`, `UserID`, `ArticleID`, `QuestionText`, `CorrectAnswer`) VALUES
+(1, 1, 23, '文中指出氣候變化對加納的哪些領域造成了直接威脅？請舉出兩個例子。', '農業（影響糧食安全）和沿海地區（因海平面上升導致侵蝕與洪水）。  ');
+
 -- --------------------------------------------------------
 
 --
@@ -351,7 +364,7 @@ TRUNCATE TABLE `purchase`;
 -- 資料表結構 `teacher_questions`
 --
 -- 建立時間： 2025-04-07 16:32:40
--- 最後更新： 2025-04-07 17:07:04
+-- 最後更新： 2025-04-09 16:47:12
 --
 
 DROP TABLE IF EXISTS `teacher_questions`;
@@ -375,22 +388,12 @@ CREATE TABLE `teacher_questions` (
 --
 
 TRUNCATE TABLE `teacher_questions`;
---
--- 傾印資料表的資料 `teacher_questions`
---
-
-INSERT INTO `teacher_questions` (`question_id`, `content`, `answer`, `question_type`, `article_id`, `created_at`, `userID`, `option_a`, `option_b`, `option_c`, `option_d`, `correct_answer`) VALUES
-(2, '根據加納公民社會組織(CSOs)的呼籲，政府應採取什麼關鍵行動來提高公眾對氣候變化的認識？', 'B', '選擇題', 23, '2025-04-07 16:57:29', 1, '增加對化石燃料的補貼以降低能源成本 ', '創建更多宣傳管道並將氣候教育納入學校課程  ', '優先發展重工業以刺激經濟增長', '減少國際合作以專注於國內議題 ', NULL),
-(3, '根據公民社會組織（CSOs）的說法，迦納政府已經建立了足夠的管道來提高公眾對氣候變化的認識。以上敘述是否正確？', '', '是非題', 23, '2025-04-07 17:03:26', 1, NULL, NULL, NULL, NULL, 0),
-(4, '文中指出氣候變化對加納的哪些領域造成了直接威脅？請舉出兩個例子。', '農業（影響糧食安全）和沿海地區（因海平面上升導致侵蝕與洪水）。  ', '問答題', 23, '2025-04-07 17:07:04', 1, NULL, NULL, NULL, NULL, NULL);
-
 -- --------------------------------------------------------
 
 --
 -- 資料表結構 `tfquiz`
 --
 -- 建立時間： 2025-04-07 15:16:54
--- 最後更新： 2025-04-07 15:16:54
 --
 
 DROP TABLE IF EXISTS `tfquiz`;
@@ -414,12 +417,13 @@ TRUNCATE TABLE `tfquiz`;
 --
 -- 資料表結構 `tfquizstagingarea`
 --
--- 建立時間： 2025-04-07 15:16:54
--- 最後更新： 2025-04-07 15:16:54
+-- 建立時間： 2025-04-09 16:46:34
+-- 最後更新： 2025-04-09 16:47:12
 --
 
 DROP TABLE IF EXISTS `tfquizstagingarea`;
 CREATE TABLE `tfquizstagingarea` (
+  `QuestionID` int(11) NOT NULL,
   `UserID` int(11) NOT NULL COMMENT 'FK to User',
   `ArticleID` int(11) DEFAULT NULL COMMENT 'FK to Article',
   `QuestionText` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '問題文字',
@@ -433,6 +437,14 @@ CREATE TABLE `tfquizstagingarea` (
 --
 
 TRUNCATE TABLE `tfquizstagingarea`;
+--
+-- 傾印資料表的資料 `tfquizstagingarea`
+--
+
+INSERT INTO `tfquizstagingarea` (`QuestionID`, `UserID`, `ArticleID`, `QuestionText`, `OptionA`, `OptionB`, `CorrectAnswer`) VALUES
+(1, 1, 23, '根據公民社會組織（CSOs）的說法，迦納政府已經建立了足夠的管道來提高公眾對氣候變化的認識。以上敘述是否正確？', '', '', 0),
+(2, 1, 21, '「通貨膨脹（inflation）僅會對現金持有者造成負面影響，而對於擁有房產或股票的人則完全不受影響。」  ', '', '', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -521,8 +533,9 @@ ALTER TABLE `choicequiz`
 -- 資料表索引 `choicequizstagingarea`
 --
 ALTER TABLE `choicequizstagingarea`
-  ADD PRIMARY KEY (`UserID`),
-  ADD KEY `fk_choicequizstagingarea_article` (`ArticleID`);
+  ADD PRIMARY KEY (`QuestionID`),
+  ADD KEY `fk_choicequizstagingarea_article` (`ArticleID`),
+  ADD KEY `UserID` (`UserID`);
 
 --
 -- 資料表索引 `choicerec`
@@ -558,7 +571,9 @@ ALTER TABLE `fillquiz`
 -- 資料表索引 `fillquizstagingarea`
 --
 ALTER TABLE `fillquizstagingarea`
-  ADD KEY `fk_fillquizstagingarea_article` (`ArticleID`);
+  ADD PRIMARY KEY (`QuestionID`),
+  ADD KEY `fk_fillquizstagingarea_article` (`ArticleID`),
+  ADD KEY `UserID` (`UserID`);
 
 --
 -- 資料表索引 `fillrec`
@@ -600,7 +615,9 @@ ALTER TABLE `tfquiz`
 -- 資料表索引 `tfquizstagingarea`
 --
 ALTER TABLE `tfquizstagingarea`
-  ADD KEY `fk_tfquizstagingarea_article` (`ArticleID`);
+  ADD PRIMARY KEY (`QuestionID`),
+  ADD KEY `fk_tfquizstagingarea_article` (`ArticleID`),
+  ADD KEY `UserID` (`UserID`);
 
 --
 -- 資料表索引 `tfrec`
@@ -638,6 +655,12 @@ ALTER TABLE `choicequiz`
   MODIFY `choiceID` int(11) NOT NULL AUTO_INCREMENT COMMENT '選擇題編號 (PK)';
 
 --
+-- 使用資料表自動遞增(AUTO_INCREMENT) `choicequizstagingarea`
+--
+ALTER TABLE `choicequizstagingarea`
+  MODIFY `QuestionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- 使用資料表自動遞增(AUTO_INCREMENT) `commentarea`
 --
 ALTER TABLE `commentarea`
@@ -656,6 +679,12 @@ ALTER TABLE `fillquiz`
   MODIFY `fillID` int(11) NOT NULL AUTO_INCREMENT COMMENT '填充題編號 (PK)';
 
 --
+-- 使用資料表自動遞增(AUTO_INCREMENT) `fillquizstagingarea`
+--
+ALTER TABLE `fillquizstagingarea`
+  MODIFY `QuestionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- 使用資料表自動遞增(AUTO_INCREMENT) `merchandise`
 --
 ALTER TABLE `merchandise`
@@ -665,13 +694,19 @@ ALTER TABLE `merchandise`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `teacher_questions`
 --
 ALTER TABLE `teacher_questions`
-  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `tfquiz`
 --
 ALTER TABLE `tfquiz`
   MODIFY `tfID` int(11) NOT NULL AUTO_INCREMENT COMMENT '是非題編號 (PK)';
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `tfquizstagingarea`
+--
+ALTER TABLE `tfquizstagingarea`
+  MODIFY `QuestionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `user`
@@ -712,6 +747,7 @@ ALTER TABLE `choicequiz`
 -- 資料表的限制式 `choicequizstagingarea`
 --
 ALTER TABLE `choicequizstagingarea`
+  ADD CONSTRAINT `choicequizstagingarea_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`),
   ADD CONSTRAINT `fk_choicequizstagingarea_article` FOREIGN KEY (`ArticleID`) REFERENCES `article` (`ArticleID`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
@@ -745,6 +781,7 @@ ALTER TABLE `fillquiz`
 -- 資料表的限制式 `fillquizstagingarea`
 --
 ALTER TABLE `fillquizstagingarea`
+  ADD CONSTRAINT `fillquizstagingarea_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`),
   ADD CONSTRAINT `fk_fillquizstagingarea_article` FOREIGN KEY (`ArticleID`) REFERENCES `article` (`ArticleID`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
@@ -779,7 +816,8 @@ ALTER TABLE `tfquiz`
 -- 資料表的限制式 `tfquizstagingarea`
 --
 ALTER TABLE `tfquizstagingarea`
-  ADD CONSTRAINT `fk_tfquizstagingarea_article` FOREIGN KEY (`ArticleID`) REFERENCES `article` (`ArticleID`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_tfquizstagingarea_article` FOREIGN KEY (`ArticleID`) REFERENCES `article` (`ArticleID`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `tfquizstagingarea_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`);
 
 --
 -- 資料表的限制式 `tfrec`

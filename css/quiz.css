@@ -1,0 +1,180 @@
+/* 通用樣式 */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+/* 固定懸浮選單樣式 */
+.sidebar {
+    position: fixed; /* 固定位置 */
+    top: 100px; /* 位於 Navbar 底部 */
+    left: 0; /* 貼近螢幕左邊緣 */
+    background-color: rgba(163, 209, 255, 0.4); /* 保持透明度 */
+    padding: 10px;
+    border-radius: 0 8px 8px 0; /* 僅左邊無圓角，右上和右下有圓角 */
+    border: 2px solid #a3d1ff; /* 設置邊框顏色與背景一致 */
+    border-left: none; /* 隱藏左邊邊框 */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* 增加陰影，突出右邊效果 */
+    z-index: 1000; /* 確保選單在最上層 */
+}
+
+.sidebar-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-links li {
+    margin: 10px 0;
+}
+
+.sidebar-links a {
+    text-decoration: none;
+    display: block; /* 確保圖片作為塊級元素 */
+}
+
+.sidebar-links img {
+    height: 30px; /* 調整圖片大小，根據需要修改 */
+    width: auto;
+    transition: opacity 0.3s; /* 添加輕微動畫效果 */
+}
+
+.sidebar-links img:hover {
+    opacity: 0.8; /* 滑鼠懸停時圖片稍微透明 */
+}
+
+/* 隱藏預設的 title 提示框，使用自定義工具提示 */
+.sidebar-links a[title]:hover:after {
+    content: attr(title); /* 顯示 title 屬性的文字 */
+    position: absolute;
+    background-color: #333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    white-space: nowrap;
+    z-index: 1001; /* 確保在懸浮選單之上 */
+    margin-left: 40px; /* 調整位置，貼近左邊緣後需要稍微向右移 */
+    margin-top: -30px; /* 調整位置，使文字出現在圖片上方 */
+}
+
+/* 主導航欄樣式 */
+
+
+/* 文章內容區域樣式 */
+.content {
+    margin: 150px 20px 20px 60px; /* 調整 margin，貼近左邊緣後縮小左邊距 */
+    padding: 20px;
+    background-color: white;
+    min-height: 500px; /* 確保有足夠空間展示內容 */
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+/* 重置預設樣式 */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+/* Navbar 樣式 */
+.navbar {
+    background-color: #4CAF50;
+    padding: 0.1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    transition: background-color 0.3s ease;
+}
+
+.navbar:hover {
+    background-color: #45a049;
+}
+
+/* Logo 樣式 */
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+    transform: rotate(15deg);
+}
+
+/* 新增的 logo-title 樣式 */
+.logo-title {
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s ease;
+}
+
+.logo-title:hover {
+    color: #f5f5f5;
+}
+
+/* 導覽連結 */
+.nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease, background-color 0.3s ease;
+
+}
+
+.nav-links li a:hover {
+    color: #f5f5f5;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+}
+
+/* 圖標 */
+.nav-icons {
+    display: flex;
+    align-items: center;
+}
+
+.nav-icons a {
+    margin-left: 15px;
+}
+
+.nav-icons img {
+    height: 40px;
+    width: 40px;
+    filter: brightness(100%);
+    transition: filter 0.3s ease;
+}
+
+.nav-icons img:hover {
+    filter: brightness(120%);
+}
+
+/* 確保內容不會被 nav 遮蓋 */
+.scraped-content {
+    margin-top: 80px;
+    padding: 20px;
+}

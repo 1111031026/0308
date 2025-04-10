@@ -1,0 +1,110 @@
+/* 重置預設樣式 */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+/* Navbar 樣式 */
+.navbar {
+    background-color: #4CAF50;
+    padding: 0.1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    transition: background-color 0.3s ease;
+}
+
+.navbar:hover {
+    background-color: #45a049;
+}
+
+/* Logo 樣式 */
+.logo {
+    display: flex;
+    align-items: center;
+    margin-right: 30px;
+}
+
+.logo img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+    transform: rotate(15deg);
+}
+
+/* 新增的 logo-title 樣式 */
+.logo-title {
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s ease;
+}
+
+.logo-title:hover {
+    color: #f5f5f5;
+}
+
+/* 導覽連結 */
+.nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease, background-color 0.3s ease;
+
+}
+
+.nav-links li a:hover {
+    color: #f5f5f5;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+}
+
+/* 圖標 */
+.nav-icons {
+    display: flex;
+    align-items: center;
+}
+
+.nav-icons a {
+    margin-left: 15px;
+}
+
+.nav-icons img {
+    height: 40px;
+    width: 40px;
+    filter: brightness(100%);
+    transition: filter 0.3s ease;
+}
+
+.nav-icons img:hover {
+    filter: brightness(120%);
+}
+
+/* 確保內容不會被 nav 遮蓋 */
+.scraped-content {
+    margin-top: 80px;
+    padding: 20px;
+}
+
+/* 用戶資料頁面樣式 *
+

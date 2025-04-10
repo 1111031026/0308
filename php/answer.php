@@ -47,15 +47,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>答題 - 永續小站</title>
     <link rel="icon" type="image/png" href="../img/icon.png">
-    <link rel="stylesheet" href="../css/nav.css">
-    <link rel="stylesheet" href="../css/1.css">
+    <link rel="stylesheet" href="../css/answer.css">
     <style>
         .answer-section {
             max-width: 800px;
-            margin: 80px auto 20px; /* 增加上邊距到80px */
+            margin: 120px auto 20px; /* 增加上邊距到120px確保不被nav擋住 */
             padding: 20px;
             background-color: #f8f9fa;
             border-radius: 5px;
+            position: relative;
+            z-index: 1;
         }
         .question-text {
             font-size: 18px;

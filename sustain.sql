@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2025-04-09 18:49:59
+-- 產生時間： 2025-04-10 15:37:10
 -- 伺服器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -141,13 +141,19 @@ CREATE TABLE `choicequiz` (
 --
 
 TRUNCATE TABLE `choicequiz`;
+--
+-- 傾印資料表的資料 `choicequiz`
+--
+
+INSERT INTO `choicequiz` (`choiceID`, `QuestionText`, `OptionA`, `OptionB`, `OptionC`, `OptionD`, `CorrectAnswer`, `UserID`, `ArticleID`) VALUES
+(1, '根據加納公民社會組織(CSOs)的呼籲，政府應採取什麼關鍵行動來提高公眾對氣候變化的認識？', '增加對化石燃料的補貼以降低能源成本 ', '創建更多宣傳管道並將氣候教育納入學校課程  ', '優先發展重工業以刺激經濟增長', '減少國際合作以專注於國內議題 ', 'B', 1, 23);
+
 -- --------------------------------------------------------
 
 --
 -- 資料表結構 `choicequizstagingarea`
 --
 -- 建立時間： 2025-04-09 16:46:34
--- 最後更新： 2025-04-09 16:47:12
 --
 
 DROP TABLE IF EXISTS `choicequizstagingarea`;
@@ -168,13 +174,6 @@ CREATE TABLE `choicequizstagingarea` (
 --
 
 TRUNCATE TABLE `choicequizstagingarea`;
---
--- 傾印資料表的資料 `choicequizstagingarea`
---
-
-INSERT INTO `choicequizstagingarea` (`QuestionID`, `UserID`, `ArticleID`, `QuestionText`, `OptionA`, `OptionB`, `OptionC`, `OptionD`, `CorrectAnswer`) VALUES
-(1, 1, 23, '根據加納公民社會組織(CSOs)的呼籲，政府應採取什麼關鍵行動來提高公眾對氣候變化的認識？', '增加對化石燃料的補貼以降低能源成本 ', '創建更多宣傳管道並將氣候教育納入學校課程  ', '優先發展重工業以刺激經濟增長', '減少國際合作以專注於國內議題 ', 'B');
-
 -- --------------------------------------------------------
 
 --
@@ -264,13 +263,19 @@ CREATE TABLE `fillquiz` (
 --
 
 TRUNCATE TABLE `fillquiz`;
+--
+-- 傾印資料表的資料 `fillquiz`
+--
+
+INSERT INTO `fillquiz` (`fillID`, `QuestionText`, `CorrectAnswer`, `UserID`, `ArticleID`) VALUES
+(2, '文中指出氣候變化對加納的哪些領域造成了直接威脅？請舉出兩個例子。', '農業（影響糧食安全）和沿海地區（因海平面上升導致侵蝕與洪水）。  ', 1, 23);
+
 -- --------------------------------------------------------
 
 --
 -- 資料表結構 `fillquizstagingarea`
 --
 -- 建立時間： 2025-04-09 16:46:34
--- 最後更新： 2025-04-09 16:47:12
 --
 
 DROP TABLE IF EXISTS `fillquizstagingarea`;
@@ -287,13 +292,6 @@ CREATE TABLE `fillquizstagingarea` (
 --
 
 TRUNCATE TABLE `fillquizstagingarea`;
---
--- 傾印資料表的資料 `fillquizstagingarea`
---
-
-INSERT INTO `fillquizstagingarea` (`QuestionID`, `UserID`, `ArticleID`, `QuestionText`, `CorrectAnswer`) VALUES
-(1, 1, 23, '文中指出氣候變化對加納的哪些領域造成了直接威脅？請舉出兩個例子。', '農業（影響糧食安全）和沿海地區（因海平面上升導致侵蝕與洪水）。  ');
-
 -- --------------------------------------------------------
 
 --
@@ -364,7 +362,6 @@ TRUNCATE TABLE `purchase`;
 -- 資料表結構 `teacher_questions`
 --
 -- 建立時間： 2025-04-07 16:32:40
--- 最後更新： 2025-04-09 16:47:12
 --
 
 DROP TABLE IF EXISTS `teacher_questions`;
@@ -412,13 +409,20 @@ CREATE TABLE `tfquiz` (
 --
 
 TRUNCATE TABLE `tfquiz`;
+--
+-- 傾印資料表的資料 `tfquiz`
+--
+
+INSERT INTO `tfquiz` (`tfID`, `QuestionText`, `OptionA`, `OptionB`, `CorrectAnswer`, `UserID`, `ArticleID`) VALUES
+(1, '根據公民社會組織（CSOs）的說法，迦納政府已經建立了足夠的管道來提高公眾對氣候變化的認識。以上敘述是否正確？', '', '', 0, 1, 23),
+(2, '「通貨膨脹（inflation）僅會對現金持有者造成負面影響，而對於擁有房產或股票的人則完全不受影響。」  ', '', '', 0, 1, 21);
+
 -- --------------------------------------------------------
 
 --
 -- 資料表結構 `tfquizstagingarea`
 --
 -- 建立時間： 2025-04-09 16:46:34
--- 最後更新： 2025-04-09 16:47:12
 --
 
 DROP TABLE IF EXISTS `tfquizstagingarea`;
@@ -437,14 +441,6 @@ CREATE TABLE `tfquizstagingarea` (
 --
 
 TRUNCATE TABLE `tfquizstagingarea`;
---
--- 傾印資料表的資料 `tfquizstagingarea`
---
-
-INSERT INTO `tfquizstagingarea` (`QuestionID`, `UserID`, `ArticleID`, `QuestionText`, `OptionA`, `OptionB`, `CorrectAnswer`) VALUES
-(1, 1, 23, '根據公民社會組織（CSOs）的說法，迦納政府已經建立了足夠的管道來提高公眾對氣候變化的認識。以上敘述是否正確？', '', '', 0),
-(2, 1, 21, '「通貨膨脹（inflation）僅會對現金持有者造成負面影響，而對於擁有房產或股票的人則完全不受影響。」  ', '', '', 0);
-
 -- --------------------------------------------------------
 
 --
@@ -652,7 +648,7 @@ ALTER TABLE `articleimage`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `choicequiz`
 --
 ALTER TABLE `choicequiz`
-  MODIFY `choiceID` int(11) NOT NULL AUTO_INCREMENT COMMENT '選擇題編號 (PK)';
+  MODIFY `choiceID` int(11) NOT NULL AUTO_INCREMENT COMMENT '選擇題編號 (PK)', AUTO_INCREMENT=2;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `choicequizstagingarea`
@@ -676,7 +672,7 @@ ALTER TABLE `communitypost`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `fillquiz`
 --
 ALTER TABLE `fillquiz`
-  MODIFY `fillID` int(11) NOT NULL AUTO_INCREMENT COMMENT '填充題編號 (PK)';
+  MODIFY `fillID` int(11) NOT NULL AUTO_INCREMENT COMMENT '填充題編號 (PK)', AUTO_INCREMENT=3;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `fillquizstagingarea`
@@ -694,13 +690,13 @@ ALTER TABLE `merchandise`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `teacher_questions`
 --
 ALTER TABLE `teacher_questions`
-  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `tfquiz`
 --
 ALTER TABLE `tfquiz`
-  MODIFY `tfID` int(11) NOT NULL AUTO_INCREMENT COMMENT '是非題編號 (PK)';
+  MODIFY `tfID` int(11) NOT NULL AUTO_INCREMENT COMMENT '是非題編號 (PK)', AUTO_INCREMENT=3;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `tfquizstagingarea`

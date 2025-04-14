@@ -66,9 +66,9 @@ $_SESSION['user_id'] = 1; // 設置測試用戶ID
                 <textarea name="description" class="url-input" placeholder="請輸入文章簡介" required></textarea>
                 <select name="category" class="url-input" required>
                     <option value="">請選擇分類</option>
-                    <option value="sdg13">SDG13 氣候永續</option>
-                    <option value="sdg14">SDG14 海洋能源</option>
-                    <option value="sdg15">SDG15 陸域永續</option>
+                    <option value="sdg13">氣候永續</option>
+                    <option value="sdg14">海洋能源</option>
+                    <option value="sdg15">陸域永續</option>
                 </select>
                 <input type="file" name="image" class="url-input" accept="image/*">
                 <input type="url" name="target_url" class="url-input" placeholder="請輸入要爬取的網址" required>

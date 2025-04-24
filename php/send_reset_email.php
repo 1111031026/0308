@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = $conn->real_escape_string($_POST["email"]);
 
     // 檢查是否存在該 email 的使用者
-    $sql = "SELECT * FROM user WHERE Email = '$email'";
+    $sql = "SELECT Username, UserID FROM user WHERE Email = '$email'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -49,14 +49,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $mail->SMTPSecure = 'tls';
             $mail->Port = 587;
 
-            $mail->setFrom('noreplysustainhub@gmail.com', 'SustainHub 團隊');
+            $mail->setFrom('noreplysustainhub@gmail.com', 'SustainHub Team');
             $mail->addAddress($email);
 
             $mail->isHTML(true);
-            $mail->Subject = 'SustainHub 密碼重設連結';
+            $mail->Subject = 'SustainHub Reset Password';
             $mail->Body = "
                 <p>親愛的使用者您好，</p>
-                <p>請點選以下連結來重設您的密碼（1 小時內有效）：</p>
+                <p>您的使用者名稱為: {$user['Username']}</p>
+                <p>請點選以下連結來重設您的密碼（該連結將於1小時後失效）：</p>
                 <p><a href='http://localhost/小專/php/reset_password.php?token=$token'>重設密碼連結</a></p>
                 <p>如果您沒有申請重設，請忽略此信件。</p>
             ";

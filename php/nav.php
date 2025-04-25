@@ -11,12 +11,11 @@ if (session_status() === PHP_SESSION_NONE) {
         <h1 style="font-size: 24px;"><a href="index.php" class="logo-title">永續小站</a></h1>
     </div>
     <ul class="nav-links">
-        <li><a href="#home" style="font-size: 16px;">氣候永續</a></li>
-        <li><a href="#land" style="font-size: 16px; ">陸域永續</a></li>
+        <li><a href="climate.php" style="font-size: 16px;">氣候永續</a></li>
+        <li><a href="landscape.php" style="font-size: 16px; ">陸域永續</a></li>
         <li><a href="ocean.php" style="font-size: 16px;">海洋永續</a></li>
         <?php if (isset($_SESSION['login_session']) && $_SESSION['login_session'] === true): ?>
             <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'Teacher'): ?>
-                <li><a href="deepseek-test.php">題目編輯區</a></li>
                 <li><a href="crawler.php">文章編輯區</a></li>
                 <li><a href="view-all-qusetion.php">查看所有編輯中題目</a></li>
             <?php elseif (isset($_SESSION['role']) && $_SESSION['role'] === 'Student'): ?>

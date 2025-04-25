@@ -6,7 +6,7 @@
     <title>氣候行動 - 永續小站</title>
     <link rel="icon" type="image/png" href="../img/icon.png">
     <link rel="stylesheet" href="../css/index.css">
-    <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/nav2.css">
     <link rel="stylesheet" href="../css/climate.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
@@ -64,5 +64,20 @@
             </div>
         </section>
     </div>
+    <script>
+        $(document).ready(function() {
+            let navbar = $('.navbar');
+            let timer;
+
+            // 監聽滑鼠移動事件
+            $(document).mousemove(function(e) {
+                if (e.clientY <= 100) {
+                    navbar.css('transform', 'translateY(100px)');
+                } else {
+                    navbar.css('transform', 'translateY(-100px)');
+                }
+            });
+        });
+    </script>
 </body>
 </html>

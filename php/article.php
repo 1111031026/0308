@@ -52,6 +52,7 @@
     <div class="content">
         <?php
         require_once 'db_connect.php';
+        require_once 'article_analyzer.php';
 
         if (isset($_GET['id'])) {
             $id = intval($_GET['id']);
@@ -62,9 +63,20 @@
 
             if ($row = $result->fetch_assoc()) {
                 echo '<div class="article-source">文章來源：<a href="' . htmlspecialchars($row['ArticleURL']) . '" target="_blank">' . htmlspecialchars($row['ArticleURL']) . '</a></div>';
-                echo '<div class="article-content">';
-                echo $row['Content'];
-                echo '</div>';
+                
+                // 使用AI分析文章內容
+                $analysis = analyzeArticle($row['Content']);
+                
+                if (isset($analysis['error'])) {
+                    echo '<div class="error">分析過程出現錯誤：' . htmlspecialchars($analysis['error']) . '</div>';
+                } else {
+                    echo '<div class="article-content">';
+                    echo '<h3>AI重點整理：</h3>';
+                    echo '<div class="ai-analysis">';
+                    echo nl2br(htmlspecialchars($analysis['choices'][0]['message']['content']));
+                    echo '</div>';
+                    echo '</div>';
+                }
             } else {
                 echo '<p>找不到該文章</p>';
             }

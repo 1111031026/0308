@@ -40,6 +40,7 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/user.css">
     <title>用戶資料</title>
+    <link rel="icon" type="image/png" href="../img/icon.png">
 </head>
 
 <body>

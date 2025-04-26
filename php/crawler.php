@@ -98,6 +98,7 @@ $_SESSION['user_id'] = 1; // 設置測試用戶ID
                     
                     // 處理圖片路徑
                     $images = $dom->getElementsByTagName('img');
+                    $downloadedImages = array();
                     foreach ($images as $image) {
                         $src = $image->getAttribute('src');
                         if ($src) {
@@ -107,7 +108,28 @@ $_SESSION['user_id'] = 1; // 設置測試用戶ID
                                     ? parse_url($url, PHP_URL_SCHEME) . '://' . parse_url($url, PHP_URL_HOST) . $src
                                     : rtrim(dirname($url), '/') . '/' . $src;
                             }
-                            $image->setAttribute('src', $src);
+                            
+                            // 下載圖片
+                            $uploadDir = '../uploads/';
+                            if (!file_exists($uploadDir)) {
+                                mkdir($uploadDir, 0777, true);
+                            }
+                            
+                            $imageFileName = uniqid() . '_' . basename($src);
+                            $targetPath = $uploadDir . $imageFileName;
+                            
+                            // 使用curl下載圖片
+                            $ch_img = curl_init($src);
+                            curl_setopt($ch_img, CURLOPT_RETURNTRANSFER, true);
+                            curl_setopt($ch_img, CURLOPT_FOLLOWLOCATION, true);
+                            curl_setopt($ch_img, CURLOPT_SSL_VERIFYPEER, false);
+                            $img_data = curl_exec($ch_img);
+                            curl_close($ch_img);
+                            
+                            if ($img_data && file_put_contents($targetPath, $img_data)) {
+                                $downloadedImages[] = 'uploads/' . $imageFileName;
+                                $image->setAttribute('src', '../uploads/' . $imageFileName);
+                            }
                         }
                     }
                     
@@ -132,9 +154,13 @@ $_SESSION['user_id'] = 1; // 設置測試用戶ID
                         }
                     }
 
+                    // 使用AI提取主要內容
+                    require_once 'article_analyzer.php';
+                    $content = $dom->saveHTML();
+                    $extracted_content = extractContent($content);
+                    
                     // 準備SQL語句
                     $stmt = $conn->prepare("INSERT INTO article (ArticleURL, Title, Description, Category, ImageURL, Content, UserID) VALUES (?, ?, ?, ?, ?, ?, ?)");
-                    $content = $dom->saveHTML();
                     if (isset($_SESSION['user_id'])) {
                         $user_id = $_SESSION['user_id'];
                     } else {

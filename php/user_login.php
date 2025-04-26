@@ -114,6 +114,11 @@ $conn->close();
                     <input type="submit" value="登入" />
                 </td>
             </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    <a href="forgot_password.php" style="color: #fff; text-decoration: none; font-size: 14px;">忘記密碼？</a>
+                </td>
+            </tr>
         </table>
     </form>
 

@@ -11,8 +11,8 @@ if (session_status() === PHP_SESSION_NONE) {
         <h1 style="font-size: 24px;"><a href="index.php" class="logo-title">永續小站</a></h1>
     </div>
     <ul class="nav-links">
-        <li><a href="#home" style="font-size: 16px;">氣候永續</a></li>
-        <li><a href="#land" style="font-size: 16px; ">陸域永續</a></li>
+        <li><a href="climate.php" style="font-size: 16px;">氣候永續</a></li>
+        <li><a href="landscape.php" style="font-size: 16px; ">陸域永續</a></li>
         <li><a href="ocean.php" style="font-size: 16px;">海洋永續</a></li>
         <?php if (isset($_SESSION['login_session']) && $_SESSION['login_session'] === true): ?>
             <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'Teacher'): ?>

@@ -421,6 +421,45 @@ html, body {
     font-size: 1em;
     color: #444;
 }
+/* 分頁樣式 */
+.section-4 .pagination {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.section-4 .pagination-btn {
+    padding: 10px 20px;
+    background-color: #1e40af;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.section-4 .pagination-btn:hover {
+    background-color: #1e3a8a;
+    transform: translateY(-2px);
+}
+
+.section-4 .pagination-btn:disabled {
+    background-color: #93c5fd;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.section-4 #page-info {
+    font-size: 1.1em;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
 
 /* 動畫 */
 @keyframes subtleZoom {

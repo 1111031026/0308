@@ -81,84 +81,132 @@
         <section class="section section-4">
             <h3>搜尋海洋文章</h3>
             <div class="search-container">
-                <form method="GET" action="ocean.php">
-                    <input type="text" name="search" placeholder="輸入關鍵字搜尋..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
+                <form id="search-form">
+                    <input type="text" name="search" id="search-input" placeholder="輸入關鍵字搜尋..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
                     <button type="submit">搜尋</button>
                 </form>
             </div>
-            <div class="posts-grid">
-                <?php
-                require_once 'db_connect.php';
-                $search = isset($_GET['search']) ? $_GET['search'] : '';
-                
-                if (!empty($search)) {
-                    $sql = "SELECT * FROM article WHERE Category = 'sdg14' AND Title LIKE '%" . $conn->real_escape_string($search) . "%' ORDER BY created_at DESC";
-                } else {
-                    $sql = "SELECT * FROM article WHERE Category = 'sdg14' ORDER BY created_at DESC";
-                }
-                
-                $result = $conn->query($sql);
-                
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        echo '<div class="post-card">';
-                        if ($row['ImageURL']) {
-                            echo '<img src="../' . htmlspecialchars($row['ImageURL']) . '" alt="文章圖片">';
-                        } else {
-                            echo '<img src="../img/ocean.jpg" alt="預設圖片">';
-                        }
-                        echo '<h4>' . htmlspecialchars($row['Title']) . '</h4>';
-                        echo '<p>' . htmlspecialchars($row['Description']) . '</p>';
-                        echo '<a href="article.php?id=' . $row['ArticleID'] . '" class="read-more">閱讀更多</a>';
-                        echo '</div>';
-                    }
-                } else {
-                    echo '<div class="post-card">';
-                    echo '<h4>暫無相關文章</h4>';
-                    echo '<p>沒有找到符合條件的文章。</p>';
-                    echo '</div>';
-                }
-                ?>
+            <div class="posts-grid" id="posts-grid">
+                <!-- 文章將通過 AJAX 動態加載 -->
+            </div>
+            <div class="pagination">
+                <button class="pagination-btn prev-btn" id="prev-btn" disabled>上一頁</button>
+                <span id="page-info">第 1 頁</span>
+                <button class="pagination-btn next-btn" id="next-btn">下一頁</button>
             </div>
         </section>
     </div>
-<script>
-$(document).ready(function() {
-    let navbar = $('.navbar');
-    let timer;
 
-    // 監聽滑鼠移動事件
-    $(document).mousemove(function(e) {
-        if (e.clientY <= 100) {
-            navbar.css('transform', 'translateY(100px)');
-        } else {
-            navbar.css('transform', 'translateY(-100px)');
-        }
-    });
+    <script>
+    $(document).ready(function() {
+        let navbar = $('.navbar');
+        let currentPage = 1;
+        let totalPages = 1;
+        let searchQuery = $('#search-input').val();
 
-    // 初始化Slick輪播
-    $('.article-content').slick({
-        infinite: true,
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        prevArrow: $('.prev-btn'),
-        nextArrow: $('.next-btn'),
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 2
-                }
-            },
-            {
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 1
-                }
+        // 監聽滑鼠移動事件
+        $(document).mousemove(function(e) {
+            if (e.clientY <= 100) {
+                navbar.css('transform', 'translateY(100px)');
+            } else {
+                navbar.css('transform', 'translateY(-100px)');
             }
-        ]
+        });
+
+        // 初始化Slick輪播
+        $('.article-content').slick({
+            infinite: true,
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            prevArrow: $('.prev-btn'),
+            nextArrow: $('.next-btn'),
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 2
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 1
+                    }
+                }
+            ]
+        });
+
+        // 載入文章函數
+        function loadArticles(page, search) {
+            $('#posts-grid').html('<p>載入中...</p>'); // 顯示載入提示
+            $.ajax({
+                url: 'fetch_articles.php',
+                method: 'GET',
+                data: { page: page, search: search },
+                dataType: 'json',
+                success: function(response) {
+                    const postsGrid = $('#posts-grid');
+                    postsGrid.empty(); // 清空現有內容
+
+                    if (response.articles.length > 0) {
+                        response.articles.forEach(article => {
+                            postsGrid.append(`
+                                <div class="post-card">
+                                    <img src="${article.ImageURL}" alt="文章圖片">
+                                    <h4>${article.Title}</h4>
+                                    <p>${article.Description}</p>
+                                    <a href="article.php?id=${article.ArticleID}" class="read-more">閱讀更多</a>
+                                </div>
+                            `);
+                        });
+                    } else {
+                        postsGrid.append(`
+                            <div class="post-card">
+                                <h4>暫無相關文章</h4>
+                                <p>沒有找到符合條件的文章。</p>
+                            </div>
+                        `);
+                    }
+
+                    totalPages = response.totalPages;
+                    $('#page-info').text(`第 ${page} 頁`);
+                    
+                    // 更新按鈕狀態
+                    $('#prev-btn').prop('disabled', page === 1);
+                    $('#next-btn').prop('disabled', page >= totalPages);
+                },
+                error: function() {
+                    $('#posts-grid').html('<p>載入文章失敗，請稍後重試。</p>');
+                }
+            });
+        }
+
+        // 初始載入第一頁
+        loadArticles(currentPage, searchQuery);
+
+        // 搜尋表單提交
+        $('#search-form').on('submit', function(e) {
+            e.preventDefault();
+            searchQuery = $('#search-input').val();
+            currentPage = 1; // 重置到第一頁
+            loadArticles(currentPage, searchQuery);
+        });
+
+        // 分頁按鈕點擊
+        $('#prev-btn').on('click', function() {
+            if (currentPage > 1) {
+                currentPage--;
+                loadArticles(currentPage, searchQuery);
+            }
+        });
+
+        $('#next-btn').on('click', function() {
+            if (currentPage < totalPages) {
+                currentPage++;
+                loadArticles(currentPage, searchQuery);
+            }
+        });
     });
-});
-</script>
+    </script>
 </body>
 </html>

@@ -23,7 +23,6 @@ require_once 'db_connect.php';
         include "nav.php";
         ?>
     </header>
-
     <main>
         <section class="hero">
             <h2>最新報導</h2>
@@ -103,20 +102,14 @@ require_once 'db_connect.php';
                 </div>
             </div>
         </section>
-        <!-- 氣候永續文章 -->
         <section class="content">
             <div class="green-section">
                 <h3>關於氣候永續的文章</h3>
                 <div class="container">
-                    <!-- 氣候圖片區塊 -->
-                    <div class="climate-image-container">
-                        <img src="../img/climate.jpg" alt="氣候圖片" class="climate-image">
-                    </div>
                     <!-- 滾動文章區域 -->
                     <div class="article-slider">
                         <div class="article-content">
                             <?php
-
                             // 查詢SDG13分類的文章（氣候行動），按創建時間排序
                             $sql = "SELECT * FROM article WHERE Category = 'sdg13' ORDER BY created_at DESC";
                             $result = $conn->query($sql);
@@ -140,13 +133,15 @@ require_once 'db_connect.php';
                                 echo '<p>目前沒有氣候永續相關的文章。</p>';
                                 echo '</div>';
                             }
-
                             ?>
                         </div>
                         <!-- 左右按鈕 -->
-                        <button class="slider-btn2 prev-btn">
-                            <</button>
-                                <button class="slider-btn2 next-btn">></button>
+                        <button class="slider-btn2 prev-btn"><</button>
+                        <button class="slider-btn2 next-btn">></button>
+                    </div>
+                    <!-- 氣候圖片區塊 -->
+                    <div class="climate-image-container">
+                        <img src="../img/climate.jpg" alt="氣候圖片" class="climate-image">
                     </div>
                 </div>
             </div>

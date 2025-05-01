@@ -146,33 +146,36 @@ main {
 
 /* Blue Section 樣式 */
 .blue-section {
-    background-color: #1E90FF;
+    background: linear-gradient(323deg, #1E90FF 0%, #00BFFF 100%);
     color: white;
-    padding: 0.8rem;  /* 減少上下內邊距 */
+    padding: 0.8rem;
     text-align: center;
     position: relative;
     overflow: hidden;
     margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .green-section {
-    background-color: #4CAF50;
+    background: linear-gradient(120deg, #4CAF50 0%, #64fca3 100%);
     color: white;
     padding: 0.8rem;
     text-align: center;
     position: relative;
     overflow: hidden;
     margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .brown-section {
-    background-color: #795548;
+    background: linear-gradient(267deg, #795548 0%, #A0522D 100%);
     color: white;
     padding: 0.8rem;
     text-align: center;
     position: relative;
     overflow: hidden;
     margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* 調整內部元素以配合新高度 */

@@ -8,7 +8,15 @@ $data = json_decode(file_get_contents('php://input'), true);
 $questionId = intval($data['questionId']);
 $questionType = $data['questionType'];
 $userAnswer = $data['answer'];
-$userId = 1; // 這裡應該從session中獲取用戶ID
+
+session_start(); // 確保 session 已啟動
+$userId = $_SESSION['user_id'] ?? 0; // 從session中獲取用戶ID
+
+// 檢查用戶是否登入
+if ($userId === 0) {
+    echo json_encode(['correct' => false, 'explanation' => '錯誤：用戶未登入或Session已過期。']);
+    exit;
+}
 
 $response = ['correct' => false, 'explanation' => ''];
 

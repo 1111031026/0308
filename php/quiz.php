@@ -1,9 +1,18 @@
 <?php
+session_start(); // 確保 session 已啟動
 require_once 'db_connect.php';
 
 // 獲取文章ID和用戶ID
 $article_id = isset($_GET['article_id']) ? intval($_GET['article_id']) : 0;
-$user_id = 1; // 這裡應該從session中獲取用戶ID
+$user_id = $_SESSION['user_id'] ?? 0; // 從session中獲取用戶ID
+
+// 檢查用戶是否登入
+if ($user_id === 0) {
+    // 可以重定向到登入頁面或顯示錯誤訊息
+    // 如果用戶未登入，重定向到導覽頁
+    header('Location: daolan.php');
+    exit; 
+}
 
 // 獲取選擇題及答題記錄
 $choice_questions = [];

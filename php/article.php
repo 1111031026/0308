@@ -1,3 +1,6 @@
+<?php
+session_start(); // 確保 session 已啟動
+?>
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>

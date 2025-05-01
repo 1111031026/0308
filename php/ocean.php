@@ -91,7 +91,10 @@
             </div>
             <div class="pagination">
                 <button class="pagination-btn prev-btn" id="prev-btn" disabled>上一頁</button>
-                <span id="page-info">第 1 頁</span>
+                <div class="page-input-container">
+                    <input type="number" id="page-input" min="1" value="1" class="page-input">
+                    <span>/ <span id="total-pages">1</span> 頁</span>
+                </div>
                 <button class="pagination-btn next-btn" id="next-btn">下一頁</button>
             </div>
         </section>
@@ -169,7 +172,9 @@
                     }
 
                     totalPages = response.totalPages;
-                    $('#page-info').text(`第 ${page} 頁`);
+                    $('#total-pages').text(totalPages);
+                    $('#page-input').val(page);
+                    $('#page-input').attr('max', totalPages);
                     
                     // 更新按鈕狀態
                     $('#prev-btn').prop('disabled', page === 1);
@@ -203,6 +208,45 @@
         $('#next-btn').on('click', function() {
             if (currentPage < totalPages) {
                 currentPage++;
+                loadArticles(currentPage, searchQuery);
+            }
+        });
+
+        // 監聽頁碼輸入框的Enter鍵事件
+        $('#page-input').on('keypress', function(e) {
+            if (e.which === 13) { // Enter鍵的keyCode是13
+                e.preventDefault(); // 防止表單提交
+                let pageNum = parseInt($(this).val());
+                
+                // 確保頁碼在有效範圍內
+                if (pageNum < 1) {
+                    pageNum = 1;
+                } else if (pageNum > totalPages) {
+                    pageNum = totalPages;
+                }
+                
+                if (pageNum !== currentPage) {
+                    currentPage = pageNum;
+                    loadArticles(currentPage, searchQuery);
+                }
+            }
+        });
+
+        // 當輸入框失去焦點時也進行頁面跳轉
+        $('#page-input').on('blur', function() {
+            let pageNum = parseInt($(this).val());
+            
+            // 確保頁碼在有效範圍內
+            if (pageNum < 1) {
+                pageNum = 1;
+                $(this).val(1);
+            } else if (pageNum > totalPages) {
+                pageNum = totalPages;
+                $(this).val(totalPages);
+            }
+            
+            if (pageNum !== currentPage) {
+                currentPage = pageNum;
                 loadArticles(currentPage, searchQuery);
             }
         });

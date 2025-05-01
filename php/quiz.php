@@ -1,36 +1,49 @@
 <?php
 require_once 'db_connect.php';
 
-// 獲取文章ID
+// 獲取文章ID和用戶ID
 $article_id = isset($_GET['article_id']) ? intval($_GET['article_id']) : 0;
+$user_id = 1; // 這裡應該從session中獲取用戶ID
 
-// 獲取選擇題
+// 獲取選擇題及答題記錄
 $choice_questions = [];
-$choice_sql = "SELECT c.*, u.Username FROM choicequiz c LEFT JOIN user u ON c.UserID = u.UserID WHERE c.ArticleID = ?";
+$choice_sql = "SELECT c.*, u.Username, cr.UserAnswer, cr.isCorrect 
+FROM choicequiz c 
+LEFT JOIN user u ON c.UserID = u.UserID 
+LEFT JOIN choicerec cr ON c.choiceID = cr.choiceID AND cr.UserID = ? 
+WHERE c.ArticleID = ?";
 $stmt = $conn->prepare($choice_sql);
-$stmt->bind_param("i", $article_id);
+$stmt->bind_param("ii", $user_id, $article_id);
 $stmt->execute();
 $result = $stmt->get_result();
 while($row = $result->fetch_assoc()) {
     $choice_questions[] = $row;
 }
 
-// 獲取填空題
+// 獲取填空題及答題記錄
 $fill_questions = [];
-$fill_sql = "SELECT f.*, u.Username FROM fillquiz f LEFT JOIN user u ON f.UserID = u.UserID WHERE f.ArticleID = ?";
+$fill_sql = "SELECT f.*, u.Username, fr.UserAnswer, fr.isCorrect 
+FROM fillquiz f 
+LEFT JOIN user u ON f.UserID = u.UserID 
+LEFT JOIN fillrec fr ON f.fillID = fr.fillID AND fr.UserID = ? 
+WHERE f.ArticleID = ?";
 $stmt = $conn->prepare($fill_sql);
-$stmt->bind_param("i", $article_id);
+$stmt->bind_param("ii", $user_id, $article_id);
 $stmt->execute();
 $result = $stmt->get_result();
 while($row = $result->fetch_assoc()) {
     $fill_questions[] = $row;
 }
 
-// 獲取是非題
+// 獲取是非題及答題記錄
 $tf_questions = [];
-$tf_sql = "SELECT t.*, u.Username FROM tfquiz t LEFT JOIN user u ON t.UserID = u.UserID WHERE t.ArticleID = ?";
+$tf_sql = "SELECT t.*, u.Username, tr.UserAnswer, tr.isCorrect 
+FROM tfquiz t 
+LEFT JOIN user u ON t.UserID = u.UserID 
+LEFT JOIN tfrec tr ON t.tfID = tr.tfID AND tr.UserID = ? 
+WHERE t.ArticleID = ?";
 $stmt = $conn->prepare($tf_sql);
-$stmt->bind_param("i", $article_id);
+$stmt->bind_param("ii", $user_id, $article_id);
 $stmt->execute();
 $result = $stmt->get_result();
 while($row = $result->fetch_assoc()) {
@@ -47,6 +60,36 @@ while($row = $result->fetch_assoc()) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/quiz_new.css">
     <link rel="stylesheet" href="../css/nav.css">
+    <style>
+        .question-container.answered {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .question-container.answered.correct {
+            background-color: rgba(76, 175, 80, 0.1);
+            border-left: 4px solid #4CAF50;
+        }
+        .question-container.answered.incorrect {
+            background-color: rgba(244, 67, 54, 0.1);
+            border-left: 4px solid #F44336;
+        }
+        .feedback.correct {
+            color: #4CAF50;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .feedback.incorrect {
+            color: #F44336;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        input[type="radio"]:disabled + label,
+        input[type="text"]:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -80,29 +123,39 @@ while($row = $result->fetch_assoc()) {
                 </h2>
                 <div id="choiceCollapse" class="accordion-collapse collapse" data-bs-parent="#quizAccordion" style="">
                     <div class="accordion-body">
-                        <?php foreach($choice_questions as $question): ?>
-                        <div class="question-container" data-question-id="<?php echo htmlspecialchars($question['choiceID']); ?>" data-question-type="choice">
+                        <?php foreach($choice_questions as $question): 
+                            $answered = isset($question['UserAnswer']);
+                            $isCorrect = $answered && $question['isCorrect'];
+                            $questionClass = $answered ? ($isCorrect ? 'answered correct' : 'answered incorrect') : '';
+                        ?>
+                        <div class="question-container <?php echo $questionClass; ?>" data-question-id="<?php echo htmlspecialchars($question['choiceID']); ?>" data-question-type="choice">
                             <div class="question-text"><?php echo htmlspecialchars($question['QuestionText']); ?></div>
                             <div class="options-container">
                                 <div class="option-item">
-                                    <input type="radio" name="choice_<?php echo $question['choiceID']; ?>" value="A"> 
+                                    <input type="radio" name="choice_<?php echo $question['choiceID']; ?>" value="A" <?php echo $answered ? ($question['UserAnswer'] === 'A' ? 'checked' : '') : ''; ?> <?php echo $answered ? 'disabled' : ''; ?>> 
                                     <label><?php echo htmlspecialchars($question['OptionA']); ?></label>
                                 </div>
                                 <div class="option-item">
-                                    <input type="radio" name="choice_<?php echo $question['choiceID']; ?>" value="B"> 
+                                    <input type="radio" name="choice_<?php echo $question['choiceID']; ?>" value="B" <?php echo $answered ? ($question['UserAnswer'] === 'B' ? 'checked' : '') : ''; ?> <?php echo $answered ? 'disabled' : ''; ?>> 
                                     <label><?php echo htmlspecialchars($question['OptionB']); ?></label>
                                 </div>
                                 <div class="option-item">
-                                    <input type="radio" name="choice_<?php echo $question['choiceID']; ?>" value="C"> 
+                                    <input type="radio" name="choice_<?php echo $question['choiceID']; ?>" value="C" <?php echo $answered ? ($question['UserAnswer'] === 'C' ? 'checked' : '') : ''; ?> <?php echo $answered ? 'disabled' : ''; ?>> 
                                     <label><?php echo htmlspecialchars($question['OptionC']); ?></label>
                                 </div>
                                 <div class="option-item">
-                                    <input type="radio" name="choice_<?php echo $question['choiceID']; ?>" value="D"> 
+                                    <input type="radio" name="choice_<?php echo $question['choiceID']; ?>" value="D" <?php echo $answered ? ($question['UserAnswer'] === 'D' ? 'checked' : '') : ''; ?> <?php echo $answered ? 'disabled' : ''; ?>> 
                                     <label><?php echo htmlspecialchars($question['OptionD']); ?></label>
                                 </div>
                             </div>
+                            <?php if(!$answered): ?>
                             <button class="submit-btn" onclick="submitAnswer(this)">提交答案</button>
-                            <div class="feedback"></div>
+                            <?php endif; ?>
+                            <div class="feedback <?php echo $answered ? ($isCorrect ? 'correct' : 'incorrect') : ''; ?>">
+                                <?php if($answered): ?>
+                                    <?php echo $isCorrect ? '答對了！' : '答錯了！'; ?>
+                                <?php endif; ?>
+                            </div>
                             <div class="teacher-info">出題老師：<?php echo htmlspecialchars($question['Username'] ?? '未知'); ?></div>
                         </div>
                         <?php endforeach; ?>
@@ -119,12 +172,22 @@ while($row = $result->fetch_assoc()) {
                 </h2>
                 <div id="fillCollapse" class="accordion-collapse collapse" data-bs-parent="#quizAccordion" style="">
                     <div class="accordion-body">
-                        <?php foreach($fill_questions as $question): ?>
-                        <div class="question-container" data-question-id="<?php echo htmlspecialchars($question['fillID']); ?>" data-question-type="fill">
+                        <?php foreach($fill_questions as $question): 
+                            $answered = isset($question['UserAnswer']);
+                            $isCorrect = $answered && $question['isCorrect'];
+                            $questionClass = $answered ? ($isCorrect ? 'answered correct' : 'answered incorrect') : '';
+                        ?>
+                        <div class="question-container <?php echo $questionClass; ?>" data-question-id="<?php echo htmlspecialchars($question['fillID']); ?>" data-question-type="fill">
                             <div class="question-text"><?php echo htmlspecialchars($question['QuestionText']); ?></div>
-                            <input type="text" class="fill-input" placeholder="請輸入答案">
+                            <input type="text" class="fill-input" placeholder="請輸入答案" value="<?php echo $answered ? htmlspecialchars($question['UserAnswer']) : ''; ?>" <?php echo $answered ? 'disabled' : ''; ?>>
+                            <?php if(!$answered): ?>
                             <button class="submit-btn" onclick="submitAnswer(this)">提交答案</button>
-                            <div class="feedback"></div>
+                            <?php endif; ?>
+                            <div class="feedback <?php echo $answered ? ($isCorrect ? 'correct' : 'incorrect') : ''; ?>">
+                                <?php if($answered): ?>
+                                    <?php echo $isCorrect ? '答對了！' : '答錯了！'; ?>
+                                <?php endif; ?>
+                            </div>
                             <div class="teacher-info">出題老師：<?php echo htmlspecialchars($question['Username'] ?? '未知'); ?></div>
                         </div>
                         <?php endforeach; ?>
@@ -141,21 +204,31 @@ while($row = $result->fetch_assoc()) {
                 </h2>
                 <div id="tfCollapse" class="accordion-collapse collapse" data-bs-parent="#quizAccordion" style="">
                     <div class="accordion-body">
-                        <?php foreach($tf_questions as $question): ?>
-                        <div class="question-container" data-question-id="<?php echo htmlspecialchars($question['tfID']); ?>" data-question-type="tf">
+                        <?php foreach($tf_questions as $question): 
+                            $answered = isset($question['UserAnswer']);
+                            $isCorrect = $answered && $question['isCorrect'];
+                            $questionClass = $answered ? ($isCorrect ? 'answered correct' : 'answered incorrect') : '';
+                        ?>
+                        <div class="question-container <?php echo $questionClass; ?>" data-question-id="<?php echo htmlspecialchars($question['tfID']); ?>" data-question-type="tf">
                             <div class="question-text"><?php echo htmlspecialchars($question['QuestionText']); ?></div>
                             <div class="options-container">
                                 <div class="option-item">
-                                    <input type="radio" name="tf_<?php echo $question['tfID']; ?>" value="T"> 
+                                    <input type="radio" name="tf_<?php echo $question['tfID']; ?>" value="T" <?php echo $answered ? ($question['UserAnswer'] === 'T' ? 'checked' : '') : ''; ?> <?php echo $answered ? 'disabled' : ''; ?>> 
                                     <label>是</label>
                                 </div>
                                 <div class="option-item">
-                                    <input type="radio" name="tf_<?php echo $question['tfID']; ?>" value="F"> 
+                                    <input type="radio" name="tf_<?php echo $question['tfID']; ?>" value="F" <?php echo $answered ? ($question['UserAnswer'] === 'F' ? 'checked' : '') : ''; ?> <?php echo $answered ? 'disabled' : ''; ?>> 
                                     <label>否</label>
                                 </div>
                             </div>
+                            <?php if(!$answered): ?>
                             <button class="submit-btn" onclick="submitAnswer(this)">提交答案</button>
-                            <div class="feedback"></div>
+                            <?php endif; ?>
+                            <div class="feedback <?php echo $answered ? ($isCorrect ? 'correct' : 'incorrect') : ''; ?>">
+                                <?php if($answered): ?>
+                                    <?php echo $isCorrect ? '答對了！' : '答錯了！'; ?>
+                                <?php endif; ?>
+                            </div>
                             <div class="teacher-info">出題老師：<?php echo htmlspecialchars($question['Username'] ?? '未知'); ?></div>
                         </div>
                         <?php endforeach; ?>
@@ -217,10 +290,10 @@ while($row = $result->fetch_assoc()) {
             feedbackDiv.style.display = 'block';
             if (data.correct) {
                 feedbackDiv.className = 'feedback correct';
-                feedbackDiv.textContent = '答對了！' + (data.explanation ? ' 解釋：' + data.explanation : '');
+                feedbackDiv.textContent = '答對了！';
             } else {
                 feedbackDiv.className = 'feedback incorrect';
-                feedbackDiv.textContent = '答錯了。' + (data.explanation ? ' 正確答案：' + data.explanation : '');
+                feedbackDiv.textContent = '答錯了。';
             }
             // 禁用提交按鈕和輸入
             button.disabled = true;

@@ -13,14 +13,14 @@ $userId = 1; // 這裡應該從session中獲取用戶ID
 $response = ['correct' => false, 'explanation' => ''];
 
 // 記錄答題歷史的函數
-function recordAnswer($userId, $questionId, $questionType, $userAnswer) {
+function recordAnswer($userId, $questionId, $questionType, $userAnswer, $isCorrect) {
     global $conn;
     $table = $questionType . 'rec';
     $idField = $questionType . 'ID';
     
-    $insertSql = "INSERT INTO $table (UserID, $idField, UserAnswer, FinishTime) VALUES (?, ?, ?, NOW())";
+    $insertSql = "INSERT INTO $table (UserID, $idField, UserAnswer, isCorrect, FinishTime) VALUES (?, ?, ?, ?, NOW())";
     $stmt = $conn->prepare($insertSql);
-    $stmt->bind_param('iis', $userId, $questionId, $userAnswer);
+    $stmt->bind_param('iisi', $userId, $questionId, $userAnswer, $isCorrect);
     $stmt->execute();
 }
 
@@ -41,8 +41,8 @@ switch($questionType) {
             $response['explanation'] = '答錯了！';
         }
         
-        // 記錄答案
-        recordAnswer($userId, $questionId, $questionType, $userAnswer);
+        // 記錄答案和是否正確
+        recordAnswer($userId, $questionId, $questionType, $userAnswer, $response['correct']);
         break;
         
     case 'fill':
@@ -57,21 +57,17 @@ switch($questionType) {
             // 先進行嚴格比對
             if (trim($userAnswer) === trim($row['CorrectAnswer'])) {
                 $response['correct'] = true;
-                $response['explanation'] = '答對了！';
             } else {
                 // 如果不完全相同，使用DeepSeek API判斷答案相似度
                 $api_key = 'sk-9483cae29d5644318c39537d786410f7';
                 if (checkAnswerSimilarity($userAnswer, $row['CorrectAnswer'])) {
                     $response['correct'] = true;
-                    $response['explanation'] = '答對了！';
-                } else {
-                    $response['explanation'] = '答錯了！';
                 }
             }
         }
         
-        // 記錄答案
-        recordAnswer($userId, $questionId, $questionType, $userAnswer);
+        // 記錄答案和是否正確
+        recordAnswer($userId, $questionId, $questionType, $userAnswer, $response['correct']);
         break;
         
     case 'tf':
@@ -86,14 +82,11 @@ switch($questionType) {
             $correctAnswer = $row['CorrectAnswer'] ? 'T' : 'F';
             if ($userAnswer === $correctAnswer) {
                 $response['correct'] = true;
-                $response['explanation'] = '答對了！';
-            } else {
-                $response['explanation'] = '答錯了！';
             }
         }
         
-        // 記錄答案
-        recordAnswer($userId, $questionId, $questionType, $userAnswer);
+        // 記錄答案和是否正確
+        recordAnswer($userId, $questionId, $questionType, $userAnswer, $response['correct']);
         break;
 }
 

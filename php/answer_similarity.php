@@ -4,7 +4,7 @@ function checkAnswerSimilarity($userAnswer, $correctAnswer) {
     
     $curl = curl_init();
     
-    $prompt = "請判斷以下兩個答案是否表達相同的意思。回答只需要true或false。\n答案1：{$userAnswer}\n答案2：{$correctAnswer}";
+    $prompt = "請判斷以下兩個答案是否表達相同的意思，標準可以寬鬆一點，例如有兩個以上的字與正確答案相符就視為正確。回答只需要true或false。\n答案1：{$userAnswer}\n答案2：{$correctAnswer}";
 
     $postData = [
         "model" => "deepseek-chat",

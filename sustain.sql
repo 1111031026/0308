@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2025-04-10 15:37:10
+-- 產生時間： 2025-05-02 14:45:24
 -- 伺服器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -28,7 +28,8 @@ USE `sustain`;
 --
 -- 資料表結構 `achievement`
 --
--- 建立時間： 2025-04-01 11:32:55
+-- 建立時間： 2025-04-30 15:29:19
+-- 最後更新： 2025-05-02 12:41:56
 --
 
 DROP TABLE IF EXISTS `achievement`;
@@ -46,12 +47,22 @@ CREATE TABLE `achievement` (
 --
 
 TRUNCATE TABLE `achievement`;
+--
+-- 傾印資料表的資料 `achievement`
+--
+
+INSERT INTO `achievement` (`UserID`, `TotalPoints`, `ArticlesViewed`, `ChoiceQuestionsCorrect`, `TFQuestionsCorrect`, `FillinQuestionsCorrect`) VALUES
+(2, 15, 4, 1, 1, 1),
+(3, 5, 1, 1, 0, 0),
+(4, 0, 1, 0, 0, 0);
+
 -- --------------------------------------------------------
 
 --
 -- 資料表結構 `article`
 --
--- 建立時間： 2025-04-01 13:34:10
+-- 建立時間： 2025-04-30 15:29:19
+-- 最後更新： 2025-05-02 09:37:16
 --
 
 DROP TABLE IF EXISTS `article`;
@@ -100,7 +111,7 @@ INSERT INTO `article` (`ArticleID`, `Title`, `Category`, `ImageURL`, `Descriptio
 --
 -- 資料表結構 `articleimage`
 --
--- 建立時間： 2025-04-01 11:32:56
+-- 建立時間： 2025-04-30 15:29:19
 --
 
 DROP TABLE IF EXISTS `articleimage`;
@@ -120,7 +131,8 @@ TRUNCATE TABLE `articleimage`;
 --
 -- 資料表結構 `choicequiz`
 --
--- 建立時間： 2025-04-07 15:16:54
+-- 建立時間： 2025-04-30 15:29:19
+-- 最後更新： 2025-05-02 09:21:56
 --
 
 DROP TABLE IF EXISTS `choicequiz`;
@@ -146,14 +158,16 @@ TRUNCATE TABLE `choicequiz`;
 --
 
 INSERT INTO `choicequiz` (`choiceID`, `QuestionText`, `OptionA`, `OptionB`, `OptionC`, `OptionD`, `CorrectAnswer`, `UserID`, `ArticleID`) VALUES
-(1, '根據加納公民社會組織(CSOs)的呼籲，政府應採取什麼關鍵行動來提高公眾對氣候變化的認識？', '增加對化石燃料的補貼以降低能源成本 ', '創建更多宣傳管道並將氣候教育納入學校課程  ', '優先發展重工業以刺激經濟增長', '減少國際合作以專注於國內議題 ', 'B', 1, 23);
+(1, '根據加納公民社會組織(CSOs)的呼籲，政府應採取什麼關鍵行動來提高公眾對氣候變化的認識？', '增加對化石燃料的補貼以降低能源成本 ', '創建更多宣傳管道並將氣候教育納入學校課程  ', '優先發展重工業以刺激經濟增長', '減少國際合作以專注於國內議題 ', 'B', 1, 23),
+(2, '\n根據《Mongabay》2025年1月的報導，關於全球鯊魚、魟魚和銀鮫的生存危機，以下哪一項敘述是正確的？', '最新研究顯示，過度捕撈和棲地破壞已導致超過50%的軟骨魚類物種瀕臨滅絕。', '國際貿易公約（CITES）已全面禁止所有鯊魚和魟魚的捕撈，緩解了族群下降趨勢。', '深海採礦和氣候變遷是威脅軟骨魚類生存的主要因素，而非漁業活動。', '科學家發現，鯊魚族群的恢復速度比預期快，因此無需加強保育措施。', 'A', 1, 16);
 
 -- --------------------------------------------------------
 
 --
 -- 資料表結構 `choicequizstagingarea`
 --
--- 建立時間： 2025-04-09 16:46:34
+-- 建立時間： 2025-04-30 15:29:19
+-- 最後更新： 2025-05-02 09:20:00
 --
 
 DROP TABLE IF EXISTS `choicequizstagingarea`;
@@ -179,7 +193,8 @@ TRUNCATE TABLE `choicequizstagingarea`;
 --
 -- 資料表結構 `choicerec`
 --
--- 建立時間： 2025-04-01 11:32:56
+-- 建立時間： 2025-05-01 02:38:33
+-- 最後更新： 2025-05-02 12:41:47
 --
 
 DROP TABLE IF EXISTS `choicerec`;
@@ -187,7 +202,8 @@ CREATE TABLE `choicerec` (
   `choiceID` int(11) NOT NULL COMMENT 'FK to ChoiceQuiz',
   `UserID` int(11) NOT NULL COMMENT 'FK to User',
   `UserAnswer` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '使用者答案 (A/B/C/D)',
-  `FinishTime` datetime DEFAULT current_timestamp() COMMENT '完成時間'
+  `FinishTime` datetime DEFAULT current_timestamp() COMMENT '完成時間',
+  `isCorrect` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -195,12 +211,20 @@ CREATE TABLE `choicerec` (
 --
 
 TRUNCATE TABLE `choicerec`;
+--
+-- 傾印資料表的資料 `choicerec`
+--
+
+INSERT INTO `choicerec` (`choiceID`, `UserID`, `UserAnswer`, `FinishTime`, `isCorrect`) VALUES
+(1, 2, 'B', '2025-05-02 20:36:17', 1),
+(1, 3, 'B', '2025-05-02 20:41:47', 1);
+
 -- --------------------------------------------------------
 
 --
 -- 資料表結構 `commentarea`
 --
--- 建立時間： 2025-04-01 11:32:56
+-- 建立時間： 2025-04-30 15:29:19
 --
 
 DROP TABLE IF EXISTS `commentarea`;
@@ -223,7 +247,7 @@ TRUNCATE TABLE `commentarea`;
 --
 -- 資料表結構 `communitypost`
 --
--- 建立時間： 2025-04-01 11:32:56
+-- 建立時間： 2025-04-30 15:29:19
 --
 
 DROP TABLE IF EXISTS `communitypost`;
@@ -246,7 +270,7 @@ TRUNCATE TABLE `communitypost`;
 --
 -- 資料表結構 `fillquiz`
 --
--- 建立時間： 2025-04-07 15:16:54
+-- 建立時間： 2025-04-30 15:29:19
 --
 
 DROP TABLE IF EXISTS `fillquiz`;
@@ -275,7 +299,7 @@ INSERT INTO `fillquiz` (`fillID`, `QuestionText`, `CorrectAnswer`, `UserID`, `Ar
 --
 -- 資料表結構 `fillquizstagingarea`
 --
--- 建立時間： 2025-04-09 16:46:34
+-- 建立時間： 2025-04-30 15:29:19
 --
 
 DROP TABLE IF EXISTS `fillquizstagingarea`;
@@ -297,7 +321,8 @@ TRUNCATE TABLE `fillquizstagingarea`;
 --
 -- 資料表結構 `fillrec`
 --
--- 建立時間： 2025-04-01 11:32:56
+-- 建立時間： 2025-05-01 02:38:33
+-- 最後更新： 2025-05-02 12:38:08
 --
 
 DROP TABLE IF EXISTS `fillrec`;
@@ -305,7 +330,8 @@ CREATE TABLE `fillrec` (
   `fillID` int(11) NOT NULL COMMENT 'FK to FillQuiz',
   `UserID` int(11) NOT NULL COMMENT 'FK to User',
   `UserAnswer` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '使用者答案',
-  `FinishTime` datetime DEFAULT current_timestamp() COMMENT '完成時間'
+  `FinishTime` datetime DEFAULT current_timestamp() COMMENT '完成時間',
+  `isCorrect` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -313,12 +339,19 @@ CREATE TABLE `fillrec` (
 --
 
 TRUNCATE TABLE `fillrec`;
+--
+-- 傾印資料表的資料 `fillrec`
+--
+
+INSERT INTO `fillrec` (`fillID`, `UserID`, `UserAnswer`, `FinishTime`, `isCorrect`) VALUES
+(2, 2, '農業（影響糧食安全）和沿海地區（因海平面上升導致侵蝕與洪水）。', '2025-05-02 20:38:08', 1);
+
 -- --------------------------------------------------------
 
 --
 -- 資料表結構 `merchandise`
 --
--- 建立時間： 2025-04-01 11:32:55
+-- 建立時間： 2025-04-30 15:29:19
 --
 
 DROP TABLE IF EXISTS `merchandise`;
@@ -340,7 +373,7 @@ TRUNCATE TABLE `merchandise`;
 --
 -- 資料表結構 `purchase`
 --
--- 建立時間： 2025-04-01 11:32:56
+-- 建立時間： 2025-04-30 15:29:19
 --
 
 DROP TABLE IF EXISTS `purchase`;
@@ -361,7 +394,8 @@ TRUNCATE TABLE `purchase`;
 --
 -- 資料表結構 `teacher_questions`
 --
--- 建立時間： 2025-04-07 16:32:40
+-- 建立時間： 2025-04-30 15:29:19
+-- 最後更新： 2025-05-02 09:19:02
 --
 
 DROP TABLE IF EXISTS `teacher_questions`;
@@ -390,7 +424,7 @@ TRUNCATE TABLE `teacher_questions`;
 --
 -- 資料表結構 `tfquiz`
 --
--- 建立時間： 2025-04-07 15:16:54
+-- 建立時間： 2025-04-30 15:29:19
 --
 
 DROP TABLE IF EXISTS `tfquiz`;
@@ -422,7 +456,7 @@ INSERT INTO `tfquiz` (`tfID`, `QuestionText`, `OptionA`, `OptionB`, `CorrectAnsw
 --
 -- 資料表結構 `tfquizstagingarea`
 --
--- 建立時間： 2025-04-09 16:46:34
+-- 建立時間： 2025-04-30 15:29:19
 --
 
 DROP TABLE IF EXISTS `tfquizstagingarea`;
@@ -446,7 +480,8 @@ TRUNCATE TABLE `tfquizstagingarea`;
 --
 -- 資料表結構 `tfrec`
 --
--- 建立時間： 2025-04-01 11:32:56
+-- 建立時間： 2025-05-01 02:38:33
+-- 最後更新： 2025-05-02 12:36:16
 --
 
 DROP TABLE IF EXISTS `tfrec`;
@@ -454,7 +489,8 @@ CREATE TABLE `tfrec` (
   `tfID` int(11) NOT NULL COMMENT 'FK to TFQuiz',
   `UserID` int(11) NOT NULL COMMENT 'FK to User',
   `UserAnswer` tinyint(1) DEFAULT NULL COMMENT '使用者答案 (True/False)',
-  `FinishTime` datetime DEFAULT current_timestamp() COMMENT '完成時間'
+  `FinishTime` datetime DEFAULT current_timestamp() COMMENT '完成時間',
+  `isCorrect` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -462,12 +498,20 @@ CREATE TABLE `tfrec` (
 --
 
 TRUNCATE TABLE `tfrec`;
+--
+-- 傾印資料表的資料 `tfrec`
+--
+
+INSERT INTO `tfrec` (`tfID`, `UserID`, `UserAnswer`, `FinishTime`, `isCorrect`) VALUES
+(1, 2, 0, '2025-05-02 20:36:16', 1);
+
 -- --------------------------------------------------------
 
 --
 -- 資料表結構 `user`
 --
--- 建立時間： 2025-04-01 11:32:55
+-- 建立時間： 2025-04-30 15:29:19
+-- 最後更新： 2025-05-02 09:29:55
 --
 
 DROP TABLE IF EXISTS `user`;
@@ -491,7 +535,9 @@ TRUNCATE TABLE `user`;
 
 INSERT INTO `user` (`UserID`, `Username`, `Email`, `Password`, `JoinDate`, `Status`) VALUES
 (1, 'hank', '12345@nutc.com', '$2y$10$WImynnKH8MOsCHB65iAeMuoQtcvdiAgs8FIgAWPwDxN7McOidmby2', '2025-04-01 19:43:05', 'Teacher'),
-(2, 'alex', '12345@nutc.com', '$2y$10$LPlTJNOvMqfRT3GIrTxs5unYLkLiRe8USPNQtjXIMLtC55xark5gq', '2025-04-01 21:27:25', 'Student');
+(2, 'alex', '12345@nutc.com', '$2y$10$LPlTJNOvMqfRT3GIrTxs5unYLkLiRe8USPNQtjXIMLtC55xark5gq', '2025-04-01 21:27:25', 'Student'),
+(3, 'josh', 'josh@nutc.com', '$2y$10$7niflDFiNyZFvkzul4qWDeWmIForE/edbVsGDJqA7r/BFIWBdXHga', '2025-05-01 21:47:34', 'Student'),
+(4, 'ivan', 'ivan@nutc.com', '$2y$10$9ZNfYgIIqWOZouZ2YWxKv.Gq1U5lyuoEOfZ4iWeNB27gaJQbBfmR.', '2025-05-02 17:29:55', 'Teacher');
 
 --
 -- 已傾印資料表的索引
@@ -636,7 +682,7 @@ ALTER TABLE `user`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `article`
 --
 ALTER TABLE `article`
-  MODIFY `ArticleID` int(11) NOT NULL AUTO_INCREMENT COMMENT '文章編號 (PK)', AUTO_INCREMENT=24;
+  MODIFY `ArticleID` int(11) NOT NULL AUTO_INCREMENT COMMENT '文章編號 (PK)', AUTO_INCREMENT=25;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `articleimage`
@@ -648,13 +694,13 @@ ALTER TABLE `articleimage`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `choicequiz`
 --
 ALTER TABLE `choicequiz`
-  MODIFY `choiceID` int(11) NOT NULL AUTO_INCREMENT COMMENT '選擇題編號 (PK)', AUTO_INCREMENT=2;
+  MODIFY `choiceID` int(11) NOT NULL AUTO_INCREMENT COMMENT '選擇題編號 (PK)', AUTO_INCREMENT=3;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `choicequizstagingarea`
 --
 ALTER TABLE `choicequizstagingarea`
-  MODIFY `QuestionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `QuestionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `commentarea`
@@ -690,7 +736,7 @@ ALTER TABLE `merchandise`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `teacher_questions`
 --
 ALTER TABLE `teacher_questions`
-  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `tfquiz`
@@ -708,7 +754,7 @@ ALTER TABLE `tfquizstagingarea`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `user`
 --
 ALTER TABLE `user`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT COMMENT '使用者編號 (PK)', AUTO_INCREMENT=3;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT COMMENT '使用者編號 (PK)', AUTO_INCREMENT=5;
 
 --
 -- 已傾印資料表的限制式
@@ -751,7 +797,8 @@ ALTER TABLE `choicequizstagingarea`
 --
 ALTER TABLE `choicerec`
   ADD CONSTRAINT `choicerec_ibfk_1` FOREIGN KEY (`choiceID`) REFERENCES `choicequiz` (`choiceID`),
-  ADD CONSTRAINT `choicerec_ibfk_2` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`);
+  ADD CONSTRAINT `choicerec_ibfk_2` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`),
+  ADD CONSTRAINT `fk_choicerec_choicequiz` FOREIGN KEY (`choiceID`) REFERENCES `choicequiz` (`choiceID`);
 
 --
 -- 資料表的限制式 `commentarea`
@@ -785,7 +832,8 @@ ALTER TABLE `fillquizstagingarea`
 --
 ALTER TABLE `fillrec`
   ADD CONSTRAINT `fillrec_ibfk_1` FOREIGN KEY (`fillID`) REFERENCES `fillquiz` (`fillID`),
-  ADD CONSTRAINT `fillrec_ibfk_2` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`);
+  ADD CONSTRAINT `fillrec_ibfk_2` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`),
+  ADD CONSTRAINT `fk_fillrec_fillquiz` FOREIGN KEY (`fillID`) REFERENCES `fillquiz` (`fillID`);
 
 --
 -- 資料表的限制式 `purchase`
@@ -819,6 +867,7 @@ ALTER TABLE `tfquizstagingarea`
 -- 資料表的限制式 `tfrec`
 --
 ALTER TABLE `tfrec`
+  ADD CONSTRAINT `fk_tfrec_tfquiz` FOREIGN KEY (`tfID`) REFERENCES `tfquiz` (`tfID`),
   ADD CONSTRAINT `tfrec_ibfk_1` FOREIGN KEY (`tfID`) REFERENCES `tfquiz` (`tfID`),
   ADD CONSTRAINT `tfrec_ibfk_2` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`);
 COMMIT;

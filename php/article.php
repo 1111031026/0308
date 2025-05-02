@@ -1,5 +1,25 @@
 <?php
 session_start(); // 確保 session 已啟動
+require_once 'db_connect.php'; // 確保引入資料庫連接
+
+// --- 新增開始：更新文章瀏覽次數 ---
+if (isset($_SESSION['login_session']) && $_SESSION['login_session'] === true && isset($_SESSION['user_id'])) {
+    $userID = $_SESSION['user_id'];
+
+    // 使用 INSERT ... ON DUPLICATE KEY UPDATE 來處理新增或更新
+    // 如果 UserID 不存在，則插入新記錄，ArticlesViewed 為 1，其他分數相關欄位為 0
+    // 如果 UserID 已存在，則僅將 ArticlesViewed 增加 1
+    $stmtView = $conn->prepare(
+        "INSERT INTO achievement (UserID, ArticlesViewed, TotalPoints, ChoiceQuestionsCorrect, TFQuestionsCorrect, FillinQuestionsCorrect) " .
+        "VALUES (?, 1, 0, 0, 0, 0) " .
+        "ON DUPLICATE KEY UPDATE ArticlesViewed = ArticlesViewed + 1"
+    );
+    $stmtView->bind_param("i", $userID);
+    $stmtView->execute();
+    $stmtView->close();
+}
+// --- 新增結束 ---
+
 ?>
 <!DOCTYPE html>
 <html lang="zh-TW">

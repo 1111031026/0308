@@ -81,10 +81,27 @@
             $sql = "INSERT INTO user (Username, Password, Email, Status) VALUES ('$username', '$hashed_password', '$email', '$role')";
             
             if ($conn->query($sql) === TRUE) {
+                $newUserId = $conn->insert_id; // 獲取新插入用戶的 ID
+
+                // 如果角色是學生，則在 achievement 表中創建初始記錄
+                if ($role === 'Student') {
+                    $stmtAchieve = $conn->prepare("INSERT INTO achievement (UserID, TotalPoints, ArticlesViewed, ChoiceQuestionsCorrect, TFQuestionsCorrect, FillinQuestionsCorrect) VALUES (?, 0, 0, 0, 0, 0)");
+                    if ($stmtAchieve) {
+                        $stmtAchieve->bind_param("i", $newUserId);
+                        if (!$stmtAchieve->execute()) {
+                            // 記錄錯誤，但不阻止註冊成功訊息
+                            error_log("Failed to create achievement record for UserID: " . $newUserId . " Error: " . $stmtAchieve->error);
+                        }
+                        $stmtAchieve->close();
+                    } else {
+                        error_log("Failed to prepare achievement insert statement: " . $conn->error);
+                    }
+                }
+
                 echo "<div class='toast success'><span class='toast-icon'>✅</span>註冊成功！請登入。</div>";
                 echo "<div class='center'><a class='login-button' href='user_login.php'>登入</a></div>";
             } else {
-                echo "<div class='toast error'><span class='toast-icon'>❌</span>註冊失敗，請稍後再試。</div>";
+                echo "<div class='toast error'><span class='toast-icon'>❌</span>註冊失敗，請稍後再試。 Error: " . $conn->error . "</div>"; // 添加錯誤訊息
             }
         }
     }

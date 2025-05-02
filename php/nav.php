@@ -24,7 +24,7 @@ if (session_status() === PHP_SESSION_NONE) {
         <?php endif; ?>
     </ul>
     <div class="nav-icons">
-        <a href="#"><img src="../img/achv.png" alt="成就"></a>
+        <a href="achievement.php"><img src="../img/achv.png" alt="成就"></a>
         <a href="user.php"><img src="../img/user.png" alt="用戶"></a>
     </div>
 </nav>

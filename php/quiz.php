@@ -101,24 +101,11 @@ while($row = $result->fetch_assoc()) {
     </style>
 </head>
 <body>
-    <header>
-        
-<nav class="navbar">
-    <div class="logo">
-        <img src="../img/icon.png" style="color: white;" alt="永續小站 Logo">
-        <h1 style="font-size: 24px;"><a href="index.php" class="logo-title">永續小站</a></h1>
-    </div>
-    <ul class="nav-links">
-        <li><a href="climate.php" style="font-size: 16px;">氣候永續</a></li>
-        <li><a href="landscape.php" style="font-size: 16px; ">陸域永續</a></li>
-        <li><a href="ocean.php" style="font-size: 16px;">海洋永續</a></li>
-                                    <li><a href="#land">商城</a></li>
-                        </ul>
-    <div class="nav-icons">
-        <a href="#"><img src="../img/achv.png" alt="成就"></a>
-        <a href="user.php"><img src="../img/user.png" alt="用戶"></a>
-    </div>
-</nav>    </header>
+<header>
+        <?php
+        include "nav.php";
+        ?>
+    </header>
 
     <div class="quiz-container">
         <h1 class="quiz-type-title">測驗題目</h1>

@@ -122,11 +122,11 @@ main {
 }
 
 .article-slider .slick-dots li.slick-active button {
-    background-color: #29427f;
+    background-color: #0f4e96;
 }
 
 .article-slider .slick-dots li button:hover {
-    background-color: #29427f;
+    background-color: #0f4e96;
 }
 
 .article-slider .slick-dots li {
@@ -153,7 +153,7 @@ main {
 }
 
 .green-section {
-    background: linear-gradient(120deg, #4CAF50 0%, #64fca3 100%);
+    background: linear-gradient(120deg, #27a532, #6bf882d8);
     color: white;
     padding: 0.8rem;
     text-align: center;
@@ -541,11 +541,11 @@ main {
 
 /* 調整氣候永續的點點顏色 */
 .green-section .article-slider .slick-dots li.slick-active button {
-    background-color: #27AE60; /* 深綠色 */
+    background-color: #348355; /* 深綠色 */
 }
 
 .green-section .article-slider .slick-dots li button:hover {
-    background-color: #27AE60;
+    background-color: #348355;
 }
 
 /* Brown Section 樣式（陸域永續） */
@@ -585,9 +585,9 @@ main {
 
 /* 調整陸域永續的點點顏色 */
 .brown-section .article-slider .slick-dots li.slick-active button {
-    background-color: #6D360F; /* 深棕色 */
+    background-color: #432a19; /* 深棕色 */
 }
 
 .brown-section .article-slider .slick-dots li button:hover {
-    background-color: #6D360F;
+    background-color: #432a19;
 }

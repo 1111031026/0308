@@ -52,8 +52,8 @@ require_once 'db_connect.php';
                     ?>
                 </div>
                 <!-- 左右按鈕 -->
-                <button class="slider-btn prev-btn">&gt;</button>
-                <button class="slider-btn next-btn">&lt;</button>
+                <button class="slider-btn prev-btn">&lt;</button>
+                <button class="slider-btn next-btn">&gt;</button>
             </div>
         </section>
 
@@ -63,7 +63,7 @@ require_once 'db_connect.php';
                     <!-- 海洋圖片區塊 -->
                     <div class="ocean-image-container">
                         <h3>關於海洋永續的文章</h3>
-                        <img src="../img/ocean1.jpg" alt="海洋圖片" class="ocean-image">
+                        <img src="../img/ocean-index.gif" alt="海洋圖片" class="ocean-image">
                     </div>
                     <!-- 滾動文章區域 -->
                     <div class="article-slider">
@@ -140,7 +140,7 @@ require_once 'db_connect.php';
                     <!-- 氣候圖片區塊 -->
                     <div class="climate-image-container">
                         <h3>關於氣候永續的文章</h3>
-                        <img src="../img/climate.jpg" alt="氣候圖片" class="climate-image">
+                        <img src="../img/climate.gif" alt="氣候圖片" class="climate-image">
                     </div>
                 </div>
             </div>
@@ -153,7 +153,7 @@ require_once 'db_connect.php';
                     <!-- 陸域圖片區塊 -->
                     <div class="land-image-container">
                         <h3>關於陸域永續的文章</h3>
-                        <img src="../img/forest.png" alt="陸域圖片" class="land-image">
+                        <img src="../img/land-index.gif" alt="陸域圖片" class="land-image">
                     </div>
                     <!-- 滾動文章區域 -->
                     <div class="article-slider">
@@ -190,8 +190,8 @@ require_once 'db_connect.php';
                         $conn->close();
                         ?>
                         <!-- 左右按鈕 -->
-                        <button class="slider-btn2 prev-btn">&gt;</button>
-                        <button class="slider-btn2 next-btn">&lt;</button>
+                        <button class="slider-btn2 prev-btn">&lt;</button>
+                        <button class="slider-btn2 next-btn">&gt;</button>
                     </div>
                 </div>
             </div>

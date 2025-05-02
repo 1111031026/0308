@@ -2,23 +2,43 @@
 session_start(); // 確保 session 已啟動
 require_once 'db_connect.php'; // 確保引入資料庫連接
 
-// --- 新增開始：更新文章瀏覽次數 ---
-if (isset($_SESSION['login_session']) && $_SESSION['login_session'] === true && isset($_SESSION['user_id'])) {
+// --- 更新文章瀏覽次數邏輯 ---
+if (isset($_GET['id']) && isset($_SESSION['login_session']) && $_SESSION['login_session'] === true && isset($_SESSION['user_id'])) {
+    $articleID = intval($_GET['id']);
     $userID = $_SESSION['user_id'];
 
-    // 使用 INSERT ... ON DUPLICATE KEY UPDATE 來處理新增或更新
-    // 如果 UserID 不存在，則插入新記錄，ArticlesViewed 為 1，其他分數相關欄位為 0
-    // 如果 UserID 已存在，則僅將 ArticlesViewed 增加 1
-    $stmtView = $conn->prepare(
-        "INSERT INTO achievement (UserID, ArticlesViewed, TotalPoints, ChoiceQuestionsCorrect, TFQuestionsCorrect, FillinQuestionsCorrect) " .
-        "VALUES (?, 1, 0, 0, 0, 0) " .
-        "ON DUPLICATE KEY UPDATE ArticlesViewed = ArticlesViewed + 1"
-    );
-    $stmtView->bind_param("i", $userID);
-    $stmtView->execute();
-    $stmtView->close();
+    // 檢查 user_article_views 表中是否已存在記錄
+    $stmtCheck = $conn->prepare("SELECT 1 FROM user_article_views WHERE UserID = ? AND ArticleID = ?");
+    $stmtCheck->bind_param("ii", $userID, $articleID);
+    $stmtCheck->execute();
+    $resultCheck = $stmtCheck->get_result();
+
+    if ($resultCheck->num_rows === 0) {
+        // 如果不存在記錄，則插入新記錄到 user_article_views
+        $stmtInsertView = $conn->prepare("INSERT INTO user_article_views (UserID, ArticleID) VALUES (?, ?)");
+        $stmtInsertView->bind_param("ii", $userID, $articleID);
+        $inserted = $stmtInsertView->execute();
+        $stmtInsertView->close();
+
+        if ($inserted) {
+            // 同時更新 achievement 表中的 ArticlesViewed
+            // 使用 INSERT ... ON DUPLICATE KEY UPDATE 確保 achievement 記錄存在
+            $stmtUpdateAchieve = $conn->prepare(
+                "INSERT INTO achievement (UserID, ArticlesViewed, TotalPoints, ChoiceQuestionsCorrect, TFQuestionsCorrect, FillinQuestionsCorrect) " .
+                "VALUES (?, 1, 0, 0, 0, 0) " .
+                "ON DUPLICATE KEY UPDATE ArticlesViewed = ArticlesViewed + 1"
+            );
+            $stmtUpdateAchieve->bind_param("i", $userID);
+            $stmtUpdateAchieve->execute();
+            $stmtUpdateAchieve->close();
+        } else {
+            // 記錄錯誤，如果插入 user_article_views 失敗
+            error_log("Failed to insert view record for UserID: " . $userID . ", ArticleID: " . $articleID . " Error: " . $conn->error);
+        }
+    }
+    $stmtCheck->close();
 }
-// --- 新增結束 ---
+// --- 更新結束 ---
 
 ?>
 <!DOCTYPE html>

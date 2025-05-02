@@ -1,7 +1,7 @@
 <?php
 session_start();
 // 添加測試用戶session
-$_SESSION['user_id'] = 1; // 設置測試用戶ID
+$user_id = $_SESSION['user_id'] ?? 0;
 ?>
 <!DOCTYPE html>
 <html lang="zh-TW">
@@ -115,7 +115,9 @@ $_SESSION['user_id'] = 1; // 設置測試用戶ID
                                 mkdir($uploadDir, 0777, true);
                             }
                             
-                            $imageFileName = uniqid() . '_' . basename($src);
+                            // 移除URL中的查詢參數和特殊字符
+                            $cleanedUrl = preg_replace('/[\?&].*/', '', $src);
+                            $imageFileName = uniqid() . '_' . preg_replace('/[^a-zA-Z0-9\-\.]/', '_', basename($cleanedUrl));
                             $targetPath = $uploadDir . $imageFileName;
                             
                             // 使用curl下載圖片

@@ -22,8 +22,13 @@ LEFT JOIN user u ON c.UserID = u.UserID
 LEFT JOIN choicerec cr ON c.choiceID = cr.choiceID AND cr.UserID = ? 
 WHERE c.ArticleID = ?";
 $stmt = $conn->prepare($choice_sql);
+if ($stmt === false) {
+    die('準備選擇題查詢失敗: ' . $conn->error);
+}
 $stmt->bind_param("ii", $user_id, $article_id);
-$stmt->execute();
+if (!$stmt->execute()) {
+    die('執行選擇題查詢失敗: ' . $stmt->error);
+}
 $result = $stmt->get_result();
 while($row = $result->fetch_assoc()) {
     $choice_questions[] = $row;
@@ -37,8 +42,13 @@ LEFT JOIN user u ON f.UserID = u.UserID
 LEFT JOIN fillrec fr ON f.fillID = fr.fillID AND fr.UserID = ? 
 WHERE f.ArticleID = ?";
 $stmt = $conn->prepare($fill_sql);
+if ($stmt === false) {
+    die('準備填空題查詢失敗: ' . $conn->error);
+}
 $stmt->bind_param("ii", $user_id, $article_id);
-$stmt->execute();
+if (!$stmt->execute()) {
+    die('執行填空題查詢失敗: ' . $stmt->error);
+}
 $result = $stmt->get_result();
 while($row = $result->fetch_assoc()) {
     $fill_questions[] = $row;
@@ -52,8 +62,13 @@ LEFT JOIN user u ON t.UserID = u.UserID
 LEFT JOIN tfrec tr ON t.tfID = tr.tfID AND tr.UserID = ? 
 WHERE t.ArticleID = ?";
 $stmt = $conn->prepare($tf_sql);
+if ($stmt === false) {
+    die('準備是非題查詢失敗: ' . $conn->error);
+}
 $stmt->bind_param("ii", $user_id, $article_id);
-$stmt->execute();
+if (!$stmt->execute()) {
+    die('執行是非題查詢失敗: ' . $stmt->error);
+}
 $result = $stmt->get_result();
 while($row = $result->fetch_assoc()) {
     $tf_questions[] = $row;

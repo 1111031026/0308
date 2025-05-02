@@ -77,8 +77,13 @@ switch($questionType) {
     case 'choice':
         $sql = "SELECT CorrectAnswer FROM choicequiz WHERE choiceID = ?";
         $stmt = $conn->prepare($sql);
+        if ($stmt === false) {
+            die('準備選擇題查詢失敗: ' . $conn->error);
+        }
         $stmt->bind_param('i', $questionId);
-        $stmt->execute();
+        if (!$stmt->execute()) {
+            die('執行選擇題查詢失敗: ' . $stmt->error);
+        }
         $result = $stmt->get_result();
         $row = $result->fetch_assoc();
         
@@ -96,8 +101,13 @@ switch($questionType) {
     case 'fill':
         $sql = "SELECT CorrectAnswer FROM fillquiz WHERE fillID = ?";
         $stmt = $conn->prepare($sql);
+        if ($stmt === false) {
+            die('準備填空題查詢失敗: ' . $conn->error);
+        }
         $stmt->bind_param('i', $questionId);
-        $stmt->execute();
+        if (!$stmt->execute()) {
+            die('執行填空題查詢失敗: ' . $stmt->error);
+        }
         $result = $stmt->get_result();
         $row = $result->fetch_assoc();
         
@@ -121,8 +131,13 @@ switch($questionType) {
     case 'tf':
         $sql = "SELECT CorrectAnswer FROM tfquiz WHERE tfID = ?";
         $stmt = $conn->prepare($sql);
+        if ($stmt === false) {
+            die('準備是非題查詢失敗: ' . $conn->error);
+        }
         $stmt->bind_param('i', $questionId);
-        $stmt->execute();
+        if (!$stmt->execute()) {
+            die('執行是非題查詢失敗: ' . $stmt->error);
+        }
         $result = $stmt->get_result();
         $row = $result->fetch_assoc();
         

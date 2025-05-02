@@ -119,6 +119,11 @@ $conn->close();
                     <a href="forgot_password.php" style="color: #fff; text-decoration: none; font-size: 14px;">忘記密碼？</a>
                 </td>
             </tr>
+            <tr>
+            <td colspan="2" style="text-align: center;">
+                    <a href="register.php" style="color: #fff; text-decoration: none; font-size: 14px;">未有帳號，立即註冊</a>
+                </td>
+            </tr>
         </table>
     </form>
 

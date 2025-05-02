@@ -2,7 +2,7 @@
 $api_key = "sk-9483cae29d5644318c39537d786410f7";
 
 function extractContent($html) {
-    $prompt = "請從以下HTML內容中提取主要文章內容和圖片，去除廣告、導航欄等無關內容。只返回文章的主體部分：\n\n" . $html;
+    $prompt = "請從以下HTML內容中提取主要文章內容和圖片，去除廣告、導航欄等無關內容。請以純文字格式輸出文章的主體部分，不要使用任何特殊符號（如#、*等）或標記語言來格式化文字：\n\n" . $html;
     
     global $api_key;
     $maxRetries = 3;
@@ -70,7 +70,7 @@ function analyzeArticle($content) {
     for ($attempt = 1; $attempt <= $maxRetries; $attempt++) {
         $curl = curl_init();
     
-    $prompt = "請幫我分析並重點整理以下文章內容，以清晰易讀的方式呈現重點：\n\n" . $content;
+    $prompt = "請幫我分析並重點整理以下文章內容。請以純文字格式輸出，使用數字編號和縮排來組織內容，不要使用任何特殊符號（如#、*等）或標記語言。每個重點請以'重點X：'開頭，內容請分段呈現：\n\n" . $content;
 
     $postData = [
         "model" => "deepseek-chat",

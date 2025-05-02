@@ -20,16 +20,56 @@ if ($userId === 0) {
 
 $response = ['correct' => false, 'explanation' => ''];
 
-// 記錄答題歷史的函數
+// 記錄答題歷史並更新成就的函數
 function recordAnswer($userId, $questionId, $questionType, $userAnswer, $isCorrect) {
     global $conn;
     $table = $questionType . 'rec';
     $idField = $questionType . 'ID';
-    
+
+    // 插入答題記錄
     $insertSql = "INSERT INTO $table (UserID, $idField, UserAnswer, isCorrect, FinishTime) VALUES (?, ?, ?, ?, NOW())";
-    $stmt = $conn->prepare($insertSql);
-    $stmt->bind_param('iisi', $userId, $questionId, $userAnswer, $isCorrect);
-    $stmt->execute();
+    $stmtRec = $conn->prepare($insertSql);
+    if (!$stmtRec) {
+        error_log("Prepare insert record failed: " . $conn->error);
+        return; // 準備失敗，提前返回
+    }
+    $stmtRec->bind_param('iisi', $userId, $questionId, $userAnswer, $isCorrect);
+    $executed = $stmtRec->execute();
+    $stmtRec->close();
+
+    if (!$executed) {
+        error_log("Execute insert record failed: " . $stmtRec->error);
+        return; // 執行失敗，提前返回
+    }
+
+    // 如果答案正確，更新成就表
+    if ($isCorrect) {
+        $choiceIncrement = ($questionType === 'choice') ? 1 : 0;
+        $tfIncrement = ($questionType === 'tf') ? 1 : 0;
+        $fillinIncrement = ($questionType === 'fill') ? 1 : 0;
+        $pointsIncrement = 5; // 每答對一題加 5 分
+
+        $updateAchieveSql = "INSERT INTO achievement (UserID, TotalPoints, ChoiceQuestionsCorrect, TFQuestionsCorrect, FillinQuestionsCorrect, ArticlesViewed) " .
+                            "VALUES (?, ?, ?, ?, ?, 0) " .
+                            "ON DUPLICATE KEY UPDATE " .
+                            "TotalPoints = TotalPoints + ?, " .
+                            "ChoiceQuestionsCorrect = ChoiceQuestionsCorrect + ?, " .
+                            "TFQuestionsCorrect = TFQuestionsCorrect + ?, " .
+                            "FillinQuestionsCorrect = FillinQuestionsCorrect + ?";
+
+        $stmtAchieve = $conn->prepare($updateAchieveSql);
+        if (!$stmtAchieve) {
+            error_log("Prepare update achievement failed: " . $conn->error);
+            return; // 準備失敗，提前返回
+        }
+        // For INSERT part: UserID, InitialPoints, InitialChoice, InitialTF, InitialFillin
+        // For UPDATE part: PointsIncrement, ChoiceIncrement, TFIncrement, FillinIncrement
+        $stmtAchieve->bind_param('iiiiiiiii', $userId, $pointsIncrement, $choiceIncrement, $tfIncrement, $fillinIncrement, $pointsIncrement, $choiceIncrement, $tfIncrement, $fillinIncrement);
+        if (!$stmtAchieve->execute()) {
+            error_log("Execute update achievement failed for UserID $userId: " . $stmtAchieve->error);
+        }
+        $stmtAchieve->close();
+    }
 }
 
 // 根據題型處理答案

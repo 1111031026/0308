@@ -24,7 +24,14 @@ if (session_status() === PHP_SESSION_NONE) {
         <?php endif; ?>
     </ul>
     <div class="nav-icons">
-        <a href="#"><img src="../img/achv.png" alt="成就"></a>
+    <?php if (isset($_SESSION['login_session']) && $_SESSION['login_session'] === true): ?>
+            <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'Teacher'): ?>
+                <a href="#"><img src="../img/achv.png" alt="成就"></a>
+            <?php elseif (isset($_SESSION['role']) && $_SESSION['role'] === 'Student'): ?>
+                <a href="achievement.php"><img src="../img/achv.png" alt="成就"></a>
+            <?php endif; ?>
+        <?php endif; ?>
+
         <a href="user.php"><img src="../img/user.png" alt="用戶"></a>
     </div>
 </nav>

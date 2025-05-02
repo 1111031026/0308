@@ -3,19 +3,15 @@
     padding: 0;
     box-sizing: border-box;
 }
-
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
     overflow-x: hidden;
     /* 防止橫向滾動 */
 }
-
 main {
     padding-top: 80px;
 }
-
-
 /* Hero 樣式 */
 .hero {
     text-align: center;
@@ -213,12 +209,13 @@ main {
 
 /* 海洋圖片樣式 */
 .ocean-image-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
     text-align: left;
     /* 圖片靠左 */
     margin-bottom: 1rem;
     /* 與標題的間距 */
-    flex: none;
-    /* 取消 flex 影響 */
     width: 300px;
     /* 直接指定寬度 */
     max-width: 50%;
@@ -527,9 +524,11 @@ main {
 
 /* 氣候圖片樣式 */
 .climate-image-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
     text-align: left;
     margin-bottom: 1rem;
-    flex: none;
     width: 300px;
     max-width: 50%;
 }
@@ -569,9 +568,11 @@ main {
 
 /* 陸域圖片樣式 */
 .land-image-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
     text-align: left;
     margin-bottom: 1rem;
-    flex: none;
     width: 300px;
     max-width: 50%;
 }

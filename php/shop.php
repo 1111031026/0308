@@ -37,7 +37,7 @@ if ($result && $result->num_rows > 0) {
     </header>
     
     <div class="shop-container">
-        <h1 class="page-title">商店</h1>
+        <h1 class="page-title">永續小站-商店</h1>
         
         <?php if (empty($categories)): ?>
             <p class="no-products">目前沒有可用的商品</p>

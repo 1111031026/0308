@@ -1,0 +1,373 @@
+/* 全局樣式 */
+body {
+    font-family: 'Microsoft JhengHei', Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* 商店容器 */
+.shop-container {
+    max-width: 1200px;
+    margin: 100px auto 30px;
+    padding: 0 20px;
+}
+
+/* 頁面標題 */
+.page-title {
+    text-align: center;
+    color: #2c3e50;
+    font-size: 32px;
+    margin: 30px 0;
+    font-weight: bold;
+}
+
+/* 分類區塊 */
+.category-section {
+    margin-bottom: 40px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+/* 分類標題 */
+.category-title {
+    font-size: 24px;
+    color: #2c3e50;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #4CAF50;
+    margin-bottom: 20px;
+}
+
+/* 商品列表 */
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 25px;
+    padding: 10px 0;
+}
+
+/* 商品卡片 */
+.product {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+.product a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+/* 商品圖片 */
+.product-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.product:hover .product-image img {
+    transform: scale(1.05);
+}
+
+/* 商品信息 */
+.product-info {
+    padding: 15px;
+}
+
+.product-name {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 10px;
+    color: #333;
+}
+
+.product-points {
+    color: #4CAF50;
+    font-weight: 500;
+    font-size: 16px;
+    margin: 0;
+}
+
+/* 商品詳細頁面 */
+.product-detail-container {
+    max-width: 1000px;
+    margin: 100px auto 30px;
+    padding: 0 20px;
+}
+
+.product-detail {
+    display: flex;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+/* 商品圖片區域 */
+.product-images {
+    flex: 1;
+    padding: 20px;
+}
+
+.main-image {
+    margin-bottom: 20px;
+}
+
+.main-image img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.preview-image h3 {
+    font-size: 18px;
+    margin: 10px 0;
+    color: #2c3e50;
+}
+
+.preview-image img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* 商品信息區域 */
+.product-info-detail {
+    flex: 1;
+    padding: 30px;
+    background: #f9f9f9;
+}
+
+.product-info-detail h1 {
+    font-size: 28px;
+    margin: 0 0 15px;
+    color: #2c3e50;
+}
+
+.product-category {
+    color: #666;
+    margin: 0 0 15px;
+    font-size: 16px;
+}
+
+.product-description {
+    margin: 0 0 20px;
+    line-height: 1.6;
+    color: #333;
+}
+
+.product-points-required {
+    font-size: 18px;
+    margin: 0 0 10px;
+}
+
+.product-points-required span {
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.user-points {
+    font-size: 16px;
+    margin: 0 0 25px;
+}
+
+.user-points span {
+    font-weight: bold;
+}
+
+/* 按鈕樣式 */
+.buy-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.buy-button:hover {
+    background-color: #45a049;
+}
+
+.buy-button.disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.back-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #f1f1f1;
+    color: #333;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.back-button:hover {
+    background-color: #e0e0e0;
+}
+
+/* 彈窗樣式 */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    color: #2c3e50;
+}
+
+.modal-content p {
+    margin-bottom: 20px;
+}
+
+.modal-content span {
+    font-weight: bold;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.modal-buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.modal-buttons button:first-child {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.modal-buttons button:first-child:hover {
+    background-color: #45a049;
+}
+
+.modal-buttons button:last-child {
+    background-color: #f1f1f1;
+    color: #333;
+}
+
+.modal-buttons button:last-child:hover {
+    background-color: #e0e0e0;
+}
+
+/* 成功彈窗樣式 */
+.modal-content.success {
+    padding-top: 20px;
+}
+
+.modal-content.success button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.modal-content.success button:hover {
+    background-color: #45a049;
+}
+
+/* 打勾動畫 */
+.checkmark-container {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+}
+
+.checkmark {
+    width: 80px;
+    height: 80px;
+}
+
+.checkmark-circle {
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    stroke-width: 2;
+    stroke-miterlimit: 10;
+    stroke: #4CAF50;
+    fill: none;
+    animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.checkmark-check {
+    transform-origin: 50% 50%;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    stroke-width: 3;
+    stroke: #4CAF50;
+    animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+
+@keyframes stroke {
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .product-detail {
+        flex-direction: column;
+    }
+    
+    .product-images, .product-info-detail {
+        padding: 15px;
+    }
+    
+    .product-list {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+}

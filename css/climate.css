@@ -81,7 +81,7 @@ html, body {
 /* 第二區塊：關於氣候行動 */
 .section-2 {
     /* 使用氣候主題漸層效果 */
-    background: linear-gradient(135deg, #2d5a27, #8ab17d);
+    background: linear-gradient(135deg, #1e5d7d, #7ec6e3);
     color: white;
     padding: 40px;
     position: relative;

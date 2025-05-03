@@ -22,6 +22,18 @@ if ($item_id <= 0 || $user_id <= 0) {
 $conn->begin_transaction();
 
 try {
+    // 檢查用戶是否已經購買過該商品
+    $sql = "SELECT * FROM purchase WHERE UserID = ? AND ItemID = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ii", $user_id, $item_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if ($result->num_rows > 0) {
+        throw new Exception('您已經購買過此商品');
+    }
+    $stmt->close();
+    
     // 獲取商品信息
     $sql = "SELECT * FROM merchandise WHERE ItemID = ? AND Available = 1";
     $stmt = $conn->prepare($sql);
@@ -36,8 +48,8 @@ try {
     $product = $result->fetch_assoc();
     $stmt->close();
     
-    // 獲取用戶點數
-    $sql = "SELECT Points FROM users WHERE UserID = ?";
+    // 獲取用戶點數 - 從 achievement 資料表
+    $sql = "SELECT TotalPoints FROM achievement WHERE UserID = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $user_id);
     $stmt->execute();
@@ -51,13 +63,13 @@ try {
     $stmt->close();
     
     // 檢查點數是否足夠
-    if ($user['Points'] < $product['PointsRequired']) {
+    if ($user['TotalPoints'] < $product['PointsRequired']) {
         throw new Exception('點數不足');
     }
     
-    // 更新用戶點數
-    $new_points = $user['Points'] - $product['PointsRequired'];
-    $sql = "UPDATE users SET Points = ? WHERE UserID = ?";
+    // 更新用戶點數 - 在 achievement 資料表
+    $new_points = $user['TotalPoints'] - $product['PointsRequired'];
+    $sql = "UPDATE achievement SET TotalPoints = ? WHERE UserID = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ii", $new_points, $user_id);
     
@@ -67,7 +79,7 @@ try {
     $stmt->close();
     
     // 記錄購買歷史
-    $sql = "INSERT INTO purchase_history (UserID, ItemID, PurchaseDate, PointsSpent) VALUES (?, ?, NOW(), ?)";
+    $sql = "INSERT INTO purchase (UserID, ItemID, PurchaseTime, SpentPoints) VALUES (?, ?, NOW(), ?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("iii", $user_id, $item_id, $product['PointsRequired']);
     

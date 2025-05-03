@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2025-05-02 18:39:36
+-- 產生時間： 2025-05-03 08:20:30
 -- 伺服器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -18,8 +18,892 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
+-- 資料庫： `mydb`
+--
+DROP DATABASE IF EXISTS `mydb`;
+CREATE DATABASE IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `mydb`;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `album`
+--
+-- 建立時間： 2025-01-07 13:36:41
+--
+
+DROP TABLE IF EXISTS `album`;
+CREATE TABLE `album` (
+  `album_id` int(11) NOT NULL,
+  `album_date` datetime DEFAULT NULL,
+  `location` varchar(255) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `picurl` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- 資料表新增資料前，先清除舊資料 `album`
+--
+
+TRUNCATE TABLE `album`;
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `favorites`
+--
+-- 建立時間： 2025-01-07 13:36:41
+--
+
+DROP TABLE IF EXISTS `favorites`;
+CREATE TABLE `favorites` (
+  `movie_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- 資料表新增資料前，先清除舊資料 `favorites`
+--
+
+TRUNCATE TABLE `favorites`;
+--
+-- 傾印資料表的資料 `favorites`
+--
+
+INSERT INTO `favorites` (`movie_id`) VALUES
+(2);
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `movies`
+--
+-- 建立時間： 2025-01-07 13:36:41
+--
+
+DROP TABLE IF EXISTS `movies`;
+CREATE TABLE `movies` (
+  `id` int(10) NOT NULL,
+  `name` varchar(20) DEFAULT NULL,
+  `type` varchar(20) DEFAULT NULL,
+  `rating` int(10) DEFAULT NULL,
+  `director` varchar(20) DEFAULT NULL,
+  `img` varchar(20) DEFAULT NULL,
+  `description` varchar(225) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- 資料表新增資料前，先清除舊資料 `movies`
+--
+
+TRUNCATE TABLE `movies`;
+--
+-- 傾印資料表的資料 `movies`
+--
+
+INSERT INTO `movies` (`id`, `name`, `type`, `rating`, `director`, `img`, `description`) VALUES
+(1, '死恃3', '動作', 90, '蘇導', 'mv1.jpg', '死侍系列的第三部，延續了這位機智毒舌且不可預測的反英雄角色的故事。本作預計將引入更多漫威宇宙的角色，為粉絲帶來更瘋狂、更幽默的冒險。'),
+(2, '周處除三害', '動作', 89, '夢導', 'mv2.jpeg', '劇情描述通緝犯陳桂林在角頭大哥告別式上囂張尋仇，卻發現自己竟然只是排名第三的通緝犯，於是他查出前兩名通緝犯的下落，要將他們一一除掉。'),
+(3, '屍速列車', '動作', 85, '寶導', 'mv3.jpg', '一部驚悚且動人的韓國殭屍電影，故事講述一列開往釜山的列車上，乘客必須在突如其來的殭屍病毒爆發中奮力求生，既緊張刺激又充滿人性描寫。'),
+(4, '復仇者聯盟三', '動作', 90, '大導', 'mv4.jpg', '漫威宇宙的史詩篇章，薩諾斯收集無限寶石以實現毀滅宇宙一半生命的計劃，復仇者聯盟和其他超級英雄攜手抗衡，帶來震撼人心的戰鬥場景和深刻情感。\r\n\r\n'),
+(5, '大亨小傳', '傳記', 90, '差低導', 'mv5.jpg', '改編自F. Scott Fitzgerald的經典小說，故事發生在1920年代的美國，講述了神秘富翁蓋茨比與昔日愛人黛西之間的愛情悲劇，揭示了美國夢的光輝與幻滅。\r\n\r\n'),
+(6, '玲芽之旅', '動畫', 80, '超導', 'mv6.jpeg', '新海誠導演的奇幻冒險動畫電影，講述少女鈴芽在日本各地尋找神秘的門，試圖阻止災難降臨的故事，融合了震撼的視覺效果和感人的情感主題。\r\n\r\n'),
+(7, '阿甘正傳', '傳記', 99, '渣導', 'mv7.jpg', '一個平凡卻非凡的人生旅程，阿甘憑藉他的純真和毅力在歷史的潮流中創造奇蹟，從美式橄欖球到越戰，這部電影展現了簡單善良的力量。\r\n\r\n'),
+(8, '楚門的世界', '喜劇', 97, '滾導', 'mv8.jpg', '一部探索自由意志和現實真相的經典作品，楚門自出生以來的生活都是一個真人秀節目，他逐漸發現真相並試圖突破這個被設計的世界。\r\n\r\n');
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `movie_photos`
+--
+-- 建立時間： 2025-01-07 13:36:41
+--
+
+DROP TABLE IF EXISTS `movie_photos`;
+CREATE TABLE `movie_photos` (
+  `id` int(11) NOT NULL,
+  `movie_id` int(11) NOT NULL,
+  `photo_path` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- 資料表新增資料前，先清除舊資料 `movie_photos`
+--
+
+TRUNCATE TABLE `movie_photos`;
+--
+-- 傾印資料表的資料 `movie_photos`
+--
+
+INSERT INTO `movie_photos` (`id`, `movie_id`, `photo_path`) VALUES
+(1, 1, '11.jpg'),
+(2, 1, '12.jpg'),
+(3, 1, '13.jpg'),
+(4, 2, '21.jpg'),
+(5, 2, '22.jpeg'),
+(6, 2, '23.jpg'),
+(7, 3, '31.jpg'),
+(8, 3, '32.jpg'),
+(9, 3, '33.jpg'),
+(10, 4, '41.jpg'),
+(11, 4, '42.jpg'),
+(12, 4, '43.jpg'),
+(13, 5, '51.jpg'),
+(14, 5, '52.jpeg'),
+(15, 5, '53.jpg'),
+(16, 6, '61.jpg'),
+(17, 6, '62.jpg'),
+(18, 6, '63.jpg'),
+(19, 7, '71.jpg'),
+(20, 7, '72.jpg'),
+(21, 7, '73.jpg'),
+(22, 8, '81.jpg'),
+(23, 8, '82.jpg'),
+(24, 8, '83.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `sdgs`
+--
+-- 建立時間： 2025-01-07 13:36:41
+--
+
+DROP TABLE IF EXISTS `sdgs`;
+CREATE TABLE `sdgs` (
+  `sdg` int(2) NOT NULL,
+  `img` char(30) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `detail` varchar(300) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- 資料表新增資料前，先清除舊資料 `sdgs`
+--
+
+TRUNCATE TABLE `sdgs`;
+--
+-- 傾印資料表的資料 `sdgs`
+--
+
+INSERT INTO `sdgs` (`sdg`, `img`, `title`, `detail`) VALUES
+(1, 'sdg1.jpg', 'SDG 1終結貧窮', '消除各地一切形式的貧窮 '),
+(2, 'sdg2.jpg', 'SDG 2消除飢餓', '確保糧食安全，消除飢餓，促進永續農業'),
+(3, 'sdg3.jpg', 'SDG 3健康與福祉', '確保及促進各年齡層健康生活與福祉 '),
+(4, 'sdg4.jpg', 'SDG 4優質教育', '確保有教無類、公平以及高品質的教育，及提倡終身學習'),
+(5, 'sdg5.jpg', 'SDG 5性別平權', '實現性別平等，並賦予婦女權力'),
+(6, 'sdg6.jpg', 'SDG 6淨水及衛生', '確保所有人都能享有水、衛生及其永續管理'),
+(7, 'sdg7.jpg', 'SDG 7可負擔的潔淨能源', '確保所有的人都可取得負擔得起、可靠、永續及現代的能源'),
+(8, 'sdg8.jpg', 'SDG 8合適的工作及經濟成長', '促進包容且永續的經濟成長，讓每個人都有一份好工作'),
+(9, 'sdg9.jpg', 'SDG 9工業化、創新及基礎建設', '建立具有韌性的基礎建設，促進包容且永續的工業，並加速創新 '),
+(10, 'sdg10.png', 'SDG 10減少不平等', '減少國內及國家間的不平等'),
+(11, 'sdg11.png', 'SDG 11永續城鄉', '建構具包容、安全、韌性及永續特質的城市與鄉村'),
+(12, 'sdg12.png', 'SDG 12責任消費及生產', '促進綠色經濟，確保永續消費及生產模式'),
+(13, 'sdg13.png', 'SDG 13氣候行動', '完備減緩調適行動，以因應氣候變遷及其影響'),
+(14, 'sdg14.png', 'SDG 14保育海洋生態', '保育及永續利用海洋生態系，以確保生物多樣性並防止海洋環境劣化'),
+(15, 'sdg15.png', 'SDG 15保育陸域生態', '保育及永續利用陸域生態系，確保生物多樣性並防止土地劣化'),
+(16, 'sdg16.png', 'SDG 16和平、正義及健全制度', '促進和平多元的社會，確保司法平等，建立具公信力且廣納民意的體系');
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `students`
+--
+-- 建立時間： 2025-01-07 13:36:41
+--
+
+DROP TABLE IF EXISTS `students`;
+CREATE TABLE `students` (
+  `sno` char(4) NOT NULL,
+  `name` varchar(10) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `birthday` date NOT NULL,
+  `username` char(10) NOT NULL,
+  `password` char(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- 資料表新增資料前，先清除舊資料 `students`
+--
+
+TRUNCATE TABLE `students`;
+--
+-- 傾印資料表的資料 `students`
+--
+
+INSERT INTO `students` (`sno`, `name`, `address`, `birthday`, `username`, `password`) VALUES
+('S001', '陳會安', '新北市五股區', '2000-10-05', 'hueyan', '1234'),
+('S002', '江小魚', '新北市中和區', '1999-01-02', 'smallfish', '1234'),
+('S003', '周傑倫', '台北市松山區', '2001-05-10', 'jay', '1234'),
+('S004', '蔡依玲', '台北市大安區', '1998-07-22', 'jolin', '1234'),
+('S005', '張會妹', '台北市信義區', '1999-03-01', 'chiang', '1234'),
+('S006', '張無忌', '台北市內湖區', '2000-03-01', 'chiang1234', '1234');
+
+--
+-- 已傾印資料表的索引
+--
+
+--
+-- 資料表索引 `album`
+--
+ALTER TABLE `album`
+  ADD PRIMARY KEY (`album_id`);
+
+--
+-- 資料表索引 `favorites`
+--
+ALTER TABLE `favorites`
+  ADD PRIMARY KEY (`movie_id`);
+
+--
+-- 資料表索引 `movies`
+--
+ALTER TABLE `movies`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- 資料表索引 `movie_photos`
+--
+ALTER TABLE `movie_photos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `movie_id` (`movie_id`);
+
+--
+-- 資料表索引 `sdgs`
+--
+ALTER TABLE `sdgs`
+  ADD PRIMARY KEY (`sdg`);
+
+--
+-- 資料表索引 `students`
+--
+ALTER TABLE `students`
+  ADD PRIMARY KEY (`sno`);
+
+--
+-- 在傾印的資料表使用自動遞增(AUTO_INCREMENT)
+--
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `album`
+--
+ALTER TABLE `album`
+  MODIFY `album_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `movie_photos`
+--
+ALTER TABLE `movie_photos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- 已傾印資料表的限制式
+--
+
+--
+-- 資料表的限制式 `movie_photos`
+--
+ALTER TABLE `movie_photos`
+  ADD CONSTRAINT `movie_photos_ibfk_1` FOREIGN KEY (`movie_id`) REFERENCES `movies` (`id`);
+--
+-- 資料庫： `phpmyadmin`
+--
+DROP DATABASE IF EXISTS `phpmyadmin`;
+CREATE DATABASE IF NOT EXISTS `phpmyadmin` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+USE `phpmyadmin`;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `pma__bookmark`
+--
+-- 建立時間： 2025-01-07 13:28:54
+--
+
+DROP TABLE IF EXISTS `pma__bookmark`;
+CREATE TABLE `pma__bookmark` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `dbase` varchar(255) NOT NULL DEFAULT '',
+  `user` varchar(255) NOT NULL DEFAULT '',
+  `label` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `query` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Bookmarks';
+
+--
+-- 資料表新增資料前，先清除舊資料 `pma__bookmark`
+--
+
+TRUNCATE TABLE `pma__bookmark`;
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `pma__central_columns`
+--
+-- 建立時間： 2025-01-07 13:28:55
+--
+
+DROP TABLE IF EXISTS `pma__central_columns`;
+CREATE TABLE `pma__central_columns` (
+  `db_name` varchar(64) NOT NULL,
+  `col_name` varchar(64) NOT NULL,
+  `col_type` varchar(64) NOT NULL,
+  `col_length` text DEFAULT NULL,
+  `col_collation` varchar(64) NOT NULL,
+  `col_isNull` tinyint(1) NOT NULL,
+  `col_extra` varchar(255) DEFAULT '',
+  `col_default` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Central list of columns';
+
+--
+-- 資料表新增資料前，先清除舊資料 `pma__central_columns`
+--
+
+TRUNCATE TABLE `pma__central_columns`;
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `pma__column_info`
+--
+-- 建立時間： 2025-01-07 13:28:54
+--
+
+DROP TABLE IF EXISTS `pma__column_info`;
+CREATE TABLE `pma__column_info` (
+  `id` int(5) UNSIGNED NOT NULL,
+  `db_name` varchar(64) NOT NULL DEFAULT '',
+  `table_name` varchar(64) NOT NULL DEFAULT '',
+  `column_name` varchar(64) NOT NULL DEFAULT '',
+  `comment` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `mimetype` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `transformation` varchar(255) NOT NULL DEFAULT '',
+  `transformation_options` varchar(255) NOT NULL DEFAULT '',
+  `input_transformation` varchar(255) NOT NULL DEFAULT '',
+  `input_transformation_options` varchar(255) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Column information for phpMyAdmin';
+
+--
+-- 資料表新增資料前，先清除舊資料 `pma__column_info`
+--
+
+TRUNCATE TABLE `pma__column_info`;
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `pma__designer_settings`
+--
+-- 建立時間： 2025-01-07 13:28:55
+--
+
+DROP TABLE IF EXISTS `pma__designer_settings`;
+CREATE TABLE `pma__designer_settings` (
+  `username` varchar(64) NOT NULL,
+  `settings_data` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Settings related to Designer';
+
+--
+-- 資料表新增資料前，先清除舊資料 `pma__designer_settings`
+--
+
+TRUNCATE TABLE `pma__designer_settings`;
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `pma__export_templates`
+--
+-- 建立時間： 2025-01-07 13:28:54
+--
+
+DROP TABLE IF EXISTS `pma__export_templates`;
+CREATE TABLE `pma__export_templates` (
+  `id` int(5) UNSIGNED NOT NULL,
+  `username` varchar(64) NOT NULL,
+  `export_type` varchar(10) NOT NULL,
+  `template_name` varchar(64) NOT NULL,
+  `template_data` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Saved export templates';
+
+--
+-- 資料表新增資料前，先清除舊資料 `pma__export_templates`
+--
+
+TRUNCATE TABLE `pma__export_templates`;
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `pma__favorite`
+--
+-- 建立時間： 2025-01-07 13:28:54
+--
+
+DROP TABLE IF EXISTS `pma__favorite`;
+CREATE TABLE `pma__favorite` (
+  `username` varchar(64) NOT NULL,
+  `tables` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Favorite tables';
+
+--
+-- 資料表新增資料前，先清除舊資料 `pma__favorite`
+--
+
+TRUNCATE TABLE `pma__favorite`;
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `pma__history`
+--
+-- 建立時間： 2025-01-07 13:28:54
+--
+
+DROP TABLE IF EXISTS `pma__history`;
+CREATE TABLE `pma__history` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `username` varchar(64) NOT NULL DEFAULT '',
+  `db` varchar(64) NOT NULL DEFAULT '',
+  `table` varchar(64) NOT NULL DEFAULT '',
+  `timevalue` timestamp NOT NULL DEFAULT current_timestamp(),
+  `sqlquery` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='SQL history for phpMyAdmin';
+
+--
+-- 資料表新增資料前，先清除舊資料 `pma__history`
+--
+
+TRUNCATE TABLE `pma__history`;
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `pma__navigationhiding`
+--
+-- 建立時間： 2025-01-07 13:28:55
+--
+
+DROP TABLE IF EXISTS `pma__navigationhiding`;
+CREATE TABLE `pma__navigationhiding` (
+  `username` varchar(64) NOT NULL,
+  `item_name` varchar(64) NOT NULL,
+  `item_type` varchar(64) NOT NULL,
+  `db_name` varchar(64) NOT NULL,
+  `table_name` varchar(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Hidden items of navigation tree';
+
+--
+-- 資料表新增資料前，先清除舊資料 `pma__navigationhiding`
+--
+
+TRUNCATE TABLE `pma__navigationhiding`;
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `pma__pdf_pages`
+--
+-- 建立時間： 2025-01-07 13:28:54
+--
+
+DROP TABLE IF EXISTS `pma__pdf_pages`;
+CREATE TABLE `pma__pdf_pages` (
+  `db_name` varchar(64) NOT NULL DEFAULT '',
+  `page_nr` int(10) UNSIGNED NOT NULL,
+  `page_descr` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='PDF relation pages for phpMyAdmin';
+
+--
+-- 資料表新增資料前，先清除舊資料 `pma__pdf_pages`
+--
+
+TRUNCATE TABLE `pma__pdf_pages`;
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `pma__recent`
+--
+-- 建立時間： 2025-01-07 13:28:54
+--
+
+DROP TABLE IF EXISTS `pma__recent`;
+CREATE TABLE `pma__recent` (
+  `username` varchar(64) NOT NULL,
+  `tables` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Recently accessed tables';
+
+--
+-- 資料表新增資料前，先清除舊資料 `pma__recent`
+--
+
+TRUNCATE TABLE `pma__recent`;
+--
+-- 傾印資料表的資料 `pma__recent`
+--
+
+INSERT INTO `pma__recent` (`username`, `tables`) VALUES
+('root', '[{\"db\":\"hospital\",\"table\":\"uniona\"},{\"db\":\"hospital\",\"table\":\"doctor\"},{\"db\":\"hospital\",\"table\":\"hospital\"}]');
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `pma__relation`
+--
+-- 建立時間： 2025-01-07 13:28:55
+--
+
+DROP TABLE IF EXISTS `pma__relation`;
+CREATE TABLE `pma__relation` (
+  `master_db` varchar(64) NOT NULL DEFAULT '',
+  `master_table` varchar(64) NOT NULL DEFAULT '',
+  `master_field` varchar(64) NOT NULL DEFAULT '',
+  `foreign_db` varchar(64) NOT NULL DEFAULT '',
+  `foreign_table` varchar(64) NOT NULL DEFAULT '',
+  `foreign_field` varchar(64) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Relation table';
+
+--
+-- 資料表新增資料前，先清除舊資料 `pma__relation`
+--
+
+TRUNCATE TABLE `pma__relation`;
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `pma__savedsearches`
+--
+-- 建立時間： 2025-01-07 13:28:55
+--
+
+DROP TABLE IF EXISTS `pma__savedsearches`;
+CREATE TABLE `pma__savedsearches` (
+  `id` int(5) UNSIGNED NOT NULL,
+  `username` varchar(64) NOT NULL DEFAULT '',
+  `db_name` varchar(64) NOT NULL DEFAULT '',
+  `search_name` varchar(64) NOT NULL DEFAULT '',
+  `search_data` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Saved searches';
+
+--
+-- 資料表新增資料前，先清除舊資料 `pma__savedsearches`
+--
+
+TRUNCATE TABLE `pma__savedsearches`;
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `pma__table_coords`
+--
+-- 建立時間： 2025-01-07 13:28:55
+--
+
+DROP TABLE IF EXISTS `pma__table_coords`;
+CREATE TABLE `pma__table_coords` (
+  `db_name` varchar(64) NOT NULL DEFAULT '',
+  `table_name` varchar(64) NOT NULL DEFAULT '',
+  `pdf_page_number` int(11) NOT NULL DEFAULT 0,
+  `x` float UNSIGNED NOT NULL DEFAULT 0,
+  `y` float UNSIGNED NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Table coordinates for phpMyAdmin PDF output';
+
+--
+-- 資料表新增資料前，先清除舊資料 `pma__table_coords`
+--
+
+TRUNCATE TABLE `pma__table_coords`;
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `pma__table_info`
+--
+-- 建立時間： 2025-01-07 13:28:55
+--
+
+DROP TABLE IF EXISTS `pma__table_info`;
+CREATE TABLE `pma__table_info` (
+  `db_name` varchar(64) NOT NULL DEFAULT '',
+  `table_name` varchar(64) NOT NULL DEFAULT '',
+  `display_field` varchar(64) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Table information for phpMyAdmin';
+
+--
+-- 資料表新增資料前，先清除舊資料 `pma__table_info`
+--
+
+TRUNCATE TABLE `pma__table_info`;
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `pma__table_uiprefs`
+--
+-- 建立時間： 2025-01-07 13:28:55
+--
+
+DROP TABLE IF EXISTS `pma__table_uiprefs`;
+CREATE TABLE `pma__table_uiprefs` (
+  `username` varchar(64) NOT NULL,
+  `db_name` varchar(64) NOT NULL,
+  `table_name` varchar(64) NOT NULL,
+  `prefs` text NOT NULL,
+  `last_update` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Tables'' UI preferences';
+
+--
+-- 資料表新增資料前，先清除舊資料 `pma__table_uiprefs`
+--
+
+TRUNCATE TABLE `pma__table_uiprefs`;
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `pma__tracking`
+--
+-- 建立時間： 2025-01-07 13:28:54
+--
+
+DROP TABLE IF EXISTS `pma__tracking`;
+CREATE TABLE `pma__tracking` (
+  `db_name` varchar(64) NOT NULL,
+  `table_name` varchar(64) NOT NULL,
+  `version` int(10) UNSIGNED NOT NULL,
+  `date_created` datetime NOT NULL,
+  `date_updated` datetime NOT NULL,
+  `schema_snapshot` text NOT NULL,
+  `schema_sql` text DEFAULT NULL,
+  `data_sql` longtext DEFAULT NULL,
+  `tracking` set('UPDATE','REPLACE','INSERT','DELETE','TRUNCATE','CREATE DATABASE','ALTER DATABASE','DROP DATABASE','CREATE TABLE','ALTER TABLE','RENAME TABLE','DROP TABLE','CREATE INDEX','DROP INDEX','CREATE VIEW','ALTER VIEW','DROP VIEW') DEFAULT NULL,
+  `tracking_active` int(1) UNSIGNED NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Database changes tracking for phpMyAdmin';
+
+--
+-- 資料表新增資料前，先清除舊資料 `pma__tracking`
+--
+
+TRUNCATE TABLE `pma__tracking`;
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `pma__userconfig`
+--
+-- 建立時間： 2025-01-07 13:28:54
+--
+
+DROP TABLE IF EXISTS `pma__userconfig`;
+CREATE TABLE `pma__userconfig` (
+  `username` varchar(64) NOT NULL,
+  `timevalue` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `config_data` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='User preferences storage for phpMyAdmin';
+
+--
+-- 資料表新增資料前，先清除舊資料 `pma__userconfig`
+--
+
+TRUNCATE TABLE `pma__userconfig`;
+--
+-- 傾印資料表的資料 `pma__userconfig`
+--
+
+INSERT INTO `pma__userconfig` (`username`, `timevalue`, `config_data`) VALUES
+('root', '2025-04-24 01:14:00', '{\"Console\\/Mode\":\"collapse\",\"lang\":\"zh_TW\"}');
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `pma__usergroups`
+--
+-- 建立時間： 2025-01-07 13:28:54
+--
+
+DROP TABLE IF EXISTS `pma__usergroups`;
+CREATE TABLE `pma__usergroups` (
+  `usergroup` varchar(64) NOT NULL,
+  `tab` varchar(64) NOT NULL,
+  `allowed` enum('Y','N') NOT NULL DEFAULT 'N'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='User groups with configured menu items';
+
+--
+-- 資料表新增資料前，先清除舊資料 `pma__usergroups`
+--
+
+TRUNCATE TABLE `pma__usergroups`;
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `pma__users`
+--
+-- 建立時間： 2025-01-07 13:28:54
+--
+
+DROP TABLE IF EXISTS `pma__users`;
+CREATE TABLE `pma__users` (
+  `username` varchar(64) NOT NULL,
+  `usergroup` varchar(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Users and their assignments to user groups';
+
+--
+-- 資料表新增資料前，先清除舊資料 `pma__users`
+--
+
+TRUNCATE TABLE `pma__users`;
+--
+-- 已傾印資料表的索引
+--
+
+--
+-- 資料表索引 `pma__bookmark`
+--
+ALTER TABLE `pma__bookmark`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- 資料表索引 `pma__central_columns`
+--
+ALTER TABLE `pma__central_columns`
+  ADD PRIMARY KEY (`db_name`,`col_name`);
+
+--
+-- 資料表索引 `pma__column_info`
+--
+ALTER TABLE `pma__column_info`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `db_name` (`db_name`,`table_name`,`column_name`);
+
+--
+-- 資料表索引 `pma__designer_settings`
+--
+ALTER TABLE `pma__designer_settings`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- 資料表索引 `pma__export_templates`
+--
+ALTER TABLE `pma__export_templates`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `u_user_type_template` (`username`,`export_type`,`template_name`);
+
+--
+-- 資料表索引 `pma__favorite`
+--
+ALTER TABLE `pma__favorite`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- 資料表索引 `pma__history`
+--
+ALTER TABLE `pma__history`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `username` (`username`,`db`,`table`,`timevalue`);
+
+--
+-- 資料表索引 `pma__navigationhiding`
+--
+ALTER TABLE `pma__navigationhiding`
+  ADD PRIMARY KEY (`username`,`item_name`,`item_type`,`db_name`,`table_name`);
+
+--
+-- 資料表索引 `pma__pdf_pages`
+--
+ALTER TABLE `pma__pdf_pages`
+  ADD PRIMARY KEY (`page_nr`),
+  ADD KEY `db_name` (`db_name`);
+
+--
+-- 資料表索引 `pma__recent`
+--
+ALTER TABLE `pma__recent`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- 資料表索引 `pma__relation`
+--
+ALTER TABLE `pma__relation`
+  ADD PRIMARY KEY (`master_db`,`master_table`,`master_field`),
+  ADD KEY `foreign_field` (`foreign_db`,`foreign_table`);
+
+--
+-- 資料表索引 `pma__savedsearches`
+--
+ALTER TABLE `pma__savedsearches`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `u_savedsearches_username_dbname` (`username`,`db_name`,`search_name`);
+
+--
+-- 資料表索引 `pma__table_coords`
+--
+ALTER TABLE `pma__table_coords`
+  ADD PRIMARY KEY (`db_name`,`table_name`,`pdf_page_number`);
+
+--
+-- 資料表索引 `pma__table_info`
+--
+ALTER TABLE `pma__table_info`
+  ADD PRIMARY KEY (`db_name`,`table_name`);
+
+--
+-- 資料表索引 `pma__table_uiprefs`
+--
+ALTER TABLE `pma__table_uiprefs`
+  ADD PRIMARY KEY (`username`,`db_name`,`table_name`);
+
+--
+-- 資料表索引 `pma__tracking`
+--
+ALTER TABLE `pma__tracking`
+  ADD PRIMARY KEY (`db_name`,`table_name`,`version`);
+
+--
+-- 資料表索引 `pma__userconfig`
+--
+ALTER TABLE `pma__userconfig`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- 資料表索引 `pma__usergroups`
+--
+ALTER TABLE `pma__usergroups`
+  ADD PRIMARY KEY (`usergroup`,`tab`,`allowed`);
+
+--
+-- 資料表索引 `pma__users`
+--
+ALTER TABLE `pma__users`
+  ADD PRIMARY KEY (`username`,`usergroup`);
+
+--
+-- 在傾印的資料表使用自動遞增(AUTO_INCREMENT)
+--
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `pma__bookmark`
+--
+ALTER TABLE `pma__bookmark`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `pma__column_info`
+--
+ALTER TABLE `pma__column_info`
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `pma__export_templates`
+--
+ALTER TABLE `pma__export_templates`
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `pma__history`
+--
+ALTER TABLE `pma__history`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `pma__pdf_pages`
+--
+ALTER TABLE `pma__pdf_pages`
+  MODIFY `page_nr` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `pma__savedsearches`
+--
+ALTER TABLE `pma__savedsearches`
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
 -- 資料庫： `sustain`
 --
+DROP DATABASE IF EXISTS `sustain`;
 CREATE DATABASE IF NOT EXISTS `sustain` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `sustain`;
 
@@ -28,8 +912,8 @@ USE `sustain`;
 --
 -- 資料表結構 `achievement`
 --
--- 建立時間： 2025-04-30 15:29:19
--- 最後更新： 2025-05-02 16:35:36
+-- 建立時間： 2025-05-03 02:52:48
+-- 最後更新： 2025-05-03 03:35:13
 --
 
 DROP TABLE IF EXISTS `achievement`;
@@ -52,15 +936,14 @@ TRUNCATE TABLE `achievement`;
 --
 
 INSERT INTO `achievement` (`UserID`, `TotalPoints`, `ArticlesViewed`, `ChoiceQuestionsCorrect`, `TFQuestionsCorrect`, `FillinQuestionsCorrect`) VALUES
-(2, 20, 2, 2, 1, 1);
+(2, 0, 2, 2, 1, 1);
 
 -- --------------------------------------------------------
 
 --
 -- 資料表結構 `article`
 --
--- 建立時間： 2025-04-30 15:29:19
--- 最後更新： 2025-05-02 09:37:16
+-- 建立時間： 2025-05-03 02:52:48
 --
 
 DROP TABLE IF EXISTS `article`;
@@ -109,7 +992,7 @@ INSERT INTO `article` (`ArticleID`, `Title`, `Category`, `ImageURL`, `Descriptio
 --
 -- 資料表結構 `articleimage`
 --
--- 建立時間： 2025-04-30 15:29:19
+-- 建立時間： 2025-05-03 02:52:48
 --
 
 DROP TABLE IF EXISTS `articleimage`;
@@ -129,8 +1012,7 @@ TRUNCATE TABLE `articleimage`;
 --
 -- 資料表結構 `choicequiz`
 --
--- 建立時間： 2025-04-30 15:29:19
--- 最後更新： 2025-05-02 09:21:56
+-- 建立時間： 2025-05-03 02:52:48
 --
 
 DROP TABLE IF EXISTS `choicequiz`;
@@ -164,8 +1046,7 @@ INSERT INTO `choicequiz` (`choiceID`, `QuestionText`, `OptionA`, `OptionB`, `Opt
 --
 -- 資料表結構 `choicequizstagingarea`
 --
--- 建立時間： 2025-04-30 15:29:19
--- 最後更新： 2025-05-02 09:20:00
+-- 建立時間： 2025-05-03 02:52:48
 --
 
 DROP TABLE IF EXISTS `choicequizstagingarea`;
@@ -191,8 +1072,7 @@ TRUNCATE TABLE `choicequizstagingarea`;
 --
 -- 資料表結構 `choicerec`
 --
--- 建立時間： 2025-05-01 02:38:33
--- 最後更新： 2025-05-02 16:36:03
+-- 建立時間： 2025-05-03 02:52:48
 --
 
 DROP TABLE IF EXISTS `choicerec`;
@@ -222,8 +1102,7 @@ INSERT INTO `choicerec` (`choiceID`, `UserID`, `UserAnswer`, `FinishTime`, `isCo
 --
 -- 資料表結構 `commentarea`
 --
--- 建立時間： 2025-05-02 16:27:57
--- 最後更新： 2025-05-02 16:37:10
+-- 建立時間： 2025-05-03 02:52:48
 --
 
 DROP TABLE IF EXISTS `commentarea`;
@@ -246,8 +1125,7 @@ TRUNCATE TABLE `commentarea`;
 --
 -- 資料表結構 `communitypost`
 --
--- 建立時間： 2025-05-02 16:26:40
--- 最後更新： 2025-05-02 16:37:33
+-- 建立時間： 2025-05-03 02:52:48
 --
 
 DROP TABLE IF EXISTS `communitypost`;
@@ -270,7 +1148,7 @@ TRUNCATE TABLE `communitypost`;
 --
 -- 資料表結構 `fillquiz`
 --
--- 建立時間： 2025-04-30 15:29:19
+-- 建立時間： 2025-05-03 02:52:48
 --
 
 DROP TABLE IF EXISTS `fillquiz`;
@@ -299,7 +1177,7 @@ INSERT INTO `fillquiz` (`fillID`, `QuestionText`, `CorrectAnswer`, `UserID`, `Ar
 --
 -- 資料表結構 `fillquizstagingarea`
 --
--- 建立時間： 2025-04-30 15:29:19
+-- 建立時間： 2025-05-03 02:52:48
 --
 
 DROP TABLE IF EXISTS `fillquizstagingarea`;
@@ -321,8 +1199,7 @@ TRUNCATE TABLE `fillquizstagingarea`;
 --
 -- 資料表結構 `fillrec`
 --
--- 建立時間： 2025-05-01 02:38:33
--- 最後更新： 2025-05-02 16:36:07
+-- 建立時間： 2025-05-03 02:52:48
 --
 
 DROP TABLE IF EXISTS `fillrec`;
@@ -351,7 +1228,8 @@ INSERT INTO `fillrec` (`fillID`, `UserID`, `UserAnswer`, `FinishTime`, `isCorrec
 --
 -- 資料表結構 `merchandise`
 --
--- 建立時間： 2025-04-30 15:29:19
+-- 建立時間： 2025-05-03 02:53:24
+-- 最後更新： 2025-05-03 05:19:12
 --
 
 DROP TABLE IF EXISTS `merchandise`;
@@ -360,7 +1238,10 @@ CREATE TABLE `merchandise` (
   `Name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '商品名稱',
   `Description` text CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '商品描述',
   `PointsRequired` int(11) NOT NULL COMMENT '所需點數',
-  `Available` tinyint(1) NOT NULL COMMENT '是否可用'
+  `Available` tinyint(1) NOT NULL COMMENT '是否可用',
+  `Category` varchar(50) NOT NULL,
+  `ImageURL` varchar(255) DEFAULT NULL,
+  `PreviewURL` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -368,12 +1249,21 @@ CREATE TABLE `merchandise` (
 --
 
 TRUNCATE TABLE `merchandise`;
+--
+-- 傾印資料表的資料 `merchandise`
+--
+
+INSERT INTO `merchandise` (`ItemID`, `Name`, `Description`, `PointsRequired`, `Available`, `Category`, `ImageURL`, `PreviewURL`) VALUES
+(1, 'head1', '頭像', 20, 1, 'head', 'product/head1.jpg', 'product/head1.jpg'),
+(2, 'wallpaper1', '桌布', 100, 1, 'wallpaper', 'product/wallpaper1.jpg', 'product/wallpaper1.jpg'),
+(3, 'background1', '背景1', 100, 1, 'background', 'product/background1.jpg', 'product/background1.jpg');
+
 -- --------------------------------------------------------
 
 --
 -- 資料表結構 `password_resets`
 --
--- 建立時間： 2025-05-02 16:38:34
+-- 建立時間： 2025-05-03 02:52:48
 --
 
 DROP TABLE IF EXISTS `password_resets`;
@@ -412,7 +1302,8 @@ INSERT INTO `password_resets` (`id`, `email`, `token`, `expiry`, `created_at`) V
 --
 -- 資料表結構 `purchase`
 --
--- 建立時間： 2025-04-30 15:29:19
+-- 建立時間： 2025-05-03 02:52:48
+-- 最後更新： 2025-05-03 03:35:13
 --
 
 DROP TABLE IF EXISTS `purchase`;
@@ -428,13 +1319,19 @@ CREATE TABLE `purchase` (
 --
 
 TRUNCATE TABLE `purchase`;
+--
+-- 傾印資料表的資料 `purchase`
+--
+
+INSERT INTO `purchase` (`UserID`, `ItemID`, `PurchaseTime`, `SpentPoints`) VALUES
+(2, 1, '2025-05-03 11:35:13', 20);
+
 -- --------------------------------------------------------
 
 --
 -- 資料表結構 `teacher_questions`
 --
--- 建立時間： 2025-04-30 15:29:19
--- 最後更新： 2025-05-02 09:19:02
+-- 建立時間： 2025-05-03 02:52:48
 --
 
 DROP TABLE IF EXISTS `teacher_questions`;
@@ -463,7 +1360,7 @@ TRUNCATE TABLE `teacher_questions`;
 --
 -- 資料表結構 `tfquiz`
 --
--- 建立時間： 2025-04-30 15:29:19
+-- 建立時間： 2025-05-03 02:52:48
 --
 
 DROP TABLE IF EXISTS `tfquiz`;
@@ -495,7 +1392,7 @@ INSERT INTO `tfquiz` (`tfID`, `QuestionText`, `OptionA`, `OptionB`, `CorrectAnsw
 --
 -- 資料表結構 `tfquizstagingarea`
 --
--- 建立時間： 2025-04-30 15:29:19
+-- 建立時間： 2025-05-03 02:52:48
 --
 
 DROP TABLE IF EXISTS `tfquizstagingarea`;
@@ -519,8 +1416,7 @@ TRUNCATE TABLE `tfquizstagingarea`;
 --
 -- 資料表結構 `tfrec`
 --
--- 建立時間： 2025-05-01 02:38:33
--- 最後更新： 2025-05-02 16:36:13
+-- 建立時間： 2025-05-03 02:52:48
 --
 
 DROP TABLE IF EXISTS `tfrec`;
@@ -549,8 +1445,7 @@ INSERT INTO `tfrec` (`tfID`, `UserID`, `UserAnswer`, `FinishTime`, `isCorrect`) 
 --
 -- 資料表結構 `user`
 --
--- 建立時間： 2025-05-02 16:34:47
--- 最後更新： 2025-05-02 16:37:39
+-- 建立時間： 2025-05-03 02:52:48
 --
 
 DROP TABLE IF EXISTS `user`;
@@ -583,8 +1478,7 @@ INSERT INTO `user` (`UserID`, `Username`, `Email`, `Password`, `JoinDate`, `Stat
 --
 -- 資料表結構 `user_article_views`
 --
--- 建立時間： 2025-05-02 15:08:17
--- 最後更新： 2025-05-02 15:11:34
+-- 建立時間： 2025-05-03 02:52:48
 --
 
 DROP TABLE IF EXISTS `user_article_views`;
@@ -811,7 +1705,7 @@ ALTER TABLE `fillquizstagingarea`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `merchandise`
 --
 ALTER TABLE `merchandise`
-  MODIFY `ItemID` int(11) NOT NULL AUTO_INCREMENT COMMENT '商品編號 (PK)';
+  MODIFY `ItemID` int(11) NOT NULL AUTO_INCREMENT COMMENT '商品編號 (PK)', AUTO_INCREMENT=4;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `password_resets`
@@ -964,6 +1858,12 @@ ALTER TABLE `tfrec`
 ALTER TABLE `user_article_views`
   ADD CONSTRAINT `user_article_views_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`) ON DELETE CASCADE,
   ADD CONSTRAINT `user_article_views_ibfk_2` FOREIGN KEY (`ArticleID`) REFERENCES `article` (`ArticleID`) ON DELETE CASCADE;
+--
+-- 資料庫： `test`
+--
+DROP DATABASE IF EXISTS `test`;
+CREATE DATABASE IF NOT EXISTS `test` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `test`;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

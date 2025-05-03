@@ -35,6 +35,40 @@ if ($row = $result->fetch_assoc()) {
 }
 $stmt->close();
 
+// --- New code start ---
+// Get weekly article view counts
+$weeklyViews = array_fill(0, 7, 0); // Initialize array for Mon-Sun with 0s
+$today = new DateTime();
+$dayOfWeek = $today->format('N'); // ISO-8601 numeric representation of the day of the week (1 for Monday through 7 for Sunday)
+
+// Calculate the start of the week (Monday)
+$startOfWeek = clone $today;
+$startOfWeek->modify('-' . ($dayOfWeek - 1) . ' days');
+$startOfWeek->setTime(0, 0, 0);
+
+// Calculate the end of the week (Sunday)
+$endOfWeek = clone $startOfWeek;
+$endOfWeek->modify('+6 days');
+$endOfWeek->setTime(23, 59, 59);
+
+// Prepare SQL query to get views for the current week
+$viewStmt = $conn->prepare("SELECT ViewTimestamp FROM user_article_views WHERE UserID = ? AND ViewTimestamp BETWEEN ? AND ?");
+$startOfWeekStr = $startOfWeek->format('Y-m-d H:i:s');
+$endOfWeekStr = $endOfWeek->format('Y-m-d H:i:s');
+$viewStmt->bind_param("iss", $userID, $startOfWeekStr, $endOfWeekStr);
+$viewStmt->execute();
+$viewResult = $viewStmt->get_result();
+
+while ($viewRow = $viewResult->fetch_assoc()) {
+    $viewTimestamp = new DateTime($viewRow['ViewTimestamp']);
+    $viewDayOfWeek = (int)$viewTimestamp->format('N'); // 1 (for Monday) through 7 (for Sunday)
+    if ($viewDayOfWeek >= 1 && $viewDayOfWeek <= 7) {
+        $weeklyViews[$viewDayOfWeek - 1]++; // Increment count for the corresponding day (index 0 for Monday)
+    }
+}
+$viewStmt->close();
+// --- New code end ---
+
 $conn->close();
 ?>
 <!DOCTYPE html>
@@ -69,6 +103,8 @@ $conn->close();
                 <p><?php echo htmlspecialchars($articlesViewed); ?></p>
             </div>
             <div id="pie-chart-container" class="chart-container"></div>
+            <!-- 新增折線圖容器 -->
+            <div id="articles-viewed-chart-container" class="chart-container" style="margin-top: 30px;"></div> 
         </div>
 
     </div>
@@ -80,7 +116,7 @@ $conn->close();
                 backgroundColor: 'transparent' // 使背景透明
             },
             title: {
-                text: '成就統計數據',
+                text: '答題正確率分佈',
                 style: {
                     color: '#333' // 標題顏色
                 }
@@ -130,11 +166,12 @@ $conn->close();
                 name: '數量',
                 colorByPoint: true,
                 data: [
-                    {
-                        name: '瀏覽文章數',
-                        y: <?php echo $articlesViewed; ?>,
-                        color: '#f45b5b' // 瀏覽文章數顏色
-                    },
+                    // 移除瀏覽文章數
+                    // {
+                    //     name: '瀏覽文章數',
+                    //     y: <?php echo $articlesViewed; ?>,
+                    //     color: '#f45b5b' // 瀏覽文章數顏色
+                    // },
                     {
                         name: '選擇題答對',
                         y: <?php echo $choiceCorrect; ?>, // 使用從 achievement 表讀取的數據
@@ -154,6 +191,52 @@ $conn->close();
             }],
             credits: {
                 enabled: false // 隱藏 Highcharts logo
+            }
+        });
+
+        // 新增瀏覽文章數折線圖
+        Highcharts.chart('articles-viewed-chart-container', {
+            chart: {
+                type: 'line', // Ensure it's a line chart
+                backgroundColor: 'transparent'
+            },
+            title: {
+                text: '本週瀏覽文章數趨勢' // Update title
+            },
+            xAxis: {
+                // Change categories to days of the week
+                categories: ['一', '二', '三', '四', '五', '六', '日']
+            },
+            yAxis: {
+                title: {
+                    text: '數量'
+                },
+                min: 0, // Set Y-axis min
+                max: 20, // Set Y-axis max
+                tickInterval: 5 // Set Y-axis tick interval
+            },
+            tooltip: {
+                // Update tooltip format if needed, maybe show day name?
+                headerFormat: '<b>星期{point.key}</b><br/>',
+                pointFormat: '瀏覽: {point.y} 篇'
+            },
+            series: [{
+                name: '瀏覽文章數',
+                // Use the weekly data from PHP
+                data: <?php echo json_encode($weeklyViews); ?>
+            }],
+            credits: {
+                enabled: false
+            },
+            legend: {
+                enabled: false // Keep legend hidden for single series
+            },
+            plotOptions: { // Ensure lines connect points
+                line: {
+                    marker: {
+                        enabled: true // Show markers on points
+                    }
+                }
             }
         });
     </script>

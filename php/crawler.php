@@ -181,6 +181,22 @@ $user_id = $_SESSION['user_id'] ?? 0;
                         echo '<h2>文章已成功保存！</h2>';
                         echo '<p>標題：' . htmlspecialchars($title) . '</p>';
                         echo '<p><a href="article.php?id=' . $conn->insert_id . '">查看文章</a></p>';
+                        
+                        // --- 新增：更新教師積分 --- 
+                        $updatePointsStmt = $conn->prepare("UPDATE teacher_achievement SET TotalPoints = TotalPoints + 5 WHERE UserID = ?");
+                        if ($updatePointsStmt) {
+                            $updatePointsStmt->bind_param("i", $user_id);
+                            if ($updatePointsStmt->execute()) {
+                                echo '<p>恭喜！您已獲得 5 點積分。</p>';
+                            } else {
+                                echo '<p>更新積分失敗：' . $updatePointsStmt->error . '</p>';
+                            }
+                            $updatePointsStmt->close();
+                        } else {
+                            echo '<p>準備更新積分語句失敗：' . $conn->error . '</p>';
+                        }
+                        // --- 更新結束 ---
+
                         echo '</div>';
                     } else {
                         echo '<div class="content-display">保存失敗：' . $stmt->error . '</div>';

@@ -96,6 +96,20 @@
                     } else {
                         error_log("Failed to prepare achievement insert statement: " . $conn->error);
                     }
+                } 
+                // 如果角色是老師，則在 teacher_achievement 表中創建初始記錄
+                else if ($role === 'Teacher') {
+                    $stmtTeacherAchieve = $conn->prepare("INSERT INTO teacher_achievement (UserID, TotalPoints, SDG13ArticlesPublished, SDG14ArticlesPublished, SDG15ArticlesPublished) VALUES (?, 0, 0, 0, 0)");
+                    if ($stmtTeacherAchieve) {
+                        $stmtTeacherAchieve->bind_param("i", $newUserId);
+                        if (!$stmtTeacherAchieve->execute()) {
+                            // 記錄錯誤，但不阻止註冊成功訊息
+                            error_log("Failed to create teacher_achievement record for UserID: " . $newUserId . " Error: " . $stmtTeacherAchieve->error);
+                        }
+                        $stmtTeacherAchieve->close();
+                    } else {
+                        error_log("Failed to prepare teacher_achievement insert statement: " . $conn->error);
+                    }
                 }
 
                 echo "<div class='toast success'><span class='toast-icon'>✅</span>註冊成功！請登入。</div>";

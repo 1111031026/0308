@@ -26,7 +26,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <div class="nav-icons">
     <?php if (isset($_SESSION['login_session']) && $_SESSION['login_session'] === true): ?>
             <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'Teacher'): ?>
-                <a href="#"><img src="../img/achv.png" alt="成就"></a>
+                <a href="teacher_achievement.php"><img src="../img/achv.png" alt="成就"></a>
             <?php elseif (isset($_SESSION['role']) && $_SESSION['role'] === 'Student'): ?>
                 <a href="achievement.php"><img src="../img/achv.png" alt="成就"></a>
             <?php endif; ?>

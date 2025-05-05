@@ -75,10 +75,12 @@ body {
     width: 100% !important;
     height: 100px !important;
     margin-bottom: 30px !important;
+    padding-left: 0; /* 移除左侧内边距 */
 }
 
 .swiper-thumbs .swiper-wrapper {
     padding: 10px 0 !important;
+    margin-left: -10px; /* 向左移动内容 */
 }
 
 .swiper-thumbs .swiper-slide {
@@ -86,6 +88,7 @@ body {
     border: 1px solid #eee;
     border-radius: 5px;
     overflow: hidden;
+    margin-left: 0; /* 确保每张图片左对齐 */
 }
 
 .swiper-thumbs .swiper-slide-thumb-active {
@@ -108,6 +111,7 @@ body {
     border-radius: 8px;
     display: block;
 }
+
 
 /* 调整轮播按钮大小 */
 .swiper-button-next, .swiper-button-prev {

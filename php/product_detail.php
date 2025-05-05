@@ -78,6 +78,9 @@ else $category_name = $product['Category'];
     <link rel="stylesheet" href="../css/product_detail.css">
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+    <!-- 添加 jQuery 和 elevateZoom-plus -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/igorlino/elevatezoom-plus@1.2.3/src/jquery.ez-plus.js"></script>
     <!-- 添加 Swiper JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 </head>
@@ -94,14 +97,18 @@ else $category_name = $product['Category'];
                 <div class="swiper swiper-main">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
-                            <img src="../<?php echo htmlspecialchars($product['ImageURL']); ?>" alt="<?php echo htmlspecialchars($product['Name']); ?>">
+                            <img id="main-img" src="../<?php echo htmlspecialchars($product['ImageURL']); ?>" alt="<?php echo htmlspecialchars($product['Name']); ?>" data-zoom-image="../<?php echo htmlspecialchars($product['ImageURL']); ?>">
                         </div>
                         <?php if (!empty($product['PreviewURL']) && $product['PreviewURL'] != 'NULL' && $product['PreviewURL'] != 'null'): ?>
                             <div class="swiper-slide">
                                 <img src="../<?php echo htmlspecialchars($product['PreviewURL']); ?>" alt="預覽效果">
                             </div>
                         <?php endif; ?>
-
+                        <?php if (!empty($product['PreviewURL2']) && $product['PreviewURL2'] != 'NULL' && $product['PreviewURL2'] != 'null'): ?>
+                            <div class="swiper-slide">
+                                <img src="../<?php echo htmlspecialchars($product['PreviewURL2']); ?>" alt="預覽效果2">
+                            </div>
+                        <?php endif; ?>
                         <?php
                         // 如果有其他圖片，可以從資料庫中獲取並顯示
                         // 修改為從 merchandise 表獲取圖片
@@ -131,6 +138,11 @@ else $category_name = $product['Category'];
                         <?php if (!empty($product['PreviewURL']) && $product['PreviewURL'] != 'NULL' && $product['PreviewURL'] != 'null'): ?>
                             <div class="swiper-slide">
                                 <img src="../<?php echo htmlspecialchars($product['PreviewURL']); ?>" alt="預覽效果">
+                            </div>
+                        <?php endif; ?>
+                        <?php if (!empty($product['PreviewURL2']) && $product['PreviewURL2'] != 'NULL' && $product['PreviewURL2'] != 'null'): ?>
+                            <div class="swiper-slide">
+                                <img src="../<?php echo htmlspecialchars($product['PreviewURL2']); ?>" alt="預覽效果2">
                             </div>
                         <?php endif; ?>
 
@@ -209,81 +221,118 @@ else $category_name = $product['Category'];
 
     <!-- 添加 Swiper 初始化和購買功能的 JavaScript -->
     <script>
-        // 先初始化縮略圖輪播
-        // 確保 loop 屬性設置為 true
-        const swiperThumbs = new Swiper('.swiper-thumbs', {
-            slidesPerView: 3,
-            spaceBetween: 10,
-            navigation: {
-                nextEl: '.swiper-thumbs .swiper-button-next',
-                prevEl: '.swiper-thumbs .swiper-button-prev',
-            },
-            loop: true, // 確保輪播循環播放
-            watchSlidesProgress: true,
-        });
+        $(document).ready(function() {
+            const swiperThumbs = new Swiper('.swiper-thumbs', {
+                slidesPerView: 3,
+                spaceBetween: 10,
+                navigation: {
+                    nextEl: '.swiper-thumbs .swiper-button-next',
+                    prevEl: '.swiper-thumbs .swiper-button-prev',
+                },
+                loop: true,
+                watchSlidesProgress: true,
+            });
 
-        const swiperMain = new Swiper('.swiper-main', {
-            navigation: {
-                nextEl: '.swiper-main .swiper-button-next',
-                prevEl: '.swiper-main .swiper-button-prev',
-            },
-            loop: true, // 確保輪播循環播放
-            thumbs: {
-                swiper: swiperThumbs
-            }
-        });
-
-        // 購買確認功能
-        function confirmPurchase(itemId) {
-            document.getElementById('purchase-modal').style.display = 'flex';
-        }
-
-        function closeModal() {
-            document.getElementById('purchase-modal').style.display = 'none';
-        }
-
-        function closeSuccessModal() {
-            document.getElementById('success-modal').style.display = 'none';
-            window.location.reload(); // 重新載入頁面以更新狀態
-        }
-
-        function processPurchase(itemId) {
-            // 發送 AJAX 請求處理購買
-            fetch('process_purchase.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
+            const swiperMain = new Swiper('.swiper-main', {
+                navigation: {
+                    nextEl: '.swiper-main .swiper-button-next',
+                    prevEl: '.swiper-main .swiper-button-prev',
+                },
+                loop: true,
+                thumbs: {
+                    swiper: swiperThumbs
+                },
+                on: {
+                    init: function() {
+                        initZoom();
                     },
-                    body: 'item_id=' + itemId
-                })
-                .then(response => response.json())
-                .then(data => {
-                    closeModal();
-                    if (data.success) {
-                        document.getElementById('success-product-name').textContent = document.getElementById('product-name').textContent;
-                        document.getElementById('success-modal').style.display = 'flex';
-                    } else {
-                        alert('購買失敗: ' + data.message);
+                    slideChangeTransitionEnd: function() {
+                        initZoom();
                     }
-                })
-                .catch(error => {
-                    closeModal();
-                    alert('發生錯誤: ' + error);
-                });
-        }
+                }
+            });
 
-        // 點擊模態框外部關閉模態框
-        window.onclick = function(event) {
-            const purchaseModal = document.getElementById('purchase-modal');
-            const successModal = document.getElementById('success-modal');
-            if (event.target === purchaseModal) {
-                purchaseModal.style.display = 'none';
+            function initZoom() {
+                $('.zoomContainer').remove();
+                const activeSlide = $('.swiper-main .swiper-slide-active').not('.swiper-slide-duplicate');
+                const $img = activeSlide.find('img').first();
+
+                if (!$img.length) {
+                    console.warn('No image found in active slide');
+                    return;
+                }
+                if (typeof $.fn.ezPlus !== 'function') {
+                    console.warn('ezPlus plugin is not loaded');
+                    return;
+                }
+
+                $img.attr('id', 'zoom-img');
+                $img.attr('data-zoom-image', $img.attr('src'));
+
+                $('#zoom-img').ezPlus({
+                    zoomType: 'lens',  // 改為窗口模式window
+                    lensShape: 'round',
+                    lensSize: 100,
+                    borderSize: 2,
+                    borderColour: '#888',
+                    zoomWindowWidth: 300,  // 設置放大窗口寬度
+                    zoomWindowHeight: 300, // 設置放大窗口高度
+                    zoomLevel: 0.8,        // 設置放大倍數
+                    cursor: 'crosshair',
+                    responsive: true
+                });
             }
-            if (event.target === successModal) {
-                successModal.style.display = 'none';
-            }
-        }
+
+            window.confirmPurchase = function(itemId) {
+                document.getElementById('purchase-modal').style.display = 'flex';
+            };
+
+            window.closeModal = function() {
+                document.getElementById('purchase-modal').style.display = 'none';
+            };
+
+            window.closeSuccessModal = function() {
+                document.getElementById('success-modal').style.display = 'none';
+                window.location.reload();
+            };
+
+            window.processPurchase = function(itemId) {
+                fetch('process_purchase.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: 'item_id=' + itemId
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        closeModal();
+                        if (data.success) {
+                            document.getElementById('success-product-name').textContent = document.getElementById('product-name').textContent;
+                            document.getElementById('success-modal').style.display = 'flex';
+                        } else {
+                            alert('購買失敗: ' + data.message);
+                        }
+                    })
+                    .catch(error => {
+                        closeModal();
+                        alert('發生錯誤: ' + error);
+                    });
+            };
+
+            window.onclick = function(event) {
+                const purchaseModal = document.getElementById('purchase-modal');
+                const successModal = document.getElementById('success-modal');
+                if (event.target === purchaseModal) {
+                    purchaseModal.style.display = 'none';
+                }
+                if (event.target === successModal) {
+                    successModal.style.display = 'none';
+                }
+            };
+        });
     </script>
+
 </body>
 
 </html>

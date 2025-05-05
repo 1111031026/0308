@@ -153,7 +153,7 @@ if ($category_result && $category_result->num_rows > 0) {
     </header>
     
     <div class="shop-container">
-        <h1 class="page-title">商店</h1>
+        <h1 class="page-title">商城</h1>
         
         <!-- 搜尋和篩選區域 -->
         <div class="search-filter-container">

@@ -25,25 +25,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // 如果沒有錯誤，保存貼文
     if (empty($errors)) {
-        // 使用 Title 欄位，匹配資料表結構
         $sql = "INSERT INTO communitypost (UserID, Title, Content, PostDate) VALUES (?, ?, ?, NOW())";
         $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, 'iss', $user_id, $title, $content);
         
-        // 檢查 mysqli_prepare 是否成功
         if ($stmt === false) {
-            $errors[] = '資料庫準備語句失敗: ' . mysqli_error($conn);
+            $errors[] = '準備SQL語句失敗：' . mysqli_error($conn);
+        } else if (mysqli_stmt_execute($stmt)) {
+            header('Location: luntan.php');
+            exit();
         } else {
-            // 綁定參數，'iss' 表示整數、字串、字串
-            mysqli_stmt_bind_param($stmt, 'iss', $user_id, $title, $content);
-            
-            if (mysqli_stmt_execute($stmt)) {
-                mysqli_stmt_close($stmt);
-                header('Location: luntan.php');
-                exit();
-            } else {
-                $errors[] = '保存失敗: ' . mysqli_stmt_error($stmt);
-                mysqli_stmt_close($stmt);
-            }
+            $errors[] = '保存失敗，請稍後再試';
         }
     }
 }

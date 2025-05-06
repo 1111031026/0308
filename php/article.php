@@ -81,9 +81,8 @@ if (isset($_GET['id']) && isset($_SESSION['login_session']) && $_SESSION['login_
                     <li><a href="deepseek-test.php?article_id=<?php echo $_GET['id']; ?>"><img src="../img/new-quiz.png" alt="新增測驗" title="新增測驗"></a></li>
                     <li><a href="luntan.php"><img src="../img/share.png" alt="貼文區" title="貼文區"></a></li>
                 <?php elseif (isset($_SESSION['role']) && $_SESSION['role'] === 'Student'): ?>
-                    <li><a href="luntan.php"><img src="../img/share.png" alt="新增貼文" title="新增貼文"></a></li>
-                    <li><a href="luntan.php"><img src="../img/share.png" alt="貼文區" title="貼文區"></a></li>
                     <li><a href="quiz.php?article_id=<?php echo $_GET['id']; ?>"><img src="../img/quiz.png" alt="測驗" title="測驗"></a></li>
+                    <li><a href="luntan.php"><img src="../img/share.png" alt="貼文區" title="貼文區"></a></li>
                 <?php endif; ?>
             <?php endif; ?>
         </ul>

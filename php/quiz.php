@@ -22,13 +22,8 @@ LEFT JOIN user u ON c.UserID = u.UserID
 LEFT JOIN choicerec cr ON c.choiceID = cr.choiceID AND cr.UserID = ? 
 WHERE c.ArticleID = ?";
 $stmt = $conn->prepare($choice_sql);
-if ($stmt === false) {
-    die('準備選擇題查詢失敗: ' . $conn->error);
-}
 $stmt->bind_param("ii", $user_id, $article_id);
-if (!$stmt->execute()) {
-    die('執行選擇題查詢失敗: ' . $stmt->error);
-}
+$stmt->execute();
 $result = $stmt->get_result();
 while($row = $result->fetch_assoc()) {
     $choice_questions[] = $row;
@@ -42,13 +37,8 @@ LEFT JOIN user u ON f.UserID = u.UserID
 LEFT JOIN fillrec fr ON f.fillID = fr.fillID AND fr.UserID = ? 
 WHERE f.ArticleID = ?";
 $stmt = $conn->prepare($fill_sql);
-if ($stmt === false) {
-    die('準備填空題查詢失敗: ' . $conn->error);
-}
 $stmt->bind_param("ii", $user_id, $article_id);
-if (!$stmt->execute()) {
-    die('執行填空題查詢失敗: ' . $stmt->error);
-}
+$stmt->execute();
 $result = $stmt->get_result();
 while($row = $result->fetch_assoc()) {
     $fill_questions[] = $row;
@@ -62,13 +52,8 @@ LEFT JOIN user u ON t.UserID = u.UserID
 LEFT JOIN tfrec tr ON t.tfID = tr.tfID AND tr.UserID = ? 
 WHERE t.ArticleID = ?";
 $stmt = $conn->prepare($tf_sql);
-if ($stmt === false) {
-    die('準備是非題查詢失敗: ' . $conn->error);
-}
 $stmt->bind_param("ii", $user_id, $article_id);
-if (!$stmt->execute()) {
-    die('執行是非題查詢失敗: ' . $stmt->error);
-}
+$stmt->execute();
 $result = $stmt->get_result();
 while($row = $result->fetch_assoc()) {
     $tf_questions[] = $row;
@@ -84,6 +69,8 @@ while($row = $result->fetch_assoc()) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/quiz_new.css">
     <link rel="stylesheet" href="../css/nav.css">
+    <!-- 加入Confetti庫 -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         .question-container.answered {
             padding: 15px;
@@ -251,8 +238,22 @@ while($row = $result->fetch_assoc()) {
         
             </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // 隨機顏色函數
+    function getRandomColorSet() {
+        const colorSets = [
+            ['#1E90FF', '#87CEFA', '#4682B4'], // 藍系
+            ['#FF6347', '#FF4500', '#FFA07A'], // 橘紅系
+            ['#32CD32', '#98FB98', '#228B22'], // 綠系
+            ['#FFD700', '#FFA500', '#FFEC8B'], // 黃金系
+            ['#BA55D3', '#DA70D6', '#D8BFD8'], // 紫系
+            ['#FF69B4', '#FFB6C1', '#DB7093']  // 粉紅系
+        ];
+        const randomSet = colorSets[Math.floor(Math.random() * colorSets.length)];
+        return randomSet;
+    }
+
     function submitAnswer(button) {
         const questionContainer = button.closest('.question-container');
         const questionId = questionContainer.dataset.questionId;
@@ -302,6 +303,18 @@ while($row = $result->fetch_assoc()) {
             if (data.correct) {
                 feedbackDiv.className = 'feedback correct';
                 feedbackDiv.textContent = '答對了！';
+                // 觸發拉炮特效
+                const rect = questionContainer.getBoundingClientRect();
+                const colors = getRandomColorSet();
+                confetti({
+                    origin: {
+                        x: (rect.left + rect.width / 2) / window.innerWidth,
+                        y: (rect.top + rect.height / 2) / window.innerHeight
+                    },
+                    colors: colors,
+                    particleCount: 100,
+                    spread: 80
+                });
             } else {
                 feedbackDiv.className = 'feedback incorrect';
                 feedbackDiv.textContent = '答錯了。';
@@ -318,6 +331,6 @@ while($row = $result->fetch_assoc()) {
             feedbackDiv.textContent = '提交答案時發生錯誤，請稍後再試。';
         });
     }
-    </script>
+</script>
 
 </body></html>

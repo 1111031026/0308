@@ -39,45 +39,55 @@
             <div class="scroll-down-arrow"><h2>⇩</h2></div>
         </section>
 
-        <!-- 第二區塊：功能介紹（報導文章、影片學習、小測驗） -->
+        <!-- 第二區塊：永續發展主題介紹 -->
         <section class="section section-2">
-            <h1>永續生活的第一步</h1>
-            <p>在SustainHub，我們提供多樣化的功能，幫助你了解並實踐永續發展！</p>
+            <h1>探索永續發展的核心領域</h1>
+            <p>在SustainHub，我們專注於三大永續發展目標，攜手創造更美好的地球！</p>
             <div class="feature-container">
                 <div class="feature-card">
-                    <i class="fas fa-newspaper"></i>
-                    <h3>報導文章展示與查詢</h3>
-                    <p>瀏覽環保報導、研究文章及SDGs解讀，按主題分類（如SDGs 13、14、15）或關鍵字搜尋，快速找到感興趣的內容。</p>
+                    <i class="fas fa-cloud-sun"></i>
+                    <h3>氣候行動 (SDG 13)</h3>
+                    <p>了解氣候變遷的影響與挑戰，學習減緩與適應策略，從日常生活開始實踐低碳行動，為地球降溫盡一份心力。</p>
                 </div>
                 <div class="feature-card">
-                    <i class="fas fa-video"></i>
-                    <h3>影片展示與學習</h3>
-                    <p>觀看環保教育影片，了解可持續發展的實踐方法，按分類（如氣候變遷、環保技巧）選擇，隨時播放與學習。</p>
+                    <i class="fas fa-water"></i>
+                    <h3>海洋保育 (SDG 14)</h3>
+                    <p>探索海洋生態系統的重要性，認識海洋污染問題，參與海洋保護行動，守護藍色星球的永續未來。</p>
                 </div>
                 <div class="feature-card">
-                    <i class="fas fa-question-circle"></i>
-                    <h3>互動式小測驗</h3>
-                    <p>參與小測驗，測試你的環保知識，測驗後查看得分與答案解析，並獲得個人化學習建議。</p>
+                    <i class="fas fa-mountain"></i>
+                    <h3>地景保育 (SDG 15)</h3>
+                    <p>關注陸地生態系統，保護森林與生物多樣性，推廣永續土地利用，維護地球的自然資源與生態平衡。</p>
                 </div>
             </div>
         </section>
 
-        <!-- 第三區塊：功能介紹（使用者社群、點數獎勳）+聯絡資訊 -->
+        <!-- 第三區塊：永續學習與社群參與 -->
         <section class="section section-3">
-            <h1>加入我們的永續社群</h1>
+            <h1>永續學習・共創未來</h1>
             <div class="feature-container">
                 <div class="feature-card">
-                    <i class="fas fa-users"></i>
-                    <h3>使用者社群</h3>
-                    <p>加入社群，參與討論、分享減碳經驗，支持關注、留言與點讚功能，與其他永續愛好者互動。</p>
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>多元學習資源</h3>
+                    <p>豐富的環保報導、教育影片和互動式測驗，幫助你深入了解永續議題，培養環境意識，成為地球永續的推動者。</p>
                 </div>
                 <div class="feature-card">
-                    <i class="fas fa-medal"></i>
-                    <h3>點數獎勳機制</h3>
-                    <p>完成學習、測驗或分享等行為可獲得點數，兌換虛擬獎勳（如專屬桌布），讓永續行動更有成就感！</p>
+                    <i class="fas fa-users"></i>
+                    <h3>永續社群平台</h3>
+                    <p>加入充滿熱情的永續發展社群，分享環保心得與實踐經驗，透過討論與互動，集結群眾力量，共同為地球永續努力。</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-award"></i>
+                    <h3>永續成就系統</h3>
+                    <p>參與學習活動、完成環保任務可獲得積分，解鎖特別獎勵，見證你在永續發展道路上的每一步進展！</p>
                 </div>
             </div>
-            <p class="contact-info">有任何問題？歡迎聯繫：support@sustainhub.com</p>
+            <div class="button-container">
+                <button class="btn btn-register" onclick="document.querySelector('.section-1').scrollIntoView({behavior: 'smooth'})">立即體驗</button>
+            </div>
+            <br>
+            <br>
+            <p class="contact-info">攜手邁向永續未來！有任何問題歡迎聯繫：SustainHub0support@gmail.com</p>
         </section>
     </div>
 

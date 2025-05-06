@@ -49,7 +49,7 @@ if (isset($_GET['id']) && isset($_SESSION['login_session']) && $_SESSION['login_
     <title>永續小站</title>
     <link rel="icon" type="image/png" href="../img/icon.png">
     <link rel="stylesheet" href="../css/1.css">
-    <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/nav3.css">
     <style>
     .article-source {
         background-color: #f8f9fa;

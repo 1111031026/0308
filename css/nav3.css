@@ -82,6 +82,7 @@ body, html {
 .nav-icons {
     display: flex;
     align-items: center;
+    margin-right: 30px;
 }
 
 .nav-icons a {

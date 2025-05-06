@@ -12,6 +12,24 @@ if (!isset($_SESSION['login_session']) || $_SESSION['login_session'] !== true) {
 $search = isset($_GET['search']) ? trim($_GET['search']) : '';
 $filter_category = isset($_GET['category']) ? $_GET['category'] : '';
 
+// 獲取用戶ID
+$user_id = $_SESSION['user_id'] ?? 0;
+
+// 獲取用戶已購買的商品
+$purchased_items = [];
+if ($user_id > 0) {
+    $purchase_sql = "SELECT ItemID FROM purchase WHERE UserID = ?";
+    $purchase_stmt = $conn->prepare($purchase_sql);
+    $purchase_stmt->bind_param("i", $user_id);
+    $purchase_stmt->execute();
+    $purchase_result = $purchase_stmt->get_result();
+    
+    while ($row = $purchase_result->fetch_assoc()) {
+        $purchased_items[] = $row['ItemID'];
+    }
+    $purchase_stmt->close();
+}
+
 // 構建SQL查詢
 $sql = "SELECT * FROM merchandise WHERE Available = 1";
 
@@ -136,6 +154,23 @@ if ($category_result && $category_result->num_rows > 0) {
             background-color: #e0e0e0;
         }
         
+        /* 已擁有標記樣式 */
+        .product-info {
+            position: relative;
+        }
+        
+        .owned-badge {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 12px;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+        
         @media (max-width: 768px) {
             .search-filter-form {
                 flex-direction: column;
@@ -204,6 +239,9 @@ if ($category_result && $category_result->num_rows > 0) {
                                     <div class="product-info">
                                         <h3 class="product-name"><?php echo htmlspecialchars($product['Name']); ?></h3>
                                         <p class="product-points">所需點數: <?php echo $product['PointsRequired']; ?></p>
+                                        <?php if (in_array($product['ItemID'], $purchased_items)): ?>
+                                        <div class="owned-badge">已擁有</div>
+                                        <?php endif; ?>
                                     </div>
                                 </a>
                             </div>

@@ -31,6 +31,7 @@ if ($user_id > 0) {
 }
 
 // 構建SQL查詢
+// 構建SQL查詢
 $sql = "SELECT * FROM merchandise WHERE Available = 1";
 
 // 添加搜尋條件
@@ -40,7 +41,17 @@ if (!empty($search)) {
 
 // 添加分類篩選條件
 if (!empty($filter_category) && $filter_category != 'all') {
-    $sql .= " AND Category = '" . $conn->real_escape_string($filter_category) . "'";
+    if ($filter_category == 'owned') {
+        // 如果選擇「已擁有」，則只顯示用戶已購買的商品
+        if (!empty($purchased_items)) {
+            $sql .= " AND ItemID IN (" . implode(',', $purchased_items) . ")";
+        } else {
+            // 如果用戶沒有購買任何商品，則返回空結果
+            $sql .= " AND 1=0";
+        }
+    } else {
+        $sql .= " AND Category = '" . $conn->real_escape_string($filter_category) . "'";
+    }
 }
 
 // 使用 CASE 語句來自定義排序順序
@@ -196,20 +207,21 @@ if ($category_result && $category_result->num_rows > 0) {
                 <div class="search-input">
                     <input type="text" name="search" placeholder="搜尋商品名稱..." value="<?php echo htmlspecialchars($search); ?>" onkeypress="if(event.keyCode==13){event.preventDefault(); document.getElementById('searchForm').submit();}">
                 </div>
-                <div class="category-filter">
-                    <select name="category" onchange="document.getElementById('searchForm').submit();">
-                        <option value="all" <?php echo $filter_category == 'all' || empty($filter_category) ? 'selected' : ''; ?>>所有分類</option>
-                        <?php foreach ($available_categories as $cat): ?>
-                            <option value="<?php echo htmlspecialchars($cat); ?>" <?php echo $filter_category == $cat ? 'selected' : ''; ?>>
+                <div class="category-filter"> 
+                    <select name="category" onchange="document.getElementById('searchForm').submit();"> 
+                        <option value="all" <?php echo $filter_category == 'all' || empty($filter_category) ? 'selected' : ''; ?>>所有分類</option> 
+                        <option value="owned" <?php echo $filter_category == 'owned' ? 'selected' : ''; ?>>已擁有</option>
+                        <?php foreach ($available_categories as $cat): ?> 
+                            <option value="<?php echo htmlspecialchars($cat); ?>" <?php echo $filter_category == $cat ? 'selected' : ''; ?>> 
                                 <?php 
-                                if ($cat == '銀樓的頭像') echo '頭像';
-                                else if ($cat == '銀樓的背景') echo '個人檔案背景';
-                                else if ($cat == '銀樓的桌布') echo '桌布';
-                                else echo htmlspecialchars($cat);
-                                ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
+                                if ($cat == 'head') echo '頭像'; 
+                                else if ($cat == 'background') echo '個人檔案背景'; 
+                                else if ($cat == 'wallpaper') echo '桌布'; 
+                                else echo htmlspecialchars($cat); 
+                                ?> 
+                            </option> 
+                        <?php endforeach; ?> 
+                    </select> 
                 </div>
                 <button type="submit" class="search-button">搜尋</button>
                 <a href="shop.php" class="reset-button">重置</a>

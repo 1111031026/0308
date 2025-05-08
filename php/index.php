@@ -15,6 +15,8 @@ require_once 'db_connect.php';
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 </head>
 
 <body>
@@ -26,8 +28,9 @@ require_once 'db_connect.php';
     <main>
         <section class="hero">
             <h2>最新報導</h2>
-            <div class="hero-slider">
-                <div class="hero-content">
+            <!-- Swiper -->
+            <div class="swiper heroSwiper">
+                <div class="swiper-wrapper">
                     <?php
                     // 查詢最新的五篇文章
                     $sql = "SELECT * FROM article ORDER BY created_at DESC LIMIT 5";
@@ -35,7 +38,7 @@ require_once 'db_connect.php';
 
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
-                            echo '<div>';
+                            echo '<div class="swiper-slide">';
                             echo '<a href="article.php?id=' . $row['ArticleID'] . '">';
                             if ($row['ImageURL']) {
                                 echo '<img src="../' . htmlspecialchars($row['ImageURL']) . '" alt="文章圖片" class="hero-item">';
@@ -45,18 +48,16 @@ require_once 'db_connect.php';
                             echo '</a>';
                             echo '</div>';
                         }
-                    } else {
-                        // 如果沒有文章，顯示預設圖片
-                        echo '<div><img src="../img/ocean.jpg" alt="預設圖片" class="hero-item"></div>';
                     }
                     ?>
                 </div>
-                <!-- 左右按鈕 -->
-                <button class="slider-btn prev-btn">&lt;</button>
-                <button class="slider-btn next-btn">&gt;</button>
+                <!-- 分頁器 -->
+                <div class="swiper-pagination"></div>
+                <!-- 導航按鈕 -->
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
             </div>
         </section>
-
         <section class="content">
             <div class="blue-section">
                 <div class="container">
@@ -200,17 +201,30 @@ require_once 'db_connect.php';
 
     <!-- 初始化 Slick.js -->
     <script>
-        // 初始化 hero-slider
-        $('.hero-content').slick({
-            dots: true,
-            infinite: true,
-            speed: 500,
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            prevArrow: $('.hero .prev-btn'),
-            nextArrow: $('.hero .next-btn'),
-            autoplay: true,
-            autoplaySpeed: 2500
+        var heroSwiper = new Swiper(".heroSwiper", {
+            grabCursor: true,
+            effect: "creative",
+            creativeEffect: {
+                prev: {
+                    shadow: true,
+                    translate: [0, 0, -400],
+                },
+                next: {
+                    translate: ["100%", 0, 0],
+                },
+            },
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
         });
 
         // 初始化所有 article-slider（海洋、氣候、陸域）

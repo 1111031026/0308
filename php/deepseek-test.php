@@ -180,8 +180,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>題目編輯器</title>
+    <link rel="icon" type="image/png" href="../img/icon.png">
     <link rel="stylesheet" href="../css/nav.css">
-    <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="../css/deepseek.css">
 </head>
 <header>
@@ -189,7 +189,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     include "nav.php";
     ?>
 </header>
-
+<div style="height: 80px;"></div>
 <body>
     <div class="editor-container">
         <div class="question-editor">

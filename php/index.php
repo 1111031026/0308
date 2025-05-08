@@ -202,17 +202,18 @@ require_once 'db_connect.php';
     <!-- 初始化 Slick.js -->
     <script>
         var heroSwiper = new Swiper(".heroSwiper", {
+            effect: "coverflow",
             grabCursor: true,
-            effect: "creative",
-            creativeEffect: {
-                prev: {
-                    shadow: true,
-                    translate: [0, 0, -400],
-                },
-                next: {
-                    translate: ["100%", 0, 0],
-                },
+            centeredSlides: true,
+            slidesPerView: 3, // 一次顯示三張幻燈片
+            coverflowEffect: {
+                rotate: 0,
+                stretch: 0,
+                depth: 100,
+                modifier: 2,
+                slideShadows: true,
             },
+            loop: true,
             autoplay: {
                 delay: 2500,
                 disableOnInteraction: false,

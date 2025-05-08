@@ -43,8 +43,30 @@ main {
 /* Swiper 輪播樣式 */
 .heroSwiper {
     width: 100%;
-    height: 500px; /* 調整為適合的高度 */
-    margin-bottom: 2rem;
+    padding-top: 20px;
+    padding-bottom: 50px;
+    height: 400px; /* 調整高度 */
+}
+.heroSwiper .swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 400px; /* 调整宽度 */
+    height: 400px; /* 调整高度 */
+    transition: transform 0.3s;
+}
+
+.hero-item {
+    width: 100%; /* 确保图片填满容器 */
+    height: 100%; /* 确保图片填满容器 */
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transform: scale(3);
+}
+
+.heroSwiper .swiper-slide-active {
+    transform: scale(1.2); /* 讓中間的幻燈片放大 */
+    z-index: 1;
 }
 
 .heroSwiper .swiper-slide {

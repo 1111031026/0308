@@ -101,7 +101,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_question'])) {
     
     // 執行SQL
     if ($stmt->execute()) {
-        echo '<script>alert("題目儲存成功！"); window.location.href = "view-all-qusetion.php";</script>';
+        $redirect_url = 'view-all-qusetion.php' . ($article_id ? "?article_id=$article_id" : '');
+        echo '<script>alert("題目儲存成功！"); window.location.href = "' . $redirect_url . '";</script>';
+
     } else {
         echo '<script>alert("儲存失敗: ' . $conn->error . '");</script>';
     }

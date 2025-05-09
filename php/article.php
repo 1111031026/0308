@@ -3,7 +3,7 @@ session_start(); // 確保 session 已啟動
 require_once 'db_connect.php'; // 確保引入資料庫連接
 
 // --- 更新文章瀏覽次數邏輯 ---
-if (isset($_GET['id']) && isset($_SESSION['login_session']) && $_SESSION['login_session'] === true && isset($_SESSION['user_id'])) {
+if (isset($_GET['id']) && isset($_SESSION['login_session']) && $_SESSION['login_session'] === true && isset($_SESSION['user_id']) && isset($_SESSION['role']) && $_SESSION['role'] !== 'Teacher') {
     $articleID = intval($_GET['id']);
     $userID = $_SESSION['user_id'];
 

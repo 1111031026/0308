@@ -31,7 +31,6 @@ html, body {
 /* Section 1: Hero Section */
 .section-1 {
   position: relative;
-  background: linear-gradient(135deg, rgba(46, 204, 113, 0.3), rgba(52, 152, 219, 0.3));
 }
 
 .section-1 .background-carousel {
@@ -94,17 +93,17 @@ html, body {
 /* Section 2: Features with Softer, Darker Green and Pink Flowing Background */
 .section-2 {
   background: linear-gradient(
-    -45deg,
-    #28a745,
-    #43a047,
-    #66bb6a,
-    #a5d6a7,
-    #f8bbd0,
-    #f48fb1,
-    #28a745
-  );
+  -45deg,
+  #f48fb1,
+  #f8bbd0,
+  #ffb8b8,
+  #b8d8ba,
+  #80c7a3,
+  #a3d8c0,
+  #f48fb1
+);
   background-size: 400% 400%;
-  animation: flowingGreen 15s ease infinite;
+  animation: flowingGreen 10s ease infinite;
 }
 
 @keyframes flowingGreen {
@@ -132,17 +131,17 @@ html, body {
 /* Section 3: Community with Flowing Blue Background */
 .section-3 {
   background: linear-gradient(
-    -45deg,
-    #1e90ff,
-    #0288d1,
-    #4fc3f7,
-    #81d4fa,
-    #bbdefb,
-    #d1c4e9,
-    #1e90ff
-  );
+  -45deg,
+  #ff99cc, /* 柔和粉紅 */
+  #cc99ff, /* 紫羅蘭 */
+  #99ccff, /* 天藍 */
+  #66ccff, /* 淺藍 */
+  #99ccff, /* 回藍，增加流暢感 */
+  #cc99ff, /* 回紫羅蘭 */
+  #ff99cc  /* 回粉紅 */
+);
   background-size: 400% 400%;
-  animation: flowingBlue 15s ease infinite;
+  animation: flowingBlue 10s ease infinite;
 }
 
 @keyframes flowingBlue {

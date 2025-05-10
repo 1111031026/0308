@@ -18,9 +18,11 @@ if (session_status() === PHP_SESSION_NONE) {
             <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'Teacher'): ?>
                 <li><a href="crawler.php">文章編輯區</a></li>
                 <li><a href="view-all-qusetion.php">查看所有編輯中題目</a></li>
-            <?php elseif (isset($_SESSION['role']) && $_SESSION['role'] === 'Student'): ?>
-                <li><a href="shop.php">商城</a></li>
+            <?php elseif (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'):?>
+                <li><a href="admin.php">題目管理</a></li>
+                <li><a href="merchandise_manage.php">商品管理</a></li>
             <?php endif; ?>
+            <li><a href="shop.php">商城</a></li>
         <?php endif; ?>
     </ul>
     <div class="nav-icons">

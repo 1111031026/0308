@@ -172,7 +172,7 @@ else $category_name = $product['Category'];
             <div class="product-info-detail">
                 <h1><?php echo htmlspecialchars($product['Name']); ?></h1>
                 <p class="product-category">分類:<?php echo $category_name; ?></p>
-                <p class="product-description"><?php echo htmlspecialchars($product['Description']); ?></p>
+                <p class="product-description">描述:<?php echo htmlspecialchars($product['Description']); ?></p>
                 <p class="product-points-required">所需點數: <span><?php echo $product['PointsRequired']; ?></span></p>
                 <p class="user-points">您目前的點數: <span><?php echo $points; ?></span></p>
 

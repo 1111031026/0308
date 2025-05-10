@@ -28,9 +28,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Store user details in session
                 $_SESSION["login_session"] = true;
                 $_SESSION["username"] = $username;
-                $_SESSION["user_id"] = $user['UserID']; // Use UserID instead of Username for consistency
-                $_SESSION["role"] = $user['Status']; // Store the user's role (Teacher or Student)
-                header("Location: index.php");
+                $_SESSION["user_id"] = $user['UserID'];
+                $_SESSION["role"] = $user['Status'];
+                
+                // 根據用戶身份重定向到不同頁面
+                if ($user['Status'] === 'Admin') {
+                    header("Location: admin.php");
+                } else {
+                    header("Location: index.php");
+                }
                 exit();
             } else {
                 $error_message = "密碼錯誤！";

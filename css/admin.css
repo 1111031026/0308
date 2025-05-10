@@ -1,83 +1,154 @@
+/* admin.css */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #eef1f5; /* Light grey background for a softer look */
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
 .admin-container {
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 0 20px;
+    max-width: 1400px; /* Wider container for admin pages */
+    margin: 30px auto;
+    padding: 25px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
 }
 
 .admin-container h1 {
     text-align: center;
-    color: #2c3e50;
-    margin-bottom: 30px;
-    font-size: 2em;
+    color: #1a2533; /* Darker, more professional title color */
+    margin-bottom: 35px;
+    font-size: 2.2em;
+    font-weight: 600;
 }
 
 .quiz-section {
-    background: white;
+    background: #fdfdff; /* Slightly off-white for sections */
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    margin-bottom: 30px;
-    padding: 20px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    margin-bottom: 35px;
+    padding: 25px;
 }
 
 .quiz-section h2 {
-    color: #34495e;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #eee;
+    color: #2c3e50; /* Consistent section header color */
+    margin-top: 0;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #dfe6e9;
+    font-size: 1.6em;
 }
 
 .quiz-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 .quiz-table th,
 .quiz-table td {
-    padding: 12px;
+    padding: 15px;
     text-align: left;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #e9ecef; /* Lighter border for table rows */
+    vertical-align: middle;
 }
 
 .quiz-table th {
-    background-color: #f8f9fa;
+    background-color: #f8f9fc; /* Very light blue for table headers */
     font-weight: 600;
-    color: #2c3e50;
+    color: #495057;
+    font-size: 0.95em;
+    text-transform: uppercase;
+}
+
+.quiz-table tr:nth-child(even) {
+    background-color: #fbfcfd;
 }
 
 .quiz-table tr:hover {
-    background-color: #f5f6fa;
+    background-color: #f1f5f9;
+}
+
+.quiz-table td {
+    color: #5a6268;
 }
 
 .publish-btn {
-    background-color: #27ae60;
+    background-color: #007bff; /* Primary blue for actions */
     color: white;
     border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
+    padding: 10px 20px;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    font-size: 0.9em;
+    font-weight: 500;
+    transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 .publish-btn:hover {
-    background-color: #219a52;
+    background-color: #0069d9;
+    box-shadow: 0 2px 5px rgba(0, 123, 255, 0.3);
 }
 
-/* 響應式設計 */
+.publish-btn:active {
+    background-color: #005cbf;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) { /* Adjusted breakpoint */
+    .admin-container {
+        margin: 20px;
+        padding: 20px;
+    }
+    .quiz-table th,
+    .quiz-table td {
+        padding: 12px;
+    }
+}
+
 @media (max-width: 768px) {
+    .admin-container h1 {
+        font-size: 1.8em;
+        margin-bottom: 25px;
+    }
+    .quiz-section h2 {
+        font-size: 1.4em;
+        margin-bottom: 20px;
+    }
     .quiz-table {
         display: block;
-        overflow-x: auto;
+        overflow-x: auto; /* Ensures table is scrollable on small screens */
+        white-space: nowrap; /* Prevents content wrapping in table cells */
     }
     
     .admin-container {
-        padding: 0 10px;
-    }
-    
-    .quiz-section {
         padding: 15px;
     }
     
+    .quiz-section {
+        padding: 20px;
+    }
+    
+    .quiz-table th,
+    .quiz-table td {
+        padding: 10px;
+        font-size: 0.9em;
+    }
+    .publish-btn {
+        padding: 8px 15px;
+        font-size: 0.85em;
+    }
+}
+
+@media (max-width: 576px) {
+    .admin-container h1 {
+        font-size: 1.6em;
+    }
+    .quiz-section h2 {
+        font-size: 1.2em;
+    }
     .quiz-table th,
     .quiz-table td {
         padding: 8px;

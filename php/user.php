@@ -22,12 +22,107 @@ if ($conn->connect_error) {
 
 // 獲取用戶信息
 $username = $_SESSION['username'];
+$user_id = $_SESSION['user_id'] ?? 0;
 $sql = "SELECT * FROM user WHERE Username='$username'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     $user = $result->fetch_assoc();
 }
+
+// 處理頭像和背景更新
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['update_avatar']) && !empty($_POST['avatar_id'])) {
+        $avatar_id = intval($_POST['avatar_id']);
+        
+        // 檢查用戶是否已購買該頭像
+        // 檢查用戶是否已購買該頭像
+        $check_sql = "SELECT * FROM purchase p JOIN merchandise m ON p.ItemID = m.ItemID 
+                      WHERE p.UserID = ? AND m.ItemID = ? AND m.Category = 'head'";
+        $check_stmt = $conn->prepare($check_sql);
+        $check_stmt->bind_param("ii", $user_id, $avatar_id);
+        $check_stmt->execute();
+        $check_result = $check_stmt->get_result();
+        
+        if ($check_result->num_rows > 0) {
+            // 獲取頭像圖片URL
+            $item = $check_result->fetch_assoc();
+            $avatar_url = $item['ImageURL'];
+            
+            // 更新用戶頭像
+            $update_sql = "UPDATE user SET AvatarURL = ? WHERE UserID = ?";
+            $update_stmt = $conn->prepare($update_sql);
+            $update_stmt->bind_param("si", $avatar_url, $user_id);
+            $update_stmt->execute();
+            $update_stmt->close();
+            
+            // 重新載入頁面以顯示更新
+            header("Location: user.php?success=avatar");
+            exit();
+        }
+        $check_stmt->close();
+    }
+    
+    if (isset($_POST['update_background']) && !empty($_POST['background_id'])) {
+        $background_id = intval($_POST['background_id']);
+        
+        // 檢查用戶是否已購買該背景
+        $check_sql = "SELECT * FROM purchase p JOIN merchandise m ON p.ItemID = m.ItemID 
+                      WHERE p.UserID = ? AND m.ItemID = ? AND m.Category = 'background'";
+        $check_stmt = $conn->prepare($check_sql);
+        $check_stmt->bind_param("ii", $user_id, $background_id);
+        $check_stmt->execute();
+        $check_result = $check_stmt->get_result();
+        
+        if ($check_result->num_rows > 0) {
+            // 獲取背景圖片URL
+            $item = $check_result->fetch_assoc();
+            $background_url = $item['ImageURL'];
+            
+            // 更新用戶背景
+            $update_sql = "UPDATE user SET BackgroundURL = ? WHERE UserID = ?";
+            $update_stmt = $conn->prepare($update_sql);
+            $update_stmt->bind_param("si", $background_url, $user_id);
+            $update_stmt->execute();
+            $update_stmt->close();
+            
+            // 重新載入頁面以顯示更新
+            header("Location: user.php?success=background");
+            exit();
+        }
+        $check_stmt->close();
+    }
+}
+
+// 獲取用戶已購買的頭像
+$avatars = [];
+$avatar_sql = "SELECT m.* FROM purchase p JOIN merchandise m ON p.ItemID = m.ItemID 
+               WHERE p.UserID = ? AND m.Category = 'head'";
+$avatar_stmt = $conn->prepare($avatar_sql);
+$avatar_stmt->bind_param("i", $user_id);
+$avatar_stmt->execute();
+$avatar_result = $avatar_stmt->get_result();
+while ($row = $avatar_result->fetch_assoc()) {
+    $avatars[] = $row;
+}
+$avatar_stmt->close();
+
+// 獲取用戶已購買的背景
+$backgrounds = [];
+$background_sql = "SELECT m.* FROM purchase p JOIN merchandise m ON p.ItemID = m.ItemID 
+                   WHERE p.UserID = ? AND m.Category = 'background'";
+$background_stmt = $conn->prepare($background_sql);
+$background_stmt->bind_param("i", $user_id);
+$background_stmt->execute();
+$background_result = $background_stmt->get_result();
+while ($row = $background_result->fetch_assoc()) {
+    $backgrounds[] = $row;
+}
+$background_stmt->close();
+
+// 獲取當前用戶的頭像和背景
+$current_avatar = $user['AvatarURL'] ?? '../img/user.png';
+$current_background = $user['BackgroundURL'] ?? '';
 
 $conn->close();
 ?>
@@ -41,6 +136,124 @@ $conn->close();
     <link rel="stylesheet" href="../css/user.css">
     <title>用戶資料</title>
     <link rel="icon" type="image/png" href="../img/icon.png">
+    <style>
+        .user-profile-container {
+            position: relative;
+            padding: 20px;
+        }
+        
+        .user-profile-card {
+            position: relative;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+            z-index: 1;
+        }
+        
+        .profile-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px 10px 0 0;
+            opacity: 0.8;
+        }
+        
+        .customization-section {
+            margin-top: 30px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+            display: none; /* 預設隱藏自訂區域 */
+        }
+        
+        .customization-title {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .item-card {
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .item-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .item-card.selected {
+            border-color: #4CAF50;
+        }
+        
+        .item-image {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+        }
+        
+        .item-name {
+            padding: 5px;
+            font-size: 12px;
+            text-align: center;
+            background-color: #f5f5f5;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .update-button, .customize-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+            margin: 10px 0;
+        }
+        
+        
+        .success-message {
+            background-color: #dff0d8;
+            color: #3c763d;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .user-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .customization-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
@@ -51,8 +264,26 @@ $conn->close();
     </header>
     <div class="user-profile-container">
         <div class="user-profile-card">
+            <?php if (!empty($current_background)): ?>
+            <div class="profile-background" style="background-image: url('../<?php echo htmlspecialchars($current_background); ?>');"></div>
+            <?php endif; ?>
+            
+            <?php if (isset($_GET['success'])): ?>
+                <div class="success-message">
+                    <?php if ($_GET['success'] === 'avatar'): ?>
+                        頭像更新成功！
+                    <?php elseif ($_GET['success'] === 'background'): ?>
+                        背景更新成功！
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>
+            
             <div class="user-profile-header">
-                <img src="../img/user.png" alt="用戶頭像" class="user-avatar">
+                <?php if (!empty($user['AvatarURL'])): ?>
+                    <img src="../<?php echo htmlspecialchars($user['AvatarURL']); ?>" alt="用戶頭像" class="user-avatar">
+                <?php else: ?>
+                    <img src="../img/user.png" alt="用戶頭像" class="user-avatar">
+                <?php endif; ?>
                 <h2 class="user-name"><?php echo htmlspecialchars($user['Username']); ?></h2>
                 <p class="user-status"><?php echo htmlspecialchars($user['Status']); ?></p>
             </div>
@@ -67,10 +298,14 @@ $conn->close();
                     <?php echo htmlspecialchars($user['RegistrationDate'] ?? '未知'); ?>
                 </p>
             </div>
-
-            <form action="logout.php" method="post" style="text-align: center; margin-top: 30px;">
-                <button type="submit" class="logout-button">登出</button>
-            </form>
+            
+            <!-- 將自訂按鈕和登出按鈕放在同一行 -->
+            <div style="text-align: center; margin-top: 30px; display: flex; justify-content: center; gap: 20px;">
+                <a href="profile_customize.php" class="custom-button">自訂個人檔案</a>
+                <form action="logout.php" method="post" style="margin: 0;">
+                    <button type="submit" class="logout-button">登出</button>
+                </form>
+            </div>
         </div>
     </div>
 </body>

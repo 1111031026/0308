@@ -212,10 +212,10 @@ else $category_name = $product['Category'];
                 </svg>
             </div>
             <h2>購買成功！</h2>
-            <p>您已成功購買 <span id="success-product-name"><?php echo htmlspecialchars($product['Name']); ?></span></p>
-            <div class="modal-buttons">
-                <button onclick="closeSuccessModal()">確定</button>
-            </div>
+            <?php if ($product['Category'] == 'wallpaper'): ?>
+                <a href="../<?php echo htmlspecialchars($product['ImageURL']); ?>" download class="download-button">下載桌布</a>
+            <?php endif; ?>
+            <button onclick="closeModal()">關閉</button>
         </div>
     </div>
 

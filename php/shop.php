@@ -200,7 +200,6 @@ if ($category_result && $category_result->num_rows > 0) {
     
     <div class="shop-container">
         <h1 class="page-title">商城</h1>
-        
         <!-- 搜尋和篩選區域 -->
         <div class="search-filter-container">
             <form class="search-filter-form" method="GET" action="shop.php" id="searchForm">

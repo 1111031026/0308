@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2025-05-04 17:04:43
+-- 產生時間： 2025-05-10 07:51:44
 -- 伺服器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -28,8 +28,7 @@ USE `sustain`;
 --
 -- 資料表結構 `achievement`
 --
--- 建立時間： 2025-05-03 15:59:47
--- 最後更新： 2025-05-04 15:03:19
+-- 建立時間： 2025-05-10 04:51:20
 --
 
 DROP TABLE IF EXISTS `achievement`;
@@ -60,8 +59,7 @@ INSERT INTO `achievement` (`UserID`, `TotalPoints`, `ArticlesViewed`, `ChoiceQue
 --
 -- 資料表結構 `article`
 --
--- 建立時間： 2025-05-04 11:32:48
--- 最後更新： 2025-05-04 15:01:12
+-- 建立時間： 2025-05-10 04:51:20
 --
 
 DROP TABLE IF EXISTS `article`;
@@ -112,7 +110,7 @@ INSERT INTO `article` (`ArticleID`, `Title`, `Category`, `ImageURL`, `Descriptio
 --
 -- 資料表結構 `articleimage`
 --
--- 建立時間： 2025-05-03 15:59:48
+-- 建立時間： 2025-05-10 04:51:20
 --
 
 DROP TABLE IF EXISTS `articleimage`;
@@ -132,8 +130,7 @@ TRUNCATE TABLE `articleimage`;
 --
 -- 資料表結構 `choicequiz`
 --
--- 建立時間： 2025-05-04 11:33:08
--- 最後更新： 2025-05-04 12:16:36
+-- 建立時間： 2025-05-10 04:51:20
 --
 
 DROP TABLE IF EXISTS `choicequiz`;
@@ -167,8 +164,7 @@ INSERT INTO `choicequiz` (`choiceID`, `QuestionText`, `OptionA`, `OptionB`, `Opt
 --
 -- 資料表結構 `choicequizstagingarea`
 --
--- 建立時間： 2025-05-04 11:33:18
--- 最後更新： 2025-05-04 11:41:45
+-- 建立時間： 2025-05-10 04:51:20
 --
 
 DROP TABLE IF EXISTS `choicequizstagingarea`;
@@ -194,8 +190,7 @@ TRUNCATE TABLE `choicequizstagingarea`;
 --
 -- 資料表結構 `choicerec`
 --
--- 建立時間： 2025-05-03 15:59:48
--- 最後更新： 2025-05-04 14:58:09
+-- 建立時間： 2025-05-10 04:51:20
 --
 
 DROP TABLE IF EXISTS `choicerec`;
@@ -224,8 +219,7 @@ INSERT INTO `choicerec` (`choiceID`, `UserID`, `UserAnswer`, `FinishTime`, `isCo
 --
 -- 資料表結構 `commentarea`
 --
--- 建立時間： 2025-05-04 11:33:45
--- 最後更新： 2025-05-04 15:02:40
+-- 建立時間： 2025-05-10 04:51:20
 --
 
 DROP TABLE IF EXISTS `commentarea`;
@@ -255,8 +249,7 @@ INSERT INTO `commentarea` (`CommentID`, `PostID`, `UserID`, `Content`, `CommentT
 --
 -- 資料表結構 `communitypost`
 --
--- 建立時間： 2025-05-04 11:33:54
--- 最後更新： 2025-05-04 14:59:42
+-- 建立時間： 2025-05-10 04:51:20
 --
 
 DROP TABLE IF EXISTS `communitypost`;
@@ -286,7 +279,7 @@ INSERT INTO `communitypost` (`PostID`, `Content`, `ImageURL`, `PostDate`, `Title
 --
 -- 資料表結構 `fillquiz`
 --
--- 建立時間： 2025-05-04 11:34:13
+-- 建立時間： 2025-05-10 04:51:20
 --
 
 DROP TABLE IF EXISTS `fillquiz`;
@@ -315,7 +308,7 @@ INSERT INTO `fillquiz` (`fillID`, `QuestionText`, `CorrectAnswer`, `UserID`, `Ar
 --
 -- 資料表結構 `fillquizstagingarea`
 --
--- 建立時間： 2025-05-04 11:34:22
+-- 建立時間： 2025-05-10 04:51:20
 --
 
 DROP TABLE IF EXISTS `fillquizstagingarea`;
@@ -337,8 +330,7 @@ TRUNCATE TABLE `fillquizstagingarea`;
 --
 -- 資料表結構 `fillrec`
 --
--- 建立時間： 2025-05-03 15:59:48
--- 最後更新： 2025-05-04 14:55:18
+-- 建立時間： 2025-05-10 04:51:20
 --
 
 DROP TABLE IF EXISTS `fillrec`;
@@ -360,7 +352,7 @@ TRUNCATE TABLE `fillrec`;
 --
 -- 資料表結構 `merchandise`
 --
--- 建立時間： 2025-05-04 11:34:39
+-- 建立時間： 2025-05-10 04:51:20
 --
 
 DROP TABLE IF EXISTS `merchandise`;
@@ -394,7 +386,7 @@ INSERT INTO `merchandise` (`ItemID`, `Name`, `Description`, `PointsRequired`, `A
 --
 -- 資料表結構 `password_resets`
 --
--- 建立時間： 2025-05-04 11:34:49
+-- 建立時間： 2025-05-10 04:51:20
 --
 
 DROP TABLE IF EXISTS `password_resets`;
@@ -433,7 +425,7 @@ INSERT INTO `password_resets` (`id`, `email`, `token`, `expiry`, `created_at`) V
 --
 -- 資料表結構 `purchase`
 --
--- 建立時間： 2025-05-03 15:59:49
+-- 建立時間： 2025-05-10 04:51:20
 --
 
 DROP TABLE IF EXISTS `purchase`;
@@ -461,8 +453,7 @@ INSERT INTO `purchase` (`UserID`, `ItemID`, `PurchaseTime`, `SpentPoints`) VALUE
 --
 -- 資料表結構 `teacher_achievement`
 --
--- 建立時間： 2025-05-04 12:08:37
--- 最後更新： 2025-05-04 15:01:33
+-- 建立時間： 2025-05-10 04:51:20
 --
 
 DROP TABLE IF EXISTS `teacher_achievement`;
@@ -492,8 +483,7 @@ INSERT INTO `teacher_achievement` (`UserID`, `TotalPoints`, `SDG13ArticlesPublis
 --
 -- 資料表結構 `teacher_questions`
 --
--- 建立時間： 2025-05-04 11:35:09
--- 最後更新： 2025-05-04 11:41:23
+-- 建立時間： 2025-05-10 04:51:20
 --
 
 DROP TABLE IF EXISTS `teacher_questions`;
@@ -522,8 +512,7 @@ TRUNCATE TABLE `teacher_questions`;
 --
 -- 資料表結構 `tfquiz`
 --
--- 建立時間： 2025-05-04 11:35:35
--- 最後更新： 2025-05-04 12:16:45
+-- 建立時間： 2025-05-10 04:51:20
 --
 
 DROP TABLE IF EXISTS `tfquiz`;
@@ -555,8 +544,7 @@ INSERT INTO `tfquiz` (`tfID`, `QuestionText`, `OptionA`, `OptionB`, `CorrectAnsw
 --
 -- 資料表結構 `tfquizstagingarea`
 --
--- 建立時間： 2025-05-04 11:35:44
--- 最後更新： 2025-05-04 11:41:47
+-- 建立時間： 2025-05-10 04:51:20
 --
 
 DROP TABLE IF EXISTS `tfquizstagingarea`;
@@ -580,8 +568,7 @@ TRUNCATE TABLE `tfquizstagingarea`;
 --
 -- 資料表結構 `tfrec`
 --
--- 建立時間： 2025-05-03 15:59:49
--- 最後更新： 2025-05-04 14:58:12
+-- 建立時間： 2025-05-10 04:51:20
 --
 
 DROP TABLE IF EXISTS `tfrec`;
@@ -610,8 +597,8 @@ INSERT INTO `tfrec` (`tfID`, `UserID`, `UserAnswer`, `FinishTime`, `isCorrect`) 
 --
 -- 資料表結構 `user`
 --
--- 建立時間： 2025-05-04 11:20:52
--- 最後更新： 2025-05-04 15:00:07
+-- 建立時間： 2025-05-10 05:00:42
+-- 最後更新： 2025-05-10 05:38:41
 --
 
 DROP TABLE IF EXISTS `user`;
@@ -623,7 +610,9 @@ CREATE TABLE `user` (
   `JoinDate` datetime DEFAULT current_timestamp() COMMENT '註冊時間',
   `Status` enum('Student','Teacher') NOT NULL DEFAULT 'Student' COMMENT '使用者身份',
   `reset_token` varchar(255) DEFAULT NULL,
-  `token_expire` datetime DEFAULT NULL
+  `token_expire` datetime DEFAULT NULL,
+  `AvatarURL` varchar(255) DEFAULT NULL,
+  `BackgroundURL` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -635,19 +624,18 @@ TRUNCATE TABLE `user`;
 -- 傾印資料表的資料 `user`
 --
 
-INSERT INTO `user` (`UserID`, `Username`, `Email`, `Password`, `JoinDate`, `Status`, `reset_token`, `token_expire`) VALUES
-(1, 'hank', '12345@nutc.com', '$2y$10$WImynnKH8MOsCHB65iAeMuoQtcvdiAgs8FIgAWPwDxN7McOidmby2', '2025-04-01 19:43:05', 'Teacher', NULL, NULL),
-(2, 'alex', '12345@nutc.com', '$2y$10$LPlTJNOvMqfRT3GIrTxs5unYLkLiRe8USPNQtjXIMLtC55xark5gq', '2025-04-01 21:27:25', 'Student', NULL, NULL),
-(9, 'josh', 'josh@nutc.com', '$2y$10$j66XVtpyiDTY5yFbDSja.uqcXK3250i1GQEpCTdl.Mnpuhyxlkf5q', '2025-05-04 22:57:00', 'Student', NULL, NULL),
-(10, 'ivan', 'ivan@nutc.com', '$2y$10$A/oNBUakPXfKGHnzlQp4AOXGb6YgG32uNY3CeGT3j5WawWD5U81Ya', '2025-05-04 23:00:07', 'Teacher', NULL, NULL);
+INSERT INTO `user` (`UserID`, `Username`, `Email`, `Password`, `JoinDate`, `Status`, `reset_token`, `token_expire`, `AvatarURL`, `BackgroundURL`) VALUES
+(1, 'hank', '12345@nutc.com', '$2y$10$WImynnKH8MOsCHB65iAeMuoQtcvdiAgs8FIgAWPwDxN7McOidmby2', '2025-04-01 19:43:05', 'Teacher', NULL, NULL, NULL, NULL),
+(2, 'alex', '12345@nutc.com', '$2y$10$LPlTJNOvMqfRT3GIrTxs5unYLkLiRe8USPNQtjXIMLtC55xark5gq', '2025-04-01 21:27:25', 'Student', NULL, NULL, NULL, NULL),
+(9, 'josh', 'josh@nutc.com', '$2y$10$j66XVtpyiDTY5yFbDSja.uqcXK3250i1GQEpCTdl.Mnpuhyxlkf5q', '2025-05-04 22:57:00', 'Student', NULL, NULL, NULL, NULL),
+(10, 'ivan', 'ivan@nutc.com', '$2y$10$A/oNBUakPXfKGHnzlQp4AOXGb6YgG32uNY3CeGT3j5WawWD5U81Ya', '2025-05-04 23:00:07', 'Teacher', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
 -- 資料表結構 `user_article_views`
 --
--- 建立時間： 2025-05-03 15:59:49
--- 最後更新： 2025-05-04 15:03:27
+-- 建立時間： 2025-05-10 04:51:20
 --
 
 DROP TABLE IF EXISTS `user_article_views`;

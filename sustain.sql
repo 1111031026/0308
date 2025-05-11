@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2025-05-10 07:51:44
+-- 產生時間： 2025-05-11 18:32:03
 -- 伺服器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -28,7 +28,7 @@ USE `sustain`;
 --
 -- 資料表結構 `achievement`
 --
--- 建立時間： 2025-05-10 04:51:20
+-- 建立時間： 2025-05-10 12:54:16
 --
 
 DROP TABLE IF EXISTS `achievement`;
@@ -51,15 +51,16 @@ TRUNCATE TABLE `achievement`;
 --
 
 INSERT INTO `achievement` (`UserID`, `TotalPoints`, `ArticlesViewed`, `ChoiceQuestionsCorrect`, `TFQuestionsCorrect`, `FillinQuestionsCorrect`) VALUES
-(2, 15, 3, 3, 2, 2),
-(9, 10, 1, 1, 1, 0);
+(2, 15, 3, 1, 1, 1),
+(9, 10, 1, 1, 1, 0),
+(11, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
 --
 -- 資料表結構 `article`
 --
--- 建立時間： 2025-05-10 04:51:20
+-- 建立時間： 2025-05-10 12:54:17
 --
 
 DROP TABLE IF EXISTS `article`;
@@ -110,7 +111,7 @@ INSERT INTO `article` (`ArticleID`, `Title`, `Category`, `ImageURL`, `Descriptio
 --
 -- 資料表結構 `articleimage`
 --
--- 建立時間： 2025-05-10 04:51:20
+-- 建立時間： 2025-05-10 12:54:16
 --
 
 DROP TABLE IF EXISTS `articleimage`;
@@ -130,7 +131,7 @@ TRUNCATE TABLE `articleimage`;
 --
 -- 資料表結構 `choicequiz`
 --
--- 建立時間： 2025-05-10 04:51:20
+-- 建立時間： 2025-05-10 12:54:17
 --
 
 DROP TABLE IF EXISTS `choicequiz`;
@@ -164,7 +165,7 @@ INSERT INTO `choicequiz` (`choiceID`, `QuestionText`, `OptionA`, `OptionB`, `Opt
 --
 -- 資料表結構 `choicequizstagingarea`
 --
--- 建立時間： 2025-05-10 04:51:20
+-- 建立時間： 2025-05-10 12:54:17
 --
 
 DROP TABLE IF EXISTS `choicequizstagingarea`;
@@ -190,7 +191,7 @@ TRUNCATE TABLE `choicequizstagingarea`;
 --
 -- 資料表結構 `choicerec`
 --
--- 建立時間： 2025-05-10 04:51:20
+-- 建立時間： 2025-05-10 12:54:16
 --
 
 DROP TABLE IF EXISTS `choicerec`;
@@ -212,6 +213,7 @@ TRUNCATE TABLE `choicerec`;
 --
 
 INSERT INTO `choicerec` (`choiceID`, `UserID`, `UserAnswer`, `FinishTime`, `isCorrect`) VALUES
+(1, 2, 'B', '2025-05-10 21:02:19', 1),
 (1, 9, 'B', '2025-05-04 22:58:09', 1);
 
 -- --------------------------------------------------------
@@ -219,7 +221,7 @@ INSERT INTO `choicerec` (`choiceID`, `UserID`, `UserAnswer`, `FinishTime`, `isCo
 --
 -- 資料表結構 `commentarea`
 --
--- 建立時間： 2025-05-10 04:51:20
+-- 建立時間： 2025-05-10 12:54:17
 --
 
 DROP TABLE IF EXISTS `commentarea`;
@@ -249,7 +251,7 @@ INSERT INTO `commentarea` (`CommentID`, `PostID`, `UserID`, `Content`, `CommentT
 --
 -- 資料表結構 `communitypost`
 --
--- 建立時間： 2025-05-10 04:51:20
+-- 建立時間： 2025-05-10 12:54:17
 --
 
 DROP TABLE IF EXISTS `communitypost`;
@@ -279,7 +281,7 @@ INSERT INTO `communitypost` (`PostID`, `Content`, `ImageURL`, `PostDate`, `Title
 --
 -- 資料表結構 `fillquiz`
 --
--- 建立時間： 2025-05-10 04:51:20
+-- 建立時間： 2025-05-10 12:54:17
 --
 
 DROP TABLE IF EXISTS `fillquiz`;
@@ -308,7 +310,7 @@ INSERT INTO `fillquiz` (`fillID`, `QuestionText`, `CorrectAnswer`, `UserID`, `Ar
 --
 -- 資料表結構 `fillquizstagingarea`
 --
--- 建立時間： 2025-05-10 04:51:20
+-- 建立時間： 2025-05-10 12:54:17
 --
 
 DROP TABLE IF EXISTS `fillquizstagingarea`;
@@ -330,7 +332,7 @@ TRUNCATE TABLE `fillquizstagingarea`;
 --
 -- 資料表結構 `fillrec`
 --
--- 建立時間： 2025-05-10 04:51:20
+-- 建立時間： 2025-05-10 12:54:16
 --
 
 DROP TABLE IF EXISTS `fillrec`;
@@ -347,12 +349,20 @@ CREATE TABLE `fillrec` (
 --
 
 TRUNCATE TABLE `fillrec`;
+--
+-- 傾印資料表的資料 `fillrec`
+--
+
+INSERT INTO `fillrec` (`fillID`, `UserID`, `UserAnswer`, `FinishTime`, `isCorrect`) VALUES
+(2, 2, '農業與沿海地區', '2025-05-10 21:03:37', 1);
+
 -- --------------------------------------------------------
 
 --
 -- 資料表結構 `merchandise`
 --
--- 建立時間： 2025-05-10 04:51:20
+-- 建立時間： 2025-05-10 12:54:17
+-- 最後更新： 2025-05-11 16:25:36
 --
 
 DROP TABLE IF EXISTS `merchandise`;
@@ -379,14 +389,15 @@ TRUNCATE TABLE `merchandise`;
 INSERT INTO `merchandise` (`ItemID`, `Name`, `Description`, `PointsRequired`, `Available`, `Category`, `ImageURL`, `PreviewURL`) VALUES
 (1, 'head1', '頭像', 20, 1, 'head', 'product/head1.jpg', 'product/head1.jpg'),
 (2, 'wallpaper1', '桌布', 100, 1, 'wallpaper', 'product/wallpaper1.jpg', 'product/wallpaper1.jpg'),
-(3, 'background1', '背景1', 100, 1, 'background', 'product/background1.jpg', 'product/background1.jpg');
+(3, 'background1', '背景1', 100, 1, 'background', 'product/background1.jpg', 'product/background1.jpg'),
+(5, '猩健啞', 'xzx', 0, 1, 'head', 'product/6820cec1ed14a_image_猩健啞.png', 'product/6820cec1ed60f_preview_猩健啞投向.png');
 
 -- --------------------------------------------------------
 
 --
 -- 資料表結構 `password_resets`
 --
--- 建立時間： 2025-05-10 04:51:20
+-- 建立時間： 2025-05-10 12:54:17
 --
 
 DROP TABLE IF EXISTS `password_resets`;
@@ -425,7 +436,8 @@ INSERT INTO `password_resets` (`id`, `email`, `token`, `expiry`, `created_at`) V
 --
 -- 資料表結構 `purchase`
 --
--- 建立時間： 2025-05-10 04:51:20
+-- 建立時間： 2025-05-10 12:54:17
+-- 最後更新： 2025-05-11 16:25:19
 --
 
 DROP TABLE IF EXISTS `purchase`;
@@ -446,14 +458,16 @@ TRUNCATE TABLE `purchase`;
 --
 
 INSERT INTO `purchase` (`UserID`, `ItemID`, `PurchaseTime`, `SpentPoints`) VALUES
-(2, 1, '2025-05-03 11:35:13', 20);
+(2, 1, '2025-05-03 11:35:13', 20),
+(11, 3, '2025-05-12 00:25:19', 0),
+(11, 5, '2025-05-12 00:24:44', 0);
 
 -- --------------------------------------------------------
 
 --
 -- 資料表結構 `teacher_achievement`
 --
--- 建立時間： 2025-05-10 04:51:20
+-- 建立時間： 2025-05-10 12:54:17
 --
 
 DROP TABLE IF EXISTS `teacher_achievement`;
@@ -483,7 +497,7 @@ INSERT INTO `teacher_achievement` (`UserID`, `TotalPoints`, `SDG13ArticlesPublis
 --
 -- 資料表結構 `teacher_questions`
 --
--- 建立時間： 2025-05-10 04:51:20
+-- 建立時間： 2025-05-10 12:54:17
 --
 
 DROP TABLE IF EXISTS `teacher_questions`;
@@ -512,7 +526,7 @@ TRUNCATE TABLE `teacher_questions`;
 --
 -- 資料表結構 `tfquiz`
 --
--- 建立時間： 2025-05-10 04:51:20
+-- 建立時間： 2025-05-10 12:54:17
 --
 
 DROP TABLE IF EXISTS `tfquiz`;
@@ -544,7 +558,7 @@ INSERT INTO `tfquiz` (`tfID`, `QuestionText`, `OptionA`, `OptionB`, `CorrectAnsw
 --
 -- 資料表結構 `tfquizstagingarea`
 --
--- 建立時間： 2025-05-10 04:51:20
+-- 建立時間： 2025-05-10 12:54:17
 --
 
 DROP TABLE IF EXISTS `tfquizstagingarea`;
@@ -568,7 +582,7 @@ TRUNCATE TABLE `tfquizstagingarea`;
 --
 -- 資料表結構 `tfrec`
 --
--- 建立時間： 2025-05-10 04:51:20
+-- 建立時間： 2025-05-10 12:54:17
 --
 
 DROP TABLE IF EXISTS `tfrec`;
@@ -590,6 +604,7 @@ TRUNCATE TABLE `tfrec`;
 --
 
 INSERT INTO `tfrec` (`tfID`, `UserID`, `UserAnswer`, `FinishTime`, `isCorrect`) VALUES
+(1, 2, 0, '2025-05-10 21:03:59', 1),
 (1, 9, 0, '2025-05-04 22:58:12', 1);
 
 -- --------------------------------------------------------
@@ -597,8 +612,8 @@ INSERT INTO `tfrec` (`tfID`, `UserID`, `UserAnswer`, `FinishTime`, `isCorrect`) 
 --
 -- 資料表結構 `user`
 --
--- 建立時間： 2025-05-10 05:00:42
--- 最後更新： 2025-05-10 05:38:41
+-- 建立時間： 2025-05-10 13:42:10
+-- 最後更新： 2025-05-11 16:26:14
 --
 
 DROP TABLE IF EXISTS `user`;
@@ -608,7 +623,7 @@ CREATE TABLE `user` (
   `Email` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '電子郵件',
   `Password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '密碼 (加密儲存)',
   `JoinDate` datetime DEFAULT current_timestamp() COMMENT '註冊時間',
-  `Status` enum('Student','Teacher') NOT NULL DEFAULT 'Student' COMMENT '使用者身份',
+  `Status` enum('Student','Teacher','Admin') NOT NULL DEFAULT 'Student' COMMENT '使用者身份',
   `reset_token` varchar(255) DEFAULT NULL,
   `token_expire` datetime DEFAULT NULL,
   `AvatarURL` varchar(255) DEFAULT NULL,
@@ -626,16 +641,17 @@ TRUNCATE TABLE `user`;
 
 INSERT INTO `user` (`UserID`, `Username`, `Email`, `Password`, `JoinDate`, `Status`, `reset_token`, `token_expire`, `AvatarURL`, `BackgroundURL`) VALUES
 (1, 'hank', '12345@nutc.com', '$2y$10$WImynnKH8MOsCHB65iAeMuoQtcvdiAgs8FIgAWPwDxN7McOidmby2', '2025-04-01 19:43:05', 'Teacher', NULL, NULL, NULL, NULL),
-(2, 'alex', '12345@nutc.com', '$2y$10$LPlTJNOvMqfRT3GIrTxs5unYLkLiRe8USPNQtjXIMLtC55xark5gq', '2025-04-01 21:27:25', 'Student', NULL, NULL, NULL, NULL),
+(2, 'alex', '12345@nutc.com', '$2y$10$LPlTJNOvMqfRT3GIrTxs5unYLkLiRe8USPNQtjXIMLtC55xark5gq', '2025-04-01 21:27:25', 'Student', NULL, NULL, 'product/head1.jpg', NULL),
 (9, 'josh', 'josh@nutc.com', '$2y$10$j66XVtpyiDTY5yFbDSja.uqcXK3250i1GQEpCTdl.Mnpuhyxlkf5q', '2025-05-04 22:57:00', 'Student', NULL, NULL, NULL, NULL),
-(10, 'ivan', 'ivan@nutc.com', '$2y$10$A/oNBUakPXfKGHnzlQp4AOXGb6YgG32uNY3CeGT3j5WawWD5U81Ya', '2025-05-04 23:00:07', 'Teacher', NULL, NULL, NULL, NULL);
+(10, 'ivan', 'ivan@nutc.com', '$2y$10$A/oNBUakPXfKGHnzlQp4AOXGb6YgG32uNY3CeGT3j5WawWD5U81Ya', '2025-05-04 23:00:07', 'Teacher', NULL, NULL, NULL, NULL),
+(11, 'test_user', 'test_user@nutc.com', '$2y$10$1e6q.Ag1FgI70n45j7tsB.vJJeW9XEriT/mBnpAl7SqvVzP7s51GW', '2025-05-10 21:42:46', 'Admin', NULL, NULL, 'product/6820cec1ed14a_image_猩健啞.png', 'product/background1.jpg');
 
 -- --------------------------------------------------------
 
 --
 -- 資料表結構 `user_article_views`
 --
--- 建立時間： 2025-05-10 04:51:20
+-- 建立時間： 2025-05-10 12:54:17
 --
 
 DROP TABLE IF EXISTS `user_article_views`;
@@ -864,7 +880,7 @@ ALTER TABLE `fillquizstagingarea`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `merchandise`
 --
 ALTER TABLE `merchandise`
-  MODIFY `ItemID` int(11) NOT NULL AUTO_INCREMENT COMMENT '商品編號 (PK)', AUTO_INCREMENT=4;
+  MODIFY `ItemID` int(11) NOT NULL AUTO_INCREMENT COMMENT '商品編號 (PK)', AUTO_INCREMENT=6;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `password_resets`
@@ -894,7 +910,7 @@ ALTER TABLE `tfquizstagingarea`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `user`
 --
 ALTER TABLE `user`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT COMMENT '使用者編號 (PK)', AUTO_INCREMENT=11;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT COMMENT '使用者編號 (PK)', AUTO_INCREMENT=12;
 
 --
 -- 已傾印資料表的限制式

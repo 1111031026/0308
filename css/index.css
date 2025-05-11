@@ -155,454 +155,286 @@ main {
 }
 
 /* Blue Section 樣式 */
+/* 藍色區塊樣式（海洋） */
 .blue-section {
-    background: linear-gradient(323deg, #1E90FF 0%, #00BFFF 100%);
+    background: linear-gradient(135deg, rgba(30, 58, 138, 0.85) 0%, rgba(96, 165, 250, 0.75) 100%); /* 柔和的現代藍色漸層 */
     color: white;
-    padding: 0.8rem;
+    padding: 2rem; /* 增加內邊距，顯得更寬敞 */
     text-align: center;
     position: relative;
     overflow: hidden;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 3rem 0; /* 增加外邊距，區塊間分隔更明顯 */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 12px; /* 輕微圓角 */
 }
 
+/* 綠色區塊樣式（氣候） */
 .green-section {
-    background: linear-gradient(120deg, #27a532, #6bf882d8);
+    background: linear-gradient(135deg, rgba(6, 95, 70, 0.85) 0%, rgba(52, 211, 153, 0.75) 100%); /* 清新、活力的綠色漸層 */
     color: white;
-    padding: 0.8rem;
+    padding: 2rem;
     text-align: center;
     position: relative;
     overflow: hidden;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 3rem 0;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
 }
 
+/* 棕色區塊樣式（陸域） */
 .brown-section {
-    background: linear-gradient(267deg, #795548 0%, #A0522D 100%);
+    background: linear-gradient(135deg, rgba(74, 44, 42, 0.85) 0%, rgba(217, 119, 6, 0.75) 100%); /* 溫暖、質樸的漸層 */
     color: white;
-    padding: 0.8rem;
+    padding: 2rem;
     text-align: center;
     position: relative;
     overflow: hidden;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 3rem 0;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
 }
 
-/* 調整內部元素以配合新高度 */
-.ocean-image {
-    height: 200px;  /* 調整圖片高度 */
-}
-
-.article-card {
-    min-height: 200px;  /* 調整卡片最小高度 */
-}
-
-.blue-section h3 {
+/* 區塊標題 */
+.blue-section h3,
+.green-section h3,
+.brown-section h3 {
     text-align: left;
-    /* 標題靠左 */
-    margin-top: 0;
-    /* 移除上邊距 */
-    font-size: 1.8rem;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
-    margin-left: 20px; 
+    font-size: 2rem; /* 稍大以突出 */
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+    margin-left: 30px;
+    margin-bottom: 1.5rem; /* 標題下方增加間距 */
 }
 
+/* 圖片和滑動區域的容器 */
 .container {
     display: flex;
-    /* 使用 Flexbox 讓圖片與清單並排 */
-    align-items: center;
-    /* 垂直置中 */
+    align-items: flex-start; /* 頂部對齊 */
     justify-content: space-between;
-    /* 左右排列 */
-    gap: 20px;
-    /* 設定間距 */
-    width: 100%;
+    gap: 30px; /* 增加間距，顯得更開闊 */
+    max-width: 1200px; /* 限制寬度以優化布局 */
+    margin: 0 auto; /* 居中 */
 }
 
-
-
-/* 海洋圖片樣式 */
-.ocean-image-container {
+/* 圖片容器 */
+.ocean-image-container,
+.climate-image-container,
+.land-image-container {
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 20px;
     text-align: left;
-    /* 圖片靠左 */
-    margin-bottom: 1rem;
-    /* 與標題的間距 */
-    width: 300px;
-    /* 直接指定寬度 */
-    max-width: 50%;
-    /* 限制最大寬度 */
+    width: 350px; /* 稍寬以平衡視覺 */
+    max-width: 40%; /* 適應響應式 */
 }
 
-
-.ocean-image {
-    width: 200px;
-    /* 設置圖片寬度 */
-    height: 250px;
-    /* 自動高度 */
-    border-radius: 10px;
-    /* 可選：圓角 */
+/* 圖片 */
+.ocean-image,
+.climate-image,
+.land-image {
     width: 100%;
-    /* 讓圖片填滿區塊 */
-    border-radius: 10px;
-    /* 圓角美化 */
+    height: 300px; /* 稍高以提升視覺效果 */
+    border-radius: 12px;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 輕微陰影 */
 }
 
+/* 文章滑動區域 */
 .article-slider {
-    flex: 2;
-    /* 增加相對寬度 */
-    max-width: 80%;
-    /* 增加最大寬度 */
+    flex: 1;
+    max-width: 60%;
     overflow: hidden;
     position: relative;
-}
-
-/* 文章內容（橫向滾動） */
-.article-content {
-    display: flex;
-    scroll-behavior: smooth;
-    gap: 30px;
-    /* 稍微加大間距 */
-    white-space: nowrap;
-    padding-bottom: 20px;
-    /* 增加底部內邊距 */
-    width: 100%;
-    /* 讓寬度佔滿容器 */
 }
 
 /* 文章卡片 */
 .article-card {
-    max-width: 460px;
-    background: #f8f8f8;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 320px; /* 維持寬度 */
+    width: 100%;
+    height: 400px; /* 固定高度 */
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    height: 100%;
+    margin: 0 15px;
+    transition: transform 0.3s ease;
 }
 
-.article-slider .slick-slide {
-    margin-right: 25px;
-    margin-left: 25px;
-}
-
-.article-slider .slick-slide:last-child {
-    margin-right: 0;
-    /* 最後一個卡片不需要右邊距 */
-}
-
-.read-more {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #007bff;
-    /* 藍色按鈕 */
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-}
-
-.article-card h4 {
-    font-size: 18px;
-    margin-bottom: 10px;
-    color: #333;
-    white-space: nowrap; /* 防止標題換行 */
-    overflow: hidden; /* 隱藏超出部分 */
-    text-overflow: ellipsis; /* 顯示省略號 */
-    width: 100%; /* 確保寬度與卡片一致 */
-    text-align: center; /* 居中對齊 */
-}
-
-.article-card p {
-    font-size: 16px;
-    color: #666;
-    flex-grow: 1;
-    width: 100%; 
-    white-space: normal; 
-    overflow: hidden;
-    text-overflow: ellipsis;
-    text-align: center;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    max-height: 3.2em;
-    line-height: 1.6em;
-    margin-bottom: 15px;
-}
-
-/* 文章卡片統一尺寸 */
-.article-card {
-    max-width: 460px;
-    width: 300px;  /* 固定寬度 */
-    height: 350px;  /* 固定高度 */
-    background: #f8f8f8;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    margin: 0 10px;
+.article-card:hover {
+    transform: translateY(-5px);
 }
 
 .article-card img {
     width: 100%;
-    height: 150px;  /* 固定圖片高度 */
+    height: 160px;
     object-fit: cover;
-    border-radius: 5px;
-    margin-bottom: 10px;
-}
-
-.article-card p {
-    font-size: 16px;
-    color: #666;
-    flex-grow: 1;
-    width: 100%;
-    white-space: normal;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    text-align: center;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    height: 70px;  /* 固定文字區域高度 */
+    border-radius: 8px;
     margin-bottom: 15px;
 }
 
-.article-card .read-more {
-    margin-top: auto;  /* 將按鈕推到底部 */
-}
-
-.article-slider .slick-slide {
-    margin-right: 25px;
-    margin-left: 25px;
-}
-
-.article-slider .slick-slide:last-child {
-    margin-right: 0;
-    /* 最後一個卡片不需要右邊距 */
-}
-
-.read-more {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #007bff;
-    /* 藍色按鈕 */
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-}
-
 .article-card h4 {
-    font-size: 18px;
+    font-size: 1.2rem;
     margin-bottom: 10px;
-    color: #333;
-}
-
-.article-card p {
-    font-size: 16px;
-    color: #666;
-    flex-grow: 1;
-    width: 100%; /* 改為100%寬度，適應卡片大小 */
-    white-space: normal; /* 允許文字換行 */
+    color: #2D3748;
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     text-align: center;
-    display: -webkit-box;
-    -webkit-line-clamp: 3; /* 限制顯示3行 */
-    -webkit-box-orient: vertical;
-    max-height: 4.8em; /* 約3行文字的高度 */
 }
 
-/* 滑動按鈕樣式 */
-.slider-btn {
-    position: absolute;
-    top: 45%;
-    transform: translateY(-50%);
-    background-color: transparent; /* 透明背景 */
-    color: rgb(0, 0, 0); /* 文字顏色，可根據需要調整 */
-    border: 2px solid transparent; /* 可選：添加邊框 */
-    padding: 10px 15px;
-    cursor: pointer;
-    font-size: 1.5rem;
-    border-radius: 50%;
-    transition: background-color 0.3s ease; /* 背景色過渡效果 */
-    z-index: 1000;
+.article-card p {
+    font-size: 0.95rem;
+    color: #4A5568;
+    flex-grow: 1;
+    text-align: center;
+    margin-bottom: 15px;
+    max-height: 100px; /* 限制文字區域高度以啟用滾動 */
+    overflow-y: auto; /* 啟用垂直滾動 */
+    padding-right: 10px; /* 為滾動條預留空間 */
+    /* 移除之前的文字截斷樣式 */
 }
 
-/* 滑鼠懸停時的樣式 */
-.slider-btn:hover {
-    background-color: white; /* 白底 */
+/* 自定義滾動條 */
+.article-card p::-webkit-scrollbar {
+    width: 8px; /* 滾動條寬度 */
 }
 
-
-.prev-btn {
-    left: 10px;
+.article-card p::-webkit-scrollbar-track {
+    background: #f1f1f1; /* 滾動條軌道背景 */
+    border-radius: 10px;
 }
 
-.next-btn {
-    right: 10px;
+.article-card p::-webkit-scrollbar-thumb {
+    background: #3B82F6; /* 滾動條手柄顏色 */
+    border-radius: 10px;
+    transition: background 0.3s ease;
 }
 
-.slider-btn2 {
-    background-color: white;
-    align-items: center;
+.article-card p::-webkit-scrollbar-thumb:hover {
+    background: #2563EB; /* 懸停時顏色加深 */
+}
+
+/* Firefox 滾動條 */
+.article-card p {
+    scrollbar-width: thin;
+    scrollbar-color: #3B82F6 #f1f1f1;
+}
+
+.article-card .read-more {
+    margin-top: auto;
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #3B82F6;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.article-card .read-more:hover {
+    background-color: #2563EB;
+}
+
+/* Slick 滑動點點 */
+.article-slider .slick-dots {
+    display: flex;
     justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.article-slider .slick-dots li {
+    margin: 0 8px;
+}
+
+.article-slider .slick-dots li button {
+    font-size: 0;
+    width: 14px;
+    height: 14px;
+    background-color: #D1D5DB; /* 淺灰色 */
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.blue-section .article-slider .slick-dots li.slick-active button,
+.blue-section .article-slider .slick-dots li button:hover {
+    background-color: #1E40AF; /* 匹配藍色區塊 */
+}
+
+.green-section .article-slider .slick-dots li.slick-active button,
+.green-section .article-slider .slick-dots li button:hover {
+    background-color: #047857; /* 匹配綠色區塊 */
+}
+
+.brown-section .article-slider .slick-dots li.slick-active button,
+.brown-section .article-slider .slick-dots li button:hover {
+    background-color: #7F1D1D; /* 匹配棕色區塊 */
+}
+
+/* 滑動按鈕 */
+.slider-btn2 {
+    background-color: rgba(255, 255, 255, 0.9);
     position: absolute;
-    top: 70%;
-    /* 調整為 50% 以垂直居中 */
+    top: 50%; /* 垂直居中 */
     transform: translateY(-50%);
-    box-shadow: 0px 0px 5px 0px rgba(215, 215, 215, 0.75);
-    border-radius: 4px;
-    height: 60px;
-    /* 縮小高度 */
-    width: 40px;
-    /* 縮小寬度 */
-    z-index: 1;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
     border: none;
     cursor: pointer;
-    font-size: 1.2rem;
-    /* 縮小箭頭大小 */
-    transition: background-color 0.3s ease, opacity 0.3s ease;
-    /* 添加透明度過渡 */
-    opacity: 0.5;
-    /* 初始透明度設為半透明 */
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+    opacity: 0.8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .slider-btn2:hover {
     opacity: 1;
-    /* 懸停時完全不透明 */
-    background-color: #f0f0f0;
-    /* 懸停時背景變淡 */
+    background-color: #F3F4F6; /* 懸停時淺灰色 */
 }
 
-/* 左側按鈕 */
 .prev-btn {
-    left: 0;
-    /* 靠左 */
+    left: -10px; /* 調整位置 */
 }
 
-/* 右側按鈕 */
 .next-btn {
-    right: 0;
-    /* 靠右 */
-}
-
-/* 確保箭頭居中並清晰 */
-.slider-btn::before {
-    content: '';
-    /* 清除預設內容 */
-}
-
-.slider-btn:focus {
-    outline: none;
-    /* 移除焦點邊框 */
+    right: -10px;
 }
 
 /* 響應式設計 */
 @media (max-width: 768px) {
-    .slick-slide img {
-        height: 150px;
+    .container {
+        flex-direction: column; /* 小螢幕時垂直堆疊 */
+        align-items: center;
+        gap: 20px;
     }
 
-    .prev-btn {
-        left: 10px;
+    .ocean-image-container,
+    .climate-image-container,
+    .land-image-container {
+        max-width: 100%;
+        width: 100%;
     }
 
-    .next-btn {
-        right: 10px;
+    .article-slider {
+        max-width: 100%;
     }
 
     .article-card {
-        margin: 0 5px;
+        margin: 0 10px;
+    }
+
+    .blue-section,
+    .green-section,
+    .brown-section {
+        padding: 1.5rem;
+        margin: 2rem 0;
     }
 }
-/* Green Section 樣式（氣候永續） */
-.green-section {
-    background-color: #2ECC71; /* 綠色，代表氣候永續 */
-    color: white;
-    padding: 0.8rem;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-}
-
-.green-section h3 {
-    text-align: left;
-    margin-top: 0;
-    font-size: 1.8rem;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
-    margin-left: 20px;
-}
-
-/* 氣候圖片樣式 */
-.climate-image-container {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    text-align: left;
-    margin-bottom: 1rem;
-    width: 300px;
-    max-width: 50%;
-}
-
-.climate-image {
-    width: 100%;
-    height: 250px;
-    border-radius: 10px;
-}
-
-/* 調整氣候永續的點點顏色 */
-.green-section .article-slider .slick-dots li.slick-active button {
-    background-color: #348355; /* 深綠色 */
-}
-
-.green-section .article-slider .slick-dots li button:hover {
-    background-color: #348355;
-}
-
-/* Brown Section 樣式（陸域永續） */
-.brown-section {
-    background-color: #8B4513; /* 棕色，代表陸域永續 */
-    color: white;
-    padding: 0.8rem;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-}
-
-.brown-section h3 {
-    text-align: left;
-    margin-top: 0;
-    font-size: 1.8rem;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
-    margin-left: 20px;
-}
-
-/* 陸域圖片樣式 */
-.land-image-container {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    text-align: left;
-    margin-bottom: 1rem;
-    width: 300px;
-    max-width: 50%;
-}
-
-.land-image {
-    width: 100%;
-    height: 250px;
-    border-radius: 10px;
-}
-
-/* 調整陸域永續的點點顏色 */
-.brown-section .article-slider .slick-dots li.slick-active button {
-    background-color: #432a19; /* 深棕色 */
-}
-
-.brown-section .article-slider .slick-dots li button:hover {
-    background-color: #432a19;
-}
-

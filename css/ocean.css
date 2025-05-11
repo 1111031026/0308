@@ -103,14 +103,104 @@ html, body {
 }
 
 .section-2 .intro-section {
-    max-width: 800px;
+    max-width: 100%; /* 允許更靈活的寬度 */
+    width: 100%;
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(10px);
     border-radius: 15px;
-    padding: 30px;
+    padding: 20px; /* 減少內邊距 */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     position: relative;
     z-index: 1;
+}
+
+.section-2 .ocean-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.section-2 .info-card {
+    background: transparent;
+    border-radius: 12px;
+    text-align: left;
+    perspective: 1000px;
+    height: 450px;
+    cursor: pointer;
+}
+
+.section-2 .info-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.section-2 .info-card:hover .info-card-inner {
+    transform: rotateY(180deg);
+}
+
+.section-2 .info-card-front,
+.section-2 .info-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    background: rgba(255, 255, 255, 0.3);
+    padding: 25px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow: hidden;
+}
+
+.section-2 .info-card-front {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.section-2 .info-card-back {
+    transform: rotateY(180deg);
+}
+
+.section-2 .info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.section-2 .info-card .info-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.section-2 .info-card:hover .info-image {
+    transform: scale(1.05);
+}
+
+.section-2 .info-card .info-content {
+    flex: 1;
+}
+
+.section-2 .info-card h3 {
+    font-size: 1.3em;
+    color: white;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.section-2 .info-card p {
+    font-size: 1em;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .section-2 h2 {

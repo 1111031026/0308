@@ -32,7 +32,64 @@
         <section class="section section-2">
             <div class="intro-section">
                 <h2>關於海洋永續</h2>
-                <p>海洋覆蓋地球70%以上的表面，是生命的搖籃，卻正面臨污染、過度捕撈與氣候變遷的威脅。在永續小站，我們致力於推廣海洋保護意識，提供實用的行動方案，讓每個人成為改變的一部分。</p>
+                <div class="ocean-info-grid">
+                    <div class="info-card">
+                        <div class="info-card-inner">
+                            <div class="info-card-front">
+                                <h3>海洋生態系統</h3>
+                            </div>
+                            <div class="info-card-back">
+                                <img src="../img/ocean1.jpg" alt="海洋生態系統" class="info-image">
+                                <div class="info-content">
+                                    <h3>海洋生態系統</h3>
+                                    <p>海洋覆蓋地球70%以上的表面，是地球上最大的生態系統。這片蔚藍的世界孕育著無數的海洋生物，從微小的浮游生物到巨大的鯨魚，構成了豐富而複雜的生態網絡。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-card-inner">
+                            <div class="info-card-front">
+                                <h3>面臨的威脅</h3>
+                            </div>
+                            <div class="info-card-back">
+                                <img src="../img/turtle.jpeg" alt="海洋威脅" class="info-image">
+                                <div class="info-content">
+                                    <h3>面臨的威脅</h3>
+                                    <p>海洋正面臨前所未有的挑戰：塑膠污染侵害海洋生物、過度捕撈導致魚群銳減、工業廢水污染破壞生態環境。這些威脅不僅影響海洋生態，最終也將影響人類的生存。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-card-inner">
+                            <div class="info-card-front">
+                                <h3>氣候變遷影響</h3>
+                            </div>
+                            <div class="info-card-back">
+                                <img src="../img/climate.jpg" alt="氣候變遷" class="info-image">
+                                <div class="info-content">
+                                    <h3>氣候變遷影響</h3>
+                                    <p>全球暖化正在改變海洋的面貌：海平面上升威脅沿海地區、海水酸化危及珊瑚礁生態系統、極端氣候事件頻發。這些變化正以前所未有的速度影響著海洋生態平衡。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-card-inner">
+                            <div class="info-card-front">
+                                <h3>永續行動</h3>
+                            </div>
+                            <div class="info-card-back">
+                                <img src="../img/share.png" alt="永續行動" class="info-image">
+                                <div class="info-content">
+                                    <h3>永續行動</h3>
+                                    <p>在永續小站，我們致力於推廣海洋保護意識，提供實用的行動方案。透過教育、研究和實際行動，我們希望能夠喚起更多人對海洋保護的重視，共同為海洋永續發展努力。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 

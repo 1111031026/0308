@@ -49,7 +49,6 @@ body, html {
     color: white;
     transition: color 0.3s ease;
     font-weight: bold; /* 添加粗體效果 */
-    
 }
 
 .logo-title:hover {

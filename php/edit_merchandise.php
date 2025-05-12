@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $description = $conn->real_escape_string($_POST["description"]);
     $pointsRequired = intval($_POST["pointsRequired"]);
     $category = $conn->real_escape_string($_POST["category"]);
-    $available = isset($_POST["available"]) ? 1 : 0;
+    $quantity = intval($_POST["quantity"]); // Changed from available to quantity
 
     $imageURL = $row['ImageURL'];
     $previewURL = $row['PreviewURL'];
@@ -80,9 +80,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     // 更新資料庫
     if (!isset($error_message)) {
-        $sql = "UPDATE merchandise SET Name=?, Description=?, PointsRequired=?, Category=?, ImageURL=?, PreviewURL=?, Available=? WHERE ItemID=?";
+        $sql = "UPDATE merchandise SET Name=?, Description=?, PointsRequired=?, Category=?, ImageURL=?, PreviewURL=?, Quantity=? WHERE ItemID=?"; // Changed Available to Quantity
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssisssii", $name, $description, $pointsRequired, $category, $imageURL, $previewURL, $available, $itemID);
+        $stmt->bind_param("ssisssii", $name, $description, $pointsRequired, $category, $imageURL, $previewURL, $quantity, $itemID); // Changed $available to $quantity
         if ($stmt->execute()) {
             $success_message = "商品更新成功！";
             // 重新取得最新資料
@@ -156,13 +156,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="file" id="preview_image" name="preview_image" accept="image/*">
         </div>
         <div class="form-group">
-            <label>
-                <input type="checkbox" name="available" <?php if($row['Available']) echo 'checked'; ?>>
-                商品可用
-            </label>
+            <label for="quantity">數量：</label>
+            <input type="number" id="quantity" name="quantity" value="<?php echo htmlspecialchars($row['Quantity'] ?? 0); ?>" required min="0">
         </div>
-        <button type="submit" class="btn-submit">儲存修改</button>
-        <a href="merchandise_manage.php" class="btn-cancel">返回商品管理</a>
+        <div class="form-buttons-container">
+            <button type="submit" class="btn-submit">儲存修改</button>
+            <button type="button" onclick="window.location.href='merchandise_manage.php'" class="btn-cancel btn-secondary">返回商品管理</button>
+        </div>
     </form>
 </div>
 </body>

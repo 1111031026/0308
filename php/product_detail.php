@@ -17,7 +17,7 @@ if ($item_id <= 0) {
 }
 
 // 獲取商品詳細信息
-$sql = "SELECT * FROM merchandise WHERE ItemID = ? AND Available = 1";
+$sql = "SELECT * FROM merchandise WHERE ItemID = ? AND Quantity > 0"; // Changed Available = 1 to Quantity > 0
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $item_id);
 $stmt->execute();
@@ -174,9 +174,12 @@ else $category_name = $product['Category'];
                 <p class="product-category">分類:<?php echo $category_name; ?></p>
                 <p class="product-description">描述:<?php echo htmlspecialchars($product['Description']); ?></p>
                 <p class="product-points-required">所需點數: <span><?php echo $product['PointsRequired']; ?></span></p>
+                <p class="product-quantity">剩餘數量: <span><?php echo $product['Quantity']; ?></span></p>
                 <p class="user-points">您目前的點數: <span><?php echo $points; ?></span></p>
 
-                <?php if ($already_purchased): ?>
+                <?php if ($product['Quantity'] == 0): ?>
+                    <div class="sold-out">商品已售完</div>
+                <?php elseif ($already_purchased): ?>
                     <div class="already-purchased">您已購買此商品</div>
                 <?php elseif ($points >= $product['PointsRequired']): ?>
                     <button class="buy-button" onclick="confirmPurchase(<?php echo $product['ItemID']; ?>)">購買商品</button>
@@ -212,6 +215,7 @@ else $category_name = $product['Category'];
                 </svg>
             </div>
             <h2>購買成功！</h2>
+            <p>您已成功購買 <span id="success-product-name"></span></p>
             <?php if ($product['Category'] == 'wallpaper'): ?>
                 <a href="../<?php echo htmlspecialchars($product['ImageURL']); ?>" download class="download-button">下載桌布</a>
             <?php endif; ?>
@@ -295,6 +299,15 @@ else $category_name = $product['Category'];
                 document.getElementById('success-modal').style.display = 'none';
                 window.location.reload();
             };
+
+            // 為成功彈窗的關閉按鈕添加點擊事件
+            document.querySelector('#success-modal button').addEventListener('click', closeSuccessModal);
+
+            // 打勾動畫說明：
+            // 使用 SVG 繪製圓圈和打勾標記
+            // .checkmark-circle 和 .checkmark-check 使用 CSS 動畫
+            // stroke-dashoffset 和 stroke-dasharray 控制繪製進度
+            // 實現圓圈和打勾逐漸出現的效果
 
             window.processPurchase = function(itemId) {
                 fetch('process_purchase.php', {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2025-05-11 18:32:03
+-- 產生時間： 2025-05-12 18:01:33
 -- 伺服器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -361,8 +361,8 @@ INSERT INTO `fillrec` (`fillID`, `UserID`, `UserAnswer`, `FinishTime`, `isCorrec
 --
 -- 資料表結構 `merchandise`
 --
--- 建立時間： 2025-05-10 12:54:17
--- 最後更新： 2025-05-11 16:25:36
+-- 建立時間： 2025-05-12 13:45:06
+-- 最後更新： 2025-05-12 16:01:06
 --
 
 DROP TABLE IF EXISTS `merchandise`;
@@ -371,7 +371,7 @@ CREATE TABLE `merchandise` (
   `Name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '商品名稱',
   `Description` text CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '商品描述',
   `PointsRequired` int(11) NOT NULL COMMENT '所需點數',
-  `Available` tinyint(1) NOT NULL COMMENT '是否可用',
+  `Quantity` int(11) DEFAULT 0,
   `Category` varchar(50) NOT NULL,
   `ImageURL` varchar(255) DEFAULT NULL,
   `PreviewURL` varchar(255) DEFAULT NULL
@@ -386,11 +386,11 @@ TRUNCATE TABLE `merchandise`;
 -- 傾印資料表的資料 `merchandise`
 --
 
-INSERT INTO `merchandise` (`ItemID`, `Name`, `Description`, `PointsRequired`, `Available`, `Category`, `ImageURL`, `PreviewURL`) VALUES
-(1, 'head1', '頭像', 20, 1, 'head', 'product/head1.jpg', 'product/head1.jpg'),
-(2, 'wallpaper1', '桌布', 100, 1, 'wallpaper', 'product/wallpaper1.jpg', 'product/wallpaper1.jpg'),
-(3, 'background1', '背景1', 100, 1, 'background', 'product/background1.jpg', 'product/background1.jpg'),
-(5, '猩健啞', 'xzx', 0, 1, 'head', 'product/6820cec1ed14a_image_猩健啞.png', 'product/6820cec1ed60f_preview_猩健啞投向.png');
+INSERT INTO `merchandise` (`ItemID`, `Name`, `Description`, `PointsRequired`, `Quantity`, `Category`, `ImageURL`, `PreviewURL`) VALUES
+(1, 'head1', '頭像', 20, 19, 'head', 'product/head1.jpg', 'product/head1.jpg'),
+(2, 'wallpaper1', '桌布', 100, 20, 'wallpaper', 'product/wallpaper1.jpg', 'product/wallpaper1.jpg'),
+(3, 'background1', '背景1', 100, 20, 'background', 'product/background1.jpg', 'product/background1.jpg'),
+(5, '猩健啞', 'xzx', 0, 20, 'head', 'product/6820cec1ed14a_image_猩健啞.png', 'product/6820cec1ed60f_preview_猩健啞投向.png');
 
 -- --------------------------------------------------------
 
@@ -437,7 +437,7 @@ INSERT INTO `password_resets` (`id`, `email`, `token`, `expiry`, `created_at`) V
 -- 資料表結構 `purchase`
 --
 -- 建立時間： 2025-05-10 12:54:17
--- 最後更新： 2025-05-11 16:25:19
+-- 最後更新： 2025-05-12 15:55:22
 --
 
 DROP TABLE IF EXISTS `purchase`;
@@ -458,9 +458,7 @@ TRUNCATE TABLE `purchase`;
 --
 
 INSERT INTO `purchase` (`UserID`, `ItemID`, `PurchaseTime`, `SpentPoints`) VALUES
-(2, 1, '2025-05-03 11:35:13', 20),
-(11, 3, '2025-05-12 00:25:19', 0),
-(11, 5, '2025-05-12 00:24:44', 0);
+(2, 1, '2025-05-03 11:35:13', 20);
 
 -- --------------------------------------------------------
 
@@ -613,7 +611,7 @@ INSERT INTO `tfrec` (`tfID`, `UserID`, `UserAnswer`, `FinishTime`, `isCorrect`) 
 -- 資料表結構 `user`
 --
 -- 建立時間： 2025-05-10 13:42:10
--- 最後更新： 2025-05-11 16:26:14
+-- 最後更新： 2025-05-12 15:51:26
 --
 
 DROP TABLE IF EXISTS `user`;

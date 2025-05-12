@@ -32,7 +32,7 @@ if ($user_id > 0) {
 
 // 構建SQL查詢
 // 構建SQL查詢
-$sql = "SELECT * FROM merchandise WHERE Available = 1";
+$sql = "SELECT * FROM merchandise WHERE Quantity > 0";
 
 // 添加搜尋條件
 if (!empty($search)) {
@@ -73,7 +73,7 @@ if ($result && $result->num_rows > 0) {
 }
 
 // 獲取所有可用的分類
-$category_sql = "SELECT DISTINCT Category FROM merchandise WHERE Available = 1";
+$category_sql = "SELECT DISTINCT Category FROM merchandise WHERE Quantity > 0";
 $category_result = $conn->query($category_sql);
 $available_categories = [];
 if ($category_result && $category_result->num_rows > 0) {
@@ -250,6 +250,7 @@ if ($category_result && $category_result->num_rows > 0) {
                                     <div class="product-info">
                                         <h3 class="product-name"><?php echo htmlspecialchars($product['Name']); ?></h3>
                                         <p class="product-points">所需點數: <?php echo $product['PointsRequired']; ?></p>
+                                        <p class="product-quantity">剩餘數量: <span><?php echo $product['Quantity']; ?></span></p>
                                         <?php if (in_array($product['ItemID'], $purchased_items)): ?>
                                         <div class="owned-badge">已擁有</div>
                                         <?php endif; ?>

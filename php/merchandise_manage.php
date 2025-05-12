@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $description = $conn->real_escape_string($_POST["description"]);
     $pointsRequired = intval($_POST["pointsRequired"]);
     $category = $conn->real_escape_string($_POST["category"]);
-    $available = isset($_POST["available"]) ? 1 : 0;
+    $quantity = intval($_POST["quantity"]); // Changed from available to quantity
 
     $imageURL = null;
     $previewURL = null;
@@ -73,10 +73,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // 如果圖片都成功上傳，則插入數據到資料庫
     if (!isset($error_message) && $imageURL && $previewURL) {
-        $sql = "INSERT INTO merchandise (Name, Description, PointsRequired, Category, ImageURL, PreviewURL, Available) 
-                VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO merchandise (Name, Description, PointsRequired, Category, ImageURL, PreviewURL, Quantity) 
+                VALUES (?, ?, ?, ?, ?, ?, ?)"; // Changed Available to Quantity
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssisssi", $name, $description, $pointsRequired, $category, $imageURL, $previewURL, $available);
+        $stmt->bind_param("ssisssi", $name, $description, $pointsRequired, $category, $imageURL, $previewURL, $quantity); // Changed $available to $quantity
 
         if ($stmt->execute()) {
             $success_message = "商品新增成功！";
@@ -158,10 +158,8 @@ $result = $conn->query($sql);
                 </div>
 
                 <div class="form-group">
-                    <label>
-                        <input type="checkbox" name="available" checked>
-                        商品可用
-                    </label>
+                    <label for="quantity">數量：</label>
+                    <input type="number" id="quantity" name="quantity" value="0" required min="0">
                 </div>
 
                 <button type="submit" class="btn-submit">新增商品</button>
@@ -180,7 +178,7 @@ $result = $conn->query($sql);
                         <th>描述</th>
                         <th>所需點數</th>
                         <th>類別</th>
-                        <th>可用</th>
+                        <th>數量</th>
                         <th>操作</th>
                     </tr>
                 </thead>
@@ -194,7 +192,7 @@ $result = $conn->query($sql);
                         <td><?php echo htmlspecialchars($row['Description']); ?></td>
                         <td><?php echo htmlspecialchars($row['PointsRequired']); ?></td>
                         <td><?php echo htmlspecialchars($row['Category']); ?></td>
-                        <td><?php echo $row['Available'] ? '是' : '否'; ?></td>
+                        <td><?php echo htmlspecialchars($row['Quantity'] ?? 0); ?></td>
                         <td class="actions">
                             <a href="edit_merchandise.php?id=<?php echo $row['ItemID']; ?>">編輯</a>
                             <a href="delete_merchandise.php?id=<?php echo $row['ItemID']; ?>" onclick="return confirm('確定要刪除此商品嗎？');" class="delete-btn">刪除</a>

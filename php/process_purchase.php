@@ -35,7 +35,7 @@ try {
     $stmt->close();
     
     // 獲取商品信息
-    $sql = "SELECT * FROM merchandise WHERE ItemID = ? AND Available = 1";
+    $sql = "SELECT * FROM merchandise WHERE ItemID = ? AND Quantity > 0";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $item_id);
     $stmt->execute();
@@ -88,6 +88,14 @@ try {
     }
     $stmt->close();
     
+    // 商品庫存減 1
+    $sql = "UPDATE merchandise SET Quantity = Quantity - 1 WHERE ItemID = ? AND Quantity > 0";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $item_id);
+    if (!$stmt->execute()) {
+        throw new Exception('更新商品庫存失敗');
+    }
+    $stmt->close();
     // 提交事務
     $conn->commit();
     

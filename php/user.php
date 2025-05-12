@@ -134,6 +134,7 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/user.css">
+    <link rel="stylesheet" href="../css/nav3.css">
     <title>用戶資料</title>
     <link rel="icon" type="image/png" href="../img/icon.png">
     <style>
@@ -278,7 +279,7 @@ $conn->close();
                 </div>
             <?php endif; ?>
             
-            <div class="user-profile-header">
+            <div class="user-profile-header" style="position: relative; z-index: 1;">
                 <?php if (!empty($user['AvatarURL'])): ?>
                     <img src="../<?php echo htmlspecialchars($user['AvatarURL']); ?>" alt="用戶頭像" class="user-avatar">
                 <?php else: ?>

@@ -192,6 +192,41 @@ if ($category_result && $category_result->num_rows > 0) {
                 width: 100%;
             }
         }
+
+        /* 桌布下載按鈕樣式 */
+        .product.owned-wallpaper {
+            position: relative; /* 為了下載按鈕定位 */
+        }
+        .download-wallpaper-btn {
+            display: none; /* 預設隱藏 */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+            z-index: 10;
+            border: none;
+            cursor: pointer;
+        }
+        .product.owned-wallpaper:hover .product-image,
+        .product.owned-wallpaper:hover .product-info {
+            opacity: 0.7;
+        }
+        .product.owned-wallpaper:hover .download-wallpaper-btn {
+            display: block;
+            opacity: 1;
+        }
+        .product.owned-wallpaper .download-wallpaper-btn {
+            display: none;
+        }
+        .product.owned-wallpaper:hover .download-wallpaper-btn {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -243,7 +278,15 @@ if ($category_result && $category_result->num_rows > 0) {
                     </h2>
                     <div class="product-list">
                         <?php foreach ($products as $product): ?>
-                            <div class="product">
+                            <?php 
+                                $is_wallpaper = ($product['Category'] == 'wallpaper');
+                                $is_owned = in_array($product['ItemID'], $purchased_items);
+                                $card_class = 'product'; // 使用現有的 class 'product'
+                                if ($is_wallpaper && $is_owned) {
+                                    $card_class .= ' owned-wallpaper';
+                                }
+                            ?>
+                            <div class="<?php echo $card_class; ?>">
                                 <a href="product_detail.php?id=<?php echo $product['ItemID']; ?>">
                                     <div class="product-image">
                                         <img src="../<?php echo htmlspecialchars($product['ImageURL']); ?>" alt="<?php echo htmlspecialchars($product['Name']); ?>">
@@ -252,11 +295,14 @@ if ($category_result && $category_result->num_rows > 0) {
                                         <h3 class="product-name"><?php echo htmlspecialchars($product['Name']); ?></h3>
                                         <p class="product-points">所需點數: <?php echo $product['PointsRequired']; ?></p>
                                         <p class="product-quantity">剩餘數量: <span><?php echo $product['Quantity']; ?></span></p>
-                                        <?php if (in_array($product['ItemID'], $purchased_items)): ?>
+                                        <?php if ($is_owned): ?>
                                         <div class="owned-badge">已擁有</div>
                                         <?php endif; ?>
                                     </div>
                                 </a>
+                                <?php if ($is_wallpaper && $is_owned): ?>
+                                    <a href="../<?php echo htmlspecialchars($product['ImageURL']); ?>" download class="download-wallpaper-btn" onclick="event.stopPropagation();">下載桌布</a>
+                                <?php endif; ?>
                             </div>
                         <?php endforeach; ?>
                     </div>

@@ -296,7 +296,7 @@ $conn->close();
                 </p>
                 <p class="user-info-item">
                     <strong class="user-info-label">註冊日期:</strong>
-                    <?php echo htmlspecialchars($user['RegistrationDate'] ?? '未知'); ?>
+                    <?php echo htmlspecialchars(isset($user['JoinDate']) ? date('Y-m-d', strtotime($user['JoinDate'])) : '未知'); ?>
                 </p>
             </div>
             

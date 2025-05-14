@@ -34,6 +34,10 @@
 
         <!-- 第二區塊：關於海洋永續 -->
         <section class="section section-2">
+            <video autoplay loop muted playsinline>
+                <source src="../img/shore.mp4" type="video/mp4">
+                您的瀏覽器不支援影片播放
+            </video>
             <div class="intro-section">
                 <h2>關於海洋永續</h2>
                 <div class="ocean-info-grid">
@@ -99,6 +103,10 @@
 
         <!-- 第三區塊：最新貼文 -->
         <section class="section section-3">
+            <video autoplay loop muted playsinline>
+                <source src="../img/shore2.mp4" type="video/mp4">
+                您的瀏覽器不支援影片播放
+            </video>
             <h3>最新貼文</h3>
             <div class="container">
                 <!-- 滾動文章區域 -->
@@ -140,6 +148,10 @@
 
         <!-- 第四區塊：搜尋文章 -->
         <section class="section section-4">
+            <video autoplay loop muted playsinline>
+                <source src="../img/shore2.mp4" type="video/mp4">
+                您的瀏覽器不支援影片播放
+            </video>
             <h3>搜尋海洋文章</h3>
             <div class="search-container">
                 <form id="search-form">

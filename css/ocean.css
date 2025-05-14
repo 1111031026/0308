@@ -96,11 +96,21 @@ html, body {
 
 /* 第二區塊：關於海洋永續 */
 .section-2 {
-    /* 使用圖片中的海洋漸層效果 */
-    background: linear-gradient(135deg, #1e3a8a, #60a5fa);
     color: white;
     padding: 40px;
     position: relative;
+    overflow: hidden;
+}
+
+.section-2 video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    filter: brightness(0.6);
 }
 
 .section-2::before {
@@ -229,8 +239,9 @@ html, body {
 
 /* 第三區塊：最新貼文 */
 .section-3 {
-    /* 使用稍淺的海洋漸層效果，與 section-2 形成層次感 */
-    background: linear-gradient(135deg, #2563eb, #93c5fd);
+    position: relative;
+    overflow: hidden;
+    background: transparent;
     padding: 40px;
     position: relative;
     display: flex;
@@ -240,13 +251,41 @@ html, body {
 
 /* 第四區塊：搜尋文章 */
 .section-4 {
-    background: linear-gradient(135deg, #3b82f6, #bfdbfe);
-    padding: 40px;
-    padding-top: 80px;
+    padding: 50px 0;
+    text-align: center;
     position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    overflow: hidden;
+}
+
+.section-4 video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.section-4 h3,
+.section-4 .search-container,
+.section-4 .posts-grid,
+.section-4 .pagination {
+    position: relative;
+    z-index: 1;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.section-4 .search-container input,
+.section-4 .search-container button {
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 5px;
 }
 
 .section-4 .search-container {
@@ -462,6 +501,17 @@ html, body {
     background: rgba(255, 255, 255, 1);
 }
 
+.section-3 video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    filter: brightness(0.6);
+}
+
 .section-3::before {
     content: '';
     position: absolute;
@@ -469,8 +519,8 @@ html, body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(37, 99, 235, 0.3), rgba(147, 197, 253, 0.3));
-    z-index: 0;
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.5), rgba(147, 197, 253, 0.5))
+    z-index 0;
 }
 
 .section-3 h3, .section-4 h3 {
@@ -634,4 +684,14 @@ html, body {
     width: 100%;
     height: 100%;
     z-index: -1; /* 確保在內容後方 */
+}
+.section-4::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(11, 13, 15, 0.5), rgba(10, 11, 12, 0.5));
+    z-index: 0;
 }

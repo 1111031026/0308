@@ -6,7 +6,7 @@
     <title>地景保育 - 永續小站</title>
     <link rel="icon" type="image/png" href="../img/icon.png">
     <link rel="stylesheet" href="../css/nav2.css">
-    <link rel="stylesheet" href="../css/landscape.css">
+    <link rel="stylesheet" href="../css/ocean.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
@@ -19,33 +19,100 @@
     </header>
 
     <div class="page-container">
-        <!-- 第一區塊：背景圖片與標題 -->
+        <!-- 第一區塊：背景影片與標題 -->
         <section class="section section-1">
             <div class="ocean-banner">
-                <img src="../img/mountain.jpg" alt="地景保育背景">
+                <video autoplay loop muted playsinline>
+                    <source src="../img/mountain.mp4" type="video/mp4">
+                    您的瀏覽器不支援影片播放
+                </video>
             </div>
             <h1>地景保育</h1>
+            <p class="intro-text">地景保育是保護自然與人文景觀的重要環境議題，我們致力於守護山脈、森林與濕地，推動永續發展，為未來留下綠色遺產。</p>
             <div class="scroll-down-arrow"><span>⇩</span></div>
         </section>
 
-        <!-- 第二區塊：關於海洋永續 -->
+        <!-- 第二區塊：關於地景保育 -->
         <section class="section section-2">
+            <video autoplay loop muted playsinline>
+                <source src="../img/mountain.mp4" type="video/mp4">
+                您的瀏覽器不支援影片播放
+            </video>
             <div class="intro-section">
                 <h2>關於地景保育</h2>
-                <p>地景保育是保護自然與人文景觀的重要環境議題，它涉及山脈、森林、濕地等多樣化的地理環境。在永續小站，我們致力於推廣地景保育的重要性，分享保護策略與行動方案，邀請每個人一同參與，守護這片美麗的土地。</p>
+                <div class="ocean-info-grid">
+                    <div class="info-card">
+                        <div class="info-card-inner">
+                            <div class="info-card-front">
+                                <h3>地景生態系統</h3>
+                            </div>
+                            <div class="info-card-back">
+                                <img src="../img/forest.jpg" alt="地景生態系統" class="info-image">
+                                <div class="info-content">
+                                    <h3>地景生態系統</h3>
+                                    <p>地景涵蓋山脈、森林、濕地等多樣化環境，是地球生物多樣性的重要基礎。這些生態系統為無數物種提供棲息地，同時調節氣候與水資源。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-card-inner">
+                            <div class="info-card-front">
+                                <h3>面臨的威脅</h3>
+                            </div>
+                            <div class="info-card-back">
+                                <img src="../img/deforestation.jpg" alt="地景威脅" class="info-image">
+                                <div class="info-content">
+                                    <h3>面臨的威脅</h3>
+                                    <p>森林砍伐、土地開發和污染正威脅地景的完整性。這些活動破壞生態平衡，導致物種滅絕與自然資源枯竭，影響人類與環境的未來。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-card-inner">
+                            <div class="info-card-front">
+                                <h3>氣候變遷影響</h3>
+                            </div>
+                            <div class="info-card-back">
+                                <img src="../img/drought.jpg" alt="氣候變遷" class="info-image">
+                                <div class="info-content">
+                                    <h3>氣候變遷影響</h3>
+                                    <p>氣候變遷導致乾旱、洪水與土壤侵蝕，嚴重影響地景生態系統。這些變化威脅農業生產與生態穩定，亟需採取行動減緩其影響。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-card-inner">
+                            <div class="info-card-front">
+                                <h3>永續行動</h3>
+                            </div>
+                            <div class="info-card-back">
+                                <img src="../img/conservation.jpg" alt="永續行動" class="info-image">
+                                <div class="info-content">
+                                    <h3>永續行動</h3>
+                                    <p>永續小站推廣地景保護教育，提供植樹、棲地復育等行動方案。我們希望透過實際行動與政策倡導，保護地景的永續未來。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
         <!-- 第三區塊：最新貼文 -->
         <section class="section section-3">
+            <video autoplay loop muted playsinline>
+                <source src="../img/mountain2.mp4" type="video/mp4">
+                您的瀏覽器不支援影片播放
+            </video>
             <h3>最新貼文</h3>
             <div class="container">
-                <!-- 滾動文章區域 -->
                 <div class="article-slider">
                     <div class="article-content">
                         <?php
                         require_once 'db_connect.php';
-                        // 查詢SDG15分類的文章，按創建時間排序
                         $sql = "SELECT * FROM article WHERE Category = 'sdg15' ORDER BY created_at DESC";
                         $result = $conn->query($sql);
                         if ($result->num_rows > 0) {
@@ -69,14 +136,18 @@
                         }
                         ?>
                     </div>
-                    <!-- 左右按鈕 -->
                     <button class="slider-btn2 prev-btn"><</button>
                     <button class="slider-btn2 next-btn">></button>
                 </div>
             </div>
         </section>
+
         <!-- 第四區塊：搜尋文章 -->
         <section class="section section-4">
+            <video autoplay loop muted playsinline>
+                <source src="../img/mountain2.mp4" type="video/mp4">
+                您的瀏覽器不支援影片播放
+            </video>
             <h3>搜尋地景文章</h3>
             <div class="search-container">
                 <form id="search-form">
@@ -85,7 +156,6 @@
                 </form>
             </div>
             <div class="posts-grid" id="posts-grid">
-                <!-- 文章將通過 AJAX 動態加載 -->
             </div>
             <div class="pagination">
                 <button class="pagination-btn prev-btn" id="prev-btn" disabled>上一頁</button>
@@ -97,13 +167,14 @@
             </div>
         </section>
     </div>
+
     <script>
     $(document).ready(function() {
         let navbar = $('.navbar');
         let currentPage = 1;
         let totalPages = 1;
         let searchQuery = $('#search-input').val();
-        // 監聽滑鼠移動事件
+
         $(document).mousemove(function(e) {
             if (e.clientY <= 100) {
                 navbar.css('transform', 'translateY(100px)');
@@ -111,7 +182,7 @@
                 navbar.css('transform', 'translateY(-100px)');
             }
         });
-        // 初始化Slick輪播
+
         $('.article-content').slick({
             infinite: true,
             slidesToShow: 3,
@@ -133,9 +204,9 @@
                 }
             ]
         });
-        // 載入文章函數
+
         function loadArticles(page, search) {
-            $('#posts-grid').html('<p>載入中...</p>'); // 顯示載入提示
+            $('#posts-grid').html('<p>載入中...</p>');
             $.ajax({
                 url: 'fetch_landscape.php',
                 method: 'GET',
@@ -143,7 +214,7 @@
                 dataType: 'json',
                 success: function(response) {
                     const postsGrid = $('#posts-grid');
-                    postsGrid.empty(); // 清空現有內容
+                    postsGrid.empty();
 
                     if (response.articles.length > 0) {
                         response.articles.forEach(article => {
@@ -169,7 +240,6 @@
                     $('#total-pages').text(totalPages);
                     $('#page-input').val(page);
                     $('#page-input').attr('max', totalPages);
-                    // 更新按鈕狀態
                     $('#prev-btn').prop('disabled', page === 1);
                     $('#next-btn').prop('disabled', page >= totalPages);
                 },
@@ -179,51 +249,47 @@
             });
         }
 
-        // 初始載入第一頁
         loadArticles(currentPage, searchQuery);
-        // 搜尋表單提交
+
         $('#search-form').on('submit', function(e) {
             e.preventDefault();
             searchQuery = $('#search-input').val();
-            currentPage = 1; // 重置到第一頁
+            currentPage = 1;
             loadArticles(currentPage, searchQuery);
         });
-        // 分頁按鈕點擊
+
         $('#prev-btn').on('click', function() {
             if (currentPage > 1) {
                 currentPage--;
                 loadArticles(currentPage, searchQuery);
             }
         });
+
         $('#next-btn').on('click', function() {
             if (currentPage < totalPages) {
                 currentPage++;
                 loadArticles(currentPage, searchQuery);
             }
         });
-        // 監聽頁碼輸入框的Enter鍵事件
+
         $('#page-input').on('keypress', function(e) {
-            if (e.which === 13) { // Enter鍵的keyCode是13
-                e.preventDefault(); // 防止表單提交
+            if (e.which === 13) {
+                e.preventDefault();
                 let pageNum = parseInt($(this).val());
-                
-                // 確保頁碼在有效範圍內
                 if (pageNum < 1) {
                     pageNum = 1;
                 } else if (pageNum > totalPages) {
                     pageNum = totalPages;
                 }
-                
                 if (pageNum !== currentPage) {
                     currentPage = pageNum;
                     loadArticles(currentPage, searchQuery);
                 }
             }
         });
-        // 當輸入框失去焦點時也進行頁面跳轉
+
         $('#page-input').on('blur', function() {
             let pageNum = parseInt($(this).val());
-            // 確保頁碼在有效範圍內
             if (pageNum < 1) {
                 pageNum = 1;
                 $(this).val(1);

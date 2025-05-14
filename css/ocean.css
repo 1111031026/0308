@@ -49,7 +49,18 @@ html, body {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 0;
+    z-index: -1;
+}
+
+.section-1 .intro-text {
+    color: white;
+    font-size: 1.2em;
+    text-align: center;
+    margin-top: 20px;
+    max-width: 800px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    position: relative;
+    z-index: 2;
 }
 
 .section-1 .ocean-banner img {
@@ -65,8 +76,9 @@ html, body {
     font-size: 3.5em;
     font-weight: 700;
     color: white;
-    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
-    z-index: 1;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+    position: relative;
+    z-index: 2;
     opacity: 0;
     transform: translateY(30px);
     animation: fadeInUp 1s ease forwards;
@@ -78,8 +90,8 @@ html, body {
     font-size: 2em;
     color: #fff;
     animation: bounceArrow 1.5s infinite;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    z-index: 1;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    z-index: 2;
 }
 
 /* 第二區塊：關於海洋永續 */
@@ -613,4 +625,13 @@ html, body {
     .section-1 h1 { font-size: 2em; }
     .section-2 .intro-section { padding: 20px; }
     .posts-grid { grid-template-columns: 1fr; }
+}
+
+.particle-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* 確保在內容後方 */
 }

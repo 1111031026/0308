@@ -22,9 +22,13 @@
         <!-- 第一區塊：背景圖片與標題 -->
         <section class="section section-1">
             <div class="ocean-banner">
-                <img src="../img/ocean.gif" alt="海洋背景">
+                <video autoplay loop muted playsinline>
+                    <source src="../img/shore.mp4" type="video/mp4">
+                    您的瀏覽器不支援影片播放
+                </video>
             </div>
             <h1>海洋永續</h1>
+            <p class="intro-text">海洋是地球生命的搖籃，我們致力於保護海洋生態系統，推動永續發展，為子孫後代守護這片蔚藍。</p>
             <div class="scroll-down-arrow"><span>⇩</span></div>
         </section>
 

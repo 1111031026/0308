@@ -91,6 +91,7 @@ if ($category_result && $category_result->num_rows > 0) {
     <title>永續小站-商店</title>
     <link rel="icon" type="image/png" href="../img/icon.png">
     <link rel="stylesheet" href="../css/shop.css">
+    <link rel="stylesheet" href="../css/nav3.css">
     <style>
         /* 搜尋和篩選區域樣式 */
         .search-filter-container {

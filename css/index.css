@@ -139,7 +139,6 @@ main {
         /* 在更小的屏幕上進一步降低高度 */
     }
 }
-/* Blue Section 樣式 */
 /* 藍色區塊樣式（海洋） */
 .blue-section {
     background: linear-gradient(135deg, rgba(96, 165, 250, 0.75) 0%, rgba(30, 58, 138, 0.85) 100%);
@@ -161,7 +160,7 @@ main {
 
 }
 .blue-section h3 {
-    width: 25%; /* 左側佔1/4寬度 */
+    width:  33.33%; /* 左側佔1/4寬度 */
     height: 100%;
     margin: 0;
     padding: 2rem;
@@ -508,7 +507,7 @@ main {
     transition: background-color 0.3s ease;
 }
 .ocean-slider-container {
-    width: 66.67%; /* 右側佔2/3寬度 */
+    width: 65%; /* 右側佔3/4寬度 */
     padding: 2rem;
 }
 .ocean-card {
@@ -521,7 +520,7 @@ main {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     height: 400px !important;
     margin: 0 25px; /* 居中卡片 */
-    width: 600px !important; /* 固定卡片寬度 */
+    width: 600px !; /* 固定卡片寬度 */
 }
 
 .ocean-card-image {
@@ -594,37 +593,6 @@ main {
     background-color: rgba(255, 255, 255, 1);
 }
 
-/* 導航點樣式 */
-.ocean-slider .slick-dots {
-    display: flex;
-    justify-content: center;
-    list-style: none;
-    padding: 0;
-    margin: 20px 0;
-}
-
-.ocean-slider .slick-dots li {
-    margin: 0 5px;
-}
-
-.ocean-slider .slick-dots li button {
-    font-size: 0;
-    width: 12px;
-    height: 12px;
-    background-color: #ccc;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.ocean-slider .slick-dots li.slick-active button {
-    background-color: #0f4e96;
-}
-
-.ocean-slider .slick-dots li button:hover {
-    background-color: #0f4e96;
-}
 
 .article-card:hover {
     transform: translateY(-5px);

@@ -51,18 +51,18 @@ require_once 'db_connect.php';
                     }
                     ?>
                 </div>
-                <!-- 分頁器 -->
-                <div class="swiper-pagination"></div>
                 <!-- 導航按鈕 -->
                 <div class="swiper-button-prev"></div>
                 <div class="swiper-button-next"></div>
+                <!-- 分頁器 -->
+                <div class="swiper-pagination"></div>
             </div>
         </section>
         <section class="content">
             <div class="blue-section">
                 <h3>關於海洋永續的文章</h3>
-                <div class="ocean-slider-container">
-                    <div class="ocean-slider">
+                <div class="ocean-slider swiper ocean-slider-container">
+                    <div class="swiper-wrapper">
                         <?php
                         // 查詢SDG14分類的文章，按創建時間排序
                         $sql = "SELECT * FROM article WHERE Category = 'sdg14' ORDER BY created_at DESC";
@@ -70,7 +70,7 @@ require_once 'db_connect.php';
 
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
-                                echo '<div class="ocean-card">';
+                                echo '<div class="swiper-slide ocean-card">';
                                 // 左側圖片
                                 if ($row['ImageURL']) {
                                     echo '<img src="../' . htmlspecialchars($row['ImageURL']) . '" alt="文章圖片" class="ocean-card-image">';
@@ -82,16 +82,16 @@ require_once 'db_connect.php';
                                 echo '<h4 class="ocean-card-title">' . htmlspecialchars($row['Title']) . '</h4>';
                                 echo '<a href="article.php?id=' . $row['ArticleID'] . '" class="ocean-card-button">閱讀更多</a>';
                                 echo '</div>'; // 結束 ocean-card-content
-                                echo '</div>'; // 結束 ocean-card
+                                echo '</div>'; // 結束 swiper-slide
                             }
                         }
                         ?>
                     </div>
+                    <!-- 分頁器 -->
+                    <div class="swiper-pagination"></div>
                     <!-- 導航按鈕 -->
-                    <div class="ocean-slider-nav">
-                        <button class="ocean-prev">&lt;</button>
-                        <button class="ocean-next">&gt;</button>
-                    </div>
+                    <div class="swiper-button-prev ocean-prev"></div>
+                    <div class="swiper-button-next ocean-next"></div>
                 </div>
             </div>
         </section>
@@ -221,22 +221,24 @@ require_once 'db_connect.php';
             },
         });
         // 初始化海洋永續文章輪播
-        // 初始化海洋永續文章輪播
-        // 设定 slide offset
-        $('.ocean-slider').slick({
-            dots: true,
-            infinite: true,
-            speed: 500,
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            prevArrow: $('.ocean-prev'),
-            nextArrow: $('.ocean-next'),
-            responsive: [{
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 1
+        var oceanSlidesCount = document.querySelectorAll('.ocean-slider .swiper-slide').length;
+        var oceanSwiper = new Swiper('.ocean-slider', {
+            slidesPerView: 1, // 改為只顯示1張
+            spaceBetween: 10,
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.ocean-next',
+                prevEl: '.ocean-prev',
+            },
+            breakpoints: {
+                768: {
+                    slidesPerView: 1,
                 }
-            }]
+            }
         });
         // 初始化所有 article-slider（海洋、氣候、陸域）
         $('.article-slider .article-content').each(function() {

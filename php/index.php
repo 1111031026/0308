@@ -60,44 +60,37 @@ require_once 'db_connect.php';
         </section>
         <section class="content">
             <div class="blue-section">
-                <div class="container">
-                    <!-- 海洋圖片區塊 -->
-                    <div class="ocean-image-container">
-                        <h3>關於海洋永續的文章</h3>
-                        <img src="../img/ocean-index.gif" alt="海洋圖片" class="ocean-image">
-                    </div>
-                    <!-- 滾動文章區域 -->
-                    <div class="article-slider">
-                        <div class="article-content">
-                            <?php
-                            // 查詢SDG14分類的文章，按創建時間排序
-                            $sql = "SELECT * FROM article WHERE Category = 'sdg14' ORDER BY created_at DESC";
-                            $result = $conn->query($sql);
+                <h3>關於海洋永續的文章</h3>
+                <div class="ocean-slider-container">
+                    <div class="ocean-slider">
+                        <?php
+                        // 查詢SDG14分類的文章，按創建時間排序
+                        $sql = "SELECT * FROM article WHERE Category = 'sdg14' ORDER BY created_at DESC";
+                        $result = $conn->query($sql);
 
-                            if ($result->num_rows > 0) {
-                                while ($row = $result->fetch_assoc()) {
-                                    echo '<div class="article-card">';
-                                    echo '<h4>' . htmlspecialchars($row['Title']) . '</h4>';
-                                    if ($row['ImageURL']) {
-                                        echo '<img src="../' . htmlspecialchars($row['ImageURL']) . '" alt="文章圖片">';
-                                    } else {
-                                        echo '<img src="../img/ocean.jpg" alt="預設圖片">';
-                                    }
-                                    echo '<p>' . htmlspecialchars($row['Description']) . '</p>';
-                                    echo '<a href="article.php?id=' . $row['ArticleID'] . '" class="read-more">閱讀更多</a>';
-                                    echo '</div>';
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                echo '<div class="ocean-card">';
+                                // 左側圖片
+                                if ($row['ImageURL']) {
+                                    echo '<img src="../' . htmlspecialchars($row['ImageURL']) . '" alt="文章圖片" class="ocean-card-image">';
+                                } else {
+                                    echo '<img src="../img/ocean.jpg" alt="預設圖片" class="ocean-card-image">';
                                 }
-                            } else {
-                                echo '<div class="article-card">';
-                                echo '<h4>暫無相關文章</h4>';
-                                echo '<p>目前沒有海洋永續相關的文章。</p>';
-                                echo '</div>';
+                                // 右側內容
+                                echo '<div class="ocean-card-content">';
+                                echo '<h4 class="ocean-card-title">' . htmlspecialchars($row['Title']) . '</h4>';
+                                echo '<a href="article.php?id=' . $row['ArticleID'] . '" class="ocean-card-button">閱讀更多</a>';
+                                echo '</div>'; // 結束 ocean-card-content
+                                echo '</div>'; // 結束 ocean-card
                             }
-                            ?>
-                        </div>
-                        <!-- 左右按鈕 -->
-                        <button class="slider-btn2 prev-btn">&lt;</button>
-                        <button class="slider-btn2 next-btn">&gt;</button>
+                        }
+                        ?>
+                    </div>
+                    <!-- 導航按鈕 -->
+                    <div class="ocean-slider-nav">
+                        <button class="ocean-prev">&lt;</button>
+                        <button class="ocean-next">&gt;</button>
                     </div>
                 </div>
             </div>
@@ -227,7 +220,24 @@ require_once 'db_connect.php';
                 prevEl: ".swiper-button-prev",
             },
         });
-
+        // 初始化海洋永續文章輪播
+        // 初始化海洋永續文章輪播
+        // 设定 slide offset
+        $('.ocean-slider').slick({
+            dots: true,
+            infinite: true,
+            speed: 500,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            prevArrow: $('.ocean-prev'),
+            nextArrow: $('.ocean-next'),
+            responsive: [{
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 1
+                }
+            }]
+        });
         // 初始化所有 article-slider（海洋、氣候、陸域）
         $('.article-slider .article-content').each(function() {
             $(this).slick({

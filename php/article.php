@@ -50,6 +50,7 @@ if (isset($_GET['id']) && isset($_SESSION['login_session']) && $_SESSION['login_
     <link rel="icon" type="image/png" href="../img/icon.png">
     <link rel="stylesheet" href="../css/1.css">
     <link rel="stylesheet" href="../css/nav3.css">
+    <link rel="stylesheet" href="../css/article.css">
     <style>
     .article-source {
         background-color: #f8f9fa;
@@ -98,27 +99,35 @@ if (isset($_GET['id']) && isset($_SESSION['login_session']) && $_SESSION['login_
 
         if (isset($_GET['id'])) {
             $id = intval($_GET['id']);
-            $stmt = $conn->prepare("SELECT Title, Content, ArticleURL FROM article WHERE ArticleID = ?");
+            $stmt = $conn->prepare("SELECT Title, Description, Content, ArticleURL FROM article WHERE ArticleID = ?");
             $stmt->bind_param("i", $id);
             $stmt->execute();
             $result = $stmt->get_result();
 
             if ($row = $result->fetch_assoc()) {
-                echo '<div class="article-source">文章來源：<a href="' . htmlspecialchars($row['ArticleURL']) . '" target="_blank">' . htmlspecialchars($row['ArticleURL']) . '</a></div>';
+                // 頂部：標題與簡介
+                echo '<div class="article-header">';
+                echo '<h1 class="article-title">' . htmlspecialchars($row['Title']) . '</h1>';
+                echo '<p class="article-description">' . nl2br(htmlspecialchars($row['Description'])) . '</p>';
+                echo '</div>';
                 
-                // 使用AI分析文章內容
+                echo '<div class="article-source"><span style="color :black;">文章來源：</span><a href="' . htmlspecialchars($row['ArticleURL']) . '" target="_blank">' . htmlspecialchars($row['ArticleURL']) . '</a></div>';
+
+                // 中間：AI重點整理
                 $analysis = analyzeArticle($row['Content']);
-                
+                echo '<div class="article-ai-section">';
+                echo '<h3 class="ai-title">AI重點整理</h3>';
                 if (isset($analysis['error'])) {
                     echo '<div class="error">分析過程出現錯誤：' . htmlspecialchars($analysis['error']) . '</div>';
                 } else {
-                    echo '<div class="article-content">';
-                    echo '<h3>AI重點整理：</h3>';
                     echo '<div class="ai-analysis">';
                     echo nl2br(htmlspecialchars($analysis['choices'][0]['message']['content']));
                     echo '</div>';
-                    echo '</div>';
                 }
+                echo '</div>';
+
+                
+                
             } else {
                 echo '<p>找不到該文章</p>';
             }

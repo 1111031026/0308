@@ -6,7 +6,7 @@
     <title>氣候行動 - 永續小站</title>
     <link rel="icon" type="image/png" href="../img/icon.png">
     <link rel="stylesheet" href="../css/nav2.css">
-    <link rel="stylesheet" href="../css/ocean.css">
+    <link rel="stylesheet" href="../css/climate.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>

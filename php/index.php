@@ -27,7 +27,7 @@ require_once 'db_connect.php';
     </header>
     <main>
         <section class="hero">
-            <h2>最新報導</h2>
+            <h2>最新文章</h2>
             <!-- Swiper -->
             <div class="swiper heroSwiper">
                 <div class="swiper-wrapper">
@@ -60,7 +60,7 @@ require_once 'db_connect.php';
         </section>
         <section class="content">
             <div class="blue-section">
-                <h3>關於海洋永續的文章</h3>
+                <h1>海洋永續的文章</h1>
                 <div class="ocean-slider swiper ocean-slider-container">
                     <div class="swiper-wrapper">
                         <?php
@@ -88,7 +88,7 @@ require_once 'db_connect.php';
                         ?>
                     </div>
                     <!-- 分頁器 -->
-                    <div class="swiper-pagination"></div>
+                    <div class="swiper-pagination-ocean"></div>
                     <!-- 導航按鈕 -->
                     <div class="swiper-button-prev ocean-prev"></div>
                     <div class="swiper-button-next ocean-next"></div>
@@ -97,96 +97,77 @@ require_once 'db_connect.php';
         </section>
         <section class="content">
             <div class="green-section">
-                <div class="container">
-                    <!-- 滾動文章區域 -->
-                    <div class="article-slider">
-                        <div class="article-content">
-                            <?php
-                            // 查詢SDG13分類的文章（氣候行動），按創建時間排序
-                            $sql = "SELECT * FROM article WHERE Category = 'sdg13' ORDER BY created_at DESC";
-                            $result = $conn->query($sql);
+                <div class="climate-slider swiper climate-slider-container">
+                    <div class="swiper-wrapper">
+                        <?php
+                        // 查詢SDG13分類的文章（氣候行動），按創建時間排序
+                        $sql = "SELECT * FROM article WHERE Category = 'sdg13' ORDER BY created_at DESC";
+                        $result = $conn->query($sql);
 
-                            if ($result->num_rows > 0) {
-                                while ($row = $result->fetch_assoc()) {
-                                    echo '<div class="article-card">';
-                                    echo '<h4>' . htmlspecialchars($row['Title']) . '</h4>';
-                                    if ($row['ImageURL']) {
-                                        echo '<img src="../' . htmlspecialchars($row['ImageURL']) . '" alt="文章圖片">';
-                                    } else {
-                                        echo '<img src="../img/climate.jpg" alt="預設圖片">';
-                                    }
-                                    echo '<p>' . htmlspecialchars($row['Description']) . '</p>';
-                                    echo '<a href="article.php?id=' . $row['ArticleID'] . '" class="read-more">閱讀更多</a>';
-                                    echo '</div>';
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                echo '<div class="swiper-slide climate-card">';
+                                // 右側內容（原本是左側圖片）
+                                echo '<div class="climate-card-content">';
+                                echo '<h4 class="climate-card-title">' . htmlspecialchars($row['Title']) . '</h4>';
+                                echo '<a href="article.php?id=' . $row['ArticleID'] . '" class="climate-card-button">閱讀更多</a>';
+                                echo '</div>'; // 結束 climate-card-content
+                                
+                                // 左側圖片（原本是右側內容）
+                                if ($row['ImageURL']) {
+                                    echo '<img src="../' . htmlspecialchars($row['ImageURL']) . '" alt="文章圖片" class="climate-card-image">';
+                                } else {
+                                    echo '<img src="../img/climate.jpg" alt="預設圖片" class="climate-card-image">';
                                 }
-                            } else {
-                                echo '<div class="article-card">';
-                                echo '<h4>暫無相關文章</h4>';
-                                echo '<p>目前沒有氣候永續相關的文章。</p>';
-                                echo '</div>';
+                                echo '</div>'; // 結束 swiper-slide
                             }
-                            ?>
-                        </div>
-                        <!-- 左右按鈕 -->
-                        <button class="slider-btn2 prev-btn">&gt;</button>
-                        <button class="slider-btn2 next-btn">&lt;</button>
+                        }
+                        ?>
                     </div>
-                    <!-- 氣候圖片區塊 -->
-                    <div class="climate-image-container">
-                        <h3>關於氣候永續的文章</h3>
-                        <img src="../img/climate.gif" alt="氣候圖片" class="climate-image">
-                    </div>
+                    <!-- 分頁器 -->
+                    <div class="swiper-pagination-climate"></div>
+                    <!-- 導航按鈕 -->
+                    <div class="swiper-button-prev climate-prev"></div>
+                    <div class="swiper-button-next climate-next"></div>
                 </div>
+                <h1>氣候永續的文章</h1>
             </div>
         </section>
-
         <!-- 陸域永續文章 -->
         <section class="content">
             <div class="brown-section">
-                <div class="container">
-                    <!-- 陸域圖片區塊 -->
-                    <div class="land-image-container">
-                        <h3>關於陸域永續的文章</h3>
-                        <img src="../img/land-index.gif" alt="陸域圖片" class="land-image">
-                    </div>
-                    <!-- 滾動文章區域 -->
-                    <div class="article-slider">
-                        <div class="article-content">
-                            <?php
-
-                            // 查詢SDG15分類的文章（陸域生態），按創建時間排序
-                            $sql = "SELECT * FROM article WHERE Category = 'sdg15' ORDER BY created_at DESC";
-                            $result = $conn->query($sql);
-
-                            if ($result->num_rows > 0) {
-                                while ($row = $result->fetch_assoc()) {
-                                    echo '<div class="article-card">';
-                                    echo '<h4>' . htmlspecialchars($row['Title']) . '</h4>';
-                                    if ($row['ImageURL']) {
-                                        echo '<img src="../' . htmlspecialchars($row['ImageURL']) . '" alt="文章圖片">';
-                                    } else {
-                                        echo '<img src="../img/forest.png" alt="預設圖片">';
-                                    }
-                                    echo '<p>' . htmlspecialchars($row['Description']) . '</p>';
-                                    echo '<a href="article.php?id=' . $row['ArticleID'] . '" class="read-more">閱讀更多</a>';
-                                    echo '</div>';
-                                }
-                            } else {
-                                echo '<div class="article-card">';
-                                echo '<h4>暫無相關文章</h4>';
-                                echo '<p>目前沒有陸域永續相關的文章。</p>';
-                                echo '</div>';
-                            }
-
-                            ?>
-                        </div>
+                <h1>陸域永續的文章</h1>
+                <div class="land-slider swiper land-slider-container">
+                    <div class="swiper-wrapper">
                         <?php
-                        $conn->close();
+                        // 查詢SDG15分類的文章（陸域生態），按創建時間排序
+                        $sql = "SELECT * FROM article WHERE Category = 'sdg15' ORDER BY created_at DESC";
+                        $result = $conn->query($sql);
+
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                echo '<div class="swiper-slide land-card">';
+                                // 左側圖片
+                                if ($row['ImageURL']) {
+                                    echo '<img src="../' . htmlspecialchars($row['ImageURL']) . '" alt="文章圖片" class="land-card-image">';
+                                } else {
+                                    echo '<img src="../img/forest.png" alt="預設圖片" class="land-card-image">';
+                                }
+                                // 右側內容
+                                echo '<div class="land-card-content">';
+                                echo '<h4 class="land-card-title">' . htmlspecialchars($row['Title']) . '</h4>';
+                                echo '<a href="article.php?id=' . $row['ArticleID'] . '" class="land-card-button">閱讀更多</a>';
+                                echo '</div>'; // 結束 land-card-content
+                                echo '</div>'; // 結束 swiper-slide
+                            }
+                        }
                         ?>
-                        <!-- 左右按鈕 -->
-                        <button class="slider-btn2 prev-btn">&lt;</button>
-                        <button class="slider-btn2 next-btn">&gt;</button>
                     </div>
+                    <!-- 分頁器 -->
+                    <div class="swiper-pagination-land"></div>
+                    <!-- 導航按鈕 -->
+                    <div class="swiper-button-prev land-prev"></div>
+                    <div class="swiper-button-next land-next"></div>
                 </div>
             </div>
         </section>
@@ -221,14 +202,13 @@ require_once 'db_connect.php';
             },
         });
         // 初始化海洋永續文章輪播
-        var oceanSlidesCount = document.querySelectorAll('.ocean-slider .swiper-slide').length;
         var oceanSwiper = new Swiper('.ocean-slider', {
-            slidesPerView: 1.5, // 改為只顯示1張
+            slidesPerView: 1.5,
             spaceBetween: 30,
             centeredSlides: false,
             loop: true,
             pagination: {
-                el: '.swiper-pagination',
+                el: '.swiper-pagination-ocean',
                 clickable: true,
             },
             navigation: {
@@ -236,7 +216,50 @@ require_once 'db_connect.php';
                 prevEl: '.ocean-prev',
             },
             breakpoints: {
-                // 當視窗寬度大於等於768px時
+                768: {
+                    slidesPerView: 1.5, 
+                    spaceBetween: 40
+                }
+            }
+        });
+        
+        // 初始化氣候永續文章輪播
+        var climateSwiper = new Swiper('.climate-slider', {
+            slidesPerView: 1.5,
+            spaceBetween: 30,
+            centeredSlides: false,
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination-climate',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.climate-next',
+                prevEl: '.climate-prev',
+            },
+            breakpoints: {
+                768: {
+                    slidesPerView: 1.5, 
+                    spaceBetween: 40
+                }
+            }
+        });
+        
+        // 初始化陸域永續文章輪播
+        var landSwiper = new Swiper('.land-slider', {
+            slidesPerView: 1.5,
+            spaceBetween: 30,
+            centeredSlides: false,
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination-land',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.land-next',
+                prevEl: '.land-prev',
+            },
+            breakpoints: {
                 768: {
                     slidesPerView: 1.5, 
                     spaceBetween: 40

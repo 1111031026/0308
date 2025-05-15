@@ -99,7 +99,7 @@ if (isset($_GET['id']) && isset($_SESSION['login_session']) && $_SESSION['login_
 
         if (isset($_GET['id'])) {
             $id = intval($_GET['id']);
-            $stmt = $conn->prepare("SELECT Title, Description, Content, ArticleURL FROM article WHERE ArticleID = ?");
+            $stmt = $conn->prepare("SELECT Title, Description, teacher_summary, ArticleURL FROM article WHERE ArticleID = ?");
             $stmt->bind_param("i", $id);
             $stmt->execute();
             $result = $stmt->get_result();
@@ -113,21 +113,19 @@ if (isset($_GET['id']) && isset($_SESSION['login_session']) && $_SESSION['login_
                 
                 echo '<div class="article-source"><span style="color :black;">文章來源：</span><a href="' . htmlspecialchars($row['ArticleURL']) . '" target="_blank">' . htmlspecialchars($row['ArticleURL']) . '</a></div>';
 
-                // 中間：AI重點整理
-                $analysis = analyzeArticle($row['Content']);
-                echo '<div class="article-ai-section">';
-                echo '<h3 class="ai-title">AI重點整理</h3>';
-                if (isset($analysis['error'])) {
-                    echo '<div class="error">分析過程出現錯誤：' . htmlspecialchars($analysis['error']) . '</div>';
+                // 直接讀取 teacher_summary 欄位內容
+                if (!empty($row['teacher_summary'])) {
+                    echo '<div class="article-ai-section">';
+                    echo '<h3 class="ai-title">AI重點整理</h3>';
+                    echo '<div class="ai-analysis">' . nl2br(htmlspecialchars($row['teacher_summary'])) . '</div>';
+                    echo '</div>';
                 } else {
-                    echo '<div class="ai-analysis">';
-                    echo nl2br(htmlspecialchars($analysis['choices'][0]['message']['content']));
+                    echo '<div class="article-ai-section">';
+                    echo '<h3 class="ai-title">AI重點整理</h3>';
+                    echo '<div class="ai-analysis" style="color:#888;">尚未有AI統整內容</div>';
                     echo '</div>';
                 }
-                echo '</div>';
 
-                
-                
             } else {
                 echo '<p>找不到該文章</p>';
             }

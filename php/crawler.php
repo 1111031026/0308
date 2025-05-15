@@ -162,7 +162,7 @@ $user_id = $_SESSION['user_id'] ?? 0;
                     $extracted_content = extractContent($content);
                     
                     // 準備SQL語句
-                    $stmt = $conn->prepare("INSERT INTO article (ArticleURL, Title, Description, Category, ImageURL, Content, UserID) VALUES (?, ?, ?, ?, ?, ?, ?)");
+                    $stmt = $conn->prepare("INSERT INTO article (ArticleURL, Title, Description, Category, ImageURL, Content, teacher_summary, UserID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
                     if (isset($_SESSION['user_id'])) {
                         $user_id = $_SESSION['user_id'];
                     } else {
@@ -173,14 +173,14 @@ $user_id = $_SESSION['user_id'] ?? 0;
                     $userTitle = $_POST['title'];
                     $description = $_POST['description'];
                     $category = $_POST['category'];
-                    $stmt->bind_param("ssssssi", $url, $userTitle, $description, $category, $imageURL, $content, $user_id);
+                    $stmt->bind_param("sssssssi", $url, $userTitle, $description, $category, $imageURL, $content, $extracted_content, $user_id);
                     
                     // 執行SQL
                     if ($stmt->execute()) {
                         echo '<div class="content-display">';
-                        echo '<h2>文章已成功保存！</h2>';
+                        echo '<h2>重點已成功保存！</h2>';
                         echo '<p>標題：' . htmlspecialchars($title) . '</p>';
-                        echo '<p><a href="article.php?id=' . $conn->insert_id . '">查看文章</a></p>';
+                        echo '<p><a href="ai_summary_editor.php?id=' . $conn->insert_id . '">查看重點</a></p>';
                         
                         // --- 新增：更新教師積分 --- 
                         $updatePointsStmt = $conn->prepare("UPDATE teacher_achievement SET TotalPoints = TotalPoints + 5 WHERE UserID = ?");

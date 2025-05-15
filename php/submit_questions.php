@@ -23,13 +23,13 @@ try {
             $user_id = $row['userID'];
             switch($question_type) {
                 case '選擇題':
-                    $sql = "INSERT INTO choicequizstagingarea (QuestionText, ArticleID, CorrectAnswer, UserID, OptionA, OptionB, OptionC, OptionD) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                    $sql = "INSERT INTO choicequiz (QuestionText, ArticleID, CorrectAnswer, UserID, OptionA, OptionB, OptionC, OptionD) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
                     break;
                 case '問答題':
-                    $sql = "INSERT INTO fillquizstagingarea (QuestionText, ArticleID, CorrectAnswer, UserID) VALUES (?, ?, ?, ?)";
+                    $sql = "INSERT INTO fillquiz (QuestionText, ArticleID, CorrectAnswer, UserID) VALUES (?, ?, ?, ?)";
                     break;
                 case '是非題':
-                    $sql = "INSERT INTO tfquizstagingarea (QuestionText, ArticleID, CorrectAnswer, UserID) VALUES (?, ?, ?, ?)";
+                    $sql = "INSERT INTO tfquiz (QuestionText, ArticleID, CorrectAnswer, UserID) VALUES (?, ?, ?, ?)";
                     break;
                 default:
                     throw new Exception("未知的題目類型：" . $question_type);

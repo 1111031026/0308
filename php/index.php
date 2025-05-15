@@ -223,8 +223,9 @@ require_once 'db_connect.php';
         // 初始化海洋永續文章輪播
         var oceanSlidesCount = document.querySelectorAll('.ocean-slider .swiper-slide').length;
         var oceanSwiper = new Swiper('.ocean-slider', {
-            slidesPerView: 1, // 改為只顯示1張
-            spaceBetween: 10,
+            slidesPerView: 1.5, // 改為只顯示1張
+            spaceBetween: 30,
+            centeredSlides: false,
             loop: true,
             pagination: {
                 el: '.swiper-pagination',
@@ -235,8 +236,10 @@ require_once 'db_connect.php';
                 prevEl: '.ocean-prev',
             },
             breakpoints: {
+                // 當視窗寬度大於等於768px時
                 768: {
-                    slidesPerView: 1,
+                    slidesPerView: 1.5, 
+                    spaceBetween: 40
                 }
             }
         });

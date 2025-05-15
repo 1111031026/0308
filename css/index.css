@@ -507,8 +507,9 @@ main {
     transition: background-color 0.3s ease;
 }
 .ocean-slider-container {
-    width: 65%; /* 右側佔3/4寬度 */
+    width: 55%; /* 右側佔3/4寬度 */
     padding: 2rem;
+    overflow: hidden; 
 }
 .ocean-card {
     /* 新的海洋永續文章卡片樣式 */
@@ -519,8 +520,7 @@ main {
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     height: 400px !important;
-    margin: 0 25px; /* 居中卡片 */
-    width: 600px !; /* 固定卡片寬度 */
+    width: 600px; /* 固定卡片寬度 */
 }
 
 .ocean-card-image {

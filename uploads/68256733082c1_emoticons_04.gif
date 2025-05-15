@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="zh-TW" itemscope itemtype="https://schema.org/WebSite">
+<head>
+<!--
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="網頁敘述">
+  <meta name="theme-color" content="#f46c00" />
+-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="content-language" content="zh-Hant-TW">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0" />
+<!-- favicon -->
+<link rel="icon" href="/static/img/icons/icon-128x128.png" sizes="128x128">
+<link rel="icon" href="/static/img/icons/icon-192x192.png" sizes="192x192">
+<link rel="icon" type="image/x-icon" href="/static/img/favicon.ico" />
+
+<!-- for Facebook -->
+<meta property="og:title" itemprop="name" content="找不到網頁"/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" itemprop="url" content=""/>
+<meta property="og:image" itemprop="image" content="https://udn.com/static/img/UDN_BABY.png"/>
+<meta property="og:image:width" content="1000"/>
+<meta property="og:image:height" content="1000"/>
+<meta property="og:site_name" content="聯合新聞網"/>
+<meta property="og:description" content="udn.com 提供即時新聞以及豐富的政治、社會、地方、兩岸、國際、財經、數位、運動、NBA、娛樂、生活、健康、旅遊新聞，以最即時、多元的內容，滿足行動世代的需求。"/>
+<meta property="og:locale" content="zh_TW">
+<meta property="fb:admins" content="100002847892748" />
+<meta property="fb:app_id" content="350231215126101" />
+<meta property="fb:pages" content="241284961029" />
+<meta property="article:author" content="https://www.facebook.com/myudn/" />
+<meta property="article:publisher" content="https://www.facebook.com/myudn/" />
+
+<!-- for Google -->
+<meta name="description" itemprop="description" content="udn.com 提供即時新聞以及豐富的政治、社會、地方、兩岸、國際、財經、數位、運動、NBA、娛樂、生活、健康、旅遊新聞，以最即時、多元的內容，滿足行動世代的需求。" />
+<meta name="author" itemprop="author" content="聯合新聞網" />
+<meta name="copyright" content="聯合新聞網" />
+<meta name="application-name" content="聯合新聞網" />
+<meta name="google-site-verification" content="zxOxo5I1xPvrdU_l5_sX9kZ8v0SiUC18mtRszIAsHqk" />
+<link rel="alternate" hreflang="zh-Hant" href="" />
+
+<!-- Twitter Card data -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@聯合新聞網">
+<meta name="twitter:title" content="找不到網頁">
+<meta name="twitter:description" content="udn.com 提供即時新聞以及豐富的政治、社會、地方、兩岸、國際、財經、數位、運動、NBA、娛樂、生活、健康、旅遊新聞，以最即時、多元的內容，滿足行動世代的需求。">
+<meta name="twitter:url" content="">
+<meta name="twitter:image:src" content="https://udn.com/static/img/UDN_BABY.png">
+
+<!-- for follow & save -->
+<meta name="date.available" content="">
+<!-- for idle page -->
+<meta name="channel_id" content="2">
+<meta name="cate_id" content="0">
+<meta name="sub_id" content="">
+<meta name="art_id" content="">
+
+
+
+
+
+<!--<link href="https://udn.com/static/img/UDN_BABY.png" rel="image_src" type="image/jpeg">-->
+<meta name="URL" content=""/>
+<meta name="date" content="">
+
+
+<link rel="alternate" type="application/rss+xml" href="https://udn.com/news/rssfeed" />
+
+<meta name="robots" content="NOINDEX, NOODP, NOFOLLOW">
+
+
+
+<meta property="taboola:image" content="https://udn.com/static/img/UDN_BABY.png"/>
+
+<!-- 57×57px -->
+<link rel="apple-touch-icon" href="https://uc.udn.com.tw/upf/news/2017/images/icon_mobile_57x57.png">
+<!-- 72×72px ipad-->
+<link rel="apple-touch-icon" sizes="72×72" href="https://uc.udn.com.tw/upf/news/2017/images/icon_mobile_72x72.png">
+<!-- 114×114px iphone4-->
+<link rel="apple-touch-icon" sizes="114×114" href="https://uc.udn.com.tw/upf/news/2017/images/icon_mobile_114x114.png">
+
+<!--<meta name="news_keywords" content="" />-->
+  <title>找不到網頁</title>
+    <link rel="dns-prefetch" href="//s.udn.com.tw" />
+  <link rel="dns-prefetch" href="//p.udn.com.tw" />
+  <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+  <link rel="dns-prefetch" href="//fonts.gstatic.com">
+  <link rel="dns-prefetch" href="//www.google-analytics.com" />
+  <link rel="dns-prefetch" href="//www.googletagservices.com" />
+  
+  <link rel="manifest" href="/static/manifest.json" crossorigin="use-credentials">
+  
+  
+  <!--<link href="https://s.udn.com.tw/static/font-icons/css/fontello.css" rel="stylesheet" type="text/css">
+  <link href="https://s.udn.com.tw/static/font-icons/css/animation.css" rel="stylesheet" type="text/css"> -->
+    
+<link rel="preload" href="/static/js/vendor.bundle.js?202505131421" as="script">
+<link rel="preload" href="/static/js/base.bundle.js?202505131421" as="script">
+<!-- #Location: /inc/meta/cssjs_preload -->
+  
+    <!--<link href="https://s.udn.com.tw/static/font-icons/css/fontello.css" rel="stylesheet" type="text/css">-->
+<link href="https://s.udn.com.tw/static/font-icons/css/fontello.css?202505131421" rel="stylesheet" type="text/css">
+<link href="https://s.udn.com.tw/static/font-icons/css/animation.css?202505131421" rel="stylesheet" type="text/css">
+<link href="/static/css/google-dfp-native.css?202505131421" rel="stylesheet" type="text/css">
+<link href="/static/css/base.css?202505131421" rel="stylesheet" type="text/css">
+
+<script src="/static/js/vendor_head.bundle.js?202505131421" ></script>
+<script src="/static/js/utils_head.bundle.js?202505131421" ></script>
+<script src="/static/js/google-dfp-native.js?202505131421" ></script>
+<!-- #Location: /inc/meta/cssjs_header -->
+<!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script>
+  
+    if (navigator.userAgent.indexOf("MSIE") >= 0) {
+      var root = document.documentElement;
+      root.className += 'ie-incompatible';
+    }
+  
+  
+    if (window.CSS && CSS.supports('color', 'var(--test)')) {
+      console.log('styles.css');
+    } else {
+      console.log('styles.no-vars.css');
+      
+        var link = document.createElement("link");
+        var root = document.documentElement;
+        root.className += ' ie-fallback';
+  
+        link.href = '/static/css/ie-polyfill.css';
+        link.type = 'text/css';
+        link.rel = 'stylesheet';
+        document.getElementsByTagName("head")[0].appendChild(link);
+  
+    }
+  
+  </script>
+    <script> rId = function(){ return null; } </script>
+  
+  <script>
+function getCookie(name) {
+	var value = "; " + document.cookie;
+	var parts = value.split("; " + name + "=");
+	if (parts.length >= 2) return parts.pop().split(";").shift();
+}
+
+var _ga = getCookie('_ga');
+var _gaA = _ga.split(".");
+var google_id = '';
+for (i=2;i<_gaA.length;i++) google_id = google_id+_gaA[i]+'.';
+google_id = google_id.substring(0,google_id.length-1);
+//console.log(google_id);
+//if (typeof _ga !== 'undefined') var google_id = _ga.split(".")[2]+'.'+_ga.split(".")[3];
+//else var google_id = '__';
+var user_id = getCookie("udnland");
+//if (typeof user_id === 'undefined' || user_id == '') user_id = undefined;
+if (typeof user_id === 'undefined' || user_id == '') {
+	user_id = undefined;
+	var auth_type = '未登入';
+}
+else {
+	var auth_type = '已登入_會員';
+}
+var etu_id = getCookie("__eruid");
+
+console.log('1.   etu_id: '+etu_id);
+console.log('2.  user_id: '+user_id);
+console.log('3.google_id: '+google_id);
+
+</script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	</script>
+<!-- #Location: /inc/meta/trace_ga -->
+<!-- Begin comScore Tag -->
+<script>
+var _comscore = _comscore || [];
+    _comscore.push({ c1: "2", c2: "7390954" });
+(function() {
+var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+el.parentNode.insertBefore(s, el);
+})();
+</script>
+<noscript>
+<img src="http://b.scorecardresearch.com/p?c1=2&c2=7390954&cv=2.0&cj=1" />
+</noscript>
+<!-- End comScore Tag -->
+<!-- #Location: /inc/meta/trace_comScore -->
+<!-- Data Layer -->
+<script>
+dataLayer = [{
+	'etu_id': etu_id,
+	'user_id': user_id,
+	'google_id': google_id,
+	'cat': ['news','cms','','',''],
+	'words': 0,
+	'content_tag': '',
+	'auth_type': auth_type,
+	'publication_date': '',
+	'content_level':'',
+	'ffid': JSON.parse(localStorage.getItem('UDN_FID'))?.FFID,
+	'dfid': JSON.parse(localStorage.getItem('UDN_FID'))?.DFID,
+}];
+</script>
+<!-- End Data Layer -->
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5CMHR66');</script>
+<!-- End Google Tag Manager -->
+
+<!-- #Location: /inc/meta/trace_GTM -->
+<!-- #Location: /inc/meta/trace -->
+  <!-- #Location: /inc/meta/structured_schemaorg_nav -->
+<!-- #Location: /inc/meta/structured -->
+
+  <!-- 2024.01.18 TEST --><script async defer src="https://p.udn.com.tw/upf/static/common/udn-fingerprint.umd.js?12"></script><!-- #Location: /inc/ads/no_more_top -->
+
+</head>
+<body>
+  <div class="udn-overlay"></div>
+  <!-- #Location: /inc/ads/under_the_body -->
+  <div id="fb-root"></div>
+  <script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
+    <header class="header">
+    <script>
+      var __UDN__ = __UDN__ || {};
+      __UDN__.initialMenu = {
+        current: '0', // which menu is active
+        version: '1',
+        fixed: [
+	          {
+            id: '1',
+            title: '即時',
+            href: '/news/breaknews/1',
+          },
+	          {
+            id: 'simple',
+            title: '再爆藝人閃兵',
+            href: 'https://stars.udn.com/search/tagging/1022/%E9%96%83%E5%85%B5',
+          },
+	        ],
+        mobile: [
+          {
+            id: 'hottest',
+            title: '熱門',
+            href: 'https://udn.com/rank/pv/2',
+          }
+        ],
+/*
+        shopping: {
+          id: '',
+          title: '',
+          href: '',
+        },
+*/
+        selected: [
+	          {
+            id: '6638',
+            title: '要聞',
+            href: '/news/cate/2/6638',
+          },
+	          {
+            id: '1022',
+            title: '娛樂',
+            href: 'https://stars.udn.com',
+          },
+	          {
+            id: '7227',
+            title: '運動',
+            href: '/news/cate/2/7227',
+          },
+	          {
+            id: '7225',
+            title: '全球',
+            href: '/news/cate/2/7225',
+          },
+	          {
+            id: '6639',
+            title: '社會',
+            href: '/news/cate/2/6639',
+          },
+	          {
+            id: '6641',
+            title: '地方',
+            href: '/news/cate/2/6641',
+          },
+	          {
+            id: '6644',
+            title: '產經',
+            href: '/news/cate/2/6644',
+          },
+	          {
+            id: '6645',
+            title: '股市',
+            href: '/news/cate/2/6645',
+          },
+	          {
+            id: '1025',
+            title: '房市',
+            href: 'https://house.udn.com',
+          },
+	          {
+            id: '6649',
+            title: '生活',
+            href: '/news/cate/2/6649',
+          },
+	          {
+            id: '1023',
+            title: '寵物',
+            href: 'https://pets.udn.com',
+          },
+	          {
+            id: '1005',
+            title: '健康',
+            href: 'https://health.udn.com',
+          },
+	          {
+            id: '8887',
+            title: '橘世代',
+            href: 'https://orange.udn.com',
+          },
+	          {
+            id: '11195',
+            title: '文教',
+            href: '/news/cate/2/11195',
+          },
+	          {
+            id: '6643',
+            title: '評論',
+            href: '/news/cate/2/6643',
+          },
+	          {
+            id: '6640',
+            title: '兩岸',
+            href: '/news/cate/2/6640',
+          },
+	          {
+            id: '1024',
+            title: '科技',
+            href: 'https://tech.udn.com',
+          },
+	          {
+            id: '120909',
+            title: 'Oops',
+            href: '/news/cate/2/120909',
+          },
+	          {
+            id: '1014',
+            title: '閱讀',
+            href: 'https://reading.udn.com/read/index',
+          },
+	          {
+            id: '1013',
+            title: '旅遊',
+            href: '/news/cate/1013',
+          },
+	          {
+            id: '1015',
+            title: '雜誌',
+            href: '/news/cate/1015',
+          },
+	          {
+            id: '8009',
+            title: '報時光',
+            href: 'https://time.udn.com',
+          },
+	          {
+            id: '8011',
+            title: '倡議+',
+            href: 'https://ubrand.udn.com',
+          },
+	          {
+            id: '8787',
+            title: '500輯',
+            href: 'https://500times.udn.com',
+          },
+	          {
+            id: '1020',
+            title: '轉角國際',
+            href: 'https://global.udn.com',
+          },
+	          {
+            id: '2000',
+            title: 'NBA',
+            href: 'https://tw-nba.udn.com',
+          },
+	          {
+            id: '2002',
+            title: '時尚',
+            href: 'https://style.udn.com',
+          },
+	          {
+            id: '1018',
+            title: '汽車',
+            href: 'https://autos.udn.com',
+          },
+	          {
+            id: '8007',
+            title: '棒球',
+            href: 'https://udn.com/ctba/index',
+          },
+	          {
+            id: '3007',
+            title: 'HBL',
+            href: 'https://udn.com/hbl/index',
+          },
+	          {
+            id: '2003',
+            title: '遊戲',
+            href: 'https://game.udn.com',
+          },
+	          {
+            id: 'topic',
+            title: '專題',
+            href: '/topic/index',
+          },
+	          {
+            id: 'blog',
+            title: '網誌',
+            href: 'http://blog.udn.com',
+          },
+	          {
+            id: '4087',
+            title: '女子漾',
+            href: 'https://woman.udn.com/woman/index',
+          },
+	        ],
+        ads: [
+	        ],
+      };
+    </script>
+  
+    
+<!-- #Location: /inc/ads/udn_logo_header-->
+
+    <div class="container">
+      <section class="header-wrapper">
+        <div class="logo">
+          <!-- logo start -->
+<a href="/news/index" alt="udn-logo" title="回聯合新聞網首頁"><img src="/static/img/logo.svg?2020020601"></a>
+<a href="/news/index" alt="udn-news" title="回首頁"><img src="/static/img/logo_name.svg?2020020601"></a>
+<!-- logo end -->
+<!-- #Location: /inc/ads/udn_logo-->
+          <!-- #Location: /inc/ads/logo_right-->
+        </div>
+        <div class="tools-box">
+          <nav class="channel-link">
+            <a title="聯合報" href="https://vip.udn.com/vip/index?utm_source=udn&utm_medium=referral&utm_campaign=familybar" style="color: #cb2529;"><i class="i-vip-udn"></i>聯合報</a>
+            <a title="經濟日報" href="https://money.udn.com/money/index?utm_source=udn&utm_medium=referral&utm_campaign=familybar" style="color: #cb2529;"><i class="i-edn"></i>經濟日報</a>
+            <a title="河好如初" href="https://river.udn.com/?utm_source=udn&utm_medium=referral&utm_campaign=familybar"><i class="i-river"></i>河好如初</a>
+            <a title="有設計" href="https://udesign.udnfunlife.com/mall/Cc1a00.do?sid=91_udn&utm_source=udn.com&utm_medium=referral_familybar_udn&utm_term=familybar_udn&utm_campaign=20170118_UDN"><i class="i-udesign"></i>有設計</a>
+            <a title="有行旅" href="https://utravel.udn.com/index.jsp?utm_source=udn&utm_medium=referral&utm_campaign=familybar"><i class="i-utravel"></i>有行旅</a>
+            <a title="願景" href="https://visionproject.org.tw/?utm_source=udn&utm_medium=referral&utm_campaign=familybar"><i class="i-visionproject"></i>願景</a>
+            <a title="我的新聞" href="https://udn.com/mypage/mynewsFeature?utm_source=udn&utm_medium=referral&utm_campaign=familybar"><i class="i-heart-fill"></i>我的新聞</a>
+          </nav>
+  
+          <div class="tools-box__items">
+          <a title="聯合報數位版" href="https://vip.udn.com/" class="vip-button" style="color: #cb2529;">
+            <i class="i-vip-udn"></i>
+          </a>
+
+
+          <div class="member-button member-button--isloading" role="button" aria-label="login" aria-pressed="false" title="登入">
+            <i class="i-user-not-login"></i>
+          </div>
+
+          <div class="menu-toggler" role="button" aria-label="menu" aria-pressed="false" title="選單/搜尋">
+            <i class="i-list-search"></i>
+          </div>
+
+
+        </div>
+
+        <div id="memberDropdown" class="member-dropdown dropdown-box" role="tooltip">
+          <a href="//member.udn.com/member/center.jsp?hold=y">會員中心</a>  
+          <a href="//member.udn.com/member/ShowMember?actiontype=update">我的設定</a> 
+          <a href="//member.udn.com/member/order_list.jsp">訂閱管理</a> 
+          <a href="//member.udn.com/member/ProcessLogout">登出</a> 
+        </div>
+
+
+</div>
+
+<!-- by kangw3n temp use --> 
+<style>
+.vip-edn--promotion a { white-space: pre; }
+</style><!-- #Location: /inc/ads/menu_top_right-->
+      </section>
+
+      <section class="navigation-wrapper">
+        <nav class="navigation">
+          <a href="/news/index" class="navigation-list navigation-fixed home" aria-label="回聯合新聞網首頁">
+            <img alt="udn-logo" title="回聯合新聞網首頁" src="/static/img/logo.svg?2020020601">
+          </a>
+          <a href="/news/breaknews/1" class="navigation-list navigation-fixed" data-id="1">即時</a>
+          <a href="https://stars.udn.com/search/tagging/1022/%E9%96%83%E5%85%B5" class="navigation-list navigation--simple" data-id="simple">再爆藝人閃兵</a>
+
+          <a href="/news/cate/2/6638" class="navigation-list" data-id="6638">要聞</a>
+          <a href="https://stars.udn.com" class="navigation-list" data-id="1022">娛樂</a>
+          <a href="/news/cate/2/7227" class="navigation-list" data-id="7227">運動</a>
+          <a href="/news/cate/2/7225" class="navigation-list" data-id="7225">全球</a>
+          <a href="/news/cate/2/6639" class="navigation-list" data-id="6639">社會</a>
+          <a href="/news/cate/2/6641" class="navigation-list" data-id="6641">地方</a>
+          <a href="/news/cate/2/6644" class="navigation-list" data-id="6644">產經</a>
+          <a href="/news/cate/2/6645" class="navigation-list" data-id="6645">股市</a>
+          <a href="https://house.udn.com" class="navigation-list" data-id="1025">房市</a>
+          <a href="/news/cate/2/6649" class="navigation-list" data-id="6649">生活</a>
+          <a href="https://pets.udn.com" class="navigation-list" data-id="1023">寵物</a>
+          <a href="https://health.udn.com" class="navigation-list" data-id="1005">健康</a>
+          <a href="https://orange.udn.com" class="navigation-list" data-id="8887">橘世代</a>
+          <a href="/news/cate/2/11195" class="navigation-list" data-id="11195">文教</a>
+          <a href="/news/cate/2/6643" class="navigation-list" data-id="6643">評論</a>
+          <a href="/news/cate/2/6640" class="navigation-list" data-id="6640">兩岸</a>
+          <a href="https://tech.udn.com" class="navigation-list" data-id="1024">科技</a>
+          <a href="/news/cate/2/120909" class="navigation-list" data-id="120909">Oops</a>
+          <a href="https://reading.udn.com/read/index" class="navigation-list" data-id="1014">閱讀</a>
+          <a href="/news/cate/1013" class="navigation-list" data-id="1013">旅遊</a>
+          <a href="/news/cate/1015" class="navigation-list" data-id="1015">雜誌</a>
+          <a href="https://time.udn.com" class="navigation-list" data-id="8009">報時光</a>
+          <a href="https://ubrand.udn.com" class="navigation-list" data-id="8011">倡議+</a>
+          <a href="https://500times.udn.com" class="navigation-list" data-id="8787">500輯</a>
+          <a href="https://global.udn.com" class="navigation-list" data-id="1020">轉角國際</a>
+          <a href="https://tw-nba.udn.com" class="navigation-list" data-id="2000">NBA</a>
+          <a href="https://style.udn.com" class="navigation-list" data-id="2002">時尚</a>
+          <a href="https://autos.udn.com" class="navigation-list" data-id="1018">汽車</a>
+          <a href="https://udn.com/ctba/index" class="navigation-list" data-id="8007">棒球</a>
+          <a href="https://udn.com/hbl/index" class="navigation-list" data-id="3007">HBL</a>
+          <a href="https://game.udn.com" class="navigation-list" data-id="2003">遊戲</a>
+          <a href="/topic/index" class="navigation-list" data-id="topic">專題</a>
+          <a href="http://blog.udn.com" class="navigation-list" data-id="blog">網誌</a>
+          <a href="https://woman.udn.com/woman/index" class="navigation-list" data-id="4087">女子漾</a>
+          <a class="navigation-list" data-id="shopping" href="#">購物</a>
+        </nav>
+        <span class="btn navigation-toggler" role="button" aria-label="more-menu"></span>
+      </section>
+  
+  
+    </div>
+  
+    <section class="overlay-menu full-menu">
+          <span class="btn close-btn" aria-label="close" role="button"><i class="i-close"></i></span>
+      <div class="container">
+  
+        <div class="input-holder" role="search">
+          <input type="search" placeholder="請輸入關鍵字" aria-label="input-search">
+          <span class="btn btn-search text-orange" aria-label="submit-search"><i class="i-search"></i></span>
+        </div>
+  
+        <section class="site-links">
+          <h3 class="site-links__title">全產品速覽</h3>
+          <div class="site-links__wrapper">
+
+            <section class="site-product">
+              <h4 class="context-box__title--orange site-product__title">新聞評論</h4>
+              <a href="https://udn.com/news/index" title="聯合新聞網" target="_blank" class="site-product__link list-ellipsis">聯合新聞網</a>
+              <a href="https://river.udn.com/river/index" title="河好如初" target="_blank" class="site-product__link list-ellipsis">河好如初</a>
+              <a href="https://sdgs.udn.com/sdgs/index" title="陽光行動" target="_blank" class="site-product__link list-ellipsis">陽光行動</a>
+              <a href="https://vip.udn.com/vip/index" title="聯合報數位版" target="_blank" class="site-product__link list-ellipsis">聯合報數位版</a>
+              <a href="https://udn70.udn.com/" title="聯合70" target="_blank" class="site-product__link list-ellipsis">聯合70</a>
+              <a href="https://global.udn.com/global_vision/index" title="轉角國際" target="_blank" class="site-product__link list-ellipsis">轉角國際</a>
+              <a href="https://ubrand.udn.com/ubrand/index" title="倡議家" target="_blank" class="site-product__link list-ellipsis">倡議家</a>
+              <a href="https://www.worldjournal.com/" title="世界日報" target="_blank" class="site-product__link list-ellipsis">世界日報</a>
+              <a href="https://topic.udn.com/issue/index" title="新聞話題" target="_blank" class="site-product__link list-ellipsis">新聞話題</a>
+            </section>
+  
+            <section class="site-product">
+              <h4 class="context-box__title--orange site-product__title">服務</h4>
+              <a href="https://member.udn.com" title="會員中心" target="_blank" class="site-product__link--member site-product__link list-ellipsis">會員中心</a>
+              <a href="https://upoints.udn.com/upt/index.jsp?utm_source=head" title="U利點數" target="_blank" class="site-product__link list-ellipsis">U利點數</a>
+              <a href="https://udn.com/mypage/mynewsFeature" title="我的新聞" target="_blank" class="site-product__link list-ellipsis">我的新聞</a>
+              <a href="https://udn.com/news/archive" title="歷史新聞" target="_blank" class="site-product__link list-ellipsis">歷史新聞</a>
+              <a href="https://event.udn.com/index/index.html" title="活動專區" target="_blank" class="site-product__link list-ellipsis">活動專區</a>
+              <a href="https://www.facebook.com/myudn" title="udn粉絲團" target="_blank" class="site-product__link list-ellipsis">udn粉絲團</a>
+              <a href="https://event.udn.com/line/" title="udn line 好友" target="_blank" class="site-product__link list-ellipsis">udn line 好友</a>
+            </section>
+  
+            <section class="site-product">
+              <h4 class="context-box__title--orange site-product__title">股市理財</h4>
+              <a href="https://money.udn.com/money/index" title="經濟日報網" target="_blank" class="site-product__link list-ellipsis">經濟日報網</a>
+              <a href="https://house.udn.com/house/index" title="房地產" target="_blank" class="site-product__link list-ellipsis">房地產</a>
+              <a href="https://www.cens.com/cens/html/zh/?utm_source=udn&utm_medium=ref_familybar_udn&utm_term=familybar_udn" title="中經社" target="_blank" class="site-product__link list-ellipsis">中經社</a>
+              <a href="https://udn.com/lotto/" title="樂透" target="_blank" class="site-product__link list-ellipsis">樂透</a>
+              <a href="https://udn.com/invoice/" title="發票" target="_blank" class="site-product__link list-ellipsis">發票</a>
+            </section>
+  
+            <section class="site-product">
+              <h4 class="context-box__title--orange site-product__title">生活娛樂</h4>
+              <a href="https://stars.udn.com/star/index" title="噓！星聞" target="_blank" class="site-product__link list-ellipsis">噓！星聞</a>
+              <a href="https://udn.com/upf/upeople/index.html" title="優人物" target="_blank" class="site-product__link list-ellipsis">優人物</a>
+              <a href="https://style.udn.com/style/index" title="udnSTYLE" target="_blank" class="site-product__link list-ellipsis">udnSTYLE</a>
+              <a href="https://500times.udn.com" title="500輯" target="_blank" class="site-product__link list-ellipsis">500輯</a>
+              <a href="https://game.udn.com/game/index" title="遊戲角落" target="_blank" class="site-product__link list-ellipsis">遊戲角落</a>
+              <a href="https://autos.udn.com/autos/index" title="發燒車訊" target="_blank" class="site-product__link list-ellipsis">發燒車訊</a>
+              <a href="https://health.udn.com/health/index" title="元氣網" target="_blank" class="site-product__link list-ellipsis">元氣網</a>
+              <a href="https://orange.udn.com/orange/index" title="橘世代" target="_blank" class="site-product__link list-ellipsis">橘世代</a>
+              <a href="https://pets.udn.com/pets/index" title="寵物部落" target="_blank" class="site-product__link list-ellipsis">寵物部落</a>
+              <a href="https://tech.udn.com/tech/index" title="科技玩家" target="_blank" class="site-product__link list-ellipsis">科技玩家</a>
+              <a href="https://woman.udn.com/woman/index" title="女子漾" target="_blank" class="site-product__link list-ellipsis">女子漾</a>
+              <a href="https://time.udn.com/udntime/index" title="報時光" target="_blank" class="site-product__link list-ellipsis">報時光</a>
+            </section>
+  
+            <section class="site-product">
+              <h4 class="context-box__title--orange site-product__title">運動</h4>
+              <a href="https://tw-nba.udn.com/nba/index" title="udn NBA" target="_blank" class="site-product__link list-ellipsis">udn NBA</a>
+              <a href="https://udn.com/ctba/index" title="野球夢田" target="_blank" class="site-product__link list-ellipsis">野球夢田</a>
+              <a href="https://udn.com/hbl/index" title="HBL" target="_blank" class="site-product__link list-ellipsis">HBL</a>
+            </section>
+  
+            <section class="site-product">
+              <h4 class="context-box__title--orange site-product__title">閱讀創作</h4>
+              <a href="https://reading.udn.com/read/index" title="琅琅悅讀" target="_blank" class="site-product__link list-ellipsis">琅琅悅讀</a>
+              <a href="https://reading.udn.com/store/store/store_index.do" title="琅琅書店" target="_blank" class="site-product__link list-ellipsis">琅琅書店</a>
+              <a href="https://reading.udn.com/story/" title="琅琅原創" target="_blank" class="site-product__link list-ellipsis">琅琅原創</a>
+<a href="https://jinfm.udn.com" title="一刻鯨選" target="_blank" class="site-product__link list-ellipsis">一刻鯨選</a>
+              <a href="https://event.udn.com/lianfu70/" title="聯副70" target="_blank" class="site-product__link list-ellipsis">聯副70</a>
+              <a href="https://blog.udn.com/" title="udn部落格" target="_blank" class="site-product__link list-ellipsis">udn部落格</a>
+              <a href="http://unitas.udngroup.com.tw/" title="聯合文學" target="_blank" class="site-product__link list-ellipsis">聯合文學</a>
+              <a href="https://www.linkingbooks.com.tw/LNB/index.aspx" title="聯經出版" target="_blank" class="site-product__link list-ellipsis">聯經出版</a>
+              <a href="https://www.unitas.me/" title="聯文雜誌" target="_blank" class="site-product__link list-ellipsis">聯文雜誌</a>
+            </section>
+  
+            <section class="site-product">
+              <h4 class="context-box__title--orange site-product__title">文創購物</h4>
+              <a href="https://udnfunlife.com/?utm_source=udn.com&utm_medium=familybar" title="數位文創" target="_blank" class="site-product__link list-ellipsis">數位文創</a>
+              <a href="https://ulicensing.udnfunlife.com/?utm_source=udn.com&utm_medium=familybar" title="IP 授權" target="_blank" class="site-product__link list-ellipsis">IP 授權</a>
+              <a href="https://uevent.udnfunlife.com/?utm_source=udn.com&utm_medium=familybar" title="瘋活動" target="_blank" class="site-product__link list-ellipsis">瘋活動</a>
+              <a href="https://tickets.udnfunlife.com/application/utk01/utk0101_.aspx?sid=91_udn&utm_source=udn.com&utm_medium=referral_familybar_udn&utm_term=familybar_udn&utm_campaign=20170118_UDN" title="售票網" target="_blank" class="site-product__link list-ellipsis">售票網</a>
+              <a href="https://timeshop.udn.com/" title="時光商號" target="_blank" class="site-product__link list-ellipsis">時光商號</a>
+            </section>
+  
+            <section class="site-product">
+              <h4 class="context-box__title--orange site-product__title">更多產品</h4>
+              <a href="https://udndata.com/ndapp/Index" title="聯合知識庫" target="_blank" class="site-product__link list-ellipsis">聯合知識庫</a>
+              <a href="https://paper.udn.com/" title="聯合電子報" target="_blank" class="site-product__link list-ellipsis">聯合電子報</a>
+              <a href="https://video.udn.com/" title="聯合影音網" target="_blank" class="site-product__link list-ellipsis">聯合影音網</a>
+              <a href="https://udncollege.udn.com/" title="聯合學苑" target="_blank" class="site-product__link list-ellipsis">聯合學苑</a>
+              <a href="https://utravel.udn.com/" title="有行旅" target="_blank" class="site-product__link list-ellipsis">有行旅</a>
+              <a href="https://mobile.udn.com/" title="APP行動網" target="_blank" class="site-product__link list-ellipsis">APP行動網</a>
+              <a href="https://udn.com/contentpartner/" title="內容聯盟" target="_blank" class="site-product__link list-ellipsis">內容聯盟</a>
+ <a href="https://co.udn.com" title="關於我們" target="_blank" class="site-product__link list-ellipsis">關於我們</a>
+            </section>
+  
+          </div>
+        </section>
+      </div>
+  
+  
+      <footer class="footer">
+        <div class="container">
+          <section class="footer-social">
+            <a href="https://www.facebook.com/myudn" title="Facebook" class="btn btn-social" aria-label="Facebook"><i class="i-fb-round"></i></a>
+            <a href="https://www.instagram.com/myudn/" title="Instagram" class="btn btn-social" aria-label="Instagram"><i class="i-instagram-1"></i></a>
+            <a href="https://www.youtube.com/channel/UC2M61YK4ntt9iK-23XhDwcw" title="Youtube" class="btn btn-social" aria-label="Youtube"><i class="i-youtube3"></i></a>
+            <a href="https://play.google.com/store/apps/details?id=com.udn.news" title="Playstore" class="btn btn-social" aria-label="Playstore"><i class="i-playstore"></i></a>
+            <a href="https://apps.apple.com/tw/app/id370132213?l=zh" title="AppleStore" class="btn btn-social" aria-label="AppleStore"><i class="i-applestore"></i></a>
+            <span class="pwa-install btn btn-social show">P</span>
+            
+            <form class="newsletter" action="https://paper.udn.com/ZOPE/UDN/Subscribe/Pkg_Add" method="GET" target="_blank">
+              <input type="email" required placeholder="輸Email訂聯合電子報" name="p_email" aria-label="subscription-email">
+              <input checked hidden value="H" name="p_PID0001" type="checkbox">
+              <button aria-label="subscription" class="btn btn-ripple btn-dark-grey" type="submit">訂閱</button>
+            </form>
+      
+          </section>
+      
+          <section class="footer-note">
+            <nav class="footer-note__wrapper">
+          <a href="https://event.udn.com/AD/" class="footer-note__link">刊登廣告</a>
+          <span class="footer-note__link"><a href="https://udn.com/page/topic/184" title="FAQ">FAQ</a>·<a href="https://co.udn.com/co/contactus" title="客服">客服</a></span>
+          <a href="https://udndata.com/udnauthority.html" class="footer-note__link">新聞授權</a>
+          <span class="footer-note__link"><a href="https://member.udn.com/member/rule.jsp" title="服務條款">服務條款</a>·<a href="https://udn.com/page/topic/495" title="著作權">著作權</a>·<a href="https://www.udngroup.com/members/udn_privacy" title="隱私權聲明">隱私權聲明</a></span>
+          <a href="https://www.udngroup.com/" class="footer-note__link">聯合報系</a>
+          <a href="http://bit.ly/3JPyOQA" class="footer-note__link">訂報紙</a>
+          <a href="https://co.udn.com/" class="footer-note__link">關於我們</a>
+          <a href="https://udn.com/page/topic/496" class="footer-note__link">網站總覽</a>
+            </nav>
+            <div class="footer-word">
+              聯合線上公司 著作權所有 ©2025
+            </div>
+          </section>
+      
+        </div>
+      </footer>
+<style>
+.logo-sponsor a:first-of-type img {aspect-ratio: unset;}
+</style>
+<!-- #Location: /inc/ads/three_lines-->
+    </section>
+  
+    <section class="overlay-menu context-box custom-menu">
+      <span class="btn close-btn" aria-label="close" role="button"><i class="i-close"></i></span>
+      <div class="container">
+        <header class="context-box__header">
+          <h3 class="context-box__title">我的頻道 </h3>
+          <div class="custom-menu__tools">
+            <span class="custom-menu__info">* 拖拉選單自訂排序儲存</span>
+            <section class="custom-menu__confirm">
+              <div class="btn-holder btn-holder--right">
+                <span class="btn btn-border btn-border--grey" id="resetMenu" role="button" aria-label="reset-menu">恢復預設</span>
+                <span class="btn btn-blue disabled" id="setMenu" role="button" aria-label="confirm-menu">確定</span>
+              </div>
+            </section>
+            <span class="btn btn-border btn-border--grey btn--customize" role="button" aria-label="customize-menu" id="customize">設定</span>
+          </div>
+        </header>
+	<!--橘世代短期活動 start -->
+	<style>
+            .orange-promotion {
+              display: none;
+              font-size: 16px;
+              background: #eee;
+              width: 100vw;
+              margin: 0 calc(-50vw + 50%);
+    
+              padding: 2px 10px;
+            }
+  
+            .orange-promotion a  {
+              display: flex;
+              align-items: center;
+              width: 100%;
+            }
+  
+            .orange-promotion span {
+              display: inline-block;
+              width: calc(100% - 50px);
+              /*text-align: center;*/
+              line-height: 1.24;
+            }
+            .orange-promotion img{
+              width: 45px;
+              height: 45px;
+            }
+            @media (max-width: 768px) {
+              .orange-promotion {
+                display: block;
+              }
+  
+              .orange-promotion + .custom-menu__wrapper {
+                padding-top: 0;
+              }
+            }
+        </style>
+	<section class="orange-promotion">
+		<a href="https://orange.udn.com/orange/index?utm_source=udnnews&utm_medium=mobilemenu"><img src="https://udn.com/upf/news/2024/orange_logo_2024.svg" alt=""><span>加入橘世代VIP富活人生下半場。</span></a>
+	</section>
+	<!--橘世代短期活動 end -->
+        <section class="custom-menu__wrapper">
+          <section class="custom-menu__content custom-menu--main">
+            <div class="custom-menu--button__holder">
+              <span data-href="#" data-id="1"
+                class="btn btn-border btn-border--blue custom-menu--button custom-menu--button-disabled disabled">即時</span>
+              <span data-href="#" data-id="2"
+                class="btn btn-border btn-border--blue custom-menu--button custom-menu--button-disabled disabled">要聞</span>
+            </div>
+          </section>
+  
+  
+        </section>
+      </div>
+  
+  
+    </section>
+  
+    
+  </header>
+
+    <section class="navigation-submenu">
+      <div class="container">
+
+        <navigation class="navigation-submenu__selector">
+
+        </navigation>
+        <div class="navigation-submenu__wrapper">
+
+          <!-- insert from here -->
+
+        </div>
+
+        <div class="navigation-submenu__controls">
+          <div class="arrow-area left">
+            <span class="arrow left-arrow i-arrow7-left"></span>
+          </div>
+          <div class="arrow-area right">
+            <span class="arrow right-arrow i-arrow7-right"></span>
+          </div>
+        </div>
+      </div>
+      <footer class="navigation-submenu__footer">
+        <div class="container">
+        </div>
+      </footer>
+    </section>
+  <section class="udn-idle"></section>
+    <main class="main-content">
+    <div class="container">
+      <!-- breaking-news : add "breaking-news-\-single" classes if only 1 news  -->
+<section class="breaking-news__wrapper  breaking-news--double">
+      
+	<div class="breaking-news__icon">快訊
+		<span class="breaking-news__arrow"></span>
+		<span class="breaking-news__arrow"></span>
+	</div>
+	<h2 class="breaking-news">
+		<a href="https://udn.com/news/story/124489/8741006?from=redpush" title="4閃兵藝人逾36歲已除役！媒體人嘆「代價太划算」：用錢換自由" data-story_list="list_快訊" data-content_level="開放閱讀">
+			<span class="breaking-news__title">4閃兵藝人逾36歲已除役！媒體人嘆「代價太划算」：用錢換自由</span>
+			<time class="breaking-news__time" datetime="11:25">11:25</time>
+		</a>
+	</h2>
+	<h2 class="breaking-news">
+		<a href="https://udn.com/news/story/124323/8741054?from=redpush" title="高雄罷韓有死亡連署 蔣萬安反問綠議員「要不要大義滅親？」" data-story_list="list_快訊" data-content_level="開放閱讀">
+			<span class="breaking-news__title">高雄罷韓有死亡連署 蔣萬安反問綠議員「要不要大義滅親？」</span>
+			<time class="breaking-news__time" datetime="10:55">10:55</time>
+		</a>
+	</h2>
+</section>
+
+<!-- #Location: /inc/ads/menu_bottom -->
+      <section class="error-container">
+        <div class="error-holder">
+          <span class="error-text">404!</span>
+          <span class="error-info">很抱歉，<br>頁面無法使用或被移除</span>
+        </div>
+        <div class="error-actions">
+          <img src="/static/img/404.gif" alt="">
+
+          <div class="input-holder" role="search">
+            <input type="search" placeholder="請輸入關鍵字" aria-label="input-search">
+            <span class="btn btn-search text-orange" aria-label="submit-search"><i class="i-search"></i></span>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+    <!-- #Location: /inc/ads/upstairs_of_no_more_down-->
+  <footer class="footer">
+    <div class="container">
+          <section class="footer-note">
+        <nav class="footer-note__wrapper">
+          <a href="https://event.udn.com/AD/" class="footer-note__link">刊登廣告</a>
+          <span class="footer-note__link"><a href="https://udn.com/page/topic/184" title="FAQ">FAQ</a>·<a href="https://co.udn.com/co/contactus" title="客服">客服</a></span>
+          <a href="https://udndata.com/faq/authority.html" class="footer-note__link">新聞授權</a>
+          <span class="footer-note__link"><a href="https://member.udn.com/member/rule.jsp" title="服務條款">服務條款</a>·<a href="https://udn.com/page/topic/495" title="著作權">著作權</a>·<a href="https://www.udngroup.com/members/udn_privacy" title="隱私權聲明">隱私權聲明</a></span>
+          <a href="https://www.udngroup.com/" class="footer-note__link">聯合報系</a>
+          <a href="http://bit.ly/3JPyOQA" class="footer-note__link">訂報紙</a>
+          <a href="https://co.udn.com/" class="footer-note__link">關於我們</a>
+          <a href="https://udn.com/page/topic/496" class="footer-note__link">網站總覽</a>
+        </nav>
+        <div class="footer-word">
+          聯合線上公司 著作權所有 ©2025
+        </div>
+      </section>
+    <script>
+
+    function dC(name) {
+        document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.udn.com";  // 將到期時間設定為1970年1月1日
+    }
+
+    // 刪除 cookie
+       dC("jaq_t");
+      // dC("FCCDCF");
+       dC("mp_990a03b701d8bc2e0702dea10c94b9ef_mixpanel");
+      
+    </script><!-- taboola body end -->
+<script type="text/javascript">
+  window._taboola = window._taboola || [];
+  _taboola.push({flush: true});
+</script><script>
+// fixed safari bug : css invalidation on position upon iPhone XS;
+window.addEventListener('message', function (e) {
+  if (e.data.type === 'overlayIframeReady') {
+    setTimeout(function() {
+      document.querySelector('#ads-Mobile_cover > div').style.position = 'relative';
+    }, 0);
+  }
+});
+
+var isOldUnsupportedBrowser = navigator.userAgent.toUpperCase().indexOf("TRIDENT/") != -1 || navigator.userAgent.toUpperCase().indexOf("MSIE") != -1;;
+
+if (isOldUnsupportedBrowser) {
+  var root = document.documentElement;
+  root.className += 'ie-incompatible-11';
+}
+</script>
+
+<style>
+.article-content__cover figcaption a, .article-content__image figcaption a {color: var(--udn-blue);}
+@media (max-width: 768px) {
+  .context-box:not(.custom-menu) {overflow: visible;}
+}
+@media screen and (max-width: 1297px) {
+    .header .tools-box .channel-link #changeChineseType, .header .tools-box .channel-link a+a {
+       margin-left: 5px;
+    }
+    .header .tools-box {
+        font-size: 16px;
+    }
+    .header-wrapper .logo .custom-logo {margin-left: 25px;}
+}
+.ie-incompatible-11 #fb-root:before {
+    content: 'udn.com 已不支援舊版瀏覽器，請下載新版Chrome或Firefox以達到最佳瀏覽體驗';
+    display: block;
+    height: 50px;
+    position: fixed;
+    background: var(--udn-red);
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+    padding: 0 20px;
+    text-align: center;
+    color: white;
+    line-height: 50px;
+    font-size: 14px;
+}
+
+</style>
+<!-- #Location: /inc/ads/no_more_down-->
+    </div>
+  </footer>
+  <div id="gotop" role="button" aria-label="go-top" class="btn btn-blue">
+    <i class="i-arrow5-up"></i>
+  </div>
+
+    
+<script src="/static/js/vendor.bundle.js?202505131421" ></script>
+<!--<link rel="preload" href="/static/js/vendor.bundle.js?202505131421" as="script">-->
+<script src="/static/js/base.bundle.js?202505131421" ></script>
+<!--<link rel="preload" href="/static/js/base.bundle.js?202505131421" as="script">-->
+<!--udn.com--><script defer src="https://udn.com/static/js/firebase.js?t=2025010202" type="module"></script>
+<!--
+<script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js?2024081501"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-messaging.js?2024081501"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-performance.js?2024081501"></script>
+<script src="/static/fcm/fcm_init.js?2024081501"></script>
+
+<script>var perf = firebase.performance();</script>
+-->
+<!-- #Location: /inc/meta/cssjs_footer -->
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC:300,400,500&display=swap&subset=chinese-traditional" rel="stylesheet" type="text/css">
+</body>
+</html>

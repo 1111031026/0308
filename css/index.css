@@ -170,37 +170,6 @@ main {
     font-weight: bold;
     background: linear-gradient(135deg, rgba(76, 145, 230, 0.85) 0%, rgba(20, 48, 128, 0.95) 100%);
 }
-
-/* 綠色區塊樣式（氣候） */
-.green-section {
-    background: white;
-    /* 清新、活力的綠色漸層 */
-    color: rgb(63, 212, 88);
-    padding: 2rem;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-/* 棕色區塊樣式（陸域） */
-.brown-section {
-    background: linear-gradient(135deg, rgba(217, 119, 6, 0.75) 0%, rgba(74, 44, 42, 0.85) 100%);
-    /* 溫暖、質樸的漸層 */
-    color: white;
-    padding: 2rem;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-/* 響應式設計 */
 @media (max-width: 768px) {
     .ocean-card {
         flex-direction: column;
@@ -355,7 +324,20 @@ main {
         height: 200px;
     }
 }
-/* 氣候永續區塊樣式 */
+/* 綠色區塊樣式（氣候） */
+.green-section {
+    background: white;
+    /* 清新、活力的綠色漸層 */
+    color: rgb(63, 212, 88);
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
 .climate-slider-container {
     width: 55%;
     padding: 2rem;
@@ -480,7 +462,20 @@ main {
     text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
 }
 
-/* 陸域永續區塊樣式 */
+/* 棕色區塊樣式（陸域） */
+.brown-section {
+    background: linear-gradient(135deg, rgba(217, 119, 6, 0.75) 0%, rgba(74, 44, 42, 0.85) 100%);
+    /* 溫暖、質樸的漸層 */
+    color: white;
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
 .land-slider-container {
     width: 55%;
     padding: 2rem;

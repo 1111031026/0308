@@ -156,10 +156,19 @@ $user_id = $_SESSION['user_id'] ?? 0;
                         }
                     }
 
-                    // 使用AI提取主要內容
+                    // 使用AI提取主要內容 - 這將被存入 teacher_summary 欄位
                     require_once 'article_analyzer.php';
-                    $content = $dom->saveHTML();
-                    $extracted_content = extractContent($content);
+                    $content = $dom->saveHTML(); // 原始HTML內容 - 這將被存入 Content 欄位
+                    $extracted_content = extractContent($content); // 提取AI統整後的內容
+                    
+                    // 檢查提取的內容是否為中文，如果不是則添加提示
+                    if (!preg_match('/[\x{4e00}-\x{9fa5}]/u', $extracted_content)) {
+                        // 如果沒有中文字符，再次嘗試提取並明確要求中文回答
+                        $extracted_content = "以下內容應以繁體中文呈現：\n\n" . $extracted_content;
+                        $extracted_content = extractContent($extracted_content); // 再次提取，確保內容為繁體中文
+                    }
+                    
+                    // 確保提取的內容是繁體中文，這將被存入 teacher_summary 欄位
                     
                     // 準備SQL語句
                     $stmt = $conn->prepare("INSERT INTO article (ArticleURL, Title, Description, Category, ImageURL, Content, teacher_summary, UserID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");

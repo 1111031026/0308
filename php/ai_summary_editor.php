@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['teacher_summary'])) {
     $stmt->bind_param("si", $new_summary, $articleID);
     if ($stmt->execute()) {
         $teacher_summary = $new_summary;
-        $msg = 'AI統整內容已儲存！';
+        $msg = '重點整理已儲存！';
     } else {
         $msg = '儲存失敗：' . $conn->error;
     }
@@ -49,25 +49,17 @@ $conn->close();
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <title>AI統整內容編輯 - <?php echo htmlspecialchars($title); ?></title>
+    <title>重點整理重點整理編輯 - <?php echo htmlspecialchars($title); ?></title>
     <link rel="stylesheet" href="../css/nav.css">
-    <link rel="stylesheet" href="../css/achievement.css">
-    <style>
-        .editor-container { max-width: 800px; margin: 30px auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 8px #eee; }
-        textarea { width: 100%; min-height: 200px; padding: 10px; font-size: 16px; border-radius: 4px; border: 1px solid #ccc; }
-        .btn-save { padding: 10px 30px; background: #4CAF50; color: #fff; border: none; border-radius: 4px; font-size: 16px; cursor: pointer; }
-        .btn-save:hover { background: #388e3c; }
-        .msg { color: #2196F3; margin-bottom: 10px; }
-        .section-title { font-weight: bold; margin-top: 20px; }
-        .raw-content { background: #f8f9fa; padding: 10px; border-radius: 4px; margin-bottom: 20px; white-space: pre-wrap; }
-    </style>
+    <link rel="stylesheet" href="../css/ai_summary_editor.css">
 </head>
 <body>
     <header><?php include "nav.php"; ?></header>
     <div class="editor-container">
-        <h2>AI統整內容編輯</h2>
+        <h2>重點整理編輯</h2>
         <form method="POST">
-            <div class="section-title">AI統整內容（可編輯）：</div>
+            <div class="section-title">重點整理（可編輯）：</div>
+            <div style="color:#888;font-size:14px;margin-bottom:5px;">請以繁體中文撰寫或編輯統整內容，避免使用英文。</div>
             <textarea name="teacher_summary" required><?php echo htmlspecialchars($teacher_summary); ?></textarea>
             <br><br>
             <button type="submit" class="btn-save">儲存</button>

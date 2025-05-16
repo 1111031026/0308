@@ -144,7 +144,7 @@ main {
     background: linear-gradient(135deg, rgba(96, 165, 250, 0.75) 0%, rgba(30, 58, 138, 0.85) 100%);
     /* 柔和的現代藍色漸層 */
     color: white;
-    padding: 2rem;
+    padding: 1.5rem;
     /* 增加內邊距，顯得更寬敞 */
     text-align: center;
     position: relative;
@@ -156,19 +156,46 @@ main {
     align-items: center;
 
 }
-.blue-section h1 {
-    width:  25%; /* 左側佔1/4寬度 */
-    height: 100%;
-    margin: 0;
-    padding: 2rem;
+.text-content {
+    width: 50%; /* 设置文本内容宽度 */
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    margin-right: 20px;
+}
+.blue-section h1 {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: flex-end;
     align-items: center;
-    text-align: center;
-    font-size: 2.5rem; /* 增加字體大小 */
+    text-align: right;
+    font-size: 2.5rem;
     font-weight: bold;
     background: linear-gradient(135deg, rgba(76, 145, 230, 0.85) 0%, rgba(20, 48, 128, 0.95) 100%);
+    position: sticky; /* 添加此行 */
+    top: 0; /* 添加此行 */
+    z-index: 10; /* 确保标题在其他元素之上 */
+}
+.description {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    color: white;
+    text-align: center;
+}
+
+.read-more {
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    color: rgb(0, 29, 158);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.read-more:hover {
+    color: #ffffff;
 }
 @media (max-width: 768px) {
     .ocean-card {
@@ -185,64 +212,16 @@ main {
         height: 200px;
     }
 }
+.ocean-card-image {
+    width: 100%;
+    height: 500px; /* 固定高度 */
+    object-fit: cover; /* 确保图片按比例缩放并填满容器 */
+}
 .ocean-slider-container {
-    width: 65%; /* 右側佔3/4寬度 */
+    width: 50%;
     padding: 2rem;
     overflow: hidden; 
 }
-.ocean-card {
-    /* 新的海洋永續文章卡片樣式 */
-    display: flex !important;
-    flex-direction: row !important; /* 水平排列 */
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    height: 400px !important;
-    width: 600px; /* 固定卡片寬度 */
-}
-
-.ocean-card-image {
-    width: 60%; /* 圖片佔卡片的60% */
-    height: 100%;
-    object-fit: cover;
-}
-
-.ocean-card-content {
-    width: 40%; /* 內容佔卡片的40% */
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: white;
-}
-
-.ocean-card-title {
-    font-size: 1.5rem;
-    color: #1E40AF;
-    margin-top: 20px; /* 增加上邊距 */
-    margin-bottom: 15px;
-    font-weight: bold;
-    text-align: center;
-}
-
-.ocean-card-button {
-    display: inline-block;
-    background-color: #3B82F6;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    text-align: center;
-    transition: background-color 0.3s ease;
-    margin-top: auto;
-    align-self: center;
-}
-
-.ocean-card-button:hover {
-    background-color: #2563EB;
-}
-
 .swiper-pagination-ocean {
     position: absolute;
     text-align: center;
@@ -252,25 +231,11 @@ main {
     left: 0;
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 0;
 }
-
-.swiper-pagination-ocean .swiper-pagination-bullet {
-    width: 12px;
-    height: 12px;
-    display: inline-block;
-    border-radius: 50%;
-    background: #bbb;
-    margin: 0 5px;
-    opacity: 0.7;
-    transition: all 0.3s ease;
-}
-
-.swiper-pagination-ocean .swiper-pagination-bullet-active {
-    opacity: 1;
-    background: #0077b6; /* 海洋藍色調 */
-    transform: scale(1.2);
-}
+.swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
+    background:rgb(36, 188, 248) !important;
+    }
 .ocean-prev, .ocean-next {
     position: absolute;
     top: 60% !important;
@@ -304,7 +269,7 @@ main {
 .ocean-prev:after, .ocean-next:after {
     font-size: 24px;
     font-weight: bold;
-    color: rgb(47, 171, 209);
+    color: rgb(0, 10, 145);
     text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
 }
 

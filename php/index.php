@@ -35,7 +35,6 @@ require_once 'db_connect.php';
                     // 查詢最新的五篇文章
                     $sql = "SELECT * FROM article ORDER BY created_at DESC LIMIT 5";
                     $result = $conn->query($sql);
-
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
                             echo '<div class="swiper-slide">';
@@ -173,9 +172,10 @@ require_once 'db_connect.php';
             coverflowEffect: {
                 rotate: 0,
                 stretch: 0,
-                depth: 100,
-                modifier: 2,
+                depth: 200,
+                modifier: 3,
                 slideShadows: true,
+                scale: 0.75, // 非活動幻燈片的縮小比例
             },
             loop: true,
             autoplay: {

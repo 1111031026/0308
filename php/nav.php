@@ -18,14 +18,14 @@ if (session_status() === PHP_SESSION_NONE) {
             <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'Teacher'): ?>
                 <li><a href="crawler.php">文章編輯區</a></li>
                 <li><a href="view-all-qusetion.php">查看所有編輯中題目</a></li>
-            <?php elseif (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'):?>
+            <?php elseif (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'): ?>
                 <li><a href="merchandise_manage.php">商品管理</a></li>
             <?php endif; ?>
             <li><a href="shop.php">商城</a></li>
         <?php endif; ?>
     </ul>
     <div class="nav-icons">
-    <?php if (isset($_SESSION['login_session']) && $_SESSION['login_session'] === true): ?>
+        <?php if (isset($_SESSION['login_session']) && $_SESSION['login_session'] === true): ?>
             <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'Teacher'): ?>
                 <a href="teacher_achievement.php"><img src="../img/achv.png" alt="成就"></a>
             <?php elseif (isset($_SESSION['role']) && $_SESSION['role'] === 'Student'): ?>
@@ -33,6 +33,36 @@ if (session_status() === PHP_SESSION_NONE) {
             <?php endif; ?>
         <?php endif; ?>
 
-        <a href="user.php"><img src="../img/user.png" alt="用戶"></a>
+        <?php if (isset($_SESSION['login_session']) && $_SESSION['login_session'] === true): ?>
+            <?php
+            // 獲取用戶頭像 URL
+            $avatarURL = $_SESSION['AvatarURL'] ?? 'img/user.png';
+
+            // 如果 AvatarURL 為 NULL，從資料庫中獲取
+            if ($avatarURL === 'img/user.png') {
+                $servername = "localhost";
+                $db_username = "root";
+                $db_password = "";
+                $dbname = "sustain";
+
+                $conn = new mysqli($servername, $db_username, $db_password, $dbname);
+                $conn->set_charset("utf8mb4");
+
+                if ($conn->connect_error) {
+                    die("連接失敗: " . $conn->connect_error);
+                }
+
+                $username = $_SESSION['username'];
+                $sql = "SELECT AvatarURL FROM user WHERE Username='$username'";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    $row = $result->fetch_assoc();
+                    $avatarURL = $row['AvatarURL'] ?? 'img/user.png';
+                }
+            }
+            ?>
+            <a href="user.php"><img src="../<?php echo htmlspecialchars($avatarURL); ?>" alt="用戶" style="border-radius: 50%;"></a>
+        <?php endif; ?>
     </div>
 </nav>

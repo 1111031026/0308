@@ -54,6 +54,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $update_stmt = $conn->prepare($update_sql);
             $update_stmt->bind_param("si", $avatar_url, $user_id);
             $update_stmt->execute();
+            // 通知前端更新导航栏头像
+            echo json_encode(['avatar_url' => $avatar_url]);
             $update_stmt->close();
             
             // 重新載入頁面以顯示更新

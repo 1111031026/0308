@@ -79,11 +79,34 @@ if (isset($_GET['id']) && isset($_SESSION['login_session']) && $_SESSION['login_
         <ul class="sidebar-links">
             <?php if (isset($_SESSION['login_session']) && $_SESSION['login_session'] === true): ?>
                 <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'Teacher'): ?>
-                    <li><a href="deepseek-test.php?article_id=<?php echo $_GET['id']; ?>"><img src="../img/new-quiz.png" alt="新增測驗" title="新增測驗"></a></li>
-                    <li><a href="luntan.php"><img src="../img/share.png" alt="貼文區" title="貼文區"></a></li>
+                    <?php
+                    // 查詢文章發布者的UserID
+                    $articleID = intval($_GET['id']);
+                    $currentUserID = $_SESSION['user_id'];
+                    $isAuthor = false;
+                    
+                    $authorStmt = $conn->prepare("SELECT UserID FROM article WHERE ArticleID = ?");
+                    $authorStmt->bind_param("i", $articleID);
+                    $authorStmt->execute();
+                    $authorResult = $authorStmt->get_result();
+                    
+                    if ($authorRow = $authorResult->fetch_assoc()) {
+                        $isAuthor = ($authorRow['UserID'] == $currentUserID);
+                    }
+                    $authorStmt->close();
+                    
+                    // 重新連接資料庫，因為前面已經關閉了連接
+                    require_once 'db_connect.php';
+                    ?>
+                    
+                    <li><a href="deepseek-test.php?article_id=<?php echo $_GET['id']; ?>"><img src="../img/new-quiz.svg" alt="新增測驗" title="新增測驗"></a></li>
+                    <?php if ($isAuthor): ?>
+                    <li><a href="ai_summary_editor.php?id=<?php echo $_GET['id']; ?>"><img src="../img/edit.svg" alt="編輯文章" title="編輯文章"></a></li>
+                    <?php endif; ?>
+                    <li><a href="luntan.php"><img src="../img/share.svg" alt="貼文區" title="貼文區"></a></li>
                 <?php elseif (isset($_SESSION['role']) && $_SESSION['role'] === 'Student'): ?>
-                    <li><a href="quiz.php?article_id=<?php echo $_GET['id']; ?>"><img src="../img/quiz.png" alt="測驗" title="測驗"></a></li>
-                    <li><a href="luntan.php"><img src="../img/share.png" alt="貼文區" title="貼文區"></a></li>
+                    <li><a href="quiz.php?article_id=<?php echo $_GET['id']; ?>"><img src="../img/quiz.svg" alt="測驗" title="測驗"></a></li>
+                    <li><a href="luntan.php"><img src="../img/share.svg" alt="貼文區" title="貼文區"></a></li>
                 <?php endif; ?>
             <?php endif; ?>
         </ul>
@@ -121,8 +144,8 @@ if (isset($_GET['id']) && isset($_SESSION['login_session']) && $_SESSION['login_
                     echo '</div>';
                 } else {
                     echo '<div class="article-ai-section">';
-                    echo '<h3 class="ai-title">AI重點整理</h3>';
-                    echo '<div class="ai-analysis" style="color:#888;">尚未有AI統整內容</div>';
+                    echo '<h3 class="ai-title">重點整理</h3>';
+                    echo '<div class="ai-analysis" style="color:#888;">尚未有重點整理</div>';
                     echo '</div>';
                 }
 

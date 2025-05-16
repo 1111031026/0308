@@ -84,7 +84,7 @@
                                 <h3>永續行動</h3>
                             </div>
                             <div class="info-card-back">
-                                <img src="../img/share.png" alt="永續行動" class="info-image">
+                                <img src="../img/share.svg" alt="永續行動" class="info-image">
                                 <div class="info-content">
                                     <h3>永續行動</h3>
                                     <p>在永續小站，我們致力於推廣海洋保護意識，提供實用的行動方案。透過教育、研究和實際行動，我們希望能夠喚起更多人對海洋保護的重視，共同為海洋永續發展努力。</p>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2025-05-16 11:59:13
+-- 產生時間： 2025-05-17 16:16:17
 -- 伺服器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -29,6 +29,7 @@ USE `sustain`;
 -- 資料表結構 `achievement`
 --
 -- 建立時間： 2025-05-14 16:01:03
+-- 最後更新： 2025-05-17 13:36:08
 --
 
 DROP TABLE IF EXISTS `achievement`;
@@ -42,13 +43,18 @@ CREATE TABLE `achievement` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- 資料表新增資料前，先清除舊資料 `achievement`
+--
+
+TRUNCATE TABLE `achievement`;
+--
 -- 傾印資料表的資料 `achievement`
 --
 
 INSERT INTO `achievement` (`UserID`, `TotalPoints`, `ArticlesViewed`, `ChoiceQuestionsCorrect`, `TFQuestionsCorrect`, `FillinQuestionsCorrect`) VALUES
-(2, 15, 3, 1, 1, 1),
+(2, 15, 7, 1, 1, 1),
 (9, 10, 1, 1, 1, 0),
-(11, 0, 0, 0, 0, 0);
+(11, 0, 2, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -56,7 +62,6 @@ INSERT INTO `achievement` (`UserID`, `TotalPoints`, `ArticlesViewed`, `ChoiceQue
 -- 資料表結構 `article`
 --
 -- 建立時間： 2025-05-15 16:02:45
--- 最後更新： 2025-05-16 09:55:50
 --
 
 DROP TABLE IF EXISTS `article`;
@@ -73,6 +78,11 @@ CREATE TABLE `article` (
   `teacher_summary` longtext CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '老師重點整理'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- 資料表新增資料前，先清除舊資料 `article`
+--
+
+TRUNCATE TABLE `article`;
 --
 -- 傾印資料表的資料 `article`
 --
@@ -115,6 +125,11 @@ CREATE TABLE `articleimage` (
   `ImageURL` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '圖片連結'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- 資料表新增資料前，先清除舊資料 `articleimage`
+--
+
+TRUNCATE TABLE `articleimage`;
 -- --------------------------------------------------------
 
 --
@@ -136,6 +151,11 @@ CREATE TABLE `choicequiz` (
   `ArticleID` int(11) DEFAULT NULL COMMENT 'FK to Article'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- 資料表新增資料前，先清除舊資料 `choicequiz`
+--
+
+TRUNCATE TABLE `choicequiz`;
 --
 -- 傾印資料表的資料 `choicequiz`
 --
@@ -166,6 +186,11 @@ CREATE TABLE `choicequizstagingarea` (
   `CorrectAnswer` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '正確答案 (A/B/C/D)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- 資料表新增資料前，先清除舊資料 `choicequizstagingarea`
+--
+
+TRUNCATE TABLE `choicequizstagingarea`;
 -- --------------------------------------------------------
 
 --
@@ -184,6 +209,11 @@ CREATE TABLE `choicerec` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- 資料表新增資料前，先清除舊資料 `choicerec`
+--
+
+TRUNCATE TABLE `choicerec`;
+--
 -- 傾印資料表的資料 `choicerec`
 --
 
@@ -197,6 +227,7 @@ INSERT INTO `choicerec` (`choiceID`, `UserID`, `UserAnswer`, `FinishTime`, `isCo
 -- 資料表結構 `commentarea`
 --
 -- 建立時間： 2025-05-14 16:01:04
+-- 最後更新： 2025-05-17 13:14:04
 --
 
 DROP TABLE IF EXISTS `commentarea`;
@@ -210,18 +241,17 @@ CREATE TABLE `commentarea` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 傾印資料表的資料 `commentarea`
+-- 資料表新增資料前，先清除舊資料 `commentarea`
 --
 
-INSERT INTO `commentarea` (`CommentID`, `PostID`, `UserID`, `Content`, `CommentTime`, `Status`) VALUES
-(1, 1, 10, '不如馬拉尼', '2025-05-04 23:02:40', 'PENDING');
-
+TRUNCATE TABLE `commentarea`;
 -- --------------------------------------------------------
 
 --
 -- 資料表結構 `communitypost`
 --
--- 建立時間： 2025-05-14 16:01:04
+-- 建立時間： 2025-05-17 13:12:56
+-- 最後更新： 2025-05-17 14:14:32
 --
 
 DROP TABLE IF EXISTS `communitypost`;
@@ -231,16 +261,15 @@ CREATE TABLE `communitypost` (
   `ImageURL` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '圖片網址',
   `PostDate` datetime DEFAULT current_timestamp() COMMENT '發文日期',
   `Title` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '標題',
-  `UserID` int(11) NOT NULL COMMENT 'FK to User'
+  `UserID` int(11) NOT NULL COMMENT 'FK to User',
+  `ArticleID` int(11) DEFAULT NULL COMMENT '關聯的文章ID'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 傾印資料表的資料 `communitypost`
+-- 資料表新增資料前，先清除舊資料 `communitypost`
 --
 
-INSERT INTO `communitypost` (`PostID`, `Content`, `ImageURL`, `PostDate`, `Title`, `UserID`) VALUES
-(1, '不如星見雅', NULL, '2025-05-04 22:59:42', 'sfajkhsjahk', 9);
-
+TRUNCATE TABLE `communitypost`;
 -- --------------------------------------------------------
 
 --
@@ -258,6 +287,11 @@ CREATE TABLE `fillquiz` (
   `ArticleID` int(11) DEFAULT NULL COMMENT 'FK to Article'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- 資料表新增資料前，先清除舊資料 `fillquiz`
+--
+
+TRUNCATE TABLE `fillquiz`;
 --
 -- 傾印資料表的資料 `fillquiz`
 --
@@ -282,6 +316,11 @@ CREATE TABLE `fillquizstagingarea` (
   `CorrectAnswer` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '正確答案'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- 資料表新增資料前，先清除舊資料 `fillquizstagingarea`
+--
+
+TRUNCATE TABLE `fillquizstagingarea`;
 -- --------------------------------------------------------
 
 --
@@ -299,6 +338,11 @@ CREATE TABLE `fillrec` (
   `isCorrect` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- 資料表新增資料前，先清除舊資料 `fillrec`
+--
+
+TRUNCATE TABLE `fillrec`;
 --
 -- 傾印資料表的資料 `fillrec`
 --
@@ -327,6 +371,11 @@ CREATE TABLE `merchandise` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- 資料表新增資料前，先清除舊資料 `merchandise`
+--
+
+TRUNCATE TABLE `merchandise`;
+--
 -- 傾印資料表的資料 `merchandise`
 --
 
@@ -353,6 +402,11 @@ CREATE TABLE `password_resets` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- 資料表新增資料前，先清除舊資料 `password_resets`
+--
+
+TRUNCATE TABLE `password_resets`;
 --
 -- 傾印資料表的資料 `password_resets`
 --
@@ -387,6 +441,11 @@ CREATE TABLE `purchase` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- 資料表新增資料前，先清除舊資料 `purchase`
+--
+
+TRUNCATE TABLE `purchase`;
+--
 -- 傾印資料表的資料 `purchase`
 --
 
@@ -399,7 +458,6 @@ INSERT INTO `purchase` (`UserID`, `ItemID`, `PurchaseTime`, `SpentPoints`) VALUE
 -- 資料表結構 `teacher_achievement`
 --
 -- 建立時間： 2025-05-14 16:01:04
--- 最後更新： 2025-05-16 09:49:29
 --
 
 DROP TABLE IF EXISTS `teacher_achievement`;
@@ -411,6 +469,11 @@ CREATE TABLE `teacher_achievement` (
   `SDG15ArticlesPublished` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- 資料表新增資料前，先清除舊資料 `teacher_achievement`
+--
+
+TRUNCATE TABLE `teacher_achievement`;
 --
 -- 傾印資料表的資料 `teacher_achievement`
 --
@@ -443,6 +506,11 @@ CREATE TABLE `teacher_questions` (
   `correct_answer` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- 資料表新增資料前，先清除舊資料 `teacher_questions`
+--
+
+TRUNCATE TABLE `teacher_questions`;
 -- --------------------------------------------------------
 
 --
@@ -462,6 +530,11 @@ CREATE TABLE `tfquiz` (
   `ArticleID` int(11) DEFAULT NULL COMMENT 'FK to Article'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- 資料表新增資料前，先清除舊資料 `tfquiz`
+--
+
+TRUNCATE TABLE `tfquiz`;
 --
 -- 傾印資料表的資料 `tfquiz`
 --
@@ -490,6 +563,11 @@ CREATE TABLE `tfquizstagingarea` (
   `CorrectAnswer` tinyint(1) NOT NULL COMMENT '正確答案 (True/False)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- 資料表新增資料前，先清除舊資料 `tfquizstagingarea`
+--
+
+TRUNCATE TABLE `tfquizstagingarea`;
 -- --------------------------------------------------------
 
 --
@@ -507,6 +585,11 @@ CREATE TABLE `tfrec` (
   `isCorrect` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- 資料表新增資料前，先清除舊資料 `tfrec`
+--
+
+TRUNCATE TABLE `tfrec`;
 --
 -- 傾印資料表的資料 `tfrec`
 --
@@ -538,6 +621,11 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- 資料表新增資料前，先清除舊資料 `user`
+--
+
+TRUNCATE TABLE `user`;
+--
 -- 傾印資料表的資料 `user`
 --
 
@@ -554,6 +642,7 @@ INSERT INTO `user` (`UserID`, `Username`, `Email`, `Password`, `JoinDate`, `Stat
 -- 資料表結構 `user_article_views`
 --
 -- 建立時間： 2025-05-14 16:01:03
+-- 最後更新： 2025-05-17 13:36:08
 --
 
 DROP TABLE IF EXISTS `user_article_views`;
@@ -564,14 +653,25 @@ CREATE TABLE `user_article_views` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
+-- 資料表新增資料前，先清除舊資料 `user_article_views`
+--
+
+TRUNCATE TABLE `user_article_views`;
+--
 -- 傾印資料表的資料 `user_article_views`
 --
 
 INSERT INTO `user_article_views` (`UserID`, `ArticleID`, `ViewTimestamp`) VALUES
+(2, 12, '2025-05-16 16:30:41'),
+(2, 13, '2025-05-16 16:30:34'),
 (2, 15, '2025-05-03 16:56:05'),
 (2, 16, '2025-05-02 15:11:34'),
 (2, 23, '2025-05-02 15:09:44'),
-(9, 23, '2025-05-04 14:57:25');
+(2, 27, '2025-05-16 16:30:21'),
+(2, 40, '2025-05-16 16:30:15'),
+(9, 23, '2025-05-04 14:57:25'),
+(11, 23, '2025-05-17 13:36:04'),
+(11, 40, '2025-05-17 13:36:08');
 
 --
 -- 已傾印資料表的索引
@@ -633,7 +733,8 @@ ALTER TABLE `commentarea`
 --
 ALTER TABLE `communitypost`
   ADD PRIMARY KEY (`PostID`),
-  ADD KEY `UserID` (`UserID`);
+  ADD KEY `UserID` (`UserID`),
+  ADD KEY `fk_communitypost_article` (`ArticleID`);
 
 --
 -- 資料表索引 `fillquiz`
@@ -759,7 +860,7 @@ ALTER TABLE `commentarea`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `communitypost`
 --
 ALTER TABLE `communitypost`
-  MODIFY `PostID` int(11) NOT NULL AUTO_INCREMENT COMMENT '貼文編號 (PK)', AUTO_INCREMENT=2;
+  MODIFY `PostID` int(11) NOT NULL AUTO_INCREMENT COMMENT '貼文編號 (PK)', AUTO_INCREMENT=10;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `fillquiz`
@@ -812,6 +913,12 @@ ALTER TABLE `user`
 --
 -- 已傾印資料表的限制式
 --
+
+--
+-- 資料表的限制式 `communitypost`
+--
+ALTER TABLE `communitypost`
+  ADD CONSTRAINT `fk_communitypost_article` FOREIGN KEY (`ArticleID`) REFERENCES `article` (`ArticleID`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- 資料表的限制式 `teacher_achievement`

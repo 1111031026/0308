@@ -10,7 +10,7 @@ if ($post_id <= 0) {
 }
 
 // 查詢貼文詳情
-$sql = "SELECT cp.PostID, cp.Title, cp.Content, cp.PostDate, cp.ImageURL, u.Username, u.Status 
+$sql = "SELECT cp.PostID, cp.Title, cp.Content, cp.PostDate, cp.ImageURL, cp.ArticleID, u.Username, u.Status 
         FROM communitypost cp 
         JOIN user u ON cp.UserID = u.UserID 
         WHERE cp.PostID = ?";
@@ -84,6 +84,19 @@ if (!mysqli_stmt_execute($stmt)) {
 
 $comments = mysqli_stmt_get_result($stmt);
 mysqli_stmt_close($stmt);
+
+// 獲取文章標題
+$article_title = '未知文章';
+if (isset($post['ArticleID']) && $post['ArticleID'] > 0) {
+    $article_sql = "SELECT Title FROM article WHERE ArticleID = ?";
+    $article_stmt = mysqli_prepare($conn, $article_sql);
+    mysqli_stmt_bind_param($article_stmt, 'i', $post['ArticleID']);
+    mysqli_stmt_execute($article_stmt);
+    $article_result = mysqli_stmt_get_result($article_stmt);
+    $article_row = mysqli_fetch_assoc($article_result);
+    $article_title = $article_row ? $article_row['Title'] : '未知文章';
+    mysqli_stmt_close($article_stmt);
+}
 ?>
 
 <!DOCTYPE html>
@@ -92,70 +105,109 @@ mysqli_stmt_close($stmt);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($post['Title']); ?> - 討論區</title>
-    <link rel="stylesheet" href="../css/nav2.css">
+    <link rel="stylesheet" href="../css/nav.css">
     <link rel="stylesheet" href="../css/discuss.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <?php include 'nav.php'; ?>
-
-    <div class="discuss-container">
-        <!-- 貼文詳情 -->
-        <div class="post-detail">
-            <h2><?php echo htmlspecialchars($post['Title']); ?></h2>
-            <div class="post-meta">
-                <span class="username"><?php echo htmlspecialchars($post['Username']); ?></span>
-                <span class="user-status"><?php echo htmlspecialchars($post['Status']); ?></span>
-                <span class="post-date"><?php echo date('Y-m-d H:i', strtotime($post['PostDate'])); ?></span>
-            </div>
-            <?php if (!empty($post['ImageURL'])): ?>
-                <img src="<?php echo htmlspecialchars($post['ImageURL']); ?>" alt="貼文圖片" class="post-image">
+    
+    <div class="forum-container">
+        <div class="navigation-links">
+            <?php if (isset($post['ArticleID']) && $post['ArticleID'] > 0): ?>
+                <a href="luntan.php?article_id=<?php echo $post['ArticleID']; ?>" class="back-link">
+                    <i class="fas fa-arrow-left"></i> 返回「<?php echo htmlspecialchars($article_title); ?>」討論區
+                </a>
+                <a href="article.php?id=<?php echo $post['ArticleID']; ?>" class="back-link">
+                    <i class="fas fa-book"></i> 返回文章
+                </a>
+            <?php else: ?>
+                <a href="luntan.php" class="back-link">
+                    <i class="fas fa-arrow-left"></i> 返回論壇
+                </a>
             <?php endif; ?>
-            <div class="post-content">
-                <?php echo nl2br(htmlspecialchars($post['Content'])); ?>
-            </div>
-            <a href="luntan.php" class="back-btn"><i class="fas fa-arrow-left"></i> 返回論壇</a>
         </div>
 
-        <!-- 評論區 -->
-        <div class="comments-section">
-            <h3>評論區 (<?php echo mysqli_num_rows($comments); ?>)</h3>
-
-            <?php if (isset($_SESSION['user_id'])): ?>
-                <form method="POST" action="" class="comment-form">
-                    <?php if ($comment_error): ?>
-                        <p class="error"><?php echo htmlspecialchars($comment_error); ?></p>
-                    <?php endif; ?>
-                    <textarea name="comment" placeholder="發表你的評論..." required></textarea>
-                    <button type="submit">發表評論</button>
-                </form>
-            <?php else: ?>
-                <div class="login-prompt">
-                    <p>請<a href="user_login.php">登入</a>後發表評論</p>
+        <div class="post-container">
+            <!-- 貼文詳情 -->
+            <div class="post-detail">
+                <h1 class="post-title"><?php echo htmlspecialchars($post['Title']); ?></h1>
+                
+                <div class="post-meta">
+                    <div class="author-info">
+                        <span class="author-avatar"><i class="fas fa-user-circle"></i></span>
+                        <span class="author-name"><?php echo htmlspecialchars($post['Username']); ?></span>
+                        <?php if (!empty($post['Status'])): ?>
+                            <span class="author-status"><?php echo htmlspecialchars($post['Status']); ?></span>
+                        <?php endif; ?>
+                    </div>
+                    <div class="post-time">
+                        <i class="far fa-clock"></i>
+                        <span><?php echo date('Y-m-d H:i', strtotime($post['PostDate'])); ?></span>
+                    </div>
                 </div>
-            <?php endif; ?>
-
-            <div class="comments-list">
-                <?php if (mysqli_num_rows($comments) > 0): ?>
-                    <?php while ($comment = mysqli_fetch_assoc($comments)): ?>
-                        <div class="comment-card">
-                            <div class="comment-header">
-                                <div class="user-info">
-                                    <span class="username"><?php echo htmlspecialchars($comment['Username']); ?></span>
-                                    <span class="user-status"><?php echo htmlspecialchars($comment['Status']); ?></span>
-                                </div>
-                                <span class="comment-date"><?php echo date('Y-m-d H:i', strtotime($comment['CommentTime'])); ?></span>
-                            </div>
-                            <div class="comment-content">
-                                <?php echo nl2br(htmlspecialchars($comment['Content'])); ?>
-                            </div>
-                        </div>
-                    <?php endwhile; ?>
-                <?php else: ?>
-                    <div class="no-comments">
-                        <p>目前還沒有評論，快來發表第一條吧！</p>
+                
+                <?php if (!empty($post['ImageURL'])): ?>
+                    <div class="post-image-container">
+                        <img src="<?php echo htmlspecialchars($post['ImageURL']); ?>" alt="貼文圖片" class="post-image">
                     </div>
                 <?php endif; ?>
+                
+                <div class="post-content">
+                    <?php echo nl2br(htmlspecialchars($post['Content'])); ?>
+                </div>
+            </div>
+
+            <!-- 評論區 -->
+            <div class="comments-section">
+                <h2 class="section-title">留言區 <span class="comment-count"><?php echo mysqli_num_rows($comments); ?></span></h2>
+
+                <?php if (isset($_SESSION['user_id'])): ?>
+                    <div class="comment-form-container">
+                        <form method="POST" action="" class="comment-form">
+                            <?php if ($comment_error): ?>
+                                <div class="error-message"><?php echo htmlspecialchars($comment_error); ?></div>
+                            <?php endif; ?>
+                            <div class="form-group">
+                                <textarea name="comment" placeholder="發表你的留言..." required></textarea>
+                                <button type="submit" class="submit-btn">留言</button>
+                            </div>
+                        </form>
+                    </div>
+                <?php else: ?>
+                    <div class="login-prompt">
+                        <p>請<a href="user_login.php">登入</a>後發表留言</p>
+                    </div>
+                <?php endif; ?>
+
+                <div class="comments-list">
+                    <?php if (mysqli_num_rows($comments) > 0): ?>
+                        <?php while ($comment = mysqli_fetch_assoc($comments)): ?>
+                            <div class="comment-card">
+                                <div class="comment-header">
+                                    <div class="commenter-info">
+                                        <span class="commenter-avatar"><i class="fas fa-user-circle"></i></span>
+                                        <span class="commenter-name"><?php echo htmlspecialchars($comment['Username']); ?></span>
+                                        <?php if (!empty($comment['Status'])): ?>
+                                            <span class="commenter-status"><?php echo htmlspecialchars($comment['Status']); ?></span>
+                                        <?php endif; ?>
+                                    </div>
+                                    <div class="comment-time">
+                                        <i class="far fa-clock"></i>
+                                        <span><?php echo date('Y-m-d H:i', strtotime($comment['CommentTime'])); ?></span>
+                                    </div>
+                                </div>
+                                <div class="comment-content">
+                                    <?php echo nl2br(htmlspecialchars($comment['Content'])); ?>
+                                </div>
+                            </div>
+                        <?php endwhile; ?>
+                    <?php else: ?>
+                        <div class="no-comments">
+                            <p>目前還沒有留言，快來發表第一條吧！</p>
+                        </div>
+                    <?php endif; ?>
+                </div>
             </div>
         </div>
     </div>

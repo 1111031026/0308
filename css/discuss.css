@@ -1,287 +1,329 @@
-/* 通用樣式 */
+/* 討論頁面樣式 */
 body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Microsoft JhengHei', Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
     background-color: #f5f5f5;
-}
-
-
-
-.logo img {
-    height: 30px;
-    vertical-align: middle;
-}
-
-.logo h1 {
     margin: 0;
-    font-size: 24px;
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: 10px;
-}
-
-.nav-links {
-    list-style: none;
     padding: 0;
-    margin: 0;
-    display: flex;
-    gap: 20px;
 }
 
-.nav-links li a {
+/* 主容器 */
+.forum-container {
+    max-width: 1000px;
+    margin: 80px auto 30px;
+    padding: 0 20px;
+}
+
+/* 導航鏈接 */
+.navigation-links {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 15px;
+    background-color: #f0f0f0;
+    color: #555;
     text-decoration: none;
-    color: white;
-    font-size: 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    border: 1px solid #ddd;
 }
 
-.nav-links li a:hover {
-    color: #f5f5f5;
+.back-link i {
+    margin-right: 5px;
 }
 
-.nav-icons a {
-    margin-left: 15px;
-}
-
-.nav-icons img {
-    height: 24px;
-}
-
-/* 文章容器樣式 */
-.article-container {
-    margin: 100px 20px 20px 20px; /* 移除底部空間，因為輸入框已嵌入留言區 */
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-    font-size: 28px;
-    margin-bottom: 10px;
-}
-
-.content-area {
-    margin-bottom: 20px;
-}
-
-.content-textarea {
-    width: 100%;
-    height: 200px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    resize: none;
-    font-size: 16px;
-    background-color: #f0f0f0;
-    color: #666;
-}
-
-.content-textarea:disabled {
-    background-color: #f0f0f0;
-    color: #666;
-}
-
-.user-info {
-    background-color: #d4edda;
-    padding: 10px;
-    border-radius: 4px;
-    margin-bottom: 20px;
-    color: #155724;
-}
-
-/* 留言區樣式 */
-.comment-section {
-    position: relative; /* 為輸入框的定位提供參考 */
-    margin-bottom: 20px;
-}
-
-.comment-section h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.comments-container {
-    max-height: 300px; /* 限制高度 */
-    overflow-y: auto; /* 啟用垂直滾動 */
-    border: 1px solid #ccc;
-    padding: 10px;
-    background-color: #fff;
-    margin-bottom: 60px; /* 預留空間給輸入框 */
-}
-
-.comment {
-    display: flex;
-    margin-bottom: 10px;
-    padding: 5px;
-    border-bottom: 1px solid #eee;
-}
-
-.comment-user {
-    font-weight: bold;
-    margin-right: 10px;
+.back-link:hover {
+    background-color: #e0e0e0;
     color: #333;
 }
 
-.comment-text {
-    flex: 1;
-    color: #666;
+/* 貼文容器 */
+.post-container {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
 }
 
-/* 留言輸入框（嵌入留言區，固定位置） */
-.comment-input-container {
-    position: sticky;
-    bottom: 0;
-    background-color: white;
-    padding: 10px;
-    border-top: 1px solid #ccc;
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+/* 貼文詳情 */
+.post-detail {
+    padding: 25px;
+    border-bottom: 1px solid #eee;
+}
+
+.post-title {
+    font-size: 24px;
+    margin: 0 0 15px 0;
+    color: #333;
+    font-weight: 700;
+}
+
+.post-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.author-info {
     display: flex;
     align-items: center;
-    gap: 10px;
 }
 
-.comment-input {
-    flex: 1;
-    height: 40px;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
+.author-avatar {
+    font-size: 24px;
+    color: #666;
+    margin-right: 10px;
 }
 
-.comment-submit {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    background-color: #4CAF50;
-    color: white;
-    cursor: pointer;
+.author-name {
+    font-weight: 600;
+    color: #333;
+    margin-right: 10px;
 }
 
-.comment-submit:hover {
-    background-color: #45a049;
+.author-status {
+    background-color: #e6f7ff;
+    color: #1890ff;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
 }
 
-/* 以下是 2.html 的樣式，確保共用 */
-.edit-container {
-    margin: 100px 20px 20px 20px;
-    padding: 20px;
-    background-color: white;
+.post-time {
+    color: #999;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+
+.post-time i {
+    margin-right: 5px;
+}
+
+.post-image-container {
+    margin: 15px 0;
+    text-align: center;
+}
+
+.post-image {
+    max-width: 100%;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.edit-header {
+.post-content {
+    line-height: 1.8;
+    color: #444;
     font-size: 16px;
-    color: #666;
-    margin-bottom: 20px;
+    white-space: pre-line;
 }
 
-.type-selection {
-    margin-bottom: 20px;
+/* 評論區 */
+.comments-section {
+    padding: 25px;
 }
 
-.type-label {
-    font-size: 16px;
-    margin-right: 10px;
-}
-
-.type-buttons {
-    display: inline;
-}
-
-.type-btn {
-    padding: 5px 10px;
-    margin-right: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #f0f0f0;
-    cursor: pointer;
-}
-
-.type-btn[data-active="true"] {
-    background-color: #4CAF50;
-    color: white;
-}
-
-.edit-content h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.options {
-    display: none;
-}
-
-.options[data-active="true"] {
-    display: block;
-    margin-top: 20px;
-}
-
-.option {
+.section-title {
+    font-size: 20px;
+    margin: 0 0 20px 0;
     display: flex;
     align-items: center;
-    gap: 10px;
+    color: #333;
 }
 
-.option label {
-    width: 60px;
-    font-size: 16px;
+.comment-count {
+    background-color: #f0f0f0;
+    color: #666;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 14px;
+    margin-left: 10px;
+    font-weight: normal;
 }
 
-.option input {
-    flex: 1;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
+/* 評論表單 */
+.comment-form-container {
+    margin-bottom: 25px;
 }
 
-.true-false-buttons {
-    display: flex;
-    gap: 20px;
-    justify-content: flex-start;
-    margin-top: 20px;
+.comment-form .form-group {
+    position: relative;
 }
 
-.true-false-btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    background-color: #4682b4;
-    color: white;
-    cursor: pointer;
+.comment-form textarea {
+    width: 100%;
+    height: 100px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    resize: none;
+    font-size: 15px;
+    font-family: inherit;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
 }
 
-.true-false-btn:hover {
-    background-color: #5a9bd5;
+.comment-form textarea:focus {
+    outline: none;
+    border-color: #4CAF50;
 }
 
-.true-false-btn[data-selected="true"] {
-    background-color: #ff0000;
-}
-
-.external-controls {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin: 20px;
-}
-
-.external-btn {
-    display: inline-block;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
+.submit-btn {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    padding: 8px 20px;
     background-color: #4CAF50;
     color: white;
-    text-decoration: none;
+    border: none;
+    border-radius: 20px;
     cursor: pointer;
-    width: 150px;
-    text-align: center;
+    font-size: 14px;
+    transition: background-color 0.3s;
 }
 
-.external-btn:hover {
+.submit-btn:hover {
     background-color: #45a049;
+}
+
+.error-message {
+    color: #f44336;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.login-prompt {
+    text-align: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.login-prompt a {
+    color: #4CAF50;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login-prompt a:hover {
+    text-decoration: underline;
+}
+
+/* 評論列表 */
+.comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.comment-card {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.commenter-info {
+    display: flex;
+    align-items: center;
+}
+
+.commenter-avatar {
+    font-size: 20px;
+    color: #666;
+    margin-right: 8px;
+}
+
+.commenter-name {
+    font-weight: 600;
+    color: #333;
+    margin-right: 8px;
+}
+
+.commenter-status {
+    background-color: #e6f7ff;
+    color: #1890ff;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+}
+
+.comment-time {
+    color: #999;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+}
+
+.comment-time i {
+    margin-right: 5px;
+}
+
+.comment-content {
+    line-height: 1.6;
+    color: #555;
+    font-size: 15px;
+    white-space: pre-line;
+}
+
+.no-comments {
+    text-align: center;
+    padding: 30px;
+    color: #999;
+    font-style: italic;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .forum-container {
+        margin-top: 60px;
+        padding: 0 15px;
+    }
+    
+    .post-title {
+        font-size: 20px;
+    }
+    
+    .post-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .post-time {
+        margin-left: 34px; /* 對齊作者名稱 */
+    }
+    
+    .comment-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .comment-time {
+        margin-left: 28px; /* 對齊評論者名稱 */
+    }
 }

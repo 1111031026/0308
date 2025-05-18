@@ -1,0 +1,244 @@
+:root {
+    --primary-color: #4CAF50;
+    --primary-hover: #45a049;
+    --text-dark: #333;
+    --text-muted: #666;
+    --text-light: #888;
+    --bg-light: #f8f9fa;
+    --error-bg: #f8d7da;
+    --error-text: #721c24;
+    --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --climate-color: #e74c3c;
+    --ocean-color: #3498db;
+    --land-color: #2ecc71;
+}
+
+body {
+    font-family: 'Microsoft JhengHei', Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: var(--text-dark);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+.forums-container {
+    max-width: 1200px;
+    margin: 80px auto 20px;
+    padding: 20px;
+}
+
+.forums-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.forums-header h1 {
+    font-size: 32px;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.forums-header p {
+    font-size: 16px;
+    color: var(--text-muted);
+}
+
+/* 分類標籤樣式 */
+.category-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    padding: 10px 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.tab-btn:hover {
+    background-color: #f0f0f0;
+}
+
+.tab-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* 分類區塊樣式 */
+.category-section {
+    margin-bottom: 40px;
+}
+
+.category-title {
+    font-size: 24px;
+    color: var(--primary-color);
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--primary-color);
+    margin-bottom: 20px;
+}
+
+/* 根據不同分類設置不同顏色 */
+#sdg13-section .category-title {
+    color: var(--climate-color);
+    border-bottom-color: var(--climate-color);
+}
+
+#sdg14-section .category-title {
+    color: var(--ocean-color);
+    border-bottom-color: var(--ocean-color);
+}
+
+#sdg15-section .category-title {
+    color: var(--land-color);
+    border-bottom-color: var(--land-color);
+}
+
+/* 貼文容器樣式 */
+.posts-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.no-posts {
+    background: white;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    padding: 30px;
+    text-align: center;
+    color: var(--text-muted);
+}
+
+/* 貼文卡片樣式 */
+.post-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    padding: 20px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.post-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.username {
+    font-weight: bold;
+    color: var(--text-dark);
+}
+
+.post-date {
+    color: var(--text-light);
+    font-size: 0.9em;
+}
+
+.post-title {
+    margin: 0 0 10px 0;
+}
+
+.post-title a {
+    color: var(--text-dark);
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.post-title a:hover {
+    color: var(--primary-color);
+}
+
+/* 文章引用樣式 */
+.article-reference {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.article-reference a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.article-reference a:hover {
+    text-decoration: underline;
+}
+
+.post-content {
+    color: var(--text-dark);
+    line-height: 1.6;
+    white-space: pre-wrap;
+    margin-bottom: 15px;
+    font-size: 15px;
+}
+
+.read-more-btn {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+    align-self: flex-start;
+}
+
+.read-more-btn:hover {
+    background-color: var(--primary-hover);
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .forums-container {
+        padding: 15px;
+    }
+    
+    .category-tabs {
+        gap: 10px;
+    }
+    
+    .tab-btn {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+    
+    .post-card {
+        padding: 15px;
+    }
+    
+    .post-title a {
+        font-size: 18px;
+    }
+}

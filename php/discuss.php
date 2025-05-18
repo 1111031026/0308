@@ -10,7 +10,7 @@ if ($post_id <= 0) {
 }
 
 // 查詢貼文詳情
-$sql = "SELECT cp.PostID, cp.Title, cp.Content, cp.PostDate, cp.ImageURL, cp.ArticleID, u.Username, u.Status 
+$sql = "SELECT cp.PostID, cp.Title, cp.Content, cp.PostDate, cp.ImageURL, cp.ArticleID, u.Username, u.Status, u.AvatarURL 
         FROM communitypost cp 
         JOIN user u ON cp.UserID = u.UserID 
         WHERE cp.PostID = ?";
@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['user_id'])) {
 }
 
 // 查詢評論列表
-$sql = "SELECT ca.CommentID, ca.Content, ca.CommentTime, u.Username, u.Status 
+$sql = "SELECT ca.CommentID, ca.Content, ca.CommentTime, u.Username, u.Status, u.AvatarURL 
         FROM commentarea ca 
         JOIN user u ON ca.UserID = u.UserID 
         WHERE ca.PostID = ? 
@@ -105,7 +105,7 @@ if (isset($post['ArticleID']) && $post['ArticleID'] > 0) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($post['Title']); ?> - 討論區</title>
-    <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/nav3.css">
     <link rel="stylesheet" href="../css/discuss.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
@@ -135,7 +135,11 @@ if (isset($post['ArticleID']) && $post['ArticleID'] > 0) {
                 
                 <div class="post-meta">
                     <div class="author-info">
-                        <span class="author-avatar"><i class="fas fa-user-circle"></i></span>
+                        <?php if (!empty($post['AvatarURL'])): ?>
+                            <img src="../<?php echo htmlspecialchars($post['AvatarURL']); ?>" alt="用戶頭像" class="author-avatar" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 8px;">
+                        <?php else: ?>
+                            <span class="author-avatar"><i class="fas fa-user-circle"></i></span>
+                        <?php endif; ?>
                         <span class="author-name"><?php echo htmlspecialchars($post['Username']); ?></span>
                         <?php if (!empty($post['Status'])): ?>
                             <span class="author-status"><?php echo htmlspecialchars($post['Status']); ?></span>
@@ -186,7 +190,11 @@ if (isset($post['ArticleID']) && $post['ArticleID'] > 0) {
                             <div class="comment-card">
                                 <div class="comment-header">
                                     <div class="commenter-info">
-                                        <span class="commenter-avatar"><i class="fas fa-user-circle"></i></span>
+                                        <?php if (!empty($comment['AvatarURL'])): ?>
+                                            <img src="../<?php echo htmlspecialchars($comment['AvatarURL']); ?>" alt="用戶頭像" class="commenter-avatar" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 8px;">
+                                        <?php else: ?>
+                                            <span class="commenter-avatar"><i class="fas fa-user-circle"></i></span>
+                                        <?php endif; ?>
                                         <span class="commenter-name"><?php echo htmlspecialchars($comment['Username']); ?></span>
                                         <?php if (!empty($comment['Status'])): ?>
                                             <span class="commenter-status"><?php echo htmlspecialchars($comment['Status']); ?></span>

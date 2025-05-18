@@ -48,8 +48,11 @@ try {
     $product = $result->fetch_assoc();
     $stmt->close();
     
-    // 獲取用戶點數 - 從 achievement 資料表
-    $sql = "SELECT TotalPoints FROM achievement WHERE UserID = ?";
+    // 獲取用戶點數 - 從 achievement 或 teacher_achievement 資料表
+    $user_role = $_SESSION['role'] ?? 'Student'; // 假設預設為學生
+    $points_table = ($user_role === 'Teacher') ? 'teacher_achievement' : 'achievement';
+    
+    $sql = "SELECT TotalPoints FROM {$points_table} WHERE UserID = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $user_id);
     $stmt->execute();
@@ -67,9 +70,12 @@ try {
         throw new Exception('點數不足');
     }
     
-    // 更新用戶點數 - 在 achievement 資料表
+    // 更新用戶點數 - 在 achievement 或 teacher_achievement 資料表
     $new_points = $user['TotalPoints'] - $product['PointsRequired'];
-    $sql = "UPDATE achievement SET TotalPoints = ? WHERE UserID = ?";
+    $user_role = $_SESSION['role'] ?? 'Student'; // 假設預設為學生
+    $points_table = ($user_role === 'Teacher') ? 'teacher_achievement' : 'achievement';
+    
+    $sql = "UPDATE {$points_table} SET TotalPoints = ? WHERE UserID = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ii", $new_points, $user_id);
     

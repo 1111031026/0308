@@ -26,9 +26,9 @@ if (isset($_GET['article_id'])) {
         // 處理查詢文章標題失敗的情況，可以記錄錯誤或使用預設標題
     }
 
-    // 查詢與 ArticleID 相關的貼文，並獲取用戶名
+    // 查詢與 ArticleID 相關的貼文，並獲取用戶名、身分和頭像
     // 修改 SQL 查詢以 JOIN user 資料表
-    $stmt = $conn->prepare("SELECT cp.*, u.Username FROM communitypost cp JOIN user u ON cp.UserID = u.UserID WHERE cp.ArticleID = ? ORDER BY cp.PostDate DESC");
+    $stmt = $conn->prepare("SELECT cp.*, u.Username, u.Status, u.AvatarURL FROM communitypost cp JOIN user u ON cp.UserID = u.UserID WHERE cp.ArticleID = ? ORDER BY cp.PostDate DESC");
     if ($stmt) {
         $stmt->bind_param("i", $article_id);
         $stmt->execute();
@@ -55,6 +55,7 @@ $conn->close();
     <title><?php echo $article_title; ?></title>
     <link rel="stylesheet" href="../css/luntan.css">
     <link rel="stylesheet" href="../css/nav.css"> <!-- 假設導航樣式 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <?php include 'nav.php'; // 引入導航欄 ?>
@@ -89,8 +90,15 @@ $conn->close();
                     <div class="post-card">
                         <div class="post-header">
                             <div class="user-info">
+                                <?php if (!empty($post['AvatarURL'])): ?>
+                                    <img src="../<?php echo htmlspecialchars($post['AvatarURL']); ?>" alt="用戶頭像" class="user-avatar" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 8px;">
+                                <?php else: ?>
+                                    <span class="user-avatar"><i class="fas fa-user-circle" style="font-size: 24px; margin-right: 8px;"></i></span>
+                                <?php endif; ?>
                                 <span class="username"><?php echo htmlspecialchars($post['Username']); ?></span>
-                                <!-- <span class="user-status">Student</span> --> <!-- 可根據用戶角色動態顯示 -->
+                                <?php if (!empty($post['Status'])): ?>
+                                    <span class="user-status" style="background-color: #e6f7ff; color: #1890ff; padding: 2px 8px; border-radius: 12px; font-size: 12px;"><?php echo htmlspecialchars($post['Status']); ?></span>
+                                <?php endif; ?>
                             </div>
                             <span class="post-date"><?php echo date('Y-m-d H:i', strtotime($post['PostDate'])); ?></span>
                         </div>

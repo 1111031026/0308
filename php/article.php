@@ -97,6 +97,14 @@ if (
                     <li><a href="ai_summary_editor.php?id=<?= $articleID; ?>"><img src="../img/edit.svg" alt="編輯文章" title="編輯文章"></a></li>
                 <?php endif; ?>
                 <li><a href="luntan.php?article_id=<?= $articleID; ?>"><img src="../img/share.svg" alt="貼文區" title="貼文區"></a></li>
+            <?php elseif ($_SESSION['role'] === 'Admin'): ?>
+                <?php
+                $articleID = intval($_GET['id']);
+                ?>
+                <li><a href="deepseek-test.php?article_id=<?= $articleID; ?>"><img src="../img/new-quiz.svg" alt="新增測驗" title="新增測驗"></a></li>
+                <li><a href="quiz.php?article_id=<?= $articleID; ?>"><img src="../img/quiz.svg" alt="測驗" title="測驗"></a></li>
+                <li><a href="ai_summary_editor.php?id=<?= $articleID; ?>"><img src="../img/edit.svg" alt="編輯文章" title="編輯文章"></a></li>
+                <li><a href="luntan.php?article_id=<?= $articleID; ?>"><img src="../img/share.svg" alt="貼文區" title="貼文區"></a></li>
             <?php elseif ($_SESSION['role'] === 'Student'): ?>
                 <li><a href="quiz.php?article_id=<?= $_GET['id']; ?>"><img src="../img/quiz.svg" alt="測驗" title="測驗"></a></li>
                 <li><a href="luntan.php?article_id=<?= $_GET['id']; ?>"><img src="../img/share.svg" alt="貼文區" title="貼文區"></a></li>

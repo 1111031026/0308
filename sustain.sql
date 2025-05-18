@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2025-05-17 16:16:17
+-- 產生時間： 2025-05-18 17:35:38
 -- 伺服器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -29,7 +29,7 @@ USE `sustain`;
 -- 資料表結構 `achievement`
 --
 -- 建立時間： 2025-05-14 16:01:03
--- 最後更新： 2025-05-17 13:36:08
+-- 最後更新： 2025-05-18 14:44:32
 --
 
 DROP TABLE IF EXISTS `achievement`;
@@ -53,7 +53,7 @@ TRUNCATE TABLE `achievement`;
 
 INSERT INTO `achievement` (`UserID`, `TotalPoints`, `ArticlesViewed`, `ChoiceQuestionsCorrect`, `TFQuestionsCorrect`, `FillinQuestionsCorrect`) VALUES
 (2, 15, 7, 1, 1, 1),
-(9, 10, 1, 1, 1, 0),
+(9, 10, 2, 1, 1, 0),
 (11, 0, 2, 0, 0, 0);
 
 -- --------------------------------------------------------
@@ -227,7 +227,7 @@ INSERT INTO `choicerec` (`choiceID`, `UserID`, `UserAnswer`, `FinishTime`, `isCo
 -- 資料表結構 `commentarea`
 --
 -- 建立時間： 2025-05-14 16:01:04
--- 最後更新： 2025-05-17 13:14:04
+-- 最後更新： 2025-05-18 14:44:21
 --
 
 DROP TABLE IF EXISTS `commentarea`;
@@ -245,13 +245,22 @@ CREATE TABLE `commentarea` (
 --
 
 TRUNCATE TABLE `commentarea`;
+--
+-- 傾印資料表的資料 `commentarea`
+--
+
+INSERT INTO `commentarea` (`CommentID`, `PostID`, `UserID`, `Content`, `CommentTime`, `Status`) VALUES
+(2, 10, 2, 'fklr', '2025-05-18 01:49:55', 'PENDING'),
+(3, 12, 1, '不如圓神', '2025-05-18 01:54:27', 'PENDING'),
+(4, 12, 9, '不如儀玄', '2025-05-18 22:44:21', 'PENDING');
+
 -- --------------------------------------------------------
 
 --
 -- 資料表結構 `communitypost`
 --
 -- 建立時間： 2025-05-17 13:12:56
--- 最後更新： 2025-05-17 14:14:32
+-- 最後更新： 2025-05-18 14:03:33
 --
 
 DROP TABLE IF EXISTS `communitypost`;
@@ -270,6 +279,15 @@ CREATE TABLE `communitypost` (
 --
 
 TRUNCATE TABLE `communitypost`;
+--
+-- 傾印資料表的資料 `communitypost`
+--
+
+INSERT INTO `communitypost` (`PostID`, `Content`, `ImageURL`, `PostDate`, `Title`, `UserID`, `ArticleID`) VALUES
+(10, 'aa', NULL, '2025-05-17 22:32:08', 'aa', 2, 23),
+(11, 'aaaafdff', NULL, '2025-05-17 18:59:03', 'eee', 2, 23),
+(12, '傷害太低', NULL, '2025-05-17 19:52:46', '加強興建雅', 2, 40);
+
 -- --------------------------------------------------------
 
 --
@@ -356,6 +374,7 @@ INSERT INTO `fillrec` (`fillID`, `UserID`, `UserAnswer`, `FinishTime`, `isCorrec
 -- 資料表結構 `merchandise`
 --
 -- 建立時間： 2025-05-14 16:01:04
+-- 最後更新： 2025-05-18 15:17:44
 --
 
 DROP TABLE IF EXISTS `merchandise`;
@@ -383,7 +402,7 @@ INSERT INTO `merchandise` (`ItemID`, `Name`, `Description`, `PointsRequired`, `Q
 (1, 'head1', '頭像', 20, 19, 'head', 'product/head1.jpg', 'product/head1.jpg'),
 (2, 'wallpaper1', '桌布', 100, 20, 'wallpaper', 'product/wallpaper1.jpg', 'product/wallpaper1.jpg'),
 (3, 'background1', '背景1', 100, 20, 'background', 'product/background1.jpg', 'product/background1.jpg'),
-(5, '猩健啞', 'xzx', 0, 20, 'head', 'product/6820cec1ed14a_image_猩健啞.png', 'product/6820cec1ed60f_preview_猩健啞投向.png');
+(5, '猩健啞', 'xzx', 0, 18, 'head', 'product/6820cec1ed14a_image_猩健啞.png', 'product/6820cec1ed60f_preview_猩健啞投向.png');
 
 -- --------------------------------------------------------
 
@@ -430,6 +449,7 @@ INSERT INTO `password_resets` (`id`, `email`, `token`, `expiry`, `created_at`) V
 -- 資料表結構 `purchase`
 --
 -- 建立時間： 2025-05-14 16:01:03
+-- 最後更新： 2025-05-18 15:17:44
 --
 
 DROP TABLE IF EXISTS `purchase`;
@@ -450,7 +470,9 @@ TRUNCATE TABLE `purchase`;
 --
 
 INSERT INTO `purchase` (`UserID`, `ItemID`, `PurchaseTime`, `SpentPoints`) VALUES
-(2, 1, '2025-05-03 11:35:13', 20);
+(1, 5, '2025-05-18 23:17:44', 0),
+(2, 1, '2025-05-03 11:35:13', 20),
+(9, 5, '2025-05-18 22:43:33', 0);
 
 -- --------------------------------------------------------
 
@@ -604,6 +626,7 @@ INSERT INTO `tfrec` (`tfID`, `UserID`, `UserAnswer`, `FinishTime`, `isCorrect`) 
 -- 資料表結構 `user`
 --
 -- 建立時間： 2025-05-14 16:01:04
+-- 最後更新： 2025-05-18 15:17:52
 --
 
 DROP TABLE IF EXISTS `user`;
@@ -630,9 +653,9 @@ TRUNCATE TABLE `user`;
 --
 
 INSERT INTO `user` (`UserID`, `Username`, `Email`, `Password`, `JoinDate`, `Status`, `reset_token`, `token_expire`, `AvatarURL`, `BackgroundURL`) VALUES
-(1, 'hank', '12345@nutc.com', '$2y$10$WImynnKH8MOsCHB65iAeMuoQtcvdiAgs8FIgAWPwDxN7McOidmby2', '2025-04-01 19:43:05', 'Teacher', NULL, NULL, NULL, NULL),
+(1, 'hank', '12345@nutc.com', '$2y$10$WImynnKH8MOsCHB65iAeMuoQtcvdiAgs8FIgAWPwDxN7McOidmby2', '2025-04-01 19:43:05', 'Teacher', NULL, NULL, 'product/6820cec1ed14a_image_猩健啞.png', NULL),
 (2, 'alex', '12345@nutc.com', '$2y$10$LPlTJNOvMqfRT3GIrTxs5unYLkLiRe8USPNQtjXIMLtC55xark5gq', '2025-04-01 21:27:25', 'Student', NULL, NULL, 'product/head1.jpg', NULL),
-(9, 'josh', 'josh@nutc.com', '$2y$10$j66XVtpyiDTY5yFbDSja.uqcXK3250i1GQEpCTdl.Mnpuhyxlkf5q', '2025-05-04 22:57:00', 'Student', NULL, NULL, NULL, NULL),
+(9, 'josh', 'josh@nutc.com', '$2y$10$j66XVtpyiDTY5yFbDSja.uqcXK3250i1GQEpCTdl.Mnpuhyxlkf5q', '2025-05-04 22:57:00', 'Student', NULL, NULL, 'product/6820cec1ed14a_image_猩健啞.png', NULL),
 (10, 'ivan', 'ivan@nutc.com', '$2y$10$A/oNBUakPXfKGHnzlQp4AOXGb6YgG32uNY3CeGT3j5WawWD5U81Ya', '2025-05-04 23:00:07', 'Teacher', NULL, NULL, NULL, NULL),
 (11, 'test_user', 'test_user@nutc.com', '$2y$10$1e6q.Ag1FgI70n45j7tsB.vJJeW9XEriT/mBnpAl7SqvVzP7s51GW', '2025-05-10 21:42:46', 'Admin', NULL, NULL, 'product/6820cec1ed14a_image_猩健啞.png', 'product/background1.jpg');
 
@@ -642,7 +665,7 @@ INSERT INTO `user` (`UserID`, `Username`, `Email`, `Password`, `JoinDate`, `Stat
 -- 資料表結構 `user_article_views`
 --
 -- 建立時間： 2025-05-14 16:01:03
--- 最後更新： 2025-05-17 13:36:08
+-- 最後更新： 2025-05-18 14:44:32
 --
 
 DROP TABLE IF EXISTS `user_article_views`;
@@ -670,6 +693,7 @@ INSERT INTO `user_article_views` (`UserID`, `ArticleID`, `ViewTimestamp`) VALUES
 (2, 27, '2025-05-16 16:30:21'),
 (2, 40, '2025-05-16 16:30:15'),
 (9, 23, '2025-05-04 14:57:25'),
+(9, 40, '2025-05-18 14:44:32'),
 (11, 23, '2025-05-17 13:36:04'),
 (11, 40, '2025-05-17 13:36:08');
 
@@ -854,13 +878,13 @@ ALTER TABLE `choicequizstagingarea`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `commentarea`
 --
 ALTER TABLE `commentarea`
-  MODIFY `CommentID` int(11) NOT NULL AUTO_INCREMENT COMMENT '留言編號 (PK)', AUTO_INCREMENT=2;
+  MODIFY `CommentID` int(11) NOT NULL AUTO_INCREMENT COMMENT '留言編號 (PK)', AUTO_INCREMENT=5;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `communitypost`
 --
 ALTER TABLE `communitypost`
-  MODIFY `PostID` int(11) NOT NULL AUTO_INCREMENT COMMENT '貼文編號 (PK)', AUTO_INCREMENT=10;
+  MODIFY `PostID` int(11) NOT NULL AUTO_INCREMENT COMMENT '貼文編號 (PK)', AUTO_INCREMENT=13;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `fillquiz`

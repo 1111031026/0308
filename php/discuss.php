@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['user_id'])) {
 }
 
 // 查詢評論列表
-$sql = "SELECT ca.CommentID, ca.Content, ca.CommentTime, u.Username, u.Status, u.AvatarURL 
+$sql = "SELECT ca.CommentID, ca.Content, ca.CommentTime, u.UserID, u.Username, u.Status, u.AvatarURL 
         FROM commentarea ca 
         JOIN user u ON ca.UserID = u.UserID 
         WHERE ca.PostID = ? 
@@ -108,6 +108,15 @@ if (isset($post['ArticleID']) && $post['ArticleID'] > 0) {
     <link rel="stylesheet" href="../css/nav3.css">
     <link rel="stylesheet" href="../css/discuss.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* 添加頭像點擊的載入動畫效果 */
+        .commenter-avatar {
+            transition: opacity 0.2s ease;
+        }
+        .commenter-avatar.loading {
+            opacity: 0.5;
+        }
+    </style>
 </head>
 <body>
     <?php include 'nav.php'; ?>
@@ -191,9 +200,13 @@ if (isset($post['ArticleID']) && $post['ArticleID'] > 0) {
                                 <div class="comment-header">
                                     <div class="commenter-info">
                                         <?php if (!empty($comment['AvatarURL'])): ?>
-                                            <img src="../<?php echo htmlspecialchars($comment['AvatarURL']); ?>" alt="用戶頭像" class="commenter-avatar" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 8px;">
+                                            <a href="achievement.php?user_id=<?php echo htmlspecialchars($comment['UserID']); ?>" class="avatar-link" data-user-id="<?php echo htmlspecialchars($comment['UserID']); ?>">
+                                                <img src="../<?php echo htmlspecialchars($comment['AvatarURL']); ?>" alt="用戶頭像" class="commenter-avatar" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 8px;">
+                                            </a>
                                         <?php else: ?>
-                                            <span class="commenter-avatar"><i class="fas fa-user-circle"></i></span>
+                                            <a href="achievement.php?user_id=<?php echo htmlspecialchars($comment['UserID']); ?>" class="avatar-link" data-user-id="<?php echo htmlspecialchars($comment['UserID']); ?>">
+                                                <span class="commenter-avatar"><i class="fas fa-user-circle"></i></span>
+                                            </a>
                                         <?php endif; ?>
                                         <span class="commenter-name"><?php echo htmlspecialchars($comment['Username']); ?></span>
                                         <?php if (!empty($comment['Status'])): ?>
@@ -219,5 +232,27 @@ if (isset($post['ArticleID']) && $post['ArticleID'] > 0) {
             </div>
         </div>
     </div>
+
+    <script>
+        // 處理頭像點擊的載入動畫和防抖
+        document.querySelectorAll('.avatar-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault(); // 阻止默認跳轉
+                const avatar = this.querySelector('.commenter-avatar');
+                if (avatar) {
+                    avatar.classList.add('loading'); // 添加載入效果
+                }
+                
+                // 防抖處理
+                if (this.dataset.loading) return;
+                this.dataset.loading = true;
+
+                // 模擬延遲（可根據需要調整或移除）
+                setTimeout(() => {
+                    window.location.href = this.href; // 執行跳轉
+                }, 300);
+            });
+        });
+    </script>
 </body>
 </html>

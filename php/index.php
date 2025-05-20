@@ -168,14 +168,14 @@ require_once 'db_connect.php';
             effect: "coverflow",
             grabCursor: true,
             centeredSlides: true,
-            slidesPerView: 3, // 一次顯示三張幻燈片
+            slidesPerView: 3,
             coverflowEffect: {
-                rotate: 0,
+                rotate: 0, // 避免旋轉
                 stretch: 0,
-                depth: 200,
-                modifier: 3,
-                slideShadows: true,
-                scale: 0.75, // 非活動幻燈片的縮小比例
+                depth: 0, // 移除深度效果，避免視覺扭曲
+                modifier: 0, // 移除額外效果
+                slideShadows: false, // 移除陰影
+                scale: 0.8, // 兩側幻燈片縮放到 80%
             },
             loop: true,
             autoplay: {

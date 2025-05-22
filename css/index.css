@@ -139,7 +139,7 @@ main {
 
 }
 
-.text-content {
+.blue-text-content {
     width: 50%;
     /* 设置文本内容宽度 */
     display: flex;
@@ -167,14 +167,14 @@ main {
     /* 确保标题在其他元素之上 */
 }
 
-.description {
+.ocean-description {
     margin-top: 1rem;
     font-size: 1.2rem;
     color: white;
     text-align: center;
 }
 
-.read-more {
+.ocean-read-more {
     display: inline-block;
     margin-top: 1rem;
     font-size: 1.2rem;
@@ -183,7 +183,7 @@ main {
     transition: color 0.3s ease;
 }
 
-.read-more:hover {
+.ocean-read-more:hover {
     color: rgb(0, 29, 158);
 }
 
@@ -294,10 +294,10 @@ main {
 
 /* 綠色區塊樣式（氣候） */
 .green-section {
-    background: white;
+    background: linear-gradient(135deg, rgba(63, 212, 88, 0.75) 0%, rgba(5, 150, 105, 0.85) 100%);
     /* 清新、活力的綠色漸層 */
-    color: rgb(63, 212, 88);
-    padding: 2rem;
+    color: white;
+    padding: 1.5rem;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -306,63 +306,63 @@ main {
     flex-direction: row;
     align-items: center;
 }
+.green-text-content {
+    width: 50%;
+    /* 设置文本内容宽度 */
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
 
+.green-section h1 {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: flex-start; /* 改為 flex-start 以確保內容靠左 */
+    align-items: center;
+    text-align: left; /* 保持文字靠左對齊 */
+    font-size: 2.5rem;
+    font-weight: bold;
+    background: white;
+    color: rgb(2, 124, 27);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.climate-description {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    color: white;
+    text-align: center;
+}
+
+.climate-read-more {
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.climate-read-more:hover {
+    color: rgb(13, 85, 26);
+}
 .climate-slider-container {
-    width: 55%;
+    width: 50%;
     padding: 2rem;
     overflow: hidden;
 }
 
-.climate-card {
-    display: flex !important;
-    flex-direction: row !important;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    height: 400px !important;
-    width: 600px;
-}
-
 .climate-card-image {
-    width: 60%;
-    height: 100%;
+    width: 100%;
+    height: 500px;
+    /* 固定高度 */
     object-fit: cover;
-}
-
-.climate-card-content {
-    width: 40%;
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: white;
-}
-
-.climate-card-title {
-    font-size: 1.5rem;
-    color: #047857;
-    margin-top: 20px;
-    margin-bottom: 15px;
-    font-weight: bold;
-    text-align: center;
-}
-
-.climate-card-button {
-    display: inline-block;
-    background-color: #10B981;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    text-align: center;
-    transition: background-color 0.3s ease;
-    margin-top: auto;
-    align-self: center;
-}
-
-.climate-card-button:hover {
-    background-color: #047857;
+    /* 确保图片按比例缩放并填满容器 */
 }
 
 .swiper-pagination-climate {
@@ -374,24 +374,11 @@ main {
     left: 0;
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 0;
 }
 
-.swiper-pagination-climate .swiper-pagination-bullet {
-    width: 12px;
-    height: 12px;
-    display: inline-block;
-    border-radius: 50%;
-    background: #bbb;
-    margin: 0 5px;
-    opacity: 0.7;
-    transition: all 0.3s ease;
-}
-
-.swiper-pagination-climate .swiper-pagination-bullet-active {
-    opacity: 1;
-    background: #047857;
-    transform: scale(1.2);
+.swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
+    background: rgb(255, 255, 255) !important;
 }
 
 .climate-prev,
@@ -411,6 +398,7 @@ main {
     justify-content: center;
     transition: all 0.3s ease;
     box-shadow: none;
+    /* 移除陰影 */
 }
 
 .climate-prev {
@@ -424,13 +412,14 @@ main {
 .climate-prev:hover,
 .climate-next:hover {
     transform: translateY(-50%) scale(1.1);
+    /* 懸停時稍微放大 */
 }
 
 .climate-prev:after,
 .climate-next:after {
     font-size: 24px;
     font-weight: bold;
-    color: white;
+    color: rgb(255, 255, 255);
     text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
 }
 
@@ -439,7 +428,7 @@ main {
     background: linear-gradient(135deg, rgba(217, 119, 6, 0.75) 0%, rgba(74, 44, 42, 0.85) 100%);
     /* 溫暖、質樸的漸層 */
     color: white;
-    padding: 2rem;
+    padding: 1.5rem;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -448,63 +437,67 @@ main {
     flex-direction: row;
     align-items: center;
 }
+.brown-text-content {
+    width: 50%;
+    /* 设置文本内容宽度 */
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+}
+
+.brown-section h1 {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    text-align: right;
+    font-size: 2.5rem;
+    font-weight: bold;
+    background: linear-gradient(135deg, rgba(152, 99, 38, 0.75) 0%, rgba(53, 25, 23, 0.85) 100%);
+    color: rgb(255, 255, 255);
+    position: sticky;
+    /* 添加此行 */
+    top: 0;
+    /* 添加此行 */
+    z-index: 10;
+    /* 确保标题在其他元素之上 */
+}
+
+.land-description {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    color: white;
+    text-align: center;
+}
+
+.land-read-more {
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.land-read-more:hover {
+    color: rgb(121, 49, 4);
+}
 
 .land-slider-container {
-    width: 55%;
+    width: 50%;
     padding: 2rem;
     overflow: hidden;
 }
 
-.land-card {
-    display: flex !important;
-    flex-direction: row !important;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    height: 400px !important;
-    width: 600px;
-}
-
 .land-card-image {
-    width: 60%;
-    height: 100%;
+    width: 100%;
+    height: 500px;
+    /* 固定高度 */
     object-fit: cover;
-}
-
-.land-card-content {
-    width: 40%;
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: white;
-}
-
-.land-card-title {
-    font-size: 1.5rem;
-    color: #7F1D1D;
-    margin-top: 20px;
-    margin-bottom: 15px;
-    font-weight: bold;
-    text-align: center;
-}
-
-.land-card-button {
-    display: inline-block;
-    background-color: #B45309;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    text-align: center;
-    transition: background-color 0.3s ease;
-    margin-top: auto;
-    align-self: center;
-}
-
-.land-card-button:hover {
-    background-color: #7F1D1D;
+    /* 确保图片按比例缩放并填满容器 */
 }
 
 .swiper-pagination-land {
@@ -516,24 +509,11 @@ main {
     left: 0;
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 0;
 }
 
-.swiper-pagination-land .swiper-pagination-bullet {
-    width: 12px;
-    height: 12px;
-    display: inline-block;
-    border-radius: 50%;
-    background: #bbb;
-    margin: 0 5px;
-    opacity: 0.7;
-    transition: all 0.3s ease;
-}
-
-.swiper-pagination-land .swiper-pagination-bullet-active {
-    opacity: 1;
-    background: #7F1D1D;
-    transform: scale(1.2);
+.swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
+    background: rgb(255, 255, 255) !important;
 }
 
 .land-prev,
@@ -553,6 +533,7 @@ main {
     justify-content: center;
     transition: all 0.3s ease;
     box-shadow: none;
+    /* 移除陰影 */
 }
 
 .land-prev {
@@ -566,13 +547,14 @@ main {
 .land-prev:hover,
 .land-next:hover {
     transform: translateY(-50%) scale(1.1);
+    /* 懸停時稍微放大 */
 }
 
 .land-prev:after,
 .land-next:after {
     font-size: 24px;
     font-weight: bold;
-    color: rgb(129, 83, 13);
+    color: rgb(255, 255, 255);
     text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
 }
 
@@ -596,29 +578,4 @@ main {
     .land-card-image {
         height: 200px;
     }
-}
-
-/* 標題樣式 */
-.green-section h1,
-.brown-section h1 {
-    width: 33.33%;
-    height: 100%;
-    margin: 0;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    font-size: 2.5rem;
-    font-weight: bold;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.green-section h1 {
-    background: white;
-}
-
-.brown-section h1 {
-    background: linear-gradient(135deg, rgba(217, 119, 6, 0.95) 0%, rgba(74, 44, 42, 0.85) 100%);
 }

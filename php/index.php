@@ -59,10 +59,10 @@ require_once 'db_connect.php';
         </section>
         <section class="content">
             <div class="blue-section">
-                <div class="text-content">
+                <div class="blue-text-content">
                     <h1>關於海洋永續</h1>
-                    <p class="description">海洋處境岌岌可危。我們苛索海洋太多了，破壞性捕撈、污染及氣候變遷，對獨特的海洋生態構成嚴重威脅。可幸的是，只要我們同心協力，就能保護海洋的蔚藍，守護所有仰賴海洋為生的生命與人們...</p>
-                    <a href="ocean.php" class="read-more">閱讀更多 ⇨</a>
+                    <p class="ocean-description">海洋處境岌岌可危。我們苛索海洋太多了，破壞性捕撈、污染及氣候變遷，對獨特的海洋生態構成嚴重威脅。可幸的是，只要我們同心協力，就能保護海洋的蔚藍，守護所有仰賴海洋為生的生命與人們...</p>
+                    <a href="ocean.php" class="ocean-read-more">閱讀更多 ⇨</a>
                 </div>
                 <div class="ocean-slider swiper ocean-slider-container">
                     <div class="swiper-wrapper">
@@ -88,30 +88,15 @@ require_once 'db_connect.php';
             <div class="green-section">
                 <div class="climate-slider swiper climate-slider-container">
                     <div class="swiper-wrapper">
-                        <?php
-                        // 查詢SDG13分類的文章（氣候行動），按創建時間排序
-                        $sql = "SELECT * FROM article WHERE Category = 'sdg13' ORDER BY created_at DESC";
-                        $result = $conn->query($sql);
-
-                        if ($result->num_rows > 0) {
-                            while ($row = $result->fetch_assoc()) {
-                                echo '<div class="swiper-slide climate-card">';
-                                // 右側內容（原本是左側圖片）
-                                echo '<div class="climate-card-content">';
-                                echo '<h4 class="climate-card-title">' . htmlspecialchars($row['Title']) . '</h4>';
-                                echo '<a href="article.php?id=' . $row['ArticleID'] . '" class="climate-card-button">閱讀更多</a>';
-                                echo '</div>'; // 結束 climate-card-content
-
-                                // 左側圖片（原本是右側內容）
-                                if ($row['ImageURL']) {
-                                    echo '<img src="../' . htmlspecialchars($row['ImageURL']) . '" alt="文章圖片" class="climate-card-image">';
-                                } else {
-                                    echo '<img src="../img/climate.jpg" alt="預設圖片" class="climate-card-image">';
-                                }
-                                echo '</div>'; // 結束 swiper-slide
-                            }
-                        }
-                        ?>
+                        <div class="swiper-slide">
+                            <img src="../img/climate.jpg" alt="氣候變遷" class="climate-card-image">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="../img/shore.mp4" alt="海平面上升" class="climate-card-image">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="../img/shore2.mp4" alt="極端天氣" class="climate-card-image">
+                        </div>
                     </div>
                     <!-- 分頁器 -->
                     <div class="swiper-pagination-climate"></div>
@@ -119,38 +104,32 @@ require_once 'db_connect.php';
                     <div class="swiper-button-prev climate-prev"></div>
                     <div class="swiper-button-next climate-next"></div>
                 </div>
-                <h1>氣候永續的文章</h1>
+                <div class="green-text-content">
+                    <h1>關於氣候永續</h1>
+                    <p class="climate-description">氣候變遷已成為全球最嚴峻的挑戰之一。極端天氣事件頻繁發生，海平面上升，生態系統受到威脅。然而，透過減少碳排放、發展可再生能源和推動永續生活方式，我們仍有機會扭轉局勢，共同守護我們唯一的家園...</p>
+                    <a href="climate.php" class="climate-read-more">閱讀更多 ⇨</a>
+                </div>
             </div>
         </section>
         <!-- 陸域永續文章 -->
         <section class="content">
             <div class="brown-section">
-                <h1>陸域永續的文章</h1>
+                <div class="brown-text-content">
+                    <h1>關於陸域永續</h1>
+                    <p class="land-description">陸地生態系統正面臨前所未有的威脅。森林砍伐、沙漠化、生物多樣性喪失等問題日益嚴重。保護陸域生態系統不僅關乎野生動植物的生存，也與人類的福祉息息相關。透過永續土地管理和生態保育，我們能夠恢復自然平衡，守護地球的綠色未來...</p>
+                    <a href="landscape.php" class="land-read-more">閱讀更多 ⇨</a>
+                </div>
                 <div class="land-slider swiper land-slider-container">
                     <div class="swiper-wrapper">
-                        <?php
-                        // 查詢SDG15分類的文章（陸域生態），按創建時間排序
-                        $sql = "SELECT * FROM article WHERE Category = 'sdg15' ORDER BY created_at DESC";
-                        $result = $conn->query($sql);
-
-                        if ($result->num_rows > 0) {
-                            while ($row = $result->fetch_assoc()) {
-                                echo '<div class="swiper-slide land-card">';
-                                // 左側圖片
-                                if ($row['ImageURL']) {
-                                    echo '<img src="../' . htmlspecialchars($row['ImageURL']) . '" alt="文章圖片" class="land-card-image">';
-                                } else {
-                                    echo '<img src="../img/forest.png" alt="預設圖片" class="land-card-image">';
-                                }
-                                // 右側內容
-                                echo '<div class="land-card-content">';
-                                echo '<h4 class="land-card-title">' . htmlspecialchars($row['Title']) . '</h4>';
-                                echo '<a href="article.php?id=' . $row['ArticleID'] . '" class="land-card-button">閱讀更多</a>';
-                                echo '</div>'; // 結束 land-card-content
-                                echo '</div>'; // 結束 swiper-slide
-                            }
-                        }
-                        ?>
+                        <div class="swiper-slide">
+                            <img src="../img/forest.png" alt="森林生態" class="land-card-image">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="../img/mountain.jpg" alt="山地生態" class="land-card-image">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="../img/desert.jpg" alt="沙漠化" class="land-card-image">
+                        </div>
                     </div>
                     <!-- 分頁器 -->
                     <div class="swiper-pagination-land"></div>
@@ -211,46 +190,42 @@ require_once 'db_connect.php';
 
         // 初始化氣候永續文章輪播
         var climateSwiper = new Swiper('.climate-slider', {
-            slidesPerView: 1.5,
-            spaceBetween: 30,
-            centeredSlides: false,
+            slidesPerView: 1,
+            spaceBetween: 0,
+            centeredSlides: true,
             loop: true,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
             pagination: {
                 el: '.swiper-pagination-climate',
-                clickable: true,
+                type: 'progressbar',
             },
             navigation: {
-                nextEl: '.climate-next',
-                prevEl: '.climate-prev',
+                nextEl: ".climate-next",
+                prevEl: ".climate-prev",
             },
-            breakpoints: {
-                768: {
-                    slidesPerView: 1.5,
-                    spaceBetween: 40
-                }
-            }
         });
 
         // 初始化陸域永續文章輪播
         var landSwiper = new Swiper('.land-slider', {
-            slidesPerView: 1.5,
-            spaceBetween: 30,
-            centeredSlides: false,
+            slidesPerView: 1,
+            spaceBetween: 0,
+            centeredSlides: true,
             loop: true,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
             pagination: {
                 el: '.swiper-pagination-land',
-                clickable: true,
+                type: 'progressbar',
             },
             navigation: {
-                nextEl: '.land-next',
-                prevEl: '.land-prev',
+                nextEl: ".land-next",
+                prevEl: ".land-prev",
             },
-            breakpoints: {
-                768: {
-                    slidesPerView: 1.5,
-                    spaceBetween: 40
-                }
-            }
         });
         // 初始化所有 article-slider（海洋、氣候、陸域）
         $('.article-slider .article-content').each(function() {

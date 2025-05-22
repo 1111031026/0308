@@ -165,17 +165,15 @@ require_once 'db_connect.php';
     <!-- 初始化 Slick.js -->
     <script>
         var heroSwiper = new Swiper(".heroSwiper", {
-            effect: "coverflow",
+            effect: "cube", // 改为Cube效果
             grabCursor: true,
             centeredSlides: true,
-            slidesPerView: 3,
-            coverflowEffect: {
-                rotate: 0, // 避免旋轉
-                stretch: 0,
-                depth: 0, // 移除深度效果，避免視覺扭曲
-                modifier: 0, // 移除額外效果
-                slideShadows: false, // 移除陰影
-                scale: 0.8, // 兩側幻燈片縮放到 80%
+            slidesPerView: 1, // Cube效果通常使用1个幻灯片视图
+            cubeEffect: {
+                shadow: true, // 启用阴影效果
+                slideShadows: true, // 启用幻灯片阴影
+                shadowOffset: 20, // 阴影偏移
+                shadowScale: 0.94 // 阴影缩放
             },
             loop: true,
             autoplay: {

@@ -131,6 +131,27 @@ require_once 'db_connect.php';
                     <a href="climate.php" class="climate-read-more">閱讀更多 ⇨</a>
                 </div>
             </div>
+            <div class="conservation-actions">
+                <h2>1990年 - 2000年的海洋保育行動</h2>
+                <div class="action-list">
+                    <div class="action-item">
+                        <h3>南極海鯨魚保護區</h3>
+                        <p>1994年國際捕鯨委員會成立，南極高達5,000萬平方公里禁止捕鯨的保護區。</p>
+                    </div>
+                    <div class="action-item">
+                        <h3>不要油污</h3>
+                        <p>多次行動支持與公眾力量，成功促使SHELL放棄向海上丟棄鑽油平台Brent Spar的決定。</p>
+                    </div>
+                    <div class="action-item">
+                        <h3>禁止流刺網</h3>
+                        <p>各地團體全力不懈努力，先後推動聯合國及歐盟禁止大面積流刺網捕撈。</p>
+                    </div>
+                    <div class="action-item">
+                        <h3>阻擋商業捕鯨</h3>
+                        <p>多年政治遊說工作，成功阻擋商業捕鯨案會否決日本發起的恢復商業捕鯨提案。</p>
+                    </div>
+                </div>
+            </div>
         </section>
         <!-- 陸域永續文章 -->
         <section class="content">

@@ -2,13 +2,28 @@
 session_start();
 require_once 'db_connect.php';
 
-if (!isset($_SESSION['login_session']) || $_SESSION['login_session'] !== true || !isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['login_session']) || $_SESSION['login_session'] !== true) {
     // 如果未登入，重定向到登入頁面或顯示錯誤訊息
-    header('Location: user_login.php'); // 假設登入頁面是 user_login.php
+    header('Location: user_login.php');
     exit;
 }
 
-$userID = $_SESSION['user_id'];
+// 獲取要顯示的用戶ID（從URL或當前登入用戶）
+$userID = isset($_GET['user_id']) && filter_var($_GET['user_id'], FILTER_VALIDATE_INT) ? (int)$_GET['user_id'] : $_SESSION['user_id'];
+
+// 驗證用戶是否存在且是教師
+$stmt = $conn->prepare("SELECT Username, Status FROM user WHERE UserID = ?");
+$stmt->bind_param("i", $userID);
+$stmt->execute();
+$result = $stmt->get_result();
+$user_data = $result->fetch_assoc();
+
+if (!$user_data || $user_data['Status'] !== 'teacher') {
+    // 如果用戶不存在或不是教師，重定向到論壇頁面
+    header('Location: luntan.php');
+    exit;
+}
+$stmt->close();
 $totalPoints = 0;
 $sdg13Count = 0;
 $sdg14Count = 0;
@@ -220,3 +235,4 @@ $conn->close();
     </script>
 </body>
 </html>
+ㄋ

@@ -84,7 +84,7 @@ require_once 'db_connect.php';
                 </div>
             </div>
             <div class="conservation-actions">
-                <h2>1990年 - 2000年的海洋保育行動</h2>
+                <h2>1990年 - 2024年的海洋保育行動</h2>
                 <div class="action-list">
                     <div class="action-item">
                         <h3>南極海鯨魚保護區</h3>
@@ -110,13 +110,13 @@ require_once 'db_connect.php';
                 <div class="climate-slider swiper climate-slider-container">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
-                            <img src="../img/climate.jpg" alt="氣候變遷" class="climate-card-image">
+                            <img src="../img/inclimate1.jpg" alt="氣候變遷" class="climate-card-image">
                         </div>
                         <div class="swiper-slide">
-                            <img src="../img/shore.mp4" alt="海平面上升" class="climate-card-image">
+                            <img src="../img/inclimate2.jpg" alt="海平面上升" class="climate-card-image">
                         </div>
                         <div class="swiper-slide">
-                            <img src="../img/shore2.mp4" alt="極端天氣" class="climate-card-image">
+                            <img src="../img/inclimate3.jpg" alt="極端天氣" class="climate-card-image">
                         </div>
                     </div>
                     <!-- 分頁器 -->
@@ -132,23 +132,23 @@ require_once 'db_connect.php';
                 </div>
             </div>
             <div class="conservation-actions">
-                <h2>1990年 - 2000年的海洋保育行動</h2>
+                <h2>1990-2024年全球永續發展的里程碑</h2>
                 <div class="action-list">
                     <div class="action-item">
-                        <h3>南極海鯨魚保護區</h3>
-                        <p>1994年國際捕鯨委員會成立，南極高達5,000萬平方公里禁止捕鯨的保護區。</p>
+                        <h3>里約地球高峰會</h3>
+                        <p>1992年，聯合國在里約召開地球高峰會，通過《議程21》，為全球永續發展奠定基礎。</p>
                     </div>
                     <div class="action-item">
-                        <h3>不要油污</h3>
-                        <p>多次行動支持與公眾力量，成功促使SHELL放棄向海上丟棄鑽油平台Brent Spar的決定。</p>
+                        <h3>蒙特婁議定書修訂</h3>
+                        <p>1990年，全球強化《蒙特婁議定書》，加速淘汰破壞臭氧層的化學物質，保護大氣環境。</p>
                     </div>
                     <div class="action-item">
-                        <h3>禁止流刺網</h3>
-                        <p>各地團體全力不懈努力，先後推動聯合國及歐盟禁止大面積流刺網捕撈。</p>
+                        <h3>永續城市運動</h3>
+                        <p>1990年代，歐洲多國推動永續城市計劃，促進綠色交通與低碳都市發展。</p>
                     </div>
                     <div class="action-item">
-                        <h3>阻擋商業捕鯨</h3>
-                        <p>多年政治遊說工作，成功阻擋商業捕鯨案會否決日本發起的恢復商業捕鯨提案。</p>
+                        <h3>生物多樣性公約</h3>
+                        <p>1992年，聯合國通過《生物多樣性公約》，推動全球保護生態系統與物種多樣性。</p>
                     </div>
                 </div>
             </div>
@@ -164,13 +164,13 @@ require_once 'db_connect.php';
                 <div class="land-slider swiper land-slider-container">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
-                            <img src="../img/forest.png" alt="森林生態" class="land-card-image">
+                            <img src="../img/inlandscape1.jpg" alt="森林生態" class="land-card-image">
                         </div>
                         <div class="swiper-slide">
-                            <img src="../img/mountain.jpg" alt="山地生態" class="land-card-image">
+                            <img src="../img/inlandscape2.jpg" alt="山地生態" class="land-card-image">
                         </div>
                         <div class="swiper-slide">
-                            <img src="../img/desert.jpg" alt="沙漠化" class="land-card-image">
+                            <img src="../img/inlandscape3.jpg" alt="沙漠化" class="land-card-image">
                         </div>
                     </div>
                     <!-- 分頁器 -->

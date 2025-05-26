@@ -20,6 +20,8 @@ if ($conn->connect_error) {
     die("連接失敗: " . $conn->connect_error);
 }
 
+// 檢查資料庫連接
+echo "<div style='display:none;'>資料庫連接狀態: " . ($conn->ping() ? "正常" : "異常") . "</div>";
 // 處理表單提交
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $conn->real_escape_string($_POST["name"]);
@@ -94,6 +96,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 // 獲取所有商品
 $sql = "SELECT * FROM merchandise ORDER BY ItemID DESC";
 $result = $conn->query($sql);
+
+// 移除調試信息，保持頁面整潔
+echo "<div style='margin: 10px; padding: 10px; background-color: #f8f9fa; border: 1px solid #ddd;'>";
+echo "查詢語句: $sql<br>";
+if (!$result) {
+    echo "查詢失敗: " . $conn->error;
+} else {
+    echo "查詢成功，找到 " . $result->num_rows . " 筆記錄";
+}
+echo "</div>";
+if (!$result) {
+    echo "<div class='error-message'>查詢失敗: " . $conn->error . "</div>";
+} else if ($result->num_rows == 0) {
+    echo "<div class='error-message'>沒有找到任何商品記錄</div>";
+}
 ?>
 
 <!DOCTYPE html>
@@ -168,6 +185,17 @@ $result = $conn->query($sql);
 
         <div class="merchandise-list">
             <h2>商品列表</h2>
+            <?php
+            // 重新執行查詢，確保有最新的結果
+            $sql = "SELECT * FROM merchandise ORDER BY ItemID DESC";
+            $result = $conn->query($sql);
+            
+            if (!$result) {
+                echo "<div class='error-message'>查詢失敗: " . $conn->error . "</div>";
+            } else if ($result->num_rows == 0) {
+                echo "<div class='error-message'>沒有找到任何商品記錄</div>";
+            }
+            ?>
             <table class="product-table">
                 <thead>
                     <tr>
@@ -183,7 +211,16 @@ $result = $conn->query($sql);
                     </tr>
                 </thead>
                 <tbody>
-                    <?php while($row = $result->fetch_assoc()): ?>
+                    <?php 
+                    // 重置結果集指針，確保能從頭開始讀取
+                    if ($result) {
+                        $result->data_seek(0);
+                    }
+                    
+                    // 檢查查詢結果
+                    if ($result && $result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()): 
+                    ?>
                     <tr>
                         <td><?php echo $row['ItemID']; ?></td>
                         <td><img src="../<?php echo htmlspecialchars($row['ImageURL']); ?>" alt="<?php echo htmlspecialchars($row['Name']); ?> 主圖片"></td>
@@ -198,7 +235,12 @@ $result = $conn->query($sql);
                             <a href="delete_merchandise.php?id=<?php echo $row['ItemID']; ?>" onclick="return confirm('確定要刪除此商品嗎？');" class="delete-btn">刪除</a>
                         </td>
                     </tr>
-                    <?php endwhile; ?>
+                    <?php 
+                        endwhile; 
+                    } else {
+                        echo "<tr><td colspan='9' style='text-align:center;padding:20px;'>沒有找到商品記錄</td></tr>";
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>

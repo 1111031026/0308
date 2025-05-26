@@ -121,27 +121,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <form action="edit_merchandise.php?id=<?php echo $itemID; ?>" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="name">商品名稱：</label>
-            <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($row['Name']); ?>" required>
+            <input type="text" id="name" name="name" value="<?php echo isset($row['Name']) ? htmlspecialchars($row['Name']) : ''; ?>" required>
         </div>
         <div class="form-group">
             <label for="description">商品描述：</label>
-            <textarea id="description" name="description"><?php echo htmlspecialchars($row['Description']); ?></textarea>
+            <textarea id="description" name="description"><?php echo isset($row['Description']) ? htmlspecialchars($row['Description']) : ''; ?></textarea>
         </div>
         <div class="form-group">
             <label for="pointsRequired">所需點數：</label>
-            <input type="number" id="pointsRequired" name="pointsRequired" value="<?php echo htmlspecialchars($row['PointsRequired']); ?>" required min="0">
+            <input type="number" id="pointsRequired" name="pointsRequired" value="<?php echo isset($row['PointsRequired']) ? htmlspecialchars($row['PointsRequired']) : 0; ?>" required min="0">
         </div>
         <div class="form-group">
             <label for="category">類別：</label>
             <select id="category" name="category" required>
-                <option value="background" <?php if($row['Category']==='background') echo 'selected'; ?>>背景</option>
-                <option value="wallpaper" <?php if($row['Category']==='wallpaper') echo 'selected'; ?>>桌布</option>
-                <option value="head" <?php if($row['Category']==='head') echo 'selected'; ?>>頭像</option>
+                <option value="background" <?php if(isset($row['Category']) && $row['Category']==='background') echo 'selected'; ?>>背景</option>
+                <option value="wallpaper" <?php if(isset($row['Category']) && $row['Category']==='wallpaper') echo 'selected'; ?>>桌布</option>
+                <option value="head" <?php if(isset($row['Category']) && $row['Category']==='head') echo 'selected'; ?>>頭像</option>
             </select>
         </div>
         <div class="form-group">
             <label>目前主圖片：</label><br>
-            <img src="../<?php echo htmlspecialchars($row['ImageURL']); ?>" alt="主圖片" style="max-width:100px;">
+            <img src="../<?php echo isset($row['ImageURL']) ? htmlspecialchars($row['ImageURL']) : ''; ?>" alt="主圖片" style="max-width:100px;">
         </div>
         <div class="form-group">
             <label for="image">更換主圖片：</label>
@@ -149,7 +149,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <div class="form-group">
             <label>目前預覽圖片：</label><br>
-            <img src="../<?php echo htmlspecialchars($row['PreviewURL']); ?>" alt="預覽圖片" style="max-width:100px;">
+            <img src="../<?php echo isset($row['PreviewURL']) ? htmlspecialchars($row['PreviewURL']) : ''; ?>" alt="預覽圖片" style="max-width:100px;">
         </div>
         <div class="form-group">
             <label for="preview_image">更換預覽圖片：</label>
@@ -157,7 +157,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <div class="form-group">
             <label for="quantity">數量：</label>
-            <input type="number" id="quantity" name="quantity" value="<?php echo htmlspecialchars($row['Quantity'] ?? 0); ?>" required min="0">
+            <input type="number" id="quantity" name="quantity" value="<?php echo isset($row['Quantity']) ? htmlspecialchars($row['Quantity']) : 0; ?>" required min="0">
         </div>
         <div class="form-buttons-container">
             <button type="submit" class="btn-submit">儲存修改</button>

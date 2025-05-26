@@ -122,9 +122,14 @@
                                         echo '<img src="../img/mountain.jpg" alt="預設圖片">';
                                     }
                                     echo '<div class="land-card-content">';
+                                    echo '<div class="progress-bar">';
+                                    echo '<div class="perent" style="width: 100%"></div>';
+                                    echo '</div>';
+                                    echo '<div class="text-content">';
                                     echo '<h4 class="land-card-title">' . htmlspecialchars($row['Title']) . '</h4>';
                                     echo '<p>' . htmlspecialchars($row['Description']) . '</p>';
                                     echo '<a href="article.php?id=' . $row['ArticleID'] . '" class="land-card-button read-more">閱讀更多</a>';
+                                    echo '</div>';
                                     echo '</div>';
                                     echo '</div>';
                                 }

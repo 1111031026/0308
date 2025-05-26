@@ -1,643 +1,767 @@
 /* 基礎樣式 */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: 'Noto Sans TC', sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* 頁面容器 */
+.page-container {
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  background: transparent;
+}
+
+/* 通用區塊樣式 */
+.section {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  scroll-snap-align: start;
+  position: relative;
+  padding: 20px;
+  color: #333;
+}
+
+/* 第一區塊：背景影片與標題 */
+.section-1 {
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+}
+
+.section-1 .ocean-banner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.section-1 .ocean-banner video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7) contrast(1.1);
+  animation: subtleZoom 20s infinite alternate;
+  display: block;
+}
+
+.section-1 h1 {
+  font-size: 3.5em;
+  font-weight: 700;
+  color: #f3f4f6;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s ease forwards;
+}
+
+.section-1 .intro-text {
+  color: #f3f4f6;
+  font-size: 1.2em;
+  text-align: center;
+  margin-top: 20px;
+  max-width: 800px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  position: relative;
+  z-index: 2;
+}
+
+.section-1 .scroll-down-arrow {
+  position: absolute;
+  bottom: 30px;
+  font-size: 2em;
+  color: #f3f4f6;
+  animation: bounceArrow 1.5s infinite;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  z-index: 2;
+  transition: transform 0.3s ease;
+}
+
+.section-1 .scroll-down-arrow:hover {
+  transform: scale(1.2);
+}
+
+/* 第二區塊（原第三區塊）：最新貼文 + 翻轉卡片 */
+.section-3 {
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.section-3 video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  filter: brightness(0.6) contrast(1.1);
+}
+
+.section-3 .info-section {
+  position: relative;
+  width: 100%;
+  padding: 80px 20px 40px 20px;
+}
+
+.section-3 .info-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  z-index: 0;
+}
+
+.section-3 .articles-section {
+  position: relative;
+  width: 100%;
+  padding: 40px 20px;
+}
+
+.section-3 .articles-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(118, 177, 64, 0.678), rgba(87, 156, 113, 0.5));
+  z-index: 0;
+}
+
+.section-3 h3,
+.section-3 .ocean-info-grid,
+.section-3 .container {
+  position: relative;
+  z-index: 1;
+}
+
+.section-3 h3 {
+  font-size: 2.5em;
+  color: #f3f4f6;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.section-3 .ocean-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-3 .info-card {
+  background: transparent;
+  border-radius: 12px;
+  text-align: left;
+  perspective: 1000px;
+  height: 250px;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+}
+
+.section-3 .info-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.section-3 .info-card:hover .info-card-inner {
+  transform: rotateY(180deg);
+}
+
+.section-3 .info-card-front,
+.section-3 .info-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.section-3 .info-card-front {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.section-3 .info-card-front h3 {
+  font-size: 1.4em;
+  color: #f3f4f6;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.4);
+  padding: 10px 20px;
+  border-radius: 8px;
+  z-index: 1;
+}
+
+.section-3 .info-card-back {
+  transform: rotateY(180deg);
+  background: rgba(21, 128, 61, 0.767);
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.section-3 .info-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.section-3 .info-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.section-3 .info-card-back h3 {
+  font-size: 1.2em;
+  color: #f3f4f6;
+  margin-bottom: 10px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.section-3 .info-card-back p {
+  font-size: 0.9em;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.5;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.section-3 .container {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+.section-3 .article-slider {
+  width: 100%;
+  position: relative;
+}
+
+.section-3 .article-content {
+  display: flex !important;
+  gap: 40px !important;
+  padding: 20px 0;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.slick-slide {
+  margin-right: 40px !important;
+}
+
+.slick-list {
+  margin-right: -20px;
+}
+
+.section-3 .article-card {
+  display: flex !important;
+  flex-direction: row !important;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  height: 350px !important;
+  width: 800px !important;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.section-3 .article-card img {
+  width: 60%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px 0 0 10px;
+  margin-bottom: 0;
+  flex-shrink: 0;
+}
+
+.section-3 .article-card .land-card-content {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: white;
+}
+
+.section-3 .article-card .text-content {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  text-align: center;
+  flex-grow: 1;
+  /* 允许内容在可用空间中扩展 */
+}
+
+.section-3 .article-card .land-card-title {
+  font-size: 1.5rem;
+  color: #374151;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.section-3 .article-card .land-card-button {
+  display: inline-block;
+  background-color: #15803D;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: auto;
+  align-self: center;
+}
+
+.section-3 .article-card .land-card-button:hover {
+  background-color: #374151;
+  transform: scale(1.05);
+}
+
+.section-3 .slider-btn2 {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.8);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 2;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.section-3 .prev-btn {
+  left: 10px;
+}
+
+.section-3 .next-btn {
+  right: 10px;
+}
+
+.section-3 .slider-btn2:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.progress-bar {
+  height: 6px;
+  background-color: #289c19;
+}
+
+/* 第三區塊（原第四區塊）：搜尋文章 */
+.section-4 {
+  padding: 50px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.section-4 video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -1;
+  transform: translateX(-50%) translateY(-50%);
+  filter: brightness(0.6) contrast(1.1);
+}
+
+.section-4::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(55, 65, 81, 0.5), rgba(21, 128, 61, 0.5));
+  z-index: 0;
+}
+
+.section-4 h3,
+.section-4 .search-container,
+.section-4 .posts-grid,
+.section-4 .pagination {
+  position: relative;
+  z-index: 1;
+}
+
+.section-4 h3 {
+  font-size: 2.5em;
+  color: #f3f4f6;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.section-4 .search-container {
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 30px;
+}
+
+.section-4 .search-container form {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.section-4 .search-container input {
+  flex-grow: 1;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 30px;
+  font-size: 1em;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.9);
+  transition: box-shadow 0.3s ease;
+}
+
+.section-4 .search-container input:focus {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.section-4 .search-container button {
+  padding: 12px 25px;
+  background: #374151;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.section-4 .search-container button:hover {
+  background: #15803D;
+  transform: scale(1.05);
+}
+
+.section-4 .posts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.section-4 .post-card {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.section-4 .post-card:hover {
+  transform: translateY(-5px);
+}
+
+.section-4 .post-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.section-4 .post-card h4 {
+  font-size: 1.2em;
+  color: #374151;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.section-4 .post-card p {
+  font-size: 0.9em;
+  color: #444;
+  margin-bottom: 15px;
+  flex-grow: 1;
+}
+
+.section-4 .post-card .read-more {
+  display: inline-block;
+  padding: 8px 15px;
+  background: #374151;
+  color: white;
+  text-decoration: none;
+  border-radius: 30px;
+  font-size: 0.9em;
+  transition: all 0.3s ease;
+  align-self: center;
+}
+
+.section-4 .post-card .read-more:hover {
+  background: #15803D;
+  transform: scale(1.05);
+}
+
+.section-4 .pagination {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.section-4 .pagination-btn {
+  padding: 10px 20px;
+  background: #374151;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.section-4 .pagination-btn:hover:not(:disabled) {
+  background: #15803D;
+  transform: scale(1.05);
+}
+
+.section-4 .pagination-btn:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.section-4 .pagination-btn:disabled::after {
+  content: '無更多頁面';
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.8em;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.section-4 .pagination-btn:disabled:hover::after {
+  opacity: 1;
+}
+
+.section-4 .page-input-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 1.1em;
+  color: #f3f4f6;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  opacity: 0.4;
+  transition: opacity 0.3s ease;
+}
+
+.section-4 .page-input-container:hover {
+  opacity: 1;
+}
+
+.section-4 .page-input {
+  width: 50px;
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 1em;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.section-4 .page-input:focus {
+  outline: 2px solid #374151;
+}
+
+/* 動畫定義 */
+@keyframes subtleZoom {
+  0% {
+    transform: scale(1);
   }
-  html, body {
-    height: 100%;
-    font-family: 'Noto Sans TC', sans-serif;
-    line-height: 1.6;
-    overflow-x: hidden;
+
+  100% {
+    transform: scale(1.05);
   }
-  /* 頁面容器 */
-  .page-container {
-    height: 100vh;
-    overflow-y: scroll;
-    scroll-snap-type: y mandatory;
-    background: transparent;
+}
+
+@keyframes bounceArrow {
+
+  0%,
+  100% {
+    transform: translateY(0);
   }
-  /* 通用區塊樣式 */
-  .section {
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    scroll-snap-align: start;
-    position: relative;
-    padding: 20px;
-    color: #333;
+
+  50% {
+    transform: translateY(10px);
   }
-  /* 第一區塊：背景影片與標題 */
-  .section-1 {
-    position: relative;
-    overflow: hidden;
-    background: transparent;
-  }
-  .section-1 .ocean-banner {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-  }
-  .section-1 .ocean-banner video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(0.7) contrast(1.1);
-    animation: subtleZoom 20s infinite alternate;
-    display: block;
-  }
-  .section-1 h1 {
-    font-size: 3.5em;
-    font-weight: 700;
-    color: #f3f4f6;
-    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
-    position: relative;
-    z-index: 2;
+}
+
+@keyframes fadeInUp {
+  0% {
     opacity: 0;
     transform: translateY(30px);
-    animation: fadeInUp 1s ease forwards;
   }
-  .section-1 .intro-text {
-    color: #f3f4f6;
-    font-size: 1.2em;
-    text-align: center;
-    margin-top: 20px;
-    max-width: 800px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-    position: relative;
-    z-index: 2;
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
-  .section-1 .scroll-down-arrow {
-    position: absolute;
-    bottom: 30px;
-    font-size: 2em;
-    color: #f3f4f6;
-    animation: bounceArrow 1.5s infinite;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-    z-index: 2;
-    transition: transform 0.3s ease;
-  }
-  .section-1 .scroll-down-arrow:hover {
-    transform: scale(1.2);
-  }
-  /* 第二區塊（原第三區塊）：最新貼文 + 翻轉卡片 */
-  .section-3 {
-    position: relative;
-    overflow: hidden;
-    background: transparent;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0;
-  }
-  .section-3 video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1;
-    filter: brightness(0.6) contrast(1.1);
-  }
-  .section-3 .info-section {
-    position: relative;
-    width: 100%;
-    padding: 80px 20px 40px 20px;
-  }
-  .section-3 .info-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: white;
-    z-index: 0;
-  }
-  .section-3 .articles-section {
-    position: relative;
-    width: 100%;
-    padding: 40px 20px;
-  }
-  .section-3 .articles-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(118, 177, 64, 0.678), rgba(87, 156, 113, 0.5));
-    z-index: 0;
-  }
-  .section-3 h3,
-  .section-3 .ocean-info-grid,
-  .section-3 .container {
-    position: relative;
-    z-index: 1;
-  }
-  .section-3 h3 {
-    font-size: 2.5em;
-    color: #f3f4f6;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    text-align: center;
-  }
+}
+
+/* 響應式設計 */
+@media (max-width: 1024px) {
   .section-3 .ocean-info-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
-  .section-3 .info-card {
-    background: transparent;
-    border-radius: 12px;
-    text-align: left;
-    perspective: 1000px;
-    height: 250px;
-    cursor: pointer;
-    transition: box-shadow 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .section-1 h1 {
+    font-size: 2.5em;
   }
-  .section-3 .info-card-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    transition: transform 0.8s;
-    transform-style: preserve-3d;
+
+  .section-3 h3,
+  .section-4 h3 {
+    font-size: 2em;
   }
-  .section-3 .info-card:hover .info-card-inner {
-    transform: rotateY(180deg);
+
+  .section-4 .posts-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
-  .section-3 .info-card-front,
-  .section-3 .info-card-back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    border-radius: 12px;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+}
+
+@media (max-width: 480px) {
+  .section-1 h1 {
+    font-size: 2em;
   }
-  .section-3 .info-card-front {
+
+  .section-1 .ocean-banner video {
+    display: none;
+  }
+
+  .section-1 .ocean-banner {
+    background-image: url('../img/climate.jpg');
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  }
+
+  .section-4 .posts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section-3 {
     padding: 0;
   }
-  .section-3 .info-card-front h3 {
-    font-size: 1.4em;
-    color: #f3f4f6;
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
-    background: rgba(0, 0, 0, 0.4);
-    padding: 10px 20px;
-    border-radius: 8px;
-    z-index: 1;
+
+  .section-3 .info-section {
+    padding: 60px 20px 20px 20px;
   }
-  .section-3 .info-card-back {
-    transform: rotateY(180deg);
-    background: rgba(21, 128, 61, 0.767);
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .section-3 .info-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-  }
-  .section-3 .info-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .section-3 .info-card-back h3 {
-    font-size: 1.2em;
-    color: #f3f4f6;
-    margin-bottom: 10px;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-  }
-  .section-3 .info-card-back p {
-    font-size: 0.9em;
-    color: rgba(255, 255, 255, 0.9);
-    line-height: 1.5;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-  }
-  .section-3 .container {
-    width: 100%;
-    max-width: 1500px;
-    margin: 0 auto;
-  }
-  .section-3 .article-slider {
-    width: 100%;
-    position: relative;
-  }
-  .section-3 .article-content {
-    display: flex !important;
-    gap: 40px !important;
-    padding: 20px 0;
-    overflow: hidden;
-    margin: 0 auto;
-  }
-  .slick-slide {
-    margin-right: 40px !important;
-  }
-  .slick-list {
-    margin-right: -20px;
-  }
-  .section-3 .article-card {
-    display: flex !important;
-    flex-direction: row !important;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    height: 350px !important;
-    width: 800px !important;
-    transition: transform 0.3s ease;
-    flex-shrink: 0;
-  }
-  .section-3 .article-card:hover {
-    transform: translateY(-5px);
-  }
-  .section-3 .article-card img {
-    width: 60%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 10px 0 0 10px;
-    margin-bottom: 0;
-    flex-shrink: 0;
-  }
-  .section-3 .article-card .land-card-content {
-    width: 40%;
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: white;
-  }
-  .section-3 .article-card .land-card-title {
-    font-size: 1.5rem;
-    color: #374151;
-    margin-top: 20px;
-    margin-bottom: 15px;
-    font-weight: bold;
-    text-align: center;
-  }
-  .section-3 .article-card .land-card-button {
-    display: inline-block;
-    background-color: #15803D;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    text-align: center;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    margin-top: auto;
-    align-self: center;
-  }
-  .section-3 .article-card .land-card-button:hover {
-    background-color: #374151;
-    transform: scale(1.05);
-  }
-  .section-3 .slider-btn2 {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.8);
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 20px;
-    cursor: pointer;
-    z-index: 2;
-    transition: background 0.3s ease, transform 0.2s ease;
-  }
-  .section-3 .prev-btn {
-    left: 10px;
-  }
-  .section-3 .next-btn {
-    right: 10px;
-  }
-  .section-3 .slider-btn2:hover {
-    background: rgba(255, 255, 255, 1);
-    transform: translateY(-50%) scale(1.1);
-  }
-  /* 第三區塊（原第四區塊）：搜尋文章 */
-  .section-4 {
-    padding: 50px 0;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .section-4 video {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    z-index: -1;
-    transform: translateX(-50%) translateY(-50%);
-    filter: brightness(0.6) contrast(1.1);
-  }
-  .section-4::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(55, 65, 81, 0.5), rgba(21, 128, 61, 0.5));
-    z-index: 0;
-  }
-  .section-4 h3,
-  .section-4 .search-container,
-  .section-4 .posts-grid,
-  .section-4 .pagination {
-    position: relative;
-    z-index: 1;
-  }
-  .section-4 h3 {
-    font-size: 2.5em;
-    color: #f3f4f6;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    text-align: center;
-  }
-  .section-4 .search-container {
-    width: 100%;
-    max-width: 800px;
-    margin-bottom: 30px;
-  }
-  .section-4 .search-container form {
-    display: flex;
-    gap: 10px;
-    width: 100%;
-  }
-  .section-4 .search-container input {
-    flex-grow: 1;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 30px;
-    font-size: 1em;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    background: rgba(255, 255, 255, 0.9);
-    transition: box-shadow 0.3s ease;
-  }
-  .section-4 .search-container input:focus {
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  }
-  .section-4 .search-container button {
-    padding: 12px 25px;
-    background: #374151;
-    color: white;
-    border: none;
-    border-radius: 30px;
-    font-size: 1em;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  }
-  .section-4 .search-container button:hover {
-    background: #15803D;
-    transform: scale(1.05);
-  }
-  .section-4 .posts-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-    width: 100%;
-    max-width: 1200px;
-  }
-  .section-4 .post-card {
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 15px;
+
+  .section-3 .articles-section {
     padding: 20px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease;
-    display: flex;
-    flex-direction: column;
   }
-  .section-4 .post-card:hover {
-    transform: translateY(-5px);
+
+  .section-3 .ocean-info-grid {
+    grid-template-columns: 1fr;
   }
-  .section-4 .post-card img {
+
+  .section-3 .article-card {
+    flex-direction: column !important;
+    height: auto !important;
+    width: 100% !important;
+  }
+
+  .section-3 .article-card img {
     width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 15px;
+    height: 300px;
   }
-  .section-4 .post-card h4 {
-    font-size: 1.2em;
-    color: #374151;
-    margin-bottom: 10px;
-    text-align: center;
+
+  .section-3 .article-card .land-card-content {
+    width: 100%;
+    padding: 20px;
   }
-  .section-4 .post-card p {
-    font-size: 0.9em;
-    color: #444;
-    margin-bottom: 15px;
-    flex-grow: 1;
+
+  .section-3 .container {
+    max-width: 100%;
   }
-  .section-4 .post-card .read-more {
-    display: inline-block;
-    padding: 8px 15px;
-    background: #374151;
-    color: white;
-    text-decoration: none;
-    border-radius: 30px;
-    font-size: 0.9em;
-    transition: all 0.3s ease;
-    align-self: center;
-  }
-  .section-4 .post-card .read-more:hover {
-    background: #15803D;
-    transform: scale(1.05);
-  }
-  .section-4 .pagination {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-top: 20px;
-    position: relative;
-    z-index: 1;
-  }
-  .section-4 .pagination-btn {
-    padding: 10px 20px;
-    background: #374151;
-    color: white;
-    border: none;
-    border-radius: 30px;
-    font-size: 1em;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    position: relative;
-  }
-  .section-4 .pagination-btn:hover:not(:disabled) {
-    background: #15803D;
-    transform: scale(1.05);
-  }
-  .section-4 .pagination-btn:disabled {
-    background: #9ca3af;
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
-  }
-  .section-4 .pagination-btn:disabled::after {
-    content: '無更多頁面';
-    position: absolute;
-    top: -30px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.7);
-    color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 0.8em;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-  .section-4 .pagination-btn:disabled:hover::after {
-    opacity: 1;
-  }
-  .section-4 .page-input-container {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 1.1em;
-    color: #f3f4f6;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-    opacity: 0.4;
-    transition: opacity 0.3s ease;
-  }
-  .section-4 .page-input-container:hover {
-    opacity: 1;
-  }
-  .section-4 .page-input {
-    width: 50px;
-    padding: 5px;
-    border: none;
-    border-radius: 5px;
-    text-align: center;
-    font-size: 1em;
-    background: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  .section-4 .page-input:focus {
-    outline: 2px solid #374151;
-  }
-  /* 動畫定義 */
-  @keyframes subtleZoom {
-    0% { transform: scale(1); }
-    100% { transform: scale(1.05); }
-  }
-  @keyframes bounceArrow {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(10px); }
-  }
-  @keyframes fadeInUp {
-    0% { opacity: 0; transform: translateY(30px); }
-    100% { opacity: 1; transform: translateY(0); }
-  }
-  /* 響應式設計 */
-  @media (max-width: 1024px) {
-    .section-3 .ocean-info-grid {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    }
-  }
-  @media (max-width: 768px) {
-    .section-1 h1 {
-        font-size: 2.5em;
-    }
-    .section-3 h3,
-    .section-4 h3 {
-        font-size: 2em;
-    }
-    .section-4 .posts-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-  }
-  @media (max-width: 480px) {
-    .section-1 h1 {
-        font-size: 2em;
-    }
-    .section-1 .ocean-banner video {
-        display: none;
-    }
-    .section-1 .ocean-banner {
-        background-image: url('../img/climate.jpg');
-        background-size: cover;
-        background-position: center;
-    }
-    .section-4 .posts-grid {
-        grid-template-columns: 1fr;
-    }
-    .section-3 {
-        padding: 0;
-    }
-    .section-3 .info-section {
-        padding: 60px 20px 20px 20px;
-    }
-    .section-3 .articles-section {
-        padding: 20px;
-    }
-    .section-3 .ocean-info-grid {
-        grid-template-columns: 1fr;
-    }
-    .section-3 .article-card {
-        flex-direction: column !important;
-        height: auto !important;
-        width: 100% !important;
-    }
-    .section-3 .article-card img {
-        width: 100%;
-        height: 300px;
-    }
-    .section-3 .article-card .land-card-content {
-        width: 100%;
-        padding: 20px;
-    }
-    .section-3 .container {
-        max-width: 100%;
-    }
-  }
-  .section-3 .info-section h3 {
-    font-size: 2.5em;
-    color: #66b985;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    text-align: center;
-  }
-  
-  /* 確保 info-card 的 h3 不受影響，保留原始樣式 */
-  .section-3 .info-card h3 {
-    font-size: 1.4em;
-    color: #f3f4f6;
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
-  }
-  
-  /* 確保 info-card-back 的 h3 不受影響，保留原始樣式 */
-  .section-3 .info-card-back h3 {
-    font-size: 1.2em;
-    color: #f3f4f6;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-  }
+}
+
+.section-3 .info-section h3 {
+  font-size: 2.5em;
+  color: #66b985;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+/* 確保 info-card 的 h3 不受影響，保留原始樣式 */
+.section-3 .info-card h3 {
+  font-size: 1.4em;
+  color: #f3f4f6;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+}
+
+/* 確保 info-card-back 的 h3 不受影響，保留原始樣式 */
+.section-3 .info-card-back h3 {
+  font-size: 1.2em;
+  color: #f3f4f6;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}

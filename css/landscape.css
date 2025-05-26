@@ -271,9 +271,6 @@ html, body {
   transition: transform 0.3s ease;
   flex-shrink: 0;
 }
-.section-3 .article-card:hover {
-  transform: translateY(-5px);
-}
 .section-3 .article-card img {
   width: 60%;
   height: 100%;
@@ -284,11 +281,17 @@ html, body {
 }
 .section-3 .article-card .land-card-content {
   width: 40%;
-  padding: 30px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   background-color: white;
+}
+.section-3 .article-card .text-content{
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  text-align: center;
+  flex-grow: 1; /* 允许内容在可用空间中扩展 */
 }
 .section-3 .article-card .land-card-title {
   font-size: 1.5rem;
@@ -338,6 +341,10 @@ html, body {
   background: rgba(255, 255, 255, 1);
   transform: translateY(-50%) scale(1.1);
 }
+.progress-bar {
+  height: 6px;
+  background-color: #854614;
+} 
 /* 第三區塊（原第四區塊）：搜尋文章 */
 .section-4 {
   padding: 50px 0;

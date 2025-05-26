@@ -17,6 +17,8 @@ require_once 'db_connect.php';
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 </head>
 
 <body>
@@ -84,23 +86,23 @@ require_once 'db_connect.php';
                 </div>
             </div>
             <div class="conservation-actions">
-                <h2>1990年 - 2000年的海洋保育行動</h2>
+                <h2>永續小行動</h2>
                 <div class="action-list">
-                    <div class="action-item">
-                        <h3>南極海鯨魚保護區</h3>
-                        <p>1994年國際捕鯨委員會成立，南極高達5,000萬平方公里禁止捕鯨的保護區。</p>
+                    <div class="action-item" data-aos="fade-up" data-aos-delay="0">
+                        <h3>隨手分類也很棒</h3>
+                        <p>丟垃圾前多看一眼分類標誌，把瓶罐沖乾淨再回收，不只乾淨環境，也能減輕回收人員的負擔，讓回收真的有用。</p>
                     </div>
-                    <div class="action-item">
-                        <h3>不要油污</h3>
-                        <p>多次行動支持與公眾力量，成功促使SHELL放棄向海上丟棄鑽油平台Brent Spar的決定。</p>
+                    <div class="action-item" data-aos="fade-up" data-aos-delay="200">
+                        <h3>自備一點不麻煩</h3>
+                        <p>日常出門多準備一個小袋子或杯子，就能減少一次性垃圾流入海洋。習慣之後，你會覺得這只是順手的事。</p>
                     </div>
-                    <div class="action-item">
-                        <h3>禁止流刺網</h3>
-                        <p>各地團體全力不懈努力，先後推動聯合國及歐盟禁止大面積流刺網捕撈。</p>
+                    <div class="action-item" data-aos="fade-up" data-aos-delay="400">
+                        <h3>減塑從日常開始</h3>
+                        <p>無論是換上固體洗髮餅、用上玻璃瓶裝調味料，這些小選擇都為環境減少一次性的負擔，也讓生活更簡單質感。</p>
                     </div>
-                    <div class="action-item">
-                        <h3>阻擋商業捕鯨</h3>
-                        <p>多年政治遊說工作，成功阻擋商業捕鯨案會否決日本發起的恢復商業捕鯨提案。</p>
+                    <div class="action-item" data-aos="fade-up" data-aos-delay="600">
+                        <h3>分享是最溫柔的永續</h3>
+                        <p>永續不是一個人的事，和朋友交換環保好物、分享生活小撇步，就能讓好習慣像漣漪一樣擴散出去!</p>
                     </div>
                 </div>
             </div>
@@ -132,23 +134,23 @@ require_once 'db_connect.php';
                 </div>
             </div>
             <div class="conservation-actions">
-                <h2>1990年 - 2000年的海洋保育行動</h2>
+                <h2>生活中的永續</h2>
                 <div class="action-list">
-                    <div class="action-item">
-                        <h3>南極海鯨魚保護區</h3>
-                        <p>1994年國際捕鯨委員會成立，南極高達5,000萬平方公里禁止捕鯨的保護區。</p>
+                    <div class="action-item" data-aos="fade-up" data-aos-delay="0">
+                        <h3>綠一點的飲食選擇</h3>
+                        <p>每週有一天改吃植物為主的餐點，像是豆腐、蔬菜、堅果等，不只能減碳，還可能讓你發現更多美味的新料理！</p>
                     </div>
-                    <div class="action-item">
-                        <h3>不要油污</h3>
-                        <p>多次行動支持與公眾力量，成功促使SHELL放棄向海上丟棄鑽油平台Brent Spar的決定。</p>
+                    <div class="action-item" data-aos="fade-up" data-aos-delay="200">
+                        <h3>關燈這一秒，很有力量</h3>
+                        <p>在日常中節省用電，如用自然光、拔掉沒用的插頭，其實累積下來幫助很大，也讓電費帳單更可愛一點。</p>
                     </div>
-                    <div class="action-item">
-                        <h3>禁止流刺網</h3>
-                        <p>各地團體全力不懈努力，先後推動聯合國及歐盟禁止大面積流刺網捕撈。</p>
+                    <div class="action-item" data-aos="fade-up" data-aos-delay="400">
+                        <h3>雙腳也能走得遠</h3>
+                        <p>上下班或上學的路途中，有時改用腳踏車或步行，不但減碳，還讓你更有精神，是對自己和地球的雙重禮物。</p>
                     </div>
-                    <div class="action-item">
-                        <h3>阻擋商業捕鯨</h3>
-                        <p>多年政治遊說工作，成功阻擋商業捕鯨案會否決日本發起的恢復商業捕鯨提案。</p>
+                    <div class="action-item" data-aos="fade-up" data-aos-delay="600">
+                        <h3>數位也能減廢</h3>
+                        <p>延長手機或電子產品的使用年限，減少更新頻率，搭配二手、維修或升級，也是一種不浪費的智慧生活。</p>
                     </div>
                 </div>
             </div>
@@ -286,6 +288,10 @@ require_once 'db_connect.php';
                     }
                 }]
             });
+        });
+        AOS.init({
+            once: true, // 滾動觸發一次就停止
+            duration: 800, // 動畫持續時間（毫秒）
         });
     </script>
 </body>

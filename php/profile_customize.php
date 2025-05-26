@@ -358,20 +358,22 @@ $conn->close();
     <script>
         function selectAvatar(id) {
             document.getElementById('selected_avatar_id').value = id;
-            // 移除所有頭像卡片的選中狀態
             const avatarCards = document.querySelectorAll('.customize-section:nth-of-type(2) .item-card');
             avatarCards.forEach(card => card.classList.remove('selected'));
-            // 為選中的卡片添加選中狀態
-            event.currentTarget.classList.add('selected');
+            const selectedCard = document.querySelector(`.customize-section:nth-of-type(2) .item-card[onclick="selectAvatar(${id})"]`);
+            if (selectedCard) {
+                selectedCard.classList.add('selected');
+            }
         }
         
         function selectBackground(id) {
             document.getElementById('selected_background_id').value = id;
-            // 移除所有背景卡片的選中狀態
             const backgroundCards = document.querySelectorAll('.customize-section:nth-of-type(3) .item-card');
             backgroundCards.forEach(card => card.classList.remove('selected'));
-            // 為選中的卡片添加選中狀態
-            event.currentTarget.classList.add('selected');
+            const selectedCard = document.querySelector(`.customize-section:nth-of-type(3) .item-card[onclick="selectBackground(${id})"]`);
+            if (selectedCard) {
+                selectedCard.classList.add('selected');
+            }
         }
     </script>
 </body>

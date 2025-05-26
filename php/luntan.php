@@ -54,7 +54,7 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $article_title; ?></title>
     <link rel="stylesheet" href="../css/luntan.css">
-    <link rel="stylesheet" href="../css/nav.css"> <!-- 假設導航樣式 -->
+    <link rel="stylesheet" href="../css/nav3.css"> <!-- 假設導航樣式 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>

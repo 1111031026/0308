@@ -301,7 +301,7 @@ $conn->close();
                 <form method="post" action="">
                     <div class="items-grid">
                         <?php foreach ($avatars as $avatar): ?>
-                        <div class="item-card <?php echo ($current_avatar === $avatar['ImageURL']) ? 'selected' : ''; ?>" onclick="selectAvatar(<?php echo $avatar['ItemID']; ?>)">
+                        <div class="item-card <?php echo ($current_avatar === $avatar['ImageURL']) ? 'selected' : ''; ?>" onclick="selectAvatar(<?php echo $avatar['ItemID']; ?>, event)">
                             <img src="../<?php echo htmlspecialchars($avatar['ImageURL']); ?>" alt="<?php echo htmlspecialchars($avatar['Name']); ?>" class="item-image">
                             <div class="item-name"><?php echo htmlspecialchars($avatar['Name']); ?></div>
                         </div>
@@ -332,7 +332,7 @@ $conn->close();
                 <form method="post" action="">
                     <div class="items-grid">
                         <?php foreach ($backgrounds as $background): ?>
-                        <div class="item-card <?php echo ($current_background === $background['ImageURL']) ? 'selected' : ''; ?>" onclick="selectBackground(<?php echo $background['ItemID']; ?>)">
+                        <div class="item-card <?php echo ($current_background === $background['ImageURL']) ? 'selected' : ''; ?>" onclick="selectBackground(<?php echo $background['ItemID']; ?>, event)">
                             <img src="../<?php echo htmlspecialchars($background['ImageURL']); ?>" alt="<?php echo htmlspecialchars($background['Name']); ?>" class="item-image">
                             <div class="item-name"><?php echo htmlspecialchars($background['Name']); ?></div>
                         </div>
@@ -356,24 +356,18 @@ $conn->close();
     </div>
     
     <script>
-        function selectAvatar(id) {
+        function selectAvatar(id, event) {
             document.getElementById('selected_avatar_id').value = id;
             const avatarCards = document.querySelectorAll('.customize-section:nth-of-type(2) .item-card');
             avatarCards.forEach(card => card.classList.remove('selected'));
-            const selectedCard = document.querySelector(`.customize-section:nth-of-type(2) .item-card[onclick="selectAvatar(${id})"]`);
-            if (selectedCard) {
-                selectedCard.classList.add('selected');
-            }
+            event.target.closest('.item-card').classList.add('selected');
         }
         
-        function selectBackground(id) {
+        function selectBackground(id, event) {
             document.getElementById('selected_background_id').value = id;
             const backgroundCards = document.querySelectorAll('.customize-section:nth-of-type(3) .item-card');
             backgroundCards.forEach(card => card.classList.remove('selected'));
-            const selectedCard = document.querySelector(`.customize-section:nth-of-type(3) .item-card[onclick="selectBackground(${id})"]`);
-            if (selectedCard) {
-                selectedCard.classList.add('selected');
-            }
+            event.target.closest('.item-card').classList.add('selected');
         }
     </script>
 </body>

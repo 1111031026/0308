@@ -109,12 +109,16 @@ if (isset($post['ArticleID']) && $post['ArticleID'] > 0) {
     <link rel="stylesheet" href="../css/discuss.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-        /* 添加頭像點擊的載入動畫效果 */
+        /* 頭像樣式 */
         .commenter-avatar {
-            transition: opacity 0.2s ease;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            cursor: pointer;
+        }
+        .commenter-avatar:hover {
+            transform: scale(1.1); /* 滑鼠懸停時放大 */
         }
         .commenter-avatar.loading {
-            opacity: 0.5;
+            opacity: 0.5; /* 點擊時半透明 */
         }
     </style>
 </head>
@@ -145,7 +149,7 @@ if (isset($post['ArticleID']) && $post['ArticleID'] > 0) {
                 <div class="post-meta">
                     <div class="author-info">
                         <?php if (!empty($post['AvatarURL'])): ?>
-                            <img src="../<?php echo htmlspecialchars($post['AvatarURL']); ?>" alt="用戶頭像" class="author-avatar" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 8px;">
+                            <img src="../<?php echo htmlspecialchars($post['AvatarURL']); ?>" alt="用戶頭像" class/sound/110466.mp3 class="author-avatar" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 8px;">
                         <?php else: ?>
                             <span class="author-avatar"><i class="fas fa-user-circle"></i></span>
                         <?php endif; ?>
@@ -199,12 +203,16 @@ if (isset($post['ArticleID']) && $post['ArticleID'] > 0) {
                             <div class="comment-card">
                                 <div class="comment-header">
                                     <div class="commenter-info">
+                                        <?php
+                                        // 根據 Status 動態設置跳轉目標
+                                        $achievement_page = $comment['Status'] === 'teacher' ? 'teacher_achievement.php' : 'achievement.php';
+                                        ?>
                                         <?php if (!empty($comment['AvatarURL'])): ?>
-                                            <a href="achievement.php?user_id=<?php echo htmlspecialchars($comment['UserID']); ?>" class="avatar-link" data-user-id="<?php echo htmlspecialchars($comment['UserID']); ?>">
+                                            <a href="<?php echo $achievement_page; ?>?user_id=<?php echo htmlspecialchars($comment['UserID']); ?>" class="avatar-link" data-user-id="<?php echo htmlspecialchars($comment['UserID']); ?>">
                                                 <img src="../<?php echo htmlspecialchars($comment['AvatarURL']); ?>" alt="用戶頭像" class="commenter-avatar" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 8px;">
                                             </a>
                                         <?php else: ?>
-                                            <a href="achievement.php?user_id=<?php echo htmlspecialchars($comment['UserID']); ?>" class="avatar-link" data-user-id="<?php echo htmlspecialchars($comment['UserID']); ?>">
+                                            <a href="<?php echo $achievement_page; ?>?user_id=<?php echo htmlspecialchars($comment['UserID']); ?>" class="avatar-link" data-user-id="<?php echo htmlspecialchars($comment['UserID']); ?>">
                                                 <span class="commenter-avatar"><i class="fas fa-user-circle"></i></span>
                                             </a>
                                         <?php endif; ?>
@@ -236,21 +244,36 @@ if (isset($post['ArticleID']) && $post['ArticleID'] > 0) {
     <script>
         // 處理頭像點擊的載入動畫和防抖
         document.querySelectorAll('.avatar-link').forEach(link => {
+            let isLocked = false; // 防抖鎖定狀態
+
             link.addEventListener('click', function(e) {
                 e.preventDefault(); // 阻止默認跳轉
+
+                // 如果鎖定中，忽略點擊
+                if (isLocked) return;
+
+                // 設置鎖定
+                isLocked = true;
+
                 const avatar = this.querySelector('.commenter-avatar');
                 if (avatar) {
                     avatar.classList.add('loading'); // 添加載入效果
-                }
-                
-                // 防抖處理
-                if (this.dataset.loading) return;
-                this.dataset.loading = true;
 
-                // 模擬延遲（可根據需要調整或移除）
+                    // 200ms 後移除載入效果
+                    setTimeout(() => {
+                        avatar.classList.remove('loading');
+                    }, 200);
+                }
+
+                // 300ms 後執行跳轉
                 setTimeout(() => {
                     window.location.href = this.href; // 執行跳轉
                 }, 300);
+
+                // 500ms 後解鎖，允許下一次點擊
+                setTimeout(() => {
+                    isLocked = false;
+                }, 500);
             });
         });
     </script>

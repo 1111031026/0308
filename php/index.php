@@ -86,7 +86,11 @@ require_once 'db_connect.php';
                 </div>
             </div>
             <div class="conservation-actions">
+<<<<<<< HEAD
                 <h2>永續小行動</h2>
+=======
+                <h2>1990年 - 2024年的海洋保育行動</h2>
+>>>>>>> 0362db6677e9452a336b272a6ab486eace43edf2
                 <div class="action-list">
                     <div class="action-item" data-aos="fade-up" data-aos-delay="0">
                         <h3>隨手分類也很棒</h3>
@@ -112,13 +116,13 @@ require_once 'db_connect.php';
                 <div class="climate-slider swiper climate-slider-container">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
-                            <img src="../img/climate.jpg" alt="氣候變遷" class="climate-card-image">
+                            <img src="../img/inclimate1.jpg" alt="氣候變遷" class="climate-card-image">
                         </div>
                         <div class="swiper-slide">
-                            <img src="../img/shore.mp4" alt="海平面上升" class="climate-card-image">
+                            <img src="../img/inclimate2.jpg" alt="海平面上升" class="climate-card-image">
                         </div>
                         <div class="swiper-slide">
-                            <img src="../img/shore2.mp4" alt="極端天氣" class="climate-card-image">
+                            <img src="../img/inclimate3.jpg" alt="極端天氣" class="climate-card-image">
                         </div>
                     </div>
                     <!-- 分頁器 -->
@@ -134,6 +138,7 @@ require_once 'db_connect.php';
                 </div>
             </div>
             <div class="conservation-actions">
+<<<<<<< HEAD
                 <h2>生活中的永續</h2>
                 <div class="action-list">
                     <div class="action-item" data-aos="fade-up" data-aos-delay="0">
@@ -151,6 +156,25 @@ require_once 'db_connect.php';
                     <div class="action-item" data-aos="fade-up" data-aos-delay="600">
                         <h3>數位也能減廢</h3>
                         <p>延長手機或電子產品的使用年限，減少更新頻率，搭配二手、維修或升級，也是一種不浪費的智慧生活。</p>
+=======
+                <h2>1990-2024年全球永續發展的里程碑</h2>
+                <div class="action-list">
+                    <div class="action-item">
+                        <h3>里約地球高峰會</h3>
+                        <p>1992年，聯合國在里約召開地球高峰會，通過《議程21》，為全球永續發展奠定基礎。</p>
+                    </div>
+                    <div class="action-item">
+                        <h3>蒙特婁議定書修訂</h3>
+                        <p>1990年，全球強化《蒙特婁議定書》，加速淘汰破壞臭氧層的化學物質，保護大氣環境。</p>
+                    </div>
+                    <div class="action-item">
+                        <h3>永續城市運動</h3>
+                        <p>1990年代，歐洲多國推動永續城市計劃，促進綠色交通與低碳都市發展。</p>
+                    </div>
+                    <div class="action-item">
+                        <h3>生物多樣性公約</h3>
+                        <p>1992年，聯合國通過《生物多樣性公約》，推動全球保護生態系統與物種多樣性。</p>
+>>>>>>> 0362db6677e9452a336b272a6ab486eace43edf2
                     </div>
                 </div>
             </div>
@@ -166,13 +190,13 @@ require_once 'db_connect.php';
                 <div class="land-slider swiper land-slider-container">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
-                            <img src="../img/forest.png" alt="森林生態" class="land-card-image">
+                            <img src="../img/inlandscape1.jpg" alt="森林生態" class="land-card-image">
                         </div>
                         <div class="swiper-slide">
-                            <img src="../img/mountain.jpg" alt="山地生態" class="land-card-image">
+                            <img src="../img/inlandscape2.jpg" alt="山地生態" class="land-card-image">
                         </div>
                         <div class="swiper-slide">
-                            <img src="../img/desert.jpg" alt="沙漠化" class="land-card-image">
+                            <img src="../img/inlandscape3.jpg" alt="沙漠化" class="land-card-image">
                         </div>
                     </div>
                     <!-- 分頁器 -->

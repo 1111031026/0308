@@ -63,7 +63,7 @@ require_once 'db_connect.php';
             <div class="blue-section">
                 <div class="blue-text-content">
                     <h1>關於海洋永續</h1>
-                    <p class="ocean-description">海洋處境岌岌可危。我們苛索海洋太多了，破壞性捕撈、污染及氣候變遷，對獨特的海洋生態構成嚴重威脅。可幸的是，只要我們同心協力，就能保護海洋的蔚藍，守護所有仰賴海洋為生的生命與人們...</p>
+                    <p class="ocean-description">海洋正面臨嚴峻危機。我們對它過度索取，包括破壞性的捕撈行為、各類污染以及氣候變遷，已對珍貴的海洋生態造成巨大威脅。幸好，只要大家攜手合作，仍有機會守護這片蔚藍，保護仰賴海洋生存的萬物與人類...</p>
                     <a href="ocean.php" class="ocean-read-more">閱讀更多 ⇨</a>
                 </div>
                 <div class="ocean-slider swiper ocean-slider-container">
@@ -86,11 +86,7 @@ require_once 'db_connect.php';
                 </div>
             </div>
             <div class="conservation-actions">
-<<<<<<< HEAD
                 <h2>永續小行動</h2>
-=======
-                <h2>1990年 - 2024年的海洋保育行動</h2>
->>>>>>> 0362db6677e9452a336b272a6ab486eace43edf2
                 <div class="action-list">
                     <div class="action-item" data-aos="fade-up" data-aos-delay="0">
                         <h3>隨手分類也很棒</h3>
@@ -138,7 +134,6 @@ require_once 'db_connect.php';
                 </div>
             </div>
             <div class="conservation-actions">
-<<<<<<< HEAD
                 <h2>生活中的永續</h2>
                 <div class="action-list">
                     <div class="action-item" data-aos="fade-up" data-aos-delay="0">
@@ -156,25 +151,6 @@ require_once 'db_connect.php';
                     <div class="action-item" data-aos="fade-up" data-aos-delay="600">
                         <h3>數位也能減廢</h3>
                         <p>延長手機或電子產品的使用年限，減少更新頻率，搭配二手、維修或升級，也是一種不浪費的智慧生活。</p>
-=======
-                <h2>1990-2024年全球永續發展的里程碑</h2>
-                <div class="action-list">
-                    <div class="action-item">
-                        <h3>里約地球高峰會</h3>
-                        <p>1992年，聯合國在里約召開地球高峰會，通過《議程21》，為全球永續發展奠定基礎。</p>
-                    </div>
-                    <div class="action-item">
-                        <h3>蒙特婁議定書修訂</h3>
-                        <p>1990年，全球強化《蒙特婁議定書》，加速淘汰破壞臭氧層的化學物質，保護大氣環境。</p>
-                    </div>
-                    <div class="action-item">
-                        <h3>永續城市運動</h3>
-                        <p>1990年代，歐洲多國推動永續城市計劃，促進綠色交通與低碳都市發展。</p>
-                    </div>
-                    <div class="action-item">
-                        <h3>生物多樣性公約</h3>
-                        <p>1992年，聯合國通過《生物多樣性公約》，推動全球保護生態系統與物種多樣性。</p>
->>>>>>> 0362db6677e9452a336b272a6ab486eace43edf2
                     </div>
                 </div>
             </div>

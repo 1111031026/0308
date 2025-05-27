@@ -17,7 +17,7 @@ if ($item_id <= 0) {
 }
 
 // 獲取商品詳細信息
-$sql = "SELECT * FROM merchandise WHERE ItemID = ? AND Quantity > 0"; // Changed Available = 1 to Quantity > 0
+$sql = "SELECT * FROM merchandise WHERE ItemID = ?"; 
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $item_id);
 $stmt->execute();
@@ -76,6 +76,7 @@ else $category_name = $product['Category'];
     <title><?php echo htmlspecialchars($product['Name']); ?> - 購買</title>
     <link rel="icon" type="image/png" href="../img/icon.png">
     <link rel="stylesheet" href="../css/product_detail.css">
+    <link rel="stylesheet" href="../css/nav3.css">
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
     <!-- 添加 jQuery 和 elevateZoom-plus -->
@@ -174,12 +175,8 @@ else $category_name = $product['Category'];
                 <p class="product-category">分類:<?php echo $category_name; ?></p>
                 <p class="product-description">描述:<?php echo htmlspecialchars($product['Description']); ?></p>
                 <p class="product-points-required">所需點數: <span><?php echo $product['PointsRequired']; ?></span></p>
-                <p class="product-quantity">剩餘數量: <span><?php echo $product['Quantity']; ?></span></p>
                 <p class="user-points">您目前的點數: <span><?php echo $points; ?></span></p>
-
-                <?php if ($product['Quantity'] == 0): ?>
-                    <div class="sold-out">商品已售完</div>
-                <?php elseif ($already_purchased): ?>
+                <?php if ($already_purchased): ?>
                     <div class="already-purchased">您已購買此商品</div>
                 <?php elseif ($points >= $product['PointsRequired']): ?>
                     <button class="buy-button" onclick="confirmPurchase(<?php echo $product['ItemID']; ?>)">購買商品</button>

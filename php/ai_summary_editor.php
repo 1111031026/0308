@@ -36,7 +36,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['teacher_summary'])) {
     $stmt->bind_param("si", $new_summary, $articleID);
     if ($stmt->execute()) {
         $teacher_summary = $new_summary;
-        $msg = '重點整理已儲存！';
+        header("Location: article.php?id=$articleID");
+        exit;
     } else {
         $msg = '儲存失敗：' . $conn->error;
     }

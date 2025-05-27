@@ -18,11 +18,7 @@ $stmt->execute();
 $result = $stmt->get_result();
 $user_data = $result->fetch_assoc();
 
-if (!$user_data || $user_data['Status'] !== 'teacher') {
-    // 如果用戶不存在或不是教師，重定向到論壇頁面
-    header('Location: luntan.php');
-    exit;
-}
+
 $stmt->close();
 $totalPoints = 0;
 $sdg13Count = 0;

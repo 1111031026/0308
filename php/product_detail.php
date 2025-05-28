@@ -37,8 +37,9 @@ $points = 0;
 $already_purchased = false;
 
 if ($user_id > 0) {
-    // 從 achievement 資料表獲取用戶點數
-    $sql = "SELECT TotalPoints FROM achievement WHERE UserID = ?";
+    $role = $_SESSION['role'] ?? 'Student';
+    $points_table = ($role === 'Teacher') ? 'teacher_achievement' : 'achievement';
+    $sql = "SELECT TotalPoints FROM $points_table WHERE UserID = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $user_id);
     $stmt->execute();

@@ -79,7 +79,9 @@ if ($category_result && $category_result->num_rows > 0) {
 
 $userPoints = 0;
 if ($user_id > 0) {
-    $points_sql = "SELECT TotalPoints FROM achievement WHERE UserID = ?";
+    $role = $_SESSION['role'] ?? 'Student';
+    $points_table = ($role === 'Teacher') ? 'teacher_achievement' : 'achievement';
+    $points_sql = "SELECT TotalPoints FROM $points_table WHERE UserID = ?";
     $points_stmt = $conn->prepare($points_sql);
     $points_stmt->bind_param("i", $user_id);
     $points_stmt->execute();

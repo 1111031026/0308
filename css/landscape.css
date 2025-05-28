@@ -14,7 +14,7 @@ html, body {
 .page-container {
   height: 100vh;
   overflow-y: scroll;
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: y mandatory; 
   background: transparent;
 }
 /* 通用區塊樣式 */

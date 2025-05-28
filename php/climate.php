@@ -47,7 +47,7 @@
         <!-- 第二區塊（原第三區塊）：最新貼文 + 翻轉卡片 -->
         <section class="section section-3">
             <div class="info-section">
-                <h3>關於氣候永續</h3>
+                <h3 style="color: #15803D;">關於氣候永續</h3>
                 <div class="ocean-info-grid">
                     <div class="info-card">
                         <div class="info-card-inner">

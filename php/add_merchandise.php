@@ -118,7 +118,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="icon" type="image/png" href="../img/icon.png">
 </head>
 <body>
-    <?php include 'nav.php'; ?>
     
     <div class="admin-container">
         <h1>新增商品</h1>

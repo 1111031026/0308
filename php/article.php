@@ -93,7 +93,7 @@ if (
 
         /* 文章標題區域 */
         .article-header {
-            background: linear-gradient(135deg,rgb(183, 225, 243) 0%,rgb(246, 196, 219) 50%,rgb(196, 245, 203) 100%);
+            background: linear-gradient(135deg,rgb(149, 202, 225) 0%,rgb(227, 155, 189) 50%,rgb(145, 210, 156) 100%);
             padding: 60px 40px 40px 40px;
             border-radius: 32px;
             box-shadow:
@@ -261,7 +261,7 @@ if (
 
         /* 文章來源區域 */
         .article-source {
-    background: linear-gradient(135deg, #d1f4ff 0%, #c2f2e2 100%); /* 柔和淺藍＋淺綠 */
+    background: linear-gradient(135deg,rgb(174, 174, 174) 0%,rgb(189, 189, 189) 100%); /* 柔和淺藍＋淺綠 */
     padding: 28px 36px;
     border-radius: 24px;
     border-left: 6px solid rgb(169, 227, 205); /* 修正：加上空格 */

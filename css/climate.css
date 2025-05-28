@@ -235,7 +235,7 @@ body {
 
 .section-3 .info-card-back {
   transform: rotateY(180deg);
-  background: rgba(21, 128, 61, 0.767);
+  background: rgba(52, 148, 87, 0.767);
   padding: 15px;
   display: flex;
   flex-direction: column;
@@ -422,7 +422,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, rgba(55, 65, 81, 0.5), rgba(21, 128, 61, 0.5));
+  background: linear-gradient(135deg, rgba(78, 79, 81, 0.5), rgba(89, 94, 91, 0.5));
   z-index: 0;
 }
 

@@ -18,11 +18,6 @@ if (isset($_POST['delete_article'])) {
     $stmt->bind_param("i", $article_id);
     $stmt->execute();
     
-    // 刪除文章相關的圖片記錄
-    $stmt = $conn->prepare("DELETE FROM articleimage WHERE ArticleID = ?");
-    $stmt->bind_param("i", $article_id);
-    $stmt->execute();
-    
     // 刪除文章瀏覽記錄
     $stmt = $conn->prepare("DELETE FROM user_article_views WHERE ArticleID = ?");
     $stmt->bind_param("i", $article_id);
@@ -70,8 +65,7 @@ $sql = "
         a.created_at,
         u.Username,
         (SELECT COUNT(*) FROM commentarea WHERE PostID = a.ArticleID) as CommentCount,
-        (SELECT COUNT(*) FROM user_article_views WHERE ArticleID = a.ArticleID) as ViewCount,
-        (SELECT GROUP_CONCAT(ImageURL) FROM articleimage WHERE ArticleID = a.ArticleID) as Images
+        (SELECT COUNT(*) FROM user_article_views WHERE ArticleID = a.ArticleID) as ViewCount
     FROM article a 
     JOIN user u ON a.UserID = u.UserID 
     $where_clause 
@@ -138,19 +132,6 @@ $articles = $conn->query($sql);
                     echo htmlspecialchars(strlen($content) > 200 ? substr($content, 0, 200) . '...' : $content); 
                     ?>
                 </div>
-                
-                <?php if ($article['Images']): ?>
-                <div class="article-images">
-                    <?php 
-                    $images = explode(',', $article['Images']);
-                    foreach (array_slice($images, 0, 3) as $image): ?>
-                        <img src="<?php echo htmlspecialchars($image); ?>" alt="文章圖片">
-                    <?php endforeach; ?>
-                    <?php if (count($images) > 3): ?>
-                        <div class="more-images">+<?php echo count($images) - 3; ?></div>
-                    <?php endif; ?>
-                </div>
-                <?php endif; ?>
                 
                 <div class="article-stats">
                     <span title="評論數">💬 <?php echo $article['CommentCount']; ?></span>

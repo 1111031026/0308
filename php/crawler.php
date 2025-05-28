@@ -147,7 +147,7 @@ $user_id = $_SESSION['user_id'] ?? 0;
                 <select name="category" class="url-input" required>
                     <option value="">請選擇分類</option>
                     <option value="sdg13">氣候永續</option>
-                    <option value="sdg14">海洋能源</option>
+                    <option value="sdg14">海洋永續</option>
                     <option value="sdg15">陸域永續</option>
                 </select>
                 <input type="file" name="image" class="url-input" accept="image/*">

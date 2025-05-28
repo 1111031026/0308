@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>地景保育 - 永續小站</title>
+    <title>陸域永續 - 永續小站</title>
     <link rel="icon" type="image/png" href="../img/icon.png">
     <link rel="stylesheet" href="../css/nav2.css">
     <link rel="stylesheet" href="../css/landscape.css">
@@ -40,24 +40,24 @@
                     您的瀏覽器不支援影片播放
                 </video>
             </div>
-            <h1>地景保育</h1>
-            <p class="intro-text">地景保育是保護自然與人文景觀的重要環境議題，我們致力於守護山脈、森林與濕地，推動永續發展，為未來留下綠色遺產。</p>
+            <h1>陸域永續</h1>
+            <p class="intro-text">陸域永續是保護自然與人文景觀的重要環境議題，我們致力於守護山脈、森林與濕地，推動永續發展，為未來留下綠色遺產。</p>
             <div class="scroll-down-arrow"><span>⇩</span></div>
         </section>
         <!-- 第二區塊（原第三區塊）：最新貼文 + 翻轉卡片 -->
         <section class="section section-3">
            
             <div class="info-section">
-                <h3>關於地景保育</h3>
+                <h3>關於陸域永續</h3>
                 <div class="ocean-info-grid">
                     <div class="info-card">
                         <div class="info-card-inner">
                             <div class="info-card-front">
-                                <h3>地景生態系統</h3>
+                                <h3>陸域生態系統</h3>
                             </div>
                             <div class="info-card-back">
                                 <div class="info-content">
-                                    <h3>地景生態系統</h3>
+                                    <h3>陸域生態系統</h3>
                                     <p>地景涵蓋山脈、森林、濕地等多樣化環境，是地球生物多樣性的重要基礎。這些生態系統為無數物種提供棲息地，同時調節氣候與水資源。</p>
                                 </div>
                             </div>
@@ -155,7 +155,7 @@
                 <source src="../img/mountain2.mp4" type="video/mp4">
                 您的瀏覽器不支援影片播放
             </video>
-            <h3>搜尋地景文章</h3>
+            <h3>搜尋陸域文章</h3>
             <div class="search-container">
                 <form id="search-form">
                     <input type="text" name="search" id="search-input" placeholder="輸入關鍵字搜尋..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">

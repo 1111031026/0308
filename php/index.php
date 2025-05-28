@@ -128,7 +128,7 @@ require_once 'db_connect.php';
                     <div class="swiper-button-next climate-next"></div>
                 </div>
                 <div class="green-text-content">
-                    <h1>關於氣候永續</h1>
+                    <h1 style="color: #15803D;">關於氣候永續</h1>
                     <p class="climate-description">氣候變遷已成為全球最嚴峻的挑戰之一。極端天氣事件頻繁發生，海平面上升，生態系統受到威脅。然而，透過減少碳排放、發展可再生能源和推動永續生活方式，我們仍有機會扭轉局勢，共同守護我們唯一的家園...</p>
                     <a href="climate.php" class="climate-read-more">閱讀更多 ⇨</a>
                 </div>

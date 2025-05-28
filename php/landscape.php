@@ -14,16 +14,16 @@
     <style>
         /* 為每個 info-card-front 設置特定的背景圖片 */
         .section-3 .info-card:nth-child(1) .info-card-front {
-            background-image: url('../img/index0.jpg');
+            background-image: url('../img/l1.jpg');
         }
         .section-3 .info-card:nth-child(2) .info-card-front {
-            background-image: url('../img/index2.jpg');
+            background-image: url('../img/l2.jpg');
         }
         .section-3 .info-card:nth-child(3) .info-card-front {
-            background-image: url('../img/index7.jpg');
+            background-image: url('../img/l3.jpg');
         }
         .section-3 .info-card:nth-child(4) .info-card-front {
-            background-image: url('../img/index9.jpg');
+            background-image: url('../img/l4.jpg');
         }
     </style>
 </head>

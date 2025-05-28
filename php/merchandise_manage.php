@@ -1,115 +1,65 @@
 <?php
 session_start();
 
-// 檢查用戶是否為管理員
+// 檢查是否為管理員登入
 if (!isset($_SESSION['login_session']) || $_SESSION['role'] !== 'Admin') {
     header("Location: user_login.php");
     exit();
 }
 
-$servername = "localhost";
-$db_username = "root";
-$db_password = "";
-$dbname = "sustain";
+include 'db_connect.php';
 
-// 創建資料庫連接
-$conn = new mysqli($servername, $db_username, $db_password, $dbname);
-$conn->set_charset("utf8mb4");
-
-if ($conn->connect_error) {
-    die("連接失敗: " . $conn->connect_error);
-}
-
-// 檢查資料庫連接
-echo "<div style='display:none;'>資料庫連接狀態: " . ($conn->ping() ? "正常" : "異常") . "</div>";
-// 處理表單提交
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = $conn->real_escape_string($_POST["name"]);
-    $description = $conn->real_escape_string($_POST["description"]);
-    $pointsRequired = intval($_POST["pointsRequired"]);
-    $category = $conn->real_escape_string($_POST["category"]);
-
-    $imageURL = null;
-    $previewURL = null;
-
-    // 處理主圖片上傳
-    if (isset($_FILES["image"]) && $_FILES["image"]["error"] == 0) {
-        $target_dir = "../product/";
-        $imageFileType = strtolower(pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION));
-        $newImageFileName = uniqid() . "_image_" . basename($_FILES["image"]["name"]);
-        $target_file_image = $target_dir . $newImageFileName;
-
-        if ($imageFileType == "jpg" || $imageFileType == "jpeg" || $imageFileType == "png" || $imageFileType == "gif") {
-            if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file_image)) {
-                $imageURL = "product/" . $newImageFileName;
-            } else {
-                $error_message = "抱歉，上傳主圖片時出現錯誤。";
-            }
-        } else {
-            $error_message = "抱歉，主圖片只允許 JPG、JPEG、PNG 和 GIF 文件。";
+// 處理商品刪除
+if (isset($_POST['delete_merchandise'])) {
+    $item_id = intval($_POST['item_id']);
+    // 先刪除相關的圖片文件
+    $stmt = $conn->prepare("SELECT ImageURL, PreviewURL FROM merchandise WHERE ItemID = ?");
+    $stmt->bind_param("i", $item_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($image_data = $result->fetch_assoc()) {
+        if ($image_data['ImageURL'] && file_exists("../" . $image_data['ImageURL'])) {
+            unlink("../" . $image_data['ImageURL']);
         }
+        if ($image_data['PreviewURL'] && file_exists("../" . $image_data['PreviewURL'])) {
+            unlink("../" . $image_data['PreviewURL']);
+        }
+    }
+    
+    // 刪除商品記錄
+    $stmt = $conn->prepare("DELETE FROM merchandise WHERE ItemID = ?");
+    $stmt->bind_param("i", $item_id);
+    $stmt->execute();
+    if ($stmt->affected_rows > 0) {
+        $success_message = "商品已成功刪除";
     } else {
-        $error_message = "請選擇要上傳的主圖片。";
-    }
-
-    // 處理預覽圖片上傳 (僅當沒有主圖片錯誤時)
-    if (!isset($error_message) && isset($_FILES["preview_image"]) && $_FILES["preview_image"]["error"] == 0) {
-        $target_dir_preview = "../product/";
-        $previewFileType = strtolower(pathinfo($_FILES["preview_image"]["name"], PATHINFO_EXTENSION));
-        $newPreviewFileName = uniqid() . "_preview_" . basename($_FILES["preview_image"]["name"]);
-        $target_file_preview = $target_dir_preview . $newPreviewFileName;
-
-        if ($previewFileType == "jpg" || $previewFileType == "jpeg" || $previewFileType == "png" || $previewFileType == "gif") {
-            if (move_uploaded_file($_FILES["preview_image"]["tmp_name"], $target_file_preview)) {
-                $previewURL = "product/" . $newPreviewFileName;
-            } else {
-                $error_message = "抱歉，上傳預覽圖片時出現錯誤。";
-            }
-        } else {
-            $error_message = "抱歉，預覽圖片只允許 JPG、JPEG、PNG 和 GIF 文件。";
-        }
-    } elseif (!isset($error_message) && (!isset($_FILES["preview_image"]) || $_FILES["preview_image"]["error"] != 0) ){
-        $error_message = "請選擇要上傳的預覽圖片。";
-    }
-
-    // 如果圖片都成功上傳，則插入數據到資料庫
-    if (!isset($error_message) && $imageURL && $previewURL) {
-        $sql = "INSERT INTO merchandise (Name, Description, PointsRequired, Category, ImageURL, PreviewURL) 
-                VALUES (?, ?, ?, ?, ?, ?)"; // Removed Quantity
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssisss", $name, $description, $pointsRequired, $category, $imageURL, $previewURL);
-
-        if ($stmt->execute()) {
-            $success_message = "商品新增成功！";
-        } else {
-            $error_message = "錯誤：" . $stmt->error;
-        }
-        $stmt->close();
-    } elseif (!isset($error_message)) {
-        // 如果 $imageURL 或 $previewURL 為空，但沒有其他錯誤，說明是文件選擇問題
-        if (!$imageURL) $error_message = $error_message ?? "請確認主圖片已成功上傳且格式正確。";
-        if (!$previewURL) $error_message = $error_message ?? "請確認預覽圖片已成功上傳且格式正確。";
+        $error_message = "刪除商品失敗";
     }
 }
 
-// 獲取所有商品
-$sql = "SELECT * FROM merchandise ORDER BY ItemID DESC";
-$result = $conn->query($sql);
+// 搜索功能
+$search = isset($_GET['search']) ? $conn->real_escape_string($_GET['search']) : '';
+$where_clause = $search ? "WHERE Name LIKE '%$search%' OR Description LIKE '%$search%' OR Category LIKE '%$search%'" : "";
 
-// 移除調試信息，保持頁面整潔
-echo "<div style='margin: 10px; padding: 10px; background-color: #f8f9fa; border: 1px solid #ddd;'>";
-echo "查詢語句: $sql<br>";
-if (!$result) {
-    echo "查詢失敗: " . $conn->error;
-} else {
-    echo "查詢成功，找到 " . $result->num_rows . " 筆記錄";
-}
-echo "</div>";
-if (!$result) {
-    echo "<div class='error-message'>查詢失敗: " . $conn->error . "</div>";
-} else if ($result->num_rows == 0) {
-    echo "<div class='error-message'>沒有找到任何商品記錄</div>";
-}
+// 分頁設置
+$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+$per_page = 10;
+$offset = ($page - 1) * $per_page;
+
+// 獲取總商品數
+$total_result = $conn->query("SELECT COUNT(*) as total FROM merchandise $where_clause");
+$total_items = $total_result->fetch_assoc()['total'];
+$total_pages = ceil($total_items / $per_page);
+
+// 獲取商品列表
+$sql = "
+    SELECT ItemID, Name, Description, PointsRequired, Category, ImageURL, PreviewURL
+    FROM merchandise 
+    $where_clause 
+    ORDER BY ItemID DESC 
+    LIMIT $offset, $per_page
+";
+$merchandise = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -118,134 +68,243 @@ if (!$result) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>商品管理</title>
-    <link rel="stylesheet" href="../css/nav3.css">
-    <link rel="stylesheet" href="../css/merchandise_manage.css">
+    <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/admin_dashboard.css">
     <link rel="icon" type="image/png" href="../img/icon.png">
 </head>
 <body>
-    <?php include 'nav.php'; ?>
-
-    <style>
-        .admin-container {
-            margin-top: 60px; /* 添加顶部边距以避免被导航栏遮挡 */
-        }
-    </style>
-
-    <div class="container admin-container">
-        <h1>商品管理</h1>
-
+    
+    
+    <div class="admin-container">
+        <div class="page-header">
+            <h1>商品管理</h1>
+            <a href="admin_dashboard.php" class="back-btn">返回儀表板</a>
+        </div>
+        
         <?php if (isset($success_message)): ?>
             <div class="success-message"><?php echo $success_message; ?></div>
         <?php endif; ?>
-
+        
         <?php if (isset($error_message)): ?>
             <div class="error-message"><?php echo $error_message; ?></div>
         <?php endif; ?>
 
-        <div class="merchandise-form">
-            <h2>新增商品</h2>
-            <form action="merchandise_manage.php" method="post" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="name">商品名稱：</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
+        <!-- 功能按鈕 -->
+        <div class="action-buttons">
+            <a href="add_merchandise.php" class="add-btn">新增商品</a>
+        </div>
 
-                <div class="form-group">
-                    <label for="description">商品描述：</label>
-                    <textarea id="description" name="description"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="pointsRequired">所需點數：</label>
-                    <input type="number" id="pointsRequired" name="pointsRequired" required min="0">
-                </div>
-
-                <div class="form-group">
-                    <label for="category">類別：</label>
-                    <select id="category" name="category" required>
-                        <option value="background">背景</option>
-                        <option value="wallpaper">桌布</option>
-                        <option value="head">頭像</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="image">商品主圖片：</label>
-                    <input type="file" id="image" name="image" required accept="image/*">
-                </div>
-
-                <div class="form-group">
-                    <label for="preview_image">商品預覽圖片：</label>
-                    <input type="file" id="preview_image" name="preview_image" required accept="image/*">
-                </div>
-
-
-
-                <button type="submit" class="btn-submit">新增商品</button>
+        <!-- 搜索欄 -->
+        <div class="search-section">
+            <form method="GET" action="" class="search-form">
+                <input type="text" name="search" placeholder="搜索商品名稱、描述或類別..." value="<?php echo htmlspecialchars($search); ?>">
+                <button type="submit">搜索</button>
             </form>
         </div>
 
-        <div class="merchandise-list">
-            <h2>商品列表</h2>
-            <?php
-            // 重新執行查詢，確保有最新的結果
-            $sql = "SELECT * FROM merchandise ORDER BY ItemID DESC";
-            $result = $conn->query($sql);
-            
-            if (!$result) {
-                echo "<div class='error-message'>查詢失敗: " . $conn->error . "</div>";
-            } else if ($result->num_rows == 0) {
-                echo "<div class='error-message'>沒有找到任何商品記錄</div>";
-            }
-            ?>
-            <table class="product-table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>主圖片</th>
-                        <th>預覽圖片</th>
-                        <th>名稱</th>
-                        <th>描述</th>
-                        <th>所需點數</th>
-                        <th>類別</th>
-
-                        <th>操作</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php 
-                    // 重置結果集指針，確保能從頭開始讀取
-                    if ($result) {
-                        $result->data_seek(0);
-                    }
-                    
-                    // 檢查查詢結果
-                    if ($result && $result->num_rows > 0) {
-                        while($row = $result->fetch_assoc()): 
-                    ?>
-                    <tr>
-                        <td><?php echo $row['ItemID']; ?></td>
-                        <td><img src="../<?php echo htmlspecialchars($row['ImageURL']); ?>" alt="<?php echo htmlspecialchars($row['Name']); ?> 主圖片"></td>
-                        <td><img src="../<?php echo htmlspecialchars($row['PreviewURL']); ?>" alt="<?php echo htmlspecialchars($row['Name']); ?> 預覽圖片"></td>
-                        <td><?php echo htmlspecialchars($row['Name']); ?></td>
-                        <td><?php echo htmlspecialchars($row['Description']); ?></td>
-                        <td><?php echo htmlspecialchars($row['PointsRequired']); ?></td>
-                        <td><?php echo htmlspecialchars($row['Category']); ?></td>
-
-                        <td class="actions">
-                            <a href="edit_merchandise.php?id=<?php echo $row['ItemID']; ?>">編輯</a>
-                            <a href="delete_merchandise.php?id=<?php echo $row['ItemID']; ?>" onclick="return confirm('確定要刪除此商品嗎？');" class="delete-btn">刪除</a>
-                        </td>
-                    </tr>
-                    <?php 
-                        endwhile; 
-                    } else {
-                        echo "<tr><td colspan='9' style='text-align:center;padding:20px;'>沒有找到商品記錄</td></tr>";
-                    }
-                    ?>
-                </tbody>
-            </table>
+        <!-- 商品列表 -->
+        <div class="merchandise-grid">
+            <?php while ($item = $merchandise->fetch_assoc()): ?>
+            <div class="merchandise-card">
+                <div class="merchandise-image">
+                    <?php if ($item['PreviewURL']): ?>
+                        <img src="<?php echo '../' . htmlspecialchars($item['PreviewURL']); ?>" 
+                             alt="<?php echo htmlspecialchars($item['Name']); ?>">
+                    <?php elseif ($item['ImageURL']): ?>
+                        <img src="<?php echo '../' . htmlspecialchars($item['ImageURL']); ?>" 
+                             alt="<?php echo htmlspecialchars($item['Name']); ?>">
+                    <?php else: ?>
+                        <img src="../img/default-merchandise.png" alt="Default Image">
+                    <?php endif; ?>
+                </div>
+                <div class="merchandise-info">
+                    <h3><?php echo htmlspecialchars($item['Name']); ?></h3>
+                    <p class="description"><?php echo htmlspecialchars(substr($item['Description'], 0, 100)) . (strlen($item['Description']) > 100 ? '...' : ''); ?></p>
+                    <div class="merchandise-details">
+                        <span class="points">所需點數: <?php echo number_format($item['PointsRequired']); ?></span>
+                        <span class="category">類別: <?php echo htmlspecialchars($item['Category']); ?></span>
+                    </div>
+                    <div class="merchandise-actions">
+                        <a href="edit_merchandise.php?id=<?php echo $item['ItemID']; ?>" class="edit-btn">編輯</a>
+                        <form method="POST" style="display: inline;" onsubmit="return confirm('確定要刪除此商品嗎？此操作無法撤銷。');">
+                            <input type="hidden" name="item_id" value="<?php echo $item['ItemID']; ?>">
+                            <button type="submit" name="delete_merchandise" class="delete-btn">刪除</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <?php endwhile; ?>
         </div>
+
+        <!-- 分頁 -->
+        <?php if ($total_pages > 1): ?>
+        <div class="pagination">
+            <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                <a href="?page=<?php echo $i; ?>&search=<?php echo urlencode($search); ?>" 
+                   class="<?php echo $page === $i ? 'active' : ''; ?>">
+                    <?php echo $i; ?>
+                </a>
+            <?php endfor; ?>
+        </div>
+        <?php endif; ?>
     </div>
+
+    <style>
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .back-btn {
+        padding: 8px 15px;
+        background-color: #34495e;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 0.9em;
+        transition: background-color 0.3s;
+    }
+
+    .back-btn:hover {
+        background-color: #2c3e50;
+    }
+
+    .action-buttons {
+        margin: 20px 0;
+        text-align: right;
+    }
+    .add-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #27ae60;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+    }
+    .add-btn:hover {
+        background-color: #219a52;
+    }
+    .merchandise-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+    }
+    .merchandise-card {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        overflow: hidden;
+    }
+    .merchandise-image {
+        height: 200px;
+        overflow: hidden;
+    }
+    .merchandise-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .merchandise-info {
+        padding: 15px;
+    }
+    .merchandise-info h3 {
+        margin: 0 0 10px 0;
+        color: #2c3e50;
+    }
+    .description {
+        color: #7f8c8d;
+        margin-bottom: 10px;
+        font-size: 0.9em;
+        min-height: 40px;
+    }
+    .merchandise-details {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+        font-size: 0.9em;
+    }
+    .points {
+        color: #e74c3c;
+        font-weight: bold;
+    }
+    .category {
+        color: #7f8c8d;
+    }
+    .merchandise-actions {
+        display: flex;
+        gap: 10px;
+    }
+    .edit-btn {
+        background-color: #3498db;
+        color: white;
+        padding: 5px 15px;
+        border-radius: 3px;
+        text-decoration: none;
+        font-size: 0.9em;
+    }
+    .edit-btn:hover {
+        background-color: #2980b9;
+    }
+    .delete-btn {
+        background-color: #e74c3c;
+        color: white;
+        border: none;
+        padding: 5px 15px;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 0.9em;
+    }
+    .delete-btn:hover {
+        background-color: #c0392b;
+    }
+    .search-section {
+        margin-bottom: 20px;
+    }
+    .search-form {
+        display: flex;
+        gap: 10px;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+    .search-form input[type="text"] {
+        flex: 1;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+    .search-form button {
+        padding: 8px 20px;
+        background-color: #3498db;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .search-form button:hover {
+        background-color: #2980b9;
+    }
+    .pagination {
+        margin-top: 20px;
+        text-align: center;
+    }
+    .pagination a {
+        display: inline-block;
+        padding: 8px 12px;
+        margin: 0 4px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        text-decoration: none;
+        color: #333;
+    }
+    .pagination a.active {
+        background-color: #3498db;
+        color: white;
+        border-color: #3498db;
+    }
+    </style>
 </body>
-</html>
+</html> 

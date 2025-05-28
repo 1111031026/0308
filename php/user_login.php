@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 
                 // 根據用戶身份重定向到不同頁面
                 if ($user['Status'] === 'Admin') {
-                    header("Location: merchandise_manage.php");
+                    header("Location: admin_dashboard.php");
                 } else {
                     header("Location: index.php");
                 }

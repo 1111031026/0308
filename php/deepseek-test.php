@@ -10,8 +10,37 @@ $edit_option_c = '';
 $edit_option_d = '';
 $edit_correct_answer = false;
 
+// 從 URL 參數獲取題目內容 (從 article_questions.php 跳轉過來)
+if (isset($_GET['question']) && isset($_GET['type'])) {
+    $edit_content = urldecode($_GET['question']);
+    $edit_answer = urldecode($_GET['answer'] ?? '');
+    $edit_id = isset($_GET['edit_id']) ? $_GET['edit_id'] : null;
+    
+    // 根據題目類型設置對應的變數
+    switch ($_GET['type']) {
+        case 'choice':
+            $edit_type = '選擇題';
+            $edit_option_a = urldecode($_GET['option_a'] ?? '');
+            $edit_option_b = urldecode($_GET['option_b'] ?? '');
+            $edit_option_c = urldecode($_GET['option_c'] ?? '');
+            $edit_option_d = urldecode($_GET['option_d'] ?? '');
+            break;
+        case 'tf':
+            $edit_type = '是非題';
+            $edit_correct_answer = strtolower($edit_answer) === 't' || strtolower($edit_answer) === 'true';
+            $edit_answer = $edit_correct_answer ? 'true' : 'false';
+            break;
+        case 'fill':
+            $edit_type = '問答題';
+            break;
+        default:
+            $edit_type = '問答題';
+            break;
+    }
+}
+
 // 如果是編輯模式，從資料庫獲取題目信息
-if (isset($_GET['edit_id'])) {
+elseif (isset($_GET['edit_id'])) {
     include 'db_connect.php';
     $edit_id = intval($_GET['edit_id']);
     
@@ -109,7 +138,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_question'])) {
             echo json_encode(['success' => true]);
             exit;
         } else {
-            $redirect_url = 'view-all-qusetion.php' . ($article_id ? "?article_id=$article_id" : '');
+            // 將重定向改為返回文章題目管理頁面
+            $redirect_url = 'view-all-qusetion.php?article_id=' . $article_id;
             echo '<script>alert("題目儲存成功！"); window.location.href = "' . $redirect_url . '";</script>';
         }
     } else {
@@ -212,7 +242,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <div class="editor-container">
         <div class="question-editor">
-            <h2>新增題目</h2>
+            <h2>題目編輯器</h2>
             <form id="question_form" method="post" action="">
                 <select name="question_type" id="question_type" required>
                     <option value="選擇題" <?php echo ($edit_type === '選擇題') ? 'selected' : ''; ?>>選擇題</option>
@@ -226,6 +256,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <input type="text" name="question_answer" placeholder="正確答案" required>
                 </div>
                 <button type="submit" name="save_question">儲存題目</button>
+                <a href="view-all-qusetion.php?article_id=<?php echo isset($_GET['article_id']) ? intval($_GET['article_id']) : ''; ?>" class="view-questions-btn">查看已儲存題目</a>
             </form>
             <script>
             document.addEventListener('DOMContentLoaded', function() {
@@ -253,9 +284,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         document.querySelector('input[name="option_d"]').value = editOptionD;
                         document.querySelector('select[name="question_answer"]').value = editAnswer;
                     } else if (editType === '是非題') {
-                        document.querySelector('select[name="question_answer"]').value = editAnswer === 'true' ? '是' : '否';
+                        const tfSelect = document.querySelector('select[name="question_answer"]');
+                        if (tfSelect) {
+                            tfSelect.value = editAnswer === 'true' ? '是' : '否';
+                        }
                     } else if (editType === '問答題') {
-                        document.querySelector('input[name="question_answer"]').value = editAnswer;
+                        const answerInput = document.querySelector('input[name="question_answer"]');
+                        if (answerInput) {
+                            answerInput.value = editAnswer;
+                        }
                     }
                 }, 0);
             });
@@ -313,8 +350,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 .then(data => {
                     if (data.success) {
                         alert('題目儲存成功！');
-                        form.reset();
-                        document.getElementById('question_type').dispatchEvent(new Event('change'));
+                        if (confirm('是否要查看已儲存的題目？')) {
+                            const articleId = new URLSearchParams(window.location.search).get('article_id');
+                            window.location.href = 'view-all-qusetion.php?article_id=' + articleId;
+                        } else {
+                            form.reset();
+                            document.getElementById('question_type').dispatchEvent(new Event('change'));
+                        }
                     } else {
                         alert('儲存失敗: ' + (data.error || '未知錯誤'));
                     }

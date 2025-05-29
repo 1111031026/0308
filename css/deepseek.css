@@ -114,3 +114,36 @@ button:hover {
     max-width: 800px;
     white-space: pre-wrap;
 }
+
+.question-editor button[type="submit"] {
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.question-editor .view-questions-btn {
+    padding: 10px 15px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    margin-left: 10px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.question-editor button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.question-editor .view-questions-btn:hover {
+    background-color: #2980b9;
+}

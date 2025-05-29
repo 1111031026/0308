@@ -18,7 +18,6 @@ if (session_status() === PHP_SESSION_NONE) {
         <?php if (isset($_SESSION['login_session']) && $_SESSION['login_session'] === true): ?>
             <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'Teacher'): ?>
                 <li><a href="crawler.php">文章編輯區</a></li>
-                <li><a href="view-all-qusetion.php">查看所有編輯中題目</a></li>
             <?php elseif (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'): ?>
                 <li><a href="crawler.php">文章編輯區</a></li>
                 <li><a href="view-all-qusetion.php">查看所有編輯中題目</a></li>
@@ -31,7 +30,8 @@ if (session_status() === PHP_SESSION_NONE) {
         <?php if (isset($_SESSION['login_session']) && $_SESSION['login_session'] === true): ?>
             <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'Teacher'): ?>
                 <span class="user-info">user: <?php echo $_SESSION['username']; ?> <?php echo $_SESSION['role']; ?></span>
-                <a href="teacher_achievement.php"><img src="../img/achievement.svg" alt="成就"></a>
+                <a href="teacher_articles.php" class="icon-link" title="我的文章"><img src="../img/article_icon.svg" alt="我的文章"></a>
+                <a href="teacher_achievement.php" class="icon-link"><img src="../img/achievement.svg" alt="成就"></a>
             <?php elseif (isset($_SESSION['role']) && $_SESSION['role'] === 'Student'): ?>
                 <span class="user-info">user: <?php echo $_SESSION['username']; ?> <?php echo $_SESSION['role']; ?></span>
                 <a href="achievement.php"><img src="../img/achievement.svg" alt="成就"></a>
@@ -106,5 +106,19 @@ if (session_status() === PHP_SESSION_NONE) {
 .default-avatar-icon {
     font-size: 0.9rem;
     color: white;
+}
+.icon-link {
+    margin: 0 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.icon-link img {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.2s ease;
+}
+.icon-link:hover img {
+    transform: scale(1.15);
 }
 </style>

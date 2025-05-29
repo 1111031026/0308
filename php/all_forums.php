@@ -85,7 +85,9 @@ $conn->close();
                                         <?php if (!empty($post['AvatarURL'])): ?>
                                             <img src="../<?php echo htmlspecialchars($post['AvatarURL']); ?>" alt="用戶頭像" class="user-avatar" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 8px;">
                                         <?php else: ?>
-                                            <span class="user-avatar"><i class="fas fa-user-circle" style="font-size: 24px; margin-right: 8px;"></i></span>
+                                            <div class="default-avatar" style="width: 30px; height: 30px; border-radius: 50%; background: #6aafc7; display: flex; align-items: center; justify-content: center; margin-right: 8px; overflow: hidden;">
+                                                <span style="font-size: 0.9rem; color: white;">👤</span>
+                                            </div>
                                         <?php endif; ?>
                                         <span class="username"><?php echo htmlspecialchars($post['Username']); ?></span>
                                         <?php if (!empty($post['Status'])): ?>

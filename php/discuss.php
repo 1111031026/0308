@@ -153,7 +153,9 @@ if (isset($post['ArticleID']) && $post['ArticleID'] > 0) {
                         <?php if (!empty($post['AvatarURL'])): ?>
                             <img src="../<?php echo htmlspecialchars($post['AvatarURL']); ?>" alt="用戶頭像" class/sound/110466.mp3 class="author-avatar" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 8px;">
                         <?php else: ?>
-                            <span class="author-avatar"><i class="fas fa-user-circle"></i></span>
+                            <div class="default-avatar" style="width: 30px; height: 30px; border-radius: 50%; background: #6aafc7; display: flex; align-items: center; justify-content: center; margin-right: 8px; overflow: hidden;">
+                                <span style="font-size: 0.9rem; color: white;">👤</span>
+                            </div>
                         <?php endif; ?>
                         <span class="author-name"><?php echo htmlspecialchars($post['Username']); ?></span>
                         <?php if (!empty($post['Status'])): ?>
@@ -215,7 +217,9 @@ if (isset($post['ArticleID']) && $post['ArticleID'] > 0) {
                                             </a>
                                         <?php else: ?>
                                             <a href="<?php echo $achievement_page; ?>?user_id=<?php echo htmlspecialchars($comment['UserID']); ?>" class="avatar-link" data-user-id="<?php echo htmlspecialchars($comment['UserID']); ?>">
-                                                <span class="commenter-avatar"><i class="fas fa-user-circle"></i></span>
+                                                <div class="default-avatar commenter-avatar" style="width: 30px; height: 30px; border-radius: 50%; background: #6aafc7; display: flex; align-items: center; justify-content: center; margin-right: 8px; overflow: hidden;">
+                                                    <span style="font-size: 0.9rem; color: white;">👤</span>
+                                                </div>
                                             </a>
                                         <?php endif; ?>
                                         <span class="commenter-name"><?php echo htmlspecialchars($comment['Username']); ?></span>

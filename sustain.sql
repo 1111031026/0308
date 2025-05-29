@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2025-05-28 19:49:07
+-- 產生時間： 2025-05-29 04:39:01
 -- 伺服器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -28,8 +28,8 @@ USE `sustain`;
 --
 -- 資料表結構 `achievement`
 --
--- 建立時間： 2025-05-27 14:02:42
--- 最後更新： 2025-05-28 17:44:57
+-- 建立時間： 2025-05-29 01:18:07
+-- 最後更新： 2025-05-29 01:38:25
 --
 
 DROP TABLE IF EXISTS `achievement`;
@@ -52,7 +52,7 @@ TRUNCATE TABLE `achievement`;
 --
 
 INSERT INTO `achievement` (`UserID`, `TotalPoints`, `ArticlesViewed`, `ChoiceQuestionsCorrect`, `TFQuestionsCorrect`, `FillinQuestionsCorrect`) VALUES
-(1, 0, 0, 0, 0, 0),
+(1, 0, 1, 0, 0, 0),
 (3, 0, 1, 0, 0, 0),
 (6, 8892, 0, 0, 0, 0);
 
@@ -61,8 +61,8 @@ INSERT INTO `achievement` (`UserID`, `TotalPoints`, `ArticlesViewed`, `ChoiceQue
 --
 -- 資料表結構 `article`
 --
--- 建立時間： 2025-05-27 14:02:42
--- 最後更新： 2025-05-28 17:16:20
+-- 建立時間： 2025-05-29 01:18:07
+-- 最後更新： 2025-05-29 02:00:20
 --
 
 DROP TABLE IF EXISTS `article`;
@@ -136,7 +136,8 @@ INSERT INTO `article` (`ArticleID`, `Title`, `Category`, `ImageURL`, `Descriptio
 --
 -- 資料表結構 `choicequiz`
 --
--- 建立時間： 2025-05-27 14:02:42
+-- 建立時間： 2025-05-29 01:18:07
+-- 最後更新： 2025-05-29 01:46:35
 --
 
 DROP TABLE IF EXISTS `choicequiz`;
@@ -157,12 +158,21 @@ CREATE TABLE `choicequiz` (
 --
 
 TRUNCATE TABLE `choicequiz`;
+--
+-- 傾印資料表的資料 `choicequiz`
+--
+
+INSERT INTO `choicequiz` (`choiceID`, `QuestionText`, `OptionA`, `OptionB`, `OptionC`, `OptionD`, `CorrectAnswer`, `UserID`, `ArticleID`) VALUES
+(1, '1.海洋中大部分的塑膠污染來自哪裡？', 'A) 海底火山噴發  ', 'B) 人們隨意丟棄的垃圾，尤其是陸地上的廢棄物 ', 'C) 魚類和其他海洋生物產生的廢物', 'D) 外星人丟棄的太空垃圾', 'B', 2, 21),
+(2, '2.每年有多少塑膠垃圾進入海洋？', 'A)50萬噸  ', 'B)800萬噸  ', 'C)1000萬噸  ', 'D)1億噸', 'B', 2, 21),
+(3, '3.關於海洋塑膠污染，下列哪一項敘述是正確的？', 'A. 每年約有800萬噸塑膠垃圾進入海洋，相當於每分鐘倒一卡車垃圾。  ', 'B. 海洋中塑膠碎片數量已超過所有鯨魚總重量的50倍。  ', 'C. 科學家預測，若污染持續，2050年海洋中的塑膠將比魚類多。', 'D. 以上皆是 ', 'D', 2, 21);
+
 -- --------------------------------------------------------
 
 --
 -- 資料表結構 `choicerec`
 --
--- 建立時間： 2025-05-27 14:02:42
+-- 建立時間： 2025-05-29 01:18:07
 --
 
 DROP TABLE IF EXISTS `choicerec`;
@@ -184,7 +194,7 @@ TRUNCATE TABLE `choicerec`;
 --
 -- 資料表結構 `commentarea`
 --
--- 建立時間： 2025-05-27 14:02:42
+-- 建立時間： 2025-05-29 01:18:07
 --
 
 DROP TABLE IF EXISTS `commentarea`;
@@ -207,7 +217,7 @@ TRUNCATE TABLE `commentarea`;
 --
 -- 資料表結構 `communitypost`
 --
--- 建立時間： 2025-05-27 14:02:42
+-- 建立時間： 2025-05-29 01:18:07
 --
 
 DROP TABLE IF EXISTS `communitypost`;
@@ -231,7 +241,8 @@ TRUNCATE TABLE `communitypost`;
 --
 -- 資料表結構 `fillquiz`
 --
--- 建立時間： 2025-05-27 14:02:42
+-- 建立時間： 2025-05-29 01:18:07
+-- 最後更新： 2025-05-29 01:56:08
 --
 
 DROP TABLE IF EXISTS `fillquiz`;
@@ -248,12 +259,21 @@ CREATE TABLE `fillquiz` (
 --
 
 TRUNCATE TABLE `fillquiz`;
+--
+-- 傾印資料表的資料 `fillquiz`
+--
+
+INSERT INTO `fillquiz` (`fillID`, `QuestionText`, `CorrectAnswer`, `UserID`, `ArticleID`) VALUES
+(1, '每年大約有多少噸的塑膠垃圾進入海洋？  ', '約800萬噸。', 2, 21),
+(2, '海洋塑膠污染對海龜造成什麼威脅？  ', '海龜可能誤食塑膠袋', 2, 21),
+(3, '我們可以透過哪三個簡單行動減少塑膠污染？（任舉一例）', '使用可重複使用的購物袋', 2, 21);
+
 -- --------------------------------------------------------
 
 --
 -- 資料表結構 `fillrec`
 --
--- 建立時間： 2025-05-27 14:02:42
+-- 建立時間： 2025-05-29 01:18:07
 --
 
 DROP TABLE IF EXISTS `fillrec`;
@@ -275,8 +295,7 @@ TRUNCATE TABLE `fillrec`;
 --
 -- 資料表結構 `merchandise`
 --
--- 建立時間： 2025-05-27 14:02:42
--- 最後更新： 2025-05-28 17:42:07
+-- 建立時間： 2025-05-29 01:18:07
 --
 
 DROP TABLE IF EXISTS `merchandise`;
@@ -321,7 +340,7 @@ INSERT INTO `merchandise` (`ItemID`, `Name`, `Description`, `PointsRequired`, `C
 --
 -- 資料表結構 `password_resets`
 --
--- 建立時間： 2025-05-27 14:02:42
+-- 建立時間： 2025-05-29 01:18:07
 --
 
 DROP TABLE IF EXISTS `password_resets`;
@@ -343,8 +362,7 @@ TRUNCATE TABLE `password_resets`;
 --
 -- 資料表結構 `purchase`
 --
--- 建立時間： 2025-05-27 14:02:42
--- 最後更新： 2025-05-28 17:44:57
+-- 建立時間： 2025-05-29 01:18:07
 --
 
 DROP TABLE IF EXISTS `purchase`;
@@ -379,7 +397,7 @@ INSERT INTO `purchase` (`UserID`, `ItemID`, `PurchaseTime`, `SpentPoints`) VALUE
 --
 -- 資料表結構 `system_settings`
 --
--- 建立時間： 2025-05-27 16:18:17
+-- 建立時間： 2025-05-29 01:18:07
 --
 
 DROP TABLE IF EXISTS `system_settings`;
@@ -402,8 +420,8 @@ TRUNCATE TABLE `system_settings`;
 --
 -- 資料表結構 `teacher_achievement`
 --
--- 建立時間： 2025-05-27 14:02:42
--- 最後更新： 2025-05-28 17:16:53
+-- 建立時間： 2025-05-29 01:18:07
+-- 最後更新： 2025-05-29 01:59:05
 --
 
 DROP TABLE IF EXISTS `teacher_achievement`;
@@ -425,7 +443,7 @@ TRUNCATE TABLE `teacher_achievement`;
 --
 
 INSERT INTO `teacher_achievement` (`UserID`, `TotalPoints`, `SDG13ArticlesPublished`, `SDG14ArticlesPublished`, `SDG15ArticlesPublished`) VALUES
-(2, 50, 0, 0, 0),
+(2, 55, 0, 0, 0),
 (4, 45, 0, 7, 1),
 (5, 35, 7, 0, 0);
 
@@ -434,7 +452,8 @@ INSERT INTO `teacher_achievement` (`UserID`, `TotalPoints`, `SDG13ArticlesPublis
 --
 -- 資料表結構 `teacher_questions`
 --
--- 建立時間： 2025-05-27 14:02:42
+-- 建立時間： 2025-05-29 01:18:07
+-- 最後更新： 2025-05-29 01:56:08
 --
 
 DROP TABLE IF EXISTS `teacher_questions`;
@@ -463,7 +482,8 @@ TRUNCATE TABLE `teacher_questions`;
 --
 -- 資料表結構 `tfquiz`
 --
--- 建立時間： 2025-05-27 14:02:42
+-- 建立時間： 2025-05-29 01:18:07
+-- 最後更新： 2025-05-29 01:56:08
 --
 
 DROP TABLE IF EXISTS `tfquiz`;
@@ -482,12 +502,22 @@ CREATE TABLE `tfquiz` (
 --
 
 TRUNCATE TABLE `tfquiz`;
+--
+-- 傾印資料表的資料 `tfquiz`
+--
+
+INSERT INTO `tfquiz` (`tfID`, `QuestionText`, `OptionA`, `OptionB`, `CorrectAnswer`, `UserID`, `ArticleID`) VALUES
+(1, '每年有大約800萬噸的塑膠垃圾進入海洋。  ', '', '', 0, 2, 21),
+(2, '每年有大約800萬噸的塑膠垃圾進入海洋。  ', '', '', 1, 2, 21),
+(3, '海洋中的塑膠污染對海洋生物沒有影響，因為它們不會誤食塑膠。', '', '', 0, 2, 21),
+(4, '塑膠垃圾在海洋中會完全分解並消失，不會長期存在。  ', '', '', 0, 2, 21);
+
 -- --------------------------------------------------------
 
 --
 -- 資料表結構 `tfrec`
 --
--- 建立時間： 2025-05-27 14:02:42
+-- 建立時間： 2025-05-29 01:18:07
 --
 
 DROP TABLE IF EXISTS `tfrec`;
@@ -509,8 +539,7 @@ TRUNCATE TABLE `tfrec`;
 --
 -- 資料表結構 `user`
 --
--- 建立時間： 2025-05-27 14:02:42
--- 最後更新： 2025-05-28 17:44:36
+-- 建立時間： 2025-05-29 01:18:07
 --
 
 DROP TABLE IF EXISTS `user`;
@@ -549,8 +578,8 @@ INSERT INTO `user` (`UserID`, `Username`, `Email`, `Password`, `JoinDate`, `Stat
 --
 -- 資料表結構 `user_article_views`
 --
--- 建立時間： 2025-05-27 14:02:42
--- 最後更新： 2025-05-28 16:42:15
+-- 建立時間： 2025-05-29 01:18:07
+-- 最後更新： 2025-05-29 01:38:25
 --
 
 DROP TABLE IF EXISTS `user_article_views`;
@@ -570,6 +599,7 @@ TRUNCATE TABLE `user_article_views`;
 --
 
 INSERT INTO `user_article_views` (`UserID`, `ArticleID`, `ViewTimestamp`) VALUES
+(1, 21, '2025-05-29 01:38:25'),
 (3, 21, '2025-05-28 16:42:15');
 
 --
@@ -711,13 +741,13 @@ ALTER TABLE `user_article_views`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `article`
 --
 ALTER TABLE `article`
-  MODIFY `ArticleID` int(11) NOT NULL AUTO_INCREMENT COMMENT '文章編號 (PK)', AUTO_INCREMENT=29;
+  MODIFY `ArticleID` int(11) NOT NULL AUTO_INCREMENT COMMENT '文章編號 (PK)', AUTO_INCREMENT=30;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `choicequiz`
 --
 ALTER TABLE `choicequiz`
-  MODIFY `choiceID` int(11) NOT NULL AUTO_INCREMENT COMMENT '選擇題編號 (PK)';
+  MODIFY `choiceID` int(11) NOT NULL AUTO_INCREMENT COMMENT '選擇題編號 (PK)', AUTO_INCREMENT=4;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `commentarea`
@@ -735,7 +765,7 @@ ALTER TABLE `communitypost`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `fillquiz`
 --
 ALTER TABLE `fillquiz`
-  MODIFY `fillID` int(11) NOT NULL AUTO_INCREMENT COMMENT '填充題編號 (PK)';
+  MODIFY `fillID` int(11) NOT NULL AUTO_INCREMENT COMMENT '填充題編號 (PK)', AUTO_INCREMENT=4;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `merchandise`
@@ -759,13 +789,13 @@ ALTER TABLE `system_settings`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `teacher_questions`
 --
 ALTER TABLE `teacher_questions`
-  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `tfquiz`
 --
 ALTER TABLE `tfquiz`
-  MODIFY `tfID` int(11) NOT NULL AUTO_INCREMENT COMMENT '是非題編號 (PK)';
+  MODIFY `tfID` int(11) NOT NULL AUTO_INCREMENT COMMENT '是非題編號 (PK)', AUTO_INCREMENT=5;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `user`

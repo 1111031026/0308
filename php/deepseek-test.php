@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_question'])) {
             $stmt->bind_param("sssssssi", $content, $answer, $question_type, $option_a, $option_b, $option_c, $option_d, $edit_id);
         } elseif ($question_type === '是非題') {
             $stmt = $conn->prepare("UPDATE teacher_questions SET content = ?, question_type = ?, correct_answer = ? WHERE question_id = ?");
-            $correct_answer = $_POST['answer'] === 'true' ? 1 : 0;
+            $correct_answer = $_POST['question_answer'] === '是' ? 1 : 0;
             $stmt->bind_param("ssii", $content, $question_type, $correct_answer, $edit_id);
         } else {
             $stmt = $conn->prepare("UPDATE teacher_questions SET content = ?, answer = ?, question_type = ? WHERE question_id = ?");
@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_question'])) {
             $stmt->bind_param("sssssssii", $content, $answer, $question_type, $option_a, $option_b, $option_c, $option_d, $article_id, $user_id);
         } elseif ($question_type === '是非題') {
             $stmt = $conn->prepare("INSERT INTO teacher_questions (content, question_type, correct_answer, article_id, UserID) VALUES (?, ?, ?, ?, ?)");
-            $correct_answer = $_POST['answer'] === 'true' ? 1 : 0;
+            $correct_answer = $_POST['question_answer'] === '是' ? 1 : 0;
             $user_id = $_SESSION['user_id'] ?? null;
             $stmt->bind_param("ssiii", $content, $question_type, $correct_answer, $article_id, $user_id);
         } else {

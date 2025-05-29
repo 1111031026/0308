@@ -101,11 +101,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_question'])) {
     
     // 執行SQL
     if ($stmt->execute()) {
-        $redirect_url = 'view-all-qusetion.php' . ($article_id ? "?article_id=$article_id" : '');
-        echo '<script>alert("題目儲存成功！"); window.location.href = "' . $redirect_url . '";</script>';
-
+        if (
+            isset($_SERVER['HTTP_X_REQUESTED_WITH']) && 
+            strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest'
+        ) {
+            header('Content-Type: application/json');
+            echo json_encode(['success' => true]);
+            exit;
+        } else {
+            $redirect_url = 'view-all-qusetion.php' . ($article_id ? "?article_id=$article_id" : '');
+            echo '<script>alert("題目儲存成功！"); window.location.href = "' . $redirect_url . '";</script>';
+        }
     } else {
-        echo '<script>alert("儲存失敗: ' . $conn->error . '");</script>';
+        if (
+            isset($_SERVER['HTTP_X_REQUESTED_WITH']) && 
+            strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest'
+        ) {
+            header('Content-Type: application/json');
+            echo json_encode(['success' => false, 'error' => $conn->error]);
+            exit;
+        } else {
+            echo '<script>alert("儲存失敗: ' . $conn->error . '");</script>';
+        }
     }
     
     $stmt->close();
@@ -196,7 +213,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="editor-container">
         <div class="question-editor">
             <h2>新增題目</h2>
-            <form method="post" action="">
+            <form id="question_form" method="post" action="">
                 <select name="question_type" id="question_type" required>
                     <option value="選擇題" <?php echo ($edit_type === '選擇題') ? 'selected' : ''; ?>>選擇題</option>
                     <option value="是非題" <?php echo ($edit_type === '是非題') ? 'selected' : ''; ?>>是非題</option>
@@ -277,6 +294,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
                 
                 answerSection.innerHTML = html;
+            });
+
+            // AJAX 送出表單
+            document.getElementById('question_form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const form = e.target;
+                const formData = new FormData(form);
+                formData.append('save_question', '1');
+                fetch(window.location.href, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('題目儲存成功！');
+                        form.reset();
+                        document.getElementById('question_type').dispatchEvent(new Event('change'));
+                    } else {
+                        alert('儲存失敗: ' + (data.error || '未知錯誤'));
+                    }
+                })
+                .catch(err => {
+                    alert('儲存失敗: ' + err);
+                });
             });
             </script>
         </div>

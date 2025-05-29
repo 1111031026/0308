@@ -157,7 +157,7 @@
             <h3>搜尋海洋文章</h3>
             <div class="search-container">
                 <form id="search-form">
-                    <input type="text" name="search" id="search-input" placeholder="輸入關鍵字搜尋..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
+                    <input type="text" name="search" id="search-input" placeholder="輸入標題或出題老師搜尋..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
                     <button type="submit">搜尋</button>
                 </form>
             </div>
@@ -229,6 +229,7 @@
                                         <img src="${article.ImageURL}" alt="文章圖片">
                                         <h4>${article.Title}</h4>
                                         <p>${article.Description}</p>
+                                        <p class="author">出題者：${article.Username}</p>
                                         <a href="article.php?id=${article.ArticleID}" class="read-more">閱讀更多</a>
                                     </div>
                                 `);

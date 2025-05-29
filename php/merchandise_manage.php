@@ -174,6 +174,8 @@ $merchandise = $conn->query($sql);
     .action-buttons {
         margin: 20px 0;
         text-align: right;
+        display: flex;
+        justify-content: flex-end;
     }
     .add-btn {
         display: inline-block;
@@ -183,6 +185,10 @@ $merchandise = $conn->query($sql);
         text-decoration: none;
         border-radius: 4px;
         transition: background-color 0.3s;
+        width: auto;
+        min-width: unset;
+        max-width: unset;
+        box-sizing: border-box;
     }
     .add-btn:hover {
         background-color: #219a52;

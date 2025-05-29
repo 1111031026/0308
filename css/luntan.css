@@ -167,7 +167,6 @@
 .post-content {
     color: var(--text-dark);
     line-height: 1.6;
-    white-space: pre-wrap; /* 保留換行和空格 */
     margin-bottom: 15px;
     font-size: 15px;
 }

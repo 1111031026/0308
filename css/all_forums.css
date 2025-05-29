@@ -198,7 +198,6 @@ body {
 .post-content {
     color: var(--text-dark);
     line-height: 1.6;
-    white-space: pre-wrap;
     margin-bottom: 15px;
     font-size: 15px;
 }

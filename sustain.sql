@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2025-05-29 05:13:54
+-- 產生時間： 2025-05-29 14:43:39
 -- 伺服器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -29,7 +29,7 @@ USE `sustain`;
 -- 資料表結構 `achievement`
 --
 -- 建立時間： 2025-05-29 01:18:07
--- 最後更新： 2025-05-29 01:38:25
+-- 最後更新： 2025-05-29 12:21:43
 --
 
 DROP TABLE IF EXISTS `achievement`;
@@ -53,8 +53,9 @@ TRUNCATE TABLE `achievement`;
 
 INSERT INTO `achievement` (`UserID`, `TotalPoints`, `ArticlesViewed`, `ChoiceQuestionsCorrect`, `TFQuestionsCorrect`, `FillinQuestionsCorrect`) VALUES
 (1, 0, 1, 0, 0, 0),
-(3, 0, 1, 0, 0, 0),
-(6, 8892, 0, 0, 0, 0);
+(3, 0, 2, 0, 0, 0),
+(6, 8682, 2, 0, 0, 0),
+(7, 0, 3, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -62,7 +63,6 @@ INSERT INTO `achievement` (`UserID`, `TotalPoints`, `ArticlesViewed`, `ChoiceQue
 -- 資料表結構 `article`
 --
 -- 建立時間： 2025-05-29 01:18:07
--- 最後更新： 2025-05-29 02:00:20
 --
 
 DROP TABLE IF EXISTS `article`;
@@ -137,7 +137,7 @@ INSERT INTO `article` (`ArticleID`, `Title`, `Category`, `ImageURL`, `Descriptio
 -- 資料表結構 `choicequiz`
 --
 -- 建立時間： 2025-05-29 01:18:07
--- 最後更新： 2025-05-29 01:46:35
+-- 最後更新： 2025-05-29 11:26:20
 --
 
 DROP TABLE IF EXISTS `choicequiz`;
@@ -165,7 +165,8 @@ TRUNCATE TABLE `choicequiz`;
 INSERT INTO `choicequiz` (`choiceID`, `QuestionText`, `OptionA`, `OptionB`, `OptionC`, `OptionD`, `CorrectAnswer`, `UserID`, `ArticleID`) VALUES
 (1, '1.海洋中大部分的塑膠污染來自哪裡？', 'A) 海底火山噴發  ', 'B) 人們隨意丟棄的垃圾，尤其是陸地上的廢棄物 ', 'C) 魚類和其他海洋生物產生的廢物', 'D) 外星人丟棄的太空垃圾', 'B', 2, 21),
 (2, '2.每年有多少塑膠垃圾進入海洋？', 'A)50萬噸  ', 'B)800萬噸  ', 'C)1000萬噸  ', 'D)1億噸', 'B', 2, 21),
-(3, '3.關於海洋塑膠污染，下列哪一項敘述是正確的？', 'A. 每年約有800萬噸塑膠垃圾進入海洋，相當於每分鐘倒一卡車垃圾。  ', 'B. 海洋中塑膠碎片數量已超過所有鯨魚總重量的50倍。  ', 'C. 科學家預測，若污染持續，2050年海洋中的塑膠將比魚類多。', 'D. 以上皆是 ', 'D', 2, 21);
+(3, '3.關於海洋塑膠污染，下列哪一項敘述是正確的？', 'A. 每年約有800萬噸塑膠垃圾進入海洋，相當於每分鐘倒一卡車垃圾。  ', 'B. 海洋中塑膠碎片數量已超過所有鯨魚總重量的50倍。  ', 'C. 科學家預測，若污染持續，2050年海洋中的塑膠將比魚類多。', 'D. 以上皆是 ', 'D', 2, 21),
+(4, '下列何者「不是」棲地破壞的主要原因？', 'A. 都市擴張與土地開發  ', 'B. 氣候變遷導致極端天氣  ', 'C. 原生植物的自然演替  ', 'D. 工業污染與過度開採  ', 'C', 5, 11);
 
 -- --------------------------------------------------------
 
@@ -195,7 +196,7 @@ TRUNCATE TABLE `choicerec`;
 -- 資料表結構 `commentarea`
 --
 -- 建立時間： 2025-05-29 01:18:07
--- 最後更新： 2025-05-29 02:56:19
+-- 最後更新： 2025-05-29 11:29:59
 --
 
 DROP TABLE IF EXISTS `commentarea`;
@@ -218,7 +219,11 @@ TRUNCATE TABLE `commentarea`;
 --
 
 INSERT INTO `commentarea` (`CommentID`, `PostID`, `UserID`, `Content`, `CommentTime`, `Status`) VALUES
-(1, 3, 2, '完全同意！這篇文章真的很清楚地說明了塑料對海洋的危害。我最近開始用可重複使用的水瓶和購物袋，感覺小改變也能幫大忙！大家有沒有什麼減塑的小撇步可以分享？', '2025-05-29 10:56:19', 'PENDING');
+(1, 3, 2, '完全同意！這篇文章真的很清楚地說明了塑料對海洋的危害。我最近開始用可重複使用的水瓶和購物袋，感覺小改變也能幫大忙！大家有沒有什麼減塑的小撇步可以分享？', '2025-05-29 10:56:19', 'PENDING'),
+(2, 5, 6, '太棒啦 跟你一樣的想法', '2025-05-29 19:27:41', 'PENDING'),
+(3, 4, 6, '這需要經過重重檢驗', '2025-05-29 19:28:18', 'PENDING'),
+(4, 6, 6, '可能是100萬?', '2025-05-29 19:29:04', 'PENDING'),
+(5, 8, 1, '哈哈 這題我也卡住了@@', '2025-05-29 19:29:59', 'PENDING');
 
 -- --------------------------------------------------------
 
@@ -226,7 +231,7 @@ INSERT INTO `commentarea` (`CommentID`, `PostID`, `UserID`, `Content`, `CommentT
 -- 資料表結構 `communitypost`
 --
 -- 建立時間： 2025-05-29 01:18:07
--- 最後更新： 2025-05-29 02:54:13
+-- 最後更新： 2025-05-29 11:27:07
 --
 
 DROP TABLE IF EXISTS `communitypost`;
@@ -251,8 +256,13 @@ TRUNCATE TABLE `communitypost`;
 
 INSERT INTO `communitypost` (`PostID`, `Content`, `ImageURL`, `PostDate`, `Title`, `UserID`, `ArticleID`) VALUES
 (1, '文章揭示了海洋塑料污染的嚴重影響，解釋了塑料如何危害海洋生物和生態系統。這是一個適合孩子和成人的絕佳資源，內容清晰且配有生動的圖片。讓我們一起討論如何提高意識並減少塑料廢物，保護我們的海洋！', NULL, '2025-05-29 04:50:22', '心得', 1, 21),
-(2, '看了 kids.earth.org 的文章，真的很震驚海洋塑料污染的嚴重性！文章提到塑料如何威脅海洋生物，甚至影響我們的食物鏈。內容簡單易懂，還有圖片幫助說明，很適合全家一起學習。快來分享你對減少塑料污染的想法吧！', NULL, '2025-05-29 04:51:25', '讀後感想', 1, 21),
-(3, '這篇關於海洋塑料污染的文章太值得一讀！它清楚解釋了塑料如何傷害海洋生態，並提供了一些簡單的減塑建議。無論是大人還是小孩，都能從中學到東西。你有哪些減少使用塑膠的好方法？快來交流吧！', NULL, '2025-05-29 04:54:13', '太棒啦!!!', 1, 21);
+(2, '看了 kids.earth.org 的文章，真的很震驚海洋塑料污染的嚴重性！文章提到塑料如何威脅海洋生物，甚至影響我們的食物鏈。內容簡單易懂，還有圖片幫助說明，很適合全家一起學習。快來分享你對減少塑料污染的想法吧！', NULL, '2025-05-29 04:51:25', '讀後感想', 6, 21),
+(3, '這篇關於海洋塑料污染的文章太值得一讀！它清楚解釋了塑料如何傷害海洋生態，並提供了一些簡單的減塑建議。無論是大人還是小孩，都能從中學到東西。你有哪些減少使用塑膠的好方法？快來交流吧！', NULL, '2025-05-29 04:54:13', '太棒啦!!!', 1, 21),
+(4, '剛讀了一篇來自 Net Zero Investor 關於澳洲淨零排放未來的文章。文章提到工黨大勝後，澳洲加速推動2030年減排43%的目標，相關部門計劃今年內出爐。像 Limestone Coast 這樣的可再生能源和儲能項目很振奮人心，但核能和煤炭的爭論顯示反對派內部仍存分歧。我覺得澳洲憑藉豐富的再生能源資源，有機會成為清潔能源領袖，但政府需要在投資者信心和實際政策間找到平衡。大家怎麼看核能在這場討論中的角色？', NULL, '2025-05-29 13:07:04', '有問題提問', 7, 28),
+(5, '剛看了一篇 Net Zero Investor 文章，提到 IPCC 警告全球淨零目標處於關鍵時刻。報告強調，要限制氣溫上升至 1.5°C，全球需在 2050 年前實現淨零排放，但當前政策和投資遠遠不足。澳洲等國的能源轉型進展緩慢，核能與煤炭爭議更添複雜性。我認為加速可再生能源投資至關重要', NULL, '2025-05-29 13:08:18', '感想', 7, 27),
+(6, '有人知道這題答案嗎?\r\n每年大約有多少噸的塑膠垃圾進入海洋？', NULL, '2025-05-29 13:12:51', '有問題', 7, 21),
+(7, '剛讀了華藝報馬仔一篇關於SDG15陸域生命的文章，孫烜駿老師從昆蟲生態切入，強調棲地維護對生物多樣性的重要性。文章提到臺灣60%的森林覆蓋率和19%的保護區面積領先全球，但保護區外的野生動物仍面臨人為活動挑戰。我覺得文中提到監測是保育第一步的觀點很關鍵，尤其是透過埋葬蟲等生物了解生態平衡，讓人重新思考保護區的角色。臺灣在這方面做得很好，但如何在經濟發展和保育間取得平衡，確實是個挑戰。大家覺得保護區外的棲地維護該怎麼更有效？', NULL, '2025-05-29 13:20:28', '內容引人省思', 5, 11),
+(8, '請簡述「生態系服務」與棲地保護的關聯性，並舉一例說明。幫助我回答這題 快!', NULL, '2025-05-29 13:27:07', '再線求救', 6, 11);
 
 -- --------------------------------------------------------
 
@@ -260,7 +270,7 @@ INSERT INTO `communitypost` (`PostID`, `Content`, `ImageURL`, `PostDate`, `Title
 -- 資料表結構 `fillquiz`
 --
 -- 建立時間： 2025-05-29 01:18:07
--- 最後更新： 2025-05-29 01:56:08
+-- 最後更新： 2025-05-29 11:26:20
 --
 
 DROP TABLE IF EXISTS `fillquiz`;
@@ -284,7 +294,8 @@ TRUNCATE TABLE `fillquiz`;
 INSERT INTO `fillquiz` (`fillID`, `QuestionText`, `CorrectAnswer`, `UserID`, `ArticleID`) VALUES
 (1, '每年大約有多少噸的塑膠垃圾進入海洋？  ', '約800萬噸。', 2, 21),
 (2, '海洋塑膠污染對海龜造成什麼威脅？  ', '海龜可能誤食塑膠袋', 2, 21),
-(3, '我們可以透過哪三個簡單行動減少塑膠污染？（任舉一例）', '使用可重複使用的購物袋', 2, 21);
+(3, '我們可以透過哪三個簡單行動減少塑膠污染？（任舉一例）', '使用可重複使用的購物袋', 2, 21),
+(4, '請簡述「生態系服務」與棲地保護的關聯性，並舉一例說明。  ', '生態系服務指自然環境為人類提供的免費資源（如淨水、授粉、碳儲存）。棲地保護能維持這些服務，例如：保護森林棲地可涵養水源，減少下游地區的洪水風險與水質污染。  ', 5, 11);
 
 -- --------------------------------------------------------
 
@@ -314,6 +325,7 @@ TRUNCATE TABLE `fillrec`;
 -- 資料表結構 `merchandise`
 --
 -- 建立時間： 2025-05-29 01:18:07
+-- 最後更新： 2025-05-29 12:35:20
 --
 
 DROP TABLE IF EXISTS `merchandise`;
@@ -337,21 +349,21 @@ TRUNCATE TABLE `merchandise`;
 --
 
 INSERT INTO `merchandise` (`ItemID`, `Name`, `Description`, `PointsRequired`, `Category`, `ImageURL`, `PreviewURL`) VALUES
-(5, '星見雅', 'Hoshimi Miyabi', 998, 'head', 'product/6820cec1ed14a_image_猩健啞.png', 'product/6820cec1ed60f_preview_猩健啞投向.png'),
-(6, '環保可夢', '環保小戰士', 10, 'head', 'product/head2.jpeg', 'product/head2_pre.png'),
-(7, '老鼠', '酷酷的頭像', 10, 'head', 'product/68355939cf66e_image_head3.jpeg', 'product/68355939cf7b4_preview_head3_pre.png'),
-(8, 'Qvive', '酷酷的頭像', 10, 'head', 'product/683559ea0794c_image_head4.jpeg', 'product/683559ea07b99_preview_head4_pre.png'),
+(5, '星見雅', 'Hoshimi Miyabi', 998, 'head', 'uploads/merchandise/6820cec1ed14a_image_猩健啞.png', 'uploads/merchandise/6820cec1ed60f_preview_猩健啞投向.png'),
+(6, '環保可夢', '環保小戰士', 10, 'head', 'uploads/merchandise/head2.jpeg', 'uploads/merchandise/head2_pre.png'),
+(7, '老鼠', '酷酷的頭像', 10, 'head', 'uploads/merchandise/68355939cf66e_image_head3.jpeg', 'uploads/merchandise/68355939cf7b4_preview_head3_pre.png'),
+(8, 'Qvive', '酷酷的頭像', 10, 'head', 'uploads/merchandise/683559ea0794c_image_head4.jpeg', 'uploads/merchandise/683559ea07b99_preview_head4_pre.png'),
 (10, '流體', '無形無相，隨勢而動，像水與空氣一樣自由流淌。', 15, 'background', 'uploads/merchandise/merchandise_683748211254b.png', 'uploads/merchandise/merchandise_preview_68374821127c0.png'),
 (11, '波動', '能量的舞者，從一點激起，層層傳遞，掀起自然的節奏。', 15, 'background', 'uploads/merchandise/merchandise_6837492c0d865.png', 'uploads/merchandise/merchandise_preview_6837492c0dab5.png'),
 (12, '朝霧', '晨光中的輕紗，湖面上飄渺的夢境，為日出披上神秘面紗。', 15, 'background', 'uploads/merchandise/merchandise_6837494dc6adc.png', 'uploads/merchandise/merchandise_preview_6837494dc6c30.png'),
 (13, '綠蔭', '樹影交織的庇護所，夏日裡最涼爽的秘密基地。', 15, 'background', 'uploads/merchandise/merchandise_6837496b4d28a.png', 'uploads/merchandise/merchandise_preview_6837496b4d3ee.png'),
 (14, '餘暉', '夕陽的最後一吻，為天空染上溫柔的金橘色。', 15, 'background', 'uploads/merchandise/merchandise_683749815c5e5.png', 'uploads/merchandise/merchandise_preview_683749815c7ab.png'),
 (15, '雪山', '雲端之上的銀白巨人，靜靜守望著大地的壯麗與寧靜。', 15, 'background', 'uploads/merchandise/merchandise_6837499fa3b86.png', 'uploads/merchandise/merchandise_preview_6837499fa3d45.png'),
-(16, '幾何礁石', '銳角與曲線交錯的天然雕塑，如同大自然的建築師遺落在人間的拼圖。', 30, 'wallpaper', 'uploads/merchandise/merchandise_68374a7707a88.png', 'uploads/merchandise/merchandise_preview_68374a7707e99.png'),
-(17, '蒸氣飛艇', '仿若從蒸氣龐克世界裡駛出的空中巨獸，載著探險家的夢想悠遊天際。', 30, 'wallpaper', 'uploads/merchandise/merchandise_68374a95a681a.png', 'uploads/merchandise/merchandise_preview_68374a95a694b.png'),
-(18, '宇宙飛船', '跨越時空的銀色希望，衝破星海邊界，探索未知的無垠宇宙。', 30, 'wallpaper', 'uploads/merchandise/merchandise_68374ab5bfa83.png', 'uploads/merchandise/merchandise_preview_68374ab5bfbf6.png'),
-(19, '湖光山色', '山影倒映在平靜湖面，像天地間的一幅水墨畫，靜謐得令人屏息。', 30, 'wallpaper', 'uploads/merchandise/merchandise_68374ad000a6b.png', 'uploads/merchandise/merchandise_preview_68374ad000bf5.png'),
-(20, '數據海浪', '資訊流湧動如潮，一波波數位浪花，正悄悄重塑我們的世界。', 30, 'wallpaper', 'uploads/merchandise/merchandise_68374aefde480.png', 'uploads/merchandise/merchandise_preview_68374aefde5e1.png');
+(18, '宇宙飛船', '跨越時空的銀色希望，衝破星海邊界，探索未知的無垠宇宙。', 30, 'wallpaper', 'uploads/merchandise/merchandise_68374ab5bfa83.png', 'uploads/merchandise/merchandise_preview_68384f2ebb775.png'),
+(19, '湖光山色', '山影倒映在平靜湖面，像天地間的一幅水墨畫，靜謐得令人屏息。', 30, 'wallpaper', 'uploads/merchandise/merchandise_68374ad000a6b.png', 'uploads/merchandise/merchandise_preview_68384cc114f05.png'),
+(20, '數據海浪', '資訊流湧動如潮，一波波數位浪花，正悄悄重塑我們的世界。', 30, 'wallpaper', 'uploads/merchandise/merchandise_68374aefde480.png', 'uploads/merchandise/merchandise_preview_68384cb5c62d7.png'),
+(21, '幾何礁石', '銳角與曲線交錯的天然雕塑，如同大自然的建築師遺落在人間的拼圖', 30, 'wallpaper', 'uploads/merchandise/merchandise_68384c45c9869.png', 'uploads/merchandise/merchandise_preview_68384c45c9b48.png'),
+(22, '蒸氣飛艇', '仿若從蒸氣龐克世界裡駛出的空中巨獸，載著探險家的夢想悠遊天際。', 30, 'wallpaper', 'uploads/merchandise/merchandise_68384c8cf2a69.png', 'uploads/merchandise/merchandise_preview_68384c8cf2c17.png');
 
 -- --------------------------------------------------------
 
@@ -381,6 +393,7 @@ TRUNCATE TABLE `password_resets`;
 -- 資料表結構 `purchase`
 --
 -- 建立時間： 2025-05-29 01:18:07
+-- 最後更新： 2025-05-29 11:53:42
 --
 
 DROP TABLE IF EXISTS `purchase`;
@@ -406,9 +419,16 @@ INSERT INTO `purchase` (`UserID`, `ItemID`, `PurchaseTime`, `SpentPoints`) VALUE
 (6, 6, '2025-05-29 01:33:05', 10),
 (6, 8, '2025-05-29 01:43:59', 10),
 (6, 10, '2025-05-29 01:32:47', 15),
+(6, 11, '2025-05-29 19:37:09', 15),
+(6, 12, '2025-05-29 19:37:12', 15),
 (6, 13, '2025-05-29 01:44:17', 15),
+(6, 14, '2025-05-29 19:37:36', 15),
+(6, 15, '2025-05-29 19:37:40', 15),
+(6, 16, '2025-05-29 19:37:18', 30),
 (6, 17, '2025-05-29 01:44:47', 30),
-(6, 19, '2025-05-29 01:44:57', 30);
+(6, 18, '2025-05-29 19:38:04', 30),
+(6, 19, '2025-05-29 19:53:42', 30),
+(6, 20, '2025-05-29 19:52:26', 30);
 
 -- --------------------------------------------------------
 
@@ -439,7 +459,6 @@ TRUNCATE TABLE `system_settings`;
 -- 資料表結構 `teacher_achievement`
 --
 -- 建立時間： 2025-05-29 01:18:07
--- 最後更新： 2025-05-29 01:59:05
 --
 
 DROP TABLE IF EXISTS `teacher_achievement`;
@@ -471,7 +490,7 @@ INSERT INTO `teacher_achievement` (`UserID`, `TotalPoints`, `SDG13ArticlesPublis
 -- 資料表結構 `teacher_questions`
 --
 -- 建立時間： 2025-05-29 01:18:07
--- 最後更新： 2025-05-29 01:56:08
+-- 最後更新： 2025-05-29 11:26:20
 --
 
 DROP TABLE IF EXISTS `teacher_questions`;
@@ -501,7 +520,7 @@ TRUNCATE TABLE `teacher_questions`;
 -- 資料表結構 `tfquiz`
 --
 -- 建立時間： 2025-05-29 01:18:07
--- 最後更新： 2025-05-29 01:56:08
+-- 最後更新： 2025-05-29 11:26:20
 --
 
 DROP TABLE IF EXISTS `tfquiz`;
@@ -528,7 +547,8 @@ INSERT INTO `tfquiz` (`tfID`, `QuestionText`, `OptionA`, `OptionB`, `CorrectAnsw
 (1, '每年有大約800萬噸的塑膠垃圾進入海洋。  ', '', '', 0, 2, 21),
 (2, '每年有大約800萬噸的塑膠垃圾進入海洋。  ', '', '', 1, 2, 21),
 (3, '海洋中的塑膠污染對海洋生物沒有影響，因為它們不會誤食塑膠。', '', '', 0, 2, 21),
-(4, '塑膠垃圾在海洋中會完全分解並消失，不會長期存在。  ', '', '', 0, 2, 21);
+(4, '塑膠垃圾在海洋中會完全分解並消失，不會長期存在。  ', '', '', 0, 2, 21),
+(5, '棲地保護僅對瀕危物種重要，對常見物種無顯著影響。', '', '', 0, 5, 11);
 
 -- --------------------------------------------------------
 
@@ -558,6 +578,7 @@ TRUNCATE TABLE `tfrec`;
 -- 資料表結構 `user`
 --
 -- 建立時間： 2025-05-29 01:18:07
+-- 最後更新： 2025-05-29 11:44:44
 --
 
 DROP TABLE IF EXISTS `user`;
@@ -589,7 +610,8 @@ INSERT INTO `user` (`UserID`, `Username`, `Email`, `Password`, `JoinDate`, `Stat
 (3, 'admin', 'admin@gmail.com', '$2y$10$pULs337051YRBXNcDyRWDeJHNeLJM6xc8OjKLJ1rlU44j/fO7Nrla', '2025-05-28 22:51:36', 'Admin', NULL, NULL, NULL, NULL),
 (4, 'ben', 'ed@gmail.com', '$2y$10$9ACtLuvG9Lu7eZQQ13E3d.gO7WyADT0KfkJl9.x/aKJKNnak7GSR2', '2025-05-28 22:53:54', 'Teacher', NULL, NULL, 'product/683559ea0794c_image_head4.jpeg', NULL),
 (5, 'brenden', 'brenden1070146@gmail.com', '$2y$10$pPeAfYxQjgSFLcxGbAL6IOKLvyQZAVDkj1UJMlLHxZtqCme4P610m', '2025-05-29 00:41:32', 'Teacher', NULL, NULL, NULL, NULL),
-(6, 'richguy', 'r@g', '$2y$10$QvgX9QEeftORqXFMPsY4wuzUyeGp9vxCrRBMELRpEbMqEf4d/EWsO', '2025-05-29 01:31:09', 'Student', NULL, NULL, 'product/683559ea0794c_image_head4.jpeg', 'uploads/merchandise/merchandise_6837496b4d28a.png');
+(6, 'richguy', 'r@g', '$2y$10$QvgX9QEeftORqXFMPsY4wuzUyeGp9vxCrRBMELRpEbMqEf4d/EWsO', '2025-05-29 01:31:09', 'Student', NULL, NULL, 'product/683559ea0794c_image_head4.jpeg', 'uploads/merchandise/merchandise_6837499fa3b86.png'),
+(7, 'lollol', 'lolol@gmail.com', '$2y$10$8hk5VRP04OGMPf0TsR8r9.Bb1m08jBhaCamjwiZZ3q7MruF1RMLzW', '2025-05-29 19:04:18', 'Student', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -597,7 +619,7 @@ INSERT INTO `user` (`UserID`, `Username`, `Email`, `Password`, `JoinDate`, `Stat
 -- 資料表結構 `user_article_views`
 --
 -- 建立時間： 2025-05-29 01:18:07
--- 最後更新： 2025-05-29 01:38:25
+-- 最後更新： 2025-05-29 12:21:43
 --
 
 DROP TABLE IF EXISTS `user_article_views`;
@@ -618,7 +640,13 @@ TRUNCATE TABLE `user_article_views`;
 
 INSERT INTO `user_article_views` (`UserID`, `ArticleID`, `ViewTimestamp`) VALUES
 (1, 21, '2025-05-29 01:38:25'),
-(3, 21, '2025-05-28 16:42:15');
+(3, 11, '2025-05-29 12:21:43'),
+(3, 21, '2025-05-28 16:42:15'),
+(6, 11, '2025-05-29 11:25:52'),
+(6, 27, '2025-05-29 11:27:47'),
+(7, 21, '2025-05-29 11:12:20'),
+(7, 27, '2025-05-29 11:07:16'),
+(7, 28, '2025-05-29 11:05:13');
 
 --
 -- 已傾印資料表的索引
@@ -765,31 +793,31 @@ ALTER TABLE `article`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `choicequiz`
 --
 ALTER TABLE `choicequiz`
-  MODIFY `choiceID` int(11) NOT NULL AUTO_INCREMENT COMMENT '選擇題編號 (PK)', AUTO_INCREMENT=4;
+  MODIFY `choiceID` int(11) NOT NULL AUTO_INCREMENT COMMENT '選擇題編號 (PK)', AUTO_INCREMENT=5;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `commentarea`
 --
 ALTER TABLE `commentarea`
-  MODIFY `CommentID` int(11) NOT NULL AUTO_INCREMENT COMMENT '留言編號 (PK)', AUTO_INCREMENT=2;
+  MODIFY `CommentID` int(11) NOT NULL AUTO_INCREMENT COMMENT '留言編號 (PK)', AUTO_INCREMENT=6;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `communitypost`
 --
 ALTER TABLE `communitypost`
-  MODIFY `PostID` int(11) NOT NULL AUTO_INCREMENT COMMENT '貼文編號 (PK)', AUTO_INCREMENT=4;
+  MODIFY `PostID` int(11) NOT NULL AUTO_INCREMENT COMMENT '貼文編號 (PK)', AUTO_INCREMENT=9;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `fillquiz`
 --
 ALTER TABLE `fillquiz`
-  MODIFY `fillID` int(11) NOT NULL AUTO_INCREMENT COMMENT '填充題編號 (PK)', AUTO_INCREMENT=4;
+  MODIFY `fillID` int(11) NOT NULL AUTO_INCREMENT COMMENT '填充題編號 (PK)', AUTO_INCREMENT=5;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `merchandise`
 --
 ALTER TABLE `merchandise`
-  MODIFY `ItemID` int(11) NOT NULL AUTO_INCREMENT COMMENT '商品編號 (PK)', AUTO_INCREMENT=21;
+  MODIFY `ItemID` int(11) NOT NULL AUTO_INCREMENT COMMENT '商品編號 (PK)', AUTO_INCREMENT=23;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `password_resets`
@@ -807,19 +835,19 @@ ALTER TABLE `system_settings`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `teacher_questions`
 --
 ALTER TABLE `teacher_questions`
-  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `tfquiz`
 --
 ALTER TABLE `tfquiz`
-  MODIFY `tfID` int(11) NOT NULL AUTO_INCREMENT COMMENT '是非題編號 (PK)', AUTO_INCREMENT=5;
+  MODIFY `tfID` int(11) NOT NULL AUTO_INCREMENT COMMENT '是非題編號 (PK)', AUTO_INCREMENT=6;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `user`
 --
 ALTER TABLE `user`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT COMMENT '使用者編號 (PK)', AUTO_INCREMENT=7;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT COMMENT '使用者編號 (PK)', AUTO_INCREMENT=8;
 
 --
 -- 已傾印資料表的限制式

@@ -14,12 +14,12 @@ $response = [
 ];
 
 if (!empty($search)) {
-    $sql = "SELECT * FROM article WHERE Category = 'sdg13' AND Title LIKE ? ORDER BY created_at DESC LIMIT ? OFFSET ?";
+    $sql = "SELECT a.*, u.Username FROM article a LEFT JOIN user u ON a.UserID = u.UserID WHERE a.Category = 'sdg13' AND (a.Title LIKE ? OR u.Username LIKE ?) ORDER BY a.created_at DESC LIMIT ? OFFSET ?";
     $searchTerm = "%" . $conn->real_escape_string($search) . "%";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sii", $searchTerm, $perPage, $offset);
+    $stmt->bind_param("ssii", $searchTerm, $searchTerm, $perPage, $offset);
 } else {
-    $sql = "SELECT * FROM article WHERE Category = 'sdg13' ORDER BY created_at DESC LIMIT ? OFFSET ?";
+    $sql = "SELECT a.*, u.Username FROM article a LEFT JOIN user u ON a.UserID = u.UserID WHERE a.Category = 'sdg13' ORDER BY a.created_at DESC LIMIT ? OFFSET ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ii", $perPage, $offset);
 }
@@ -33,15 +33,16 @@ while ($row = $result->fetch_assoc()) {
         'ArticleID' => $row['ArticleID'],
         'Title' => htmlspecialchars($row['Title']),
         'Description' => htmlspecialchars($row['Description']),
-        'ImageURL' => $row['ImageURL'] ? '../' . htmlspecialchars($row['ImageURL']) : '../img/Climate-change.jpg'
+        'ImageURL' => $row['ImageURL'] ? '../' . htmlspecialchars($row['ImageURL']) : '../img/Climate-change.jpg',
+        'Username' => isset($row['Username']) ? htmlspecialchars($row['Username']) : '未知作者'
     ];
 }
 
 // 計算總頁數
-$countSql = "SELECT COUNT(*) as total FROM article WHERE Category = 'sdg13'" . (!empty($search) ? " AND Title LIKE ?" : "");
+$countSql = "SELECT COUNT(*) as total FROM article a LEFT JOIN user u ON a.UserID = u.UserID WHERE a.Category = 'sdg13'" . (!empty($search) ? " AND (a.Title LIKE ? OR u.Username LIKE ?)" : "");
 if (!empty($search)) {
     $countStmt = $conn->prepare($countSql);
-    $countStmt->bind_param("s", $searchTerm);
+    $countStmt->bind_param("ss", $searchTerm, $searchTerm);
     $countStmt->execute();
     $countResult = $countStmt->get_result();
 } else {

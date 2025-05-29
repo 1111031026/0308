@@ -31,24 +31,28 @@ if ($user_id > 0) {
 }
 
 // 構建SQL查詢
-// 構建SQL查詢
-$sql = "SELECT * FROM merchandise"; // Removed quantity condition\n$category_sql = "SELECT DISTINCT Category FROM merchandise";\n// Removed quantity condition
+$sql = "SELECT * FROM merchandise";
+$where = [];
 
-// 添加分類篩選條件
+// 搜尋條件
+if (!empty($search)) {
+    $where[] = "Name LIKE '%" . $conn->real_escape_string($search) . "%'";
+}
+// 分類篩選條件
 if (!empty($filter_category) && $filter_category != 'all') {
     if ($filter_category == 'owned') {
-        // 如果選擇「已擁有」，則只顯示用戶已購買的商品
         if (!empty($purchased_items)) {
-            $sql .= " AND ItemID IN (" . implode(',', $purchased_items) . ")";
+            $where[] = "ItemID IN (" . implode(',', $purchased_items) . ")";
         } else {
-            // 如果用戶沒有購買任何商品，則返回空結果
-            $sql .= " AND 1=0";
+            $where[] = "1=0";
         }
     } else {
-        $sql .= " AND Category = '" . $conn->real_escape_string($filter_category) . "'";
+        $where[] = "Category = '" . $conn->real_escape_string($filter_category) . "'";
     }
 }
-
+if ($where) {
+    $sql .= " WHERE " . implode(' AND ', $where);
+}
 // 使用 CASE 語句來自定義排序順序
 $sql .= " ORDER BY CASE 
             WHEN Category = 'head' THEN 1 
@@ -190,3 +194,4 @@ if ($user_id > 0) {
 </body>
 
 </html>
+

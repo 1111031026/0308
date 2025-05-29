@@ -261,66 +261,66 @@ if (
 
         /* 文章來源區域 */
         .article-source {
-    background: linear-gradient(135deg,rgb(174, 174, 174) 0%,rgb(189, 189, 189) 100%); /* 柔和淺藍＋淺綠 */
-    padding: 28px 36px;
-    border-radius: 24px;
-    border-left: 6px solid rgb(169, 227, 205); /* 修正：加上空格 */
-    color: #1f2937; /* 柔和深灰，較好閱讀 */
-    margin: 0 auto 40px auto;
-    max-width: 900px;
-    box-shadow:
-        0 20px 60px rgba(0, 150, 136, 0.15),
-        0 0 0 1px rgba(255, 255, 255, 0.15);
-    font-size: 16px;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.4s ease;
-}
+            background: linear-gradient(90deg, #6aafc7, #a0d8ef);
+            padding: 28px 36px;
+            border-radius: 24px;
+            border-left: 6px solid rgb(169, 227, 205); /* 修正：加上空格 */
+            color: #1f2937; /* 柔和深灰，較好閱讀 */
+            margin: 0 auto 40px auto;
+            max-width: 900px;
+            box-shadow:
+                0 20px 60px rgba(0, 150, 136, 0.15),
+                0 0 0 1px rgba(255, 255, 255, 0.15);
+            font-size: 16px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
 
-.article-source::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    transition: left 0.5s ease;
-}
+        .article-source::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
 
-.article-source:hover::before {
-    left: 100%;
-}
+        .article-source:hover::before {
+            left: 100%;
+        }
 
-.article-source:hover {
-    transform: translateY(-4px);
-    box-shadow:
-        0 30px 80px rgba(129, 155, 239, 0.35),
-        0 0 0 1px rgba(255, 255, 255, 0.2);
-}
+        .article-source:hover {
+            transform: translateY(-4px);
+            box-shadow:
+                0 30px 80px rgba(129, 155, 239, 0.35),
+                0 0 0 1px rgba(255, 255, 255, 0.2);
+        }
 
-.article-source a {
-    color: #5a7be0; /* 淺藍紫，較柔和 */
-    text-decoration: none;
-    font-weight: 500;
-    position: relative;
-    transition: all 0.3s ease;
-}
+        .article-source a {
+            color: #5a7be0; /* 淺藍紫，較柔和 */
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: all 0.3s ease;
+        }
 
-.article-source a::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: #a7f3d0; /* 舒服的薄荷綠底線 */
-    transition: width 0.3s ease;
-}
+        .article-source a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #a7f3d0; /* 舒服的薄荷綠底線 */
+            transition: width 0.3s ease;
+        }
 
-.article-source a:hover::after {
-    width: 100%;
-}
+        .article-source a:hover::after {
+            width: 100%;
+        }
 
         .article-source a:hover {
             color: #6ee7b7;
@@ -469,6 +469,76 @@ if (
             font-style: italic;
             background: linear-gradient(135deg, rgba(156, 163, 175, 0.08) 0%, rgba(156, 163, 175, 0.08) 100%);
         }
+
+        /* 文章作者區塊樣式 */
+        .article-author {
+            padding: 0;
+            margin: 0;
+            position: relative;
+            display: flex;
+            align-items: center;
+            background: none;
+            border: none;
+            box-shadow: none;
+        }
+
+        .author-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #6aafc7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 8px;
+            overflow: hidden;
+        }
+
+        .author-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-icon {
+            font-size: 0.9rem;
+            color: white;
+        }
+
+        .author-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .author-label {
+            font-size: 0.8rem;
+            color: #6c757d;
+            margin-bottom: 0;
+        }
+
+        .author-name {
+            font-weight: 500;
+            color: #3c6478;
+            font-size: 0.9rem;
+        }
+        
+        .author-id {
+            font-size: 0.8rem;
+            color: #6c757d;
+            margin-left: 5px;
+        }
+
+        /* AI分析區塊中的作者位置 */
+        .ai-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .ai-title-container {
+            flex-grow: 1;
+        }
     </style>
 </head>
 
@@ -532,7 +602,10 @@ if (
 
         if (isset($_GET['id'])) {
             $id = intval($_GET['id']);
-            $stmt = $conn->prepare("SELECT Title, Description, teacher_summary, ArticleURL FROM article WHERE ArticleID = ?");
+            $stmt = $conn->prepare("SELECT a.Title, a.Description, a.teacher_summary, a.ArticleURL, a.UserID, u.Username, u.AvatarURL 
+                                   FROM article a 
+                                   LEFT JOIN user u ON a.UserID = u.UserID 
+                                   WHERE a.ArticleID = ?");
             $stmt->bind_param("i", $id);
             $stmt->execute();
             $result = $stmt->get_result();
@@ -547,12 +620,60 @@ if (
 
                 if (!empty($row['teacher_summary'])) {
                     echo '<div class="article-ai-section scroll-reveal">';
+                    echo '<div class="ai-section-header">';
+                    echo '<div class="ai-title-container">';
                     echo '<h3 class="ai-title">🤖 AI重點整理</h3>';
+                    echo '</div>';
+                    echo '<div class="article-author">';
+                    
+                    // 檢查用戶是否有頭像
+                    if (!empty($row['AvatarURL'])) {
+                        echo '<div class="author-avatar"><img src="../' . htmlspecialchars($row['AvatarURL']) . '" alt="作者頭像" class="author-img"></div>';
+                    } else {
+                        echo '<div class="author-avatar"><span class="author-icon">👤</span></div>';
+                    }
+                    
+                    echo '<div class="author-info">';
+                    echo '<span class="author-label">文章發布者</span>';
+                    echo '<span class="author-name">';
+                    if (!empty($row['Username'])) {
+                        echo htmlspecialchars($row['Username']) . ' <span class="author-id">ID: ' . $row['UserID'] . '</span>';
+                    } else {
+                        echo '未知用戶 <span class="author-id">ID: ' . $row['UserID'] . '</span>';
+                    }
+                    echo '</span>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</div>';
                     echo '<div class="ai-analysis">' . nl2br(htmlspecialchars($row['teacher_summary'])) . '</div>';
                     echo '</div>';
                 } else {
                     echo '<div class="article-ai-section scroll-reveal">';
+                    echo '<div class="ai-section-header">';
+                    echo '<div class="ai-title-container">';
                     echo '<h3 class="ai-title">🤖 重點整理</h3>';
+                    echo '</div>';
+                    echo '<div class="article-author">';
+                    
+                    // 檢查用戶是否有頭像
+                    if (!empty($row['AvatarURL'])) {
+                        echo '<div class="author-avatar"><img src="../' . htmlspecialchars($row['AvatarURL']) . '" alt="作者頭像" class="author-img"></div>';
+                    } else {
+                        echo '<div class="author-avatar"><span class="author-icon">👤</span></div>';
+                    }
+                    
+                    echo '<div class="author-info">';
+                    echo '<span class="author-label">文章發布者</span>';
+                    echo '<span class="author-name">';
+                    if (!empty($row['Username'])) {
+                        echo htmlspecialchars($row['Username']) . ' <span class="author-id">ID: ' . $row['UserID'] . '</span>';
+                    } else {
+                        echo '未知用戶 <span class="author-id">ID: ' . $row['UserID'] . '</span>';
+                    }
+                    echo '</span>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</div>';
                     echo '<div class="ai-analysis" style="color:#888;">尚未有重點整理</div>';
                     echo '</div>';
                 }

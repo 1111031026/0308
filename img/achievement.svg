@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <!-- 獎盃主體 -->
+  <path d="M8 4L8 10C8 13 10 15 12 16C14 15 16 13 16 10L16 4L8 4Z" fill="#FFD700" stroke="#B8860B" stroke-width="1.5"/>
+  <!-- 獎盃底座 -->
+  <path d="M6 4L18 4" stroke="#B8860B" stroke-width="2" stroke-linecap="round"/>
+  <path d="M9 16L15 16L15 18L9 18L9 16Z" fill="#B8860B" stroke="#8B4513" stroke-width="1.5"/>
+  <path d="M10 18L14 18L13 21L11 21L10 18Z" fill="#CD853F" stroke="#8B4513" stroke-width="1.5"/>
+  <!-- 獎盃把手 -->
+  <path d="M16 6C18 6 19 7 19 9C19 10 18 10.5 16.5 11" stroke="#B8860B" stroke-width="1.5" fill="none"/>
+  <path d="M8 6C6 6 5 7 5 9C5 10 6 10.5 7.5 11" stroke="#B8860B" stroke-width="1.5" fill="none"/>
+  <!-- 星星裝飾 -->
+  <path d="M12 7L12.5 8L13.5 8.2L12.7 9L13 10L12 9.5L11 10L11.3 9L10.5 8.2L11.5 8L12 7Z" fill="#FFFFFF" stroke="#B8860B" stroke-width="0.75"/>
+</svg> 

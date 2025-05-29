@@ -30,21 +30,24 @@ if (session_status() === PHP_SESSION_NONE) {
     <div class="nav-icons">
         <?php if (isset($_SESSION['login_session']) && $_SESSION['login_session'] === true): ?>
             <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'Teacher'): ?>
-                <a href="teacher_achievement.php"><img src="../img/achv.png" alt="成就"></a>
+                <span class="user-info">user: <?php echo $_SESSION['username']; ?> <?php echo $_SESSION['role']; ?></span>
+                <a href="teacher_achievement.php"><img src="../img/achievement.svg" alt="成就"></a>
             <?php elseif (isset($_SESSION['role']) && $_SESSION['role'] === 'Student'): ?>
-                <a href="achievement.php"><img src="../img/achv.png" alt="成就"></a>
+                <span class="user-info">user: <?php echo $_SESSION['username']; ?> <?php echo $_SESSION['role']; ?></span>
+                <a href="achievement.php"><img src="../img/achievement.svg" alt="成就"></a>
             <?php elseif (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'): ?>
-                <a href="teacher_achievement.php"><img src="../img/achv.png" alt="成就"></a>
+                <span class="user-info">user: <?php echo $_SESSION['username']; ?> <?php echo $_SESSION['role']; ?></span>
+                <a href="teacher_achievement.php"><img src="../img/achievement.svg" alt="成就"></a>
             <?php endif; ?>
         <?php endif; ?>
 
         <?php if (isset($_SESSION['login_session']) && $_SESSION['login_session'] === true): ?>
             <?php
             // 獲取用戶頭像 URL
-            $avatarURL = $_SESSION['AvatarURL'] ?? 'img/user.png';
+            $avatarURL = $_SESSION['AvatarURL'] ?? '';
 
-            // 如果 AvatarURL 為 NULL，從資料庫中獲取
-            if ($avatarURL === 'img/user.png') {
+            // 如果 AvatarURL 為空，從資料庫中獲取
+            if (empty($avatarURL)) {
                 $servername = "localhost";
                 $db_username = "root";
                 $db_password = "";
@@ -63,11 +66,45 @@ if (session_status() === PHP_SESSION_NONE) {
 
                 if ($result->num_rows > 0) {
                     $row = $result->fetch_assoc();
-                    $avatarURL = $row['AvatarURL'] ?? 'img/user.png';
+                    $avatarURL = $row['AvatarURL'] ?? '';
                 }
             }
+            
+            if (!empty($avatarURL)) {
+                echo '<a href="user.php"><img src="../' . htmlspecialchars($avatarURL) . '" alt="用戶" style="border-radius: 50%; width: 32px; height: 32px; object-fit: cover;"></a>';
+            } else {
+                echo '<a href="user.php" style="text-decoration: none;"><div class="default-avatar"><span class="default-avatar-icon">👤</span></div></a>';
+            }
             ?>
-            <a href="user.php"><img src="../<?php echo htmlspecialchars($avatarURL); ?>" alt="用戶" style="border-radius: 50%;"></a>
         <?php endif; ?>
     </div>
 </nav>
+
+<style>
+.nav-icons {
+    display: flex;
+    align-items: center;
+}
+.user-info {
+    font-size: 13px;
+    margin-right: 8px;
+    color: #ffffff;
+    font-style: italic;
+    opacity: 0.9;
+    padding: 3px 6px;
+}
+.default-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #6aafc7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.default-avatar-icon {
+    font-size: 0.9rem;
+    color: white;
+}
+</style>

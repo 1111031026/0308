@@ -149,11 +149,12 @@ $conn->close();
             position: relative;
             background-color: #fff;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 30px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            padding: 40px 30px;
             max-width: 800px;
             margin: 0 auto;
             z-index: 1;
+            overflow: visible;
         }
         
         .profile-background {
@@ -161,11 +162,12 @@ $conn->close();
             top: 0;
             left: 0;
             width: 100%;
-            height: 200px;
+            height: 220px;
             background-size: cover;
             background-position: center;
             border-radius: 10px 10px 0 0;
             opacity: 0.8;
+            z-index: 0;
         }
         
         .customization-section {
@@ -243,13 +245,60 @@ $conn->close();
             text-align: center;
         }
         
+        .user-profile-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-top: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .avatar-container {
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .user-name {
+            font-size: 32px;
+            margin: 15px 0 8px;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .user-status {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
         .user-avatar {
-            width: 100px;
-            height: 100px;
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid white;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            border: 5px solid white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .default-avatar {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: #6aafc7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 5px solid white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .default-avatar-icon {
+            font-size: 5.5rem;
+            color: white;
         }
         
         .customization-container {
@@ -266,9 +315,10 @@ $conn->close();
         ?>
     </header>
     <div class="user-profile-container">
-        <div class="user-profile-card">
+        <div class="user-profile-card" style="padding: 50px 35px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);">
             <?php if (!empty($current_background)): ?>
-            <div class="profile-background" style="background-image: url('../<?php echo htmlspecialchars($current_background); ?>');"></div>
+            <div class="profile-background" style="height: 240px; opacity: 0.85; background-image: url('../<?php echo htmlspecialchars($current_background); ?>');">
+            </div>
             <?php endif; ?>
             
             <?php if (isset($_GET['success'])): ?>
@@ -281,14 +331,18 @@ $conn->close();
                 </div>
             <?php endif; ?>
             
-            <div class="user-profile-header" style="position: relative; z-index: 1;">
-                <?php if (!empty($user['AvatarURL'])): ?>
-                    <img src="../<?php echo htmlspecialchars($user['AvatarURL']); ?>" alt="用戶頭像" class="user-avatar">
-                <?php else: ?>
-                    <img src="../img/user.png" alt="用戶頭像" class="user-avatar">
-                <?php endif; ?>
-                <h2 class="user-name"><?php echo htmlspecialchars($user['Username']); ?></h2>
-                <p class="user-status"><?php echo htmlspecialchars($user['Status']); ?></p>
+            <div class="user-profile-header" style="padding-top: 50px; margin-bottom: 40px;">
+                <div class="avatar-container" style="margin-bottom: 20px;">
+                    <?php if (!empty($user['AvatarURL'])): ?>
+                        <img src="../<?php echo htmlspecialchars($user['AvatarURL']); ?>" alt="用戶頭像" class="user-avatar" style="width: 160px !important; height: 160px !important; border: 5px solid white; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);">
+                    <?php else: ?>
+                        <div class="default-avatar" style="width: 160px !important; height: 160px !important; border: 5px solid white; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);">
+                            <span class="default-avatar-icon" style="font-size: 5rem !important;">👤</span>
+                        </div>
+                    <?php endif; ?>
+                </div>
+                <h2 class="user-name" style="font-size: 32px; margin: 15px 0 8px;"><?php echo htmlspecialchars($user['Username']); ?></h2>
+                <p class="user-status" style="font-size: 20px;"><?php echo htmlspecialchars($user['Status']); ?></p>
             </div>
 
             <div class="user-info-section">

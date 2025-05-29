@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2025-05-29 04:39:01
+-- 產生時間： 2025-05-29 05:13:54
 -- 伺服器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -195,6 +195,7 @@ TRUNCATE TABLE `choicerec`;
 -- 資料表結構 `commentarea`
 --
 -- 建立時間： 2025-05-29 01:18:07
+-- 最後更新： 2025-05-29 02:56:19
 --
 
 DROP TABLE IF EXISTS `commentarea`;
@@ -212,12 +213,20 @@ CREATE TABLE `commentarea` (
 --
 
 TRUNCATE TABLE `commentarea`;
+--
+-- 傾印資料表的資料 `commentarea`
+--
+
+INSERT INTO `commentarea` (`CommentID`, `PostID`, `UserID`, `Content`, `CommentTime`, `Status`) VALUES
+(1, 3, 2, '完全同意！這篇文章真的很清楚地說明了塑料對海洋的危害。我最近開始用可重複使用的水瓶和購物袋，感覺小改變也能幫大忙！大家有沒有什麼減塑的小撇步可以分享？', '2025-05-29 10:56:19', 'PENDING');
+
 -- --------------------------------------------------------
 
 --
 -- 資料表結構 `communitypost`
 --
 -- 建立時間： 2025-05-29 01:18:07
+-- 最後更新： 2025-05-29 02:54:13
 --
 
 DROP TABLE IF EXISTS `communitypost`;
@@ -236,6 +245,15 @@ CREATE TABLE `communitypost` (
 --
 
 TRUNCATE TABLE `communitypost`;
+--
+-- 傾印資料表的資料 `communitypost`
+--
+
+INSERT INTO `communitypost` (`PostID`, `Content`, `ImageURL`, `PostDate`, `Title`, `UserID`, `ArticleID`) VALUES
+(1, '文章揭示了海洋塑料污染的嚴重影響，解釋了塑料如何危害海洋生物和生態系統。這是一個適合孩子和成人的絕佳資源，內容清晰且配有生動的圖片。讓我們一起討論如何提高意識並減少塑料廢物，保護我們的海洋！', NULL, '2025-05-29 04:50:22', '心得', 1, 21),
+(2, '看了 kids.earth.org 的文章，真的很震驚海洋塑料污染的嚴重性！文章提到塑料如何威脅海洋生物，甚至影響我們的食物鏈。內容簡單易懂，還有圖片幫助說明，很適合全家一起學習。快來分享你對減少塑料污染的想法吧！', NULL, '2025-05-29 04:51:25', '讀後感想', 1, 21),
+(3, '這篇關於海洋塑料污染的文章太值得一讀！它清楚解釋了塑料如何傷害海洋生態，並提供了一些簡單的減塑建議。無論是大人還是小孩，都能從中學到東西。你有哪些減少使用塑膠的好方法？快來交流吧！', NULL, '2025-05-29 04:54:13', '太棒啦!!!', 1, 21);
+
 -- --------------------------------------------------------
 
 --
@@ -753,13 +771,13 @@ ALTER TABLE `choicequiz`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `commentarea`
 --
 ALTER TABLE `commentarea`
-  MODIFY `CommentID` int(11) NOT NULL AUTO_INCREMENT COMMENT '留言編號 (PK)';
+  MODIFY `CommentID` int(11) NOT NULL AUTO_INCREMENT COMMENT '留言編號 (PK)', AUTO_INCREMENT=2;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `communitypost`
 --
 ALTER TABLE `communitypost`
-  MODIFY `PostID` int(11) NOT NULL AUTO_INCREMENT COMMENT '貼文編號 (PK)';
+  MODIFY `PostID` int(11) NOT NULL AUTO_INCREMENT COMMENT '貼文編號 (PK)', AUTO_INCREMENT=4;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `fillquiz`

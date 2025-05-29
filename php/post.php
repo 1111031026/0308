@@ -59,11 +59,13 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>新增貼文</title>
+    <link rel="icon" type="image/png" href="../img/icon.png">
     <link rel="stylesheet" href="../css/post.css">
-    <link rel="stylesheet" href="../css/nav.css"> <!-- 假設導航樣式 -->
+    <link rel="stylesheet" href="../css/nav3.css"> <!-- 假設導航樣式 -->
 </head>
 <body>
     <?php include 'nav.php'; // 引入導航欄 ?>
+    <div style="height: 70px;"></div>
 
     <div class="post-container">
         <h2>新增貼文</h2>

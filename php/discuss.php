@@ -105,6 +105,7 @@ if (isset($post['ArticleID']) && $post['ArticleID'] > 0) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($post['Title']); ?> - 討論區</title>
+    <link rel="icon" type="image/png" href="../img/icon.png">
     <link rel="stylesheet" href="../css/nav3.css">
     <link rel="stylesheet" href="../css/discuss.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -124,6 +125,7 @@ if (isset($post['ArticleID']) && $post['ArticleID'] > 0) {
 </head>
 <body>
     <?php include 'nav.php'; ?>
+    <div style="height: 70px;"></div>
     
     <div class="forum-container">
         <div class="navigation-links">

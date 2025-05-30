@@ -2,9 +2,9 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- 主机： 127.0.0.1
--- 生成日期： 2025-05-29 20:19:25
--- 服务器版本： 10.4.32-MariaDB
+-- 主機： 127.0.0.1
+-- 產生時間： 2025-05-30 06:18:00
+-- 伺服器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- 数据库： `sustain`
+-- 資料庫： `sustain`
 --
 CREATE DATABASE IF NOT EXISTS `sustain` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `sustain`;
@@ -26,9 +26,10 @@ USE `sustain`;
 -- --------------------------------------------------------
 
 --
--- 表的结构 `achievement`
+-- 資料表結構 `achievement`
 --
--- 创建时间： 2025-05-29 14:38:46
+-- 建立時間： 2025-05-30 02:09:05
+-- 最後更新： 2025-05-30 02:09:46
 --
 
 DROP TABLE IF EXISTS `achievement`;
@@ -42,16 +43,16 @@ CREATE TABLE `achievement` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 插入之前先把表清空（truncate） `achievement`
+-- 資料表新增資料前，先清除舊資料 `achievement`
 --
 
 TRUNCATE TABLE `achievement`;
 --
--- 转存表中的数据 `achievement`
+-- 傾印資料表的資料 `achievement`
 --
 
 INSERT INTO `achievement` (`UserID`, `TotalPoints`, `ArticlesViewed`, `ChoiceQuestionsCorrect`, `TFQuestionsCorrect`, `FillinQuestionsCorrect`) VALUES
-(1, 0, 1, 0, 0, 0),
+(1, 0, 3, 0, 0, 0),
 (3, 0, 2, 0, 0, 0),
 (6, 8682, 2, 0, 0, 0),
 (7, 0, 3, 0, 0, 0);
@@ -59,9 +60,9 @@ INSERT INTO `achievement` (`UserID`, `TotalPoints`, `ArticlesViewed`, `ChoiceQue
 -- --------------------------------------------------------
 
 --
--- 表的结构 `article`
+-- 資料表結構 `article`
 --
--- 创建时间： 2025-05-29 14:38:47
+-- 建立時間： 2025-05-30 02:09:05
 --
 
 DROP TABLE IF EXISTS `article`;
@@ -79,12 +80,12 @@ CREATE TABLE `article` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 插入之前先把表清空（truncate） `article`
+-- 資料表新增資料前，先清除舊資料 `article`
 --
 
 TRUNCATE TABLE `article`;
 --
--- 转存表中的数据 `article`
+-- 傾印資料表的資料 `article`
 --
 
 INSERT INTO `article` (`ArticleID`, `Title`, `Category`, `ImageURL`, `Description`, `ArticleURL`, `UserID`, `Content`, `created_at`, `teacher_summary`) VALUES
@@ -133,10 +134,10 @@ INSERT INTO `article` (`ArticleID`, `Title`, `Category`, `ImageURL`, `Descriptio
 -- --------------------------------------------------------
 
 --
--- 表的结构 `choicequiz`
+-- 資料表結構 `choicequiz`
 --
--- 创建时间： 2025-05-29 14:38:48
--- 最后更新： 2025-05-29 18:15:24
+-- 建立時間： 2025-05-30 02:09:05
+-- 最後更新： 2025-05-30 04:17:03
 --
 
 DROP TABLE IF EXISTS `choicequiz`;
@@ -153,12 +154,12 @@ CREATE TABLE `choicequiz` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 插入之前先把表清空（truncate） `choicequiz`
+-- 資料表新增資料前，先清除舊資料 `choicequiz`
 --
 
 TRUNCATE TABLE `choicequiz`;
 --
--- 转存表中的数据 `choicequiz`
+-- 傾印資料表的資料 `choicequiz`
 --
 
 INSERT INTO `choicequiz` (`choiceID`, `QuestionText`, `OptionA`, `OptionB`, `OptionC`, `OptionD`, `CorrectAnswer`, `UserID`, `ArticleID`) VALUES
@@ -166,14 +167,16 @@ INSERT INTO `choicequiz` (`choiceID`, `QuestionText`, `OptionA`, `OptionB`, `Opt
 (2, '2.每年有多少塑膠垃圾進入海洋？', 'A)50萬噸  ', 'B)800萬噸  ', 'C)1000萬噸  ', 'D)1億噸', 'B', 2, 21),
 (3, '3.關於海洋塑膠污染，下列哪一項敘述是正確的？', 'A. 每年約有800萬噸塑膠垃圾進入海洋，相當於每分鐘倒一卡車垃圾。  ', 'B. 海洋中塑膠碎片數量已超過所有鯨魚總重量的50倍。  ', 'C. 科學家預測，若污染持續，2050年海洋中的塑膠將比魚類多。', 'D. 以上皆是 ', 'D', 2, 21),
 (4, '下列何者「不是」棲地破壞的主要原因？', 'A. 都市擴張與土地開發  ', 'B. 氣候變遷導致極端天氣  ', 'C. 原生植物的自然演替  ', 'D. 工業污染與過度開採  ', 'C', 5, 11),
-(5, '下列關於棲地保育的敘述，何者「不正確」？', '棲地破碎化會導致生物多樣性下降', '社區參與對棲地保育的長期成功至關重要  ', '外來種入侵可能破壞原生棲地的生態平衡  ', '設立保護區是唯一有效的棲地保育方法 ', 'D', 2, 11);
+(5, '下列關於棲地保育的敘述，何者「不正確」？', '棲地破碎化會導致生物多樣性下降', '社區參與對棲地保育的長期成功至關重要  ', '外來種入侵可能破壞原生棲地的生態平衡  ', '設立保護區是唯一有效的棲地保育方法 ', 'D', 2, 11),
+(8, '根據《What next for Australia\'s new net-zero reality》一文，澳大利亞實現淨零排放目標的主要挑戰不包括以下哪一項？  ', 'A) 能源轉型中對化石燃料產業的依賴  ', 'B) 可再生能源基礎設施的投資不足 ', 'C) 國際社會對澳大利亞的減排壓力不足 ', 'D) 國內政策與淨零目標的協調困難', 'C', 2, 28),
+(9, '根據《What Next for Australia\'s New Net Zero Reality?》一文，澳大利亞實現淨零排放目標的主要挑戰不包括下列哪一項？  \r\n', 'A) 能源基礎設施轉型所需的巨額投資  ', 'B) 政治與政策的不確定性  ', 'C) 國內煤炭產業的強烈抵制  ', 'D) 缺乏可再生能源的技術與資源  ', 'D', 2, 28);
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `choicerec`
+-- 資料表結構 `choicerec`
 --
--- 创建时间： 2025-05-29 14:38:46
+-- 建立時間： 2025-05-30 02:09:05
 --
 
 DROP TABLE IF EXISTS `choicerec`;
@@ -186,16 +189,16 @@ CREATE TABLE `choicerec` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 插入之前先把表清空（truncate） `choicerec`
+-- 資料表新增資料前，先清除舊資料 `choicerec`
 --
 
 TRUNCATE TABLE `choicerec`;
 -- --------------------------------------------------------
 
 --
--- 表的结构 `commentarea`
+-- 資料表結構 `commentarea`
 --
--- 创建时间： 2025-05-29 14:38:48
+-- 建立時間： 2025-05-30 02:09:05
 --
 
 DROP TABLE IF EXISTS `commentarea`;
@@ -209,12 +212,12 @@ CREATE TABLE `commentarea` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 插入之前先把表清空（truncate） `commentarea`
+-- 資料表新增資料前，先清除舊資料 `commentarea`
 --
 
 TRUNCATE TABLE `commentarea`;
 --
--- 转存表中的数据 `commentarea`
+-- 傾印資料表的資料 `commentarea`
 --
 
 INSERT INTO `commentarea` (`CommentID`, `PostID`, `UserID`, `Content`, `CommentTime`, `Status`) VALUES
@@ -227,9 +230,9 @@ INSERT INTO `commentarea` (`CommentID`, `PostID`, `UserID`, `Content`, `CommentT
 -- --------------------------------------------------------
 
 --
--- 表的结构 `communitypost`
+-- 資料表結構 `communitypost`
 --
--- 创建时间： 2025-05-29 14:38:49
+-- 建立時間： 2025-05-30 02:09:05
 --
 
 DROP TABLE IF EXISTS `communitypost`;
@@ -244,12 +247,12 @@ CREATE TABLE `communitypost` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 插入之前先把表清空（truncate） `communitypost`
+-- 資料表新增資料前，先清除舊資料 `communitypost`
 --
 
 TRUNCATE TABLE `communitypost`;
 --
--- 转存表中的数据 `communitypost`
+-- 傾印資料表的資料 `communitypost`
 --
 
 INSERT INTO `communitypost` (`PostID`, `Content`, `ImageURL`, `PostDate`, `Title`, `UserID`, `ArticleID`) VALUES
@@ -265,10 +268,9 @@ INSERT INTO `communitypost` (`PostID`, `Content`, `ImageURL`, `PostDate`, `Title
 -- --------------------------------------------------------
 
 --
--- 表的结构 `fillquiz`
+-- 資料表結構 `fillquiz`
 --
--- 创建时间： 2025-05-29 14:38:48
--- 最后更新： 2025-05-29 18:15:29
+-- 建立時間： 2025-05-30 02:09:05
 --
 
 DROP TABLE IF EXISTS `fillquiz`;
@@ -281,12 +283,12 @@ CREATE TABLE `fillquiz` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 插入之前先把表清空（truncate） `fillquiz`
+-- 資料表新增資料前，先清除舊資料 `fillquiz`
 --
 
 TRUNCATE TABLE `fillquiz`;
 --
--- 转存表中的数据 `fillquiz`
+-- 傾印資料表的資料 `fillquiz`
 --
 
 INSERT INTO `fillquiz` (`fillID`, `QuestionText`, `CorrectAnswer`, `UserID`, `ArticleID`) VALUES
@@ -299,9 +301,9 @@ INSERT INTO `fillquiz` (`fillID`, `QuestionText`, `CorrectAnswer`, `UserID`, `Ar
 -- --------------------------------------------------------
 
 --
--- 表的结构 `fillrec`
+-- 資料表結構 `fillrec`
 --
--- 创建时间： 2025-05-29 14:38:46
+-- 建立時間： 2025-05-30 02:09:05
 --
 
 DROP TABLE IF EXISTS `fillrec`;
@@ -314,16 +316,16 @@ CREATE TABLE `fillrec` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 插入之前先把表清空（truncate） `fillrec`
+-- 資料表新增資料前，先清除舊資料 `fillrec`
 --
 
 TRUNCATE TABLE `fillrec`;
 -- --------------------------------------------------------
 
 --
--- 表的结构 `merchandise`
+-- 資料表結構 `merchandise`
 --
--- 创建时间： 2025-05-29 14:38:48
+-- 建立時間： 2025-05-30 02:09:05
 --
 
 DROP TABLE IF EXISTS `merchandise`;
@@ -338,12 +340,12 @@ CREATE TABLE `merchandise` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 插入之前先把表清空（truncate） `merchandise`
+-- 資料表新增資料前，先清除舊資料 `merchandise`
 --
 
 TRUNCATE TABLE `merchandise`;
 --
--- 转存表中的数据 `merchandise`
+-- 傾印資料表的資料 `merchandise`
 --
 
 INSERT INTO `merchandise` (`ItemID`, `Name`, `Description`, `PointsRequired`, `Category`, `ImageURL`, `PreviewURL`) VALUES
@@ -366,9 +368,9 @@ INSERT INTO `merchandise` (`ItemID`, `Name`, `Description`, `PointsRequired`, `C
 -- --------------------------------------------------------
 
 --
--- 表的结构 `password_resets`
+-- 資料表結構 `password_resets`
 --
--- 创建时间： 2025-05-29 14:38:48
+-- 建立時間： 2025-05-30 02:09:05
 --
 
 DROP TABLE IF EXISTS `password_resets`;
@@ -381,16 +383,16 @@ CREATE TABLE `password_resets` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 插入之前先把表清空（truncate） `password_resets`
+-- 資料表新增資料前，先清除舊資料 `password_resets`
 --
 
 TRUNCATE TABLE `password_resets`;
 -- --------------------------------------------------------
 
 --
--- 表的结构 `purchase`
+-- 資料表結構 `purchase`
 --
--- 创建时间： 2025-05-29 14:38:47
+-- 建立時間： 2025-05-30 02:09:05
 --
 
 DROP TABLE IF EXISTS `purchase`;
@@ -402,12 +404,12 @@ CREATE TABLE `purchase` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 插入之前先把表清空（truncate） `purchase`
+-- 資料表新增資料前，先清除舊資料 `purchase`
 --
 
 TRUNCATE TABLE `purchase`;
 --
--- 转存表中的数据 `purchase`
+-- 傾印資料表的資料 `purchase`
 --
 
 INSERT INTO `purchase` (`UserID`, `ItemID`, `PurchaseTime`, `SpentPoints`) VALUES
@@ -430,9 +432,9 @@ INSERT INTO `purchase` (`UserID`, `ItemID`, `PurchaseTime`, `SpentPoints`) VALUE
 -- --------------------------------------------------------
 
 --
--- 表的结构 `system_settings`
+-- 資料表結構 `system_settings`
 --
--- 创建时间： 2025-05-29 14:38:48
+-- 建立時間： 2025-05-30 02:09:05
 --
 
 DROP TABLE IF EXISTS `system_settings`;
@@ -446,16 +448,16 @@ CREATE TABLE `system_settings` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 插入之前先把表清空（truncate） `system_settings`
+-- 資料表新增資料前，先清除舊資料 `system_settings`
 --
 
 TRUNCATE TABLE `system_settings`;
 -- --------------------------------------------------------
 
 --
--- 表的结构 `teacher_achievement`
+-- 資料表結構 `teacher_achievement`
 --
--- 创建时间： 2025-05-29 14:38:49
+-- 建立時間： 2025-05-30 02:09:05
 --
 
 DROP TABLE IF EXISTS `teacher_achievement`;
@@ -468,12 +470,12 @@ CREATE TABLE `teacher_achievement` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 插入之前先把表清空（truncate） `teacher_achievement`
+-- 資料表新增資料前，先清除舊資料 `teacher_achievement`
 --
 
 TRUNCATE TABLE `teacher_achievement`;
 --
--- 转存表中的数据 `teacher_achievement`
+-- 傾印資料表的資料 `teacher_achievement`
 --
 
 INSERT INTO `teacher_achievement` (`UserID`, `TotalPoints`, `SDG13ArticlesPublished`, `SDG14ArticlesPublished`, `SDG15ArticlesPublished`) VALUES
@@ -484,10 +486,10 @@ INSERT INTO `teacher_achievement` (`UserID`, `TotalPoints`, `SDG13ArticlesPublis
 -- --------------------------------------------------------
 
 --
--- 表的结构 `teacher_questions`
+-- 資料表結構 `teacher_questions`
 --
--- 创建时间： 2025-05-29 14:38:49
--- 最后更新： 2025-05-29 18:17:23
+-- 建立時間： 2025-05-30 02:09:05
+-- 最後更新： 2025-05-30 04:17:03
 --
 
 DROP TABLE IF EXISTS `teacher_questions`;
@@ -507,17 +509,17 @@ CREATE TABLE `teacher_questions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 插入之前先把表清空（truncate） `teacher_questions`
+-- 資料表新增資料前，先清除舊資料 `teacher_questions`
 --
 
 TRUNCATE TABLE `teacher_questions`;
 -- --------------------------------------------------------
 
 --
--- 表的结构 `tfquiz`
+-- 資料表結構 `tfquiz`
 --
--- 创建时间： 2025-05-29 14:38:49
--- 最后更新： 2025-05-29 18:15:33
+-- 建立時間： 2025-05-30 02:09:05
+-- 最後更新： 2025-05-30 04:17:03
 --
 
 DROP TABLE IF EXISTS `tfquiz`;
@@ -532,12 +534,12 @@ CREATE TABLE `tfquiz` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 插入之前先把表清空（truncate） `tfquiz`
+-- 資料表新增資料前，先清除舊資料 `tfquiz`
 --
 
 TRUNCATE TABLE `tfquiz`;
 --
--- 转存表中的数据 `tfquiz`
+-- 傾印資料表的資料 `tfquiz`
 --
 
 INSERT INTO `tfquiz` (`tfID`, `QuestionText`, `OptionA`, `OptionB`, `CorrectAnswer`, `UserID`, `ArticleID`) VALUES
@@ -546,14 +548,15 @@ INSERT INTO `tfquiz` (`tfID`, `QuestionText`, `OptionA`, `OptionB`, `CorrectAnsw
 (3, '海洋中的塑膠污染對海洋生物沒有影響，因為它們不會誤食塑膠。', '', '', 0, 2, 21),
 (4, '塑膠垃圾在海洋中會完全分解並消失，不會長期存在。  ', '', '', 0, 2, 21),
 (5, '棲地保護僅對瀕危物種重要，對常見物種無顯著影響。', '', '', 0, 5, 11),
-(6, '棲地保育僅需依靠政府政策推動，個人無法對生態保護產生實質影響。', '', '', 0, 2, 11);
+(6, '棲地保育僅需依靠政府政策推動，個人無法對生態保護產生實質影響。', '', '', 0, 2, 11),
+(9, '「澳大利亞在實現淨零排放的過程中，是否面臨能源轉型與經濟結構調整的雙重挑戰？」  ', '', '', 1, 2, 28);
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `tfrec`
+-- 資料表結構 `tfrec`
 --
--- 创建时间： 2025-05-29 14:38:47
+-- 建立時間： 2025-05-30 02:09:05
 --
 
 DROP TABLE IF EXISTS `tfrec`;
@@ -566,16 +569,17 @@ CREATE TABLE `tfrec` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 插入之前先把表清空（truncate） `tfrec`
+-- 資料表新增資料前，先清除舊資料 `tfrec`
 --
 
 TRUNCATE TABLE `tfrec`;
 -- --------------------------------------------------------
 
 --
--- 表的结构 `user`
+-- 資料表結構 `user`
 --
--- 创建时间： 2025-05-29 14:38:49
+-- 建立時間： 2025-05-30 02:09:05
+-- 最後更新： 2025-05-30 03:31:44
 --
 
 DROP TABLE IF EXISTS `user`;
@@ -593,29 +597,30 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 插入之前先把表清空（truncate） `user`
+-- 資料表新增資料前，先清除舊資料 `user`
 --
 
 TRUNCATE TABLE `user`;
 --
--- 转存表中的数据 `user`
+-- 傾印資料表的資料 `user`
 --
 
 INSERT INTO `user` (`UserID`, `Username`, `Email`, `Password`, `JoinDate`, `Status`, `reset_token`, `token_expire`, `AvatarURL`, `BackgroundURL`) VALUES
 (1, 'alex', 'alex@gmail.com', '$2y$10$nUwpGDahd4Rla88tuy3mUOtmGX.yVDNtgKWqQeAngMncP4XvfvTQ6', '2025-05-28 22:22:00', 'Student', NULL, NULL, NULL, NULL),
 (2, 'hank', 'hank@gmail.com', '$2y$10$2dGIFIbmOL65KEA./lxvBe.3nHIySVjqH3D9kCZvGhMHk17m4BVfq', '2025-05-28 22:23:07', 'Teacher', NULL, NULL, NULL, NULL),
 (3, 'admin', 'admin@gmail.com', '$2y$10$pULs337051YRBXNcDyRWDeJHNeLJM6xc8OjKLJ1rlU44j/fO7Nrla', '2025-05-28 22:51:36', 'Admin', NULL, NULL, NULL, NULL),
-(4, 'ben', 'ed@gmail.com', '$2y$10$9ACtLuvG9Lu7eZQQ13E3d.gO7WyADT0KfkJl9.x/aKJKNnak7GSR2', '2025-05-28 22:53:54', 'Teacher', NULL, NULL, 'product/683559ea0794c_image_head4.jpeg', NULL),
+(4, 'ben', 'ed@gmail.com', '$2y$10$9ACtLuvG9Lu7eZQQ13E3d.gO7WyADT0KfkJl9.x/aKJKNnak7GSR2', '2025-05-28 22:53:54', 'Teacher', NULL, NULL, 'uploads/merchandise/683559ea0794c_image_head4.jpeg', NULL),
 (5, 'brenden', 'brenden1070146@gmail.com', '$2y$10$pPeAfYxQjgSFLcxGbAL6IOKLvyQZAVDkj1UJMlLHxZtqCme4P610m', '2025-05-29 00:41:32', 'Teacher', NULL, NULL, NULL, NULL),
-(6, 'richguy', 'r@g', '$2y$10$QvgX9QEeftORqXFMPsY4wuzUyeGp9vxCrRBMELRpEbMqEf4d/EWsO', '2025-05-29 01:31:09', 'Student', NULL, NULL, 'product/683559ea0794c_image_head4.jpeg', 'uploads/merchandise/merchandise_6837499fa3b86.png'),
+(6, 'richguy', 'r@g', '$2y$10$QvgX9QEeftORqXFMPsY4wuzUyeGp9vxCrRBMELRpEbMqEf4d/EWsO', '2025-05-29 01:31:09', 'Student', NULL, NULL, 'uploads/merchandise/683559ea0794c_image_head4.jpeg', 'uploads/merchandise/merchandise_6837499fa3b86.png'),
 (7, 'lollol', 'lolol@gmail.com', '$2y$10$8hk5VRP04OGMPf0TsR8r9.Bb1m08jBhaCamjwiZZ3q7MruF1RMLzW', '2025-05-29 19:04:18', 'Student', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `user_article_views`
+-- 資料表結構 `user_article_views`
 --
--- 创建时间： 2025-05-29 14:38:47
+-- 建立時間： 2025-05-30 02:09:05
+-- 最後更新： 2025-05-30 02:09:46
 --
 
 DROP TABLE IF EXISTS `user_article_views`;
@@ -626,16 +631,18 @@ CREATE TABLE `user_article_views` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- 插入之前先把表清空（truncate） `user_article_views`
+-- 資料表新增資料前，先清除舊資料 `user_article_views`
 --
 
 TRUNCATE TABLE `user_article_views`;
 --
--- 转存表中的数据 `user_article_views`
+-- 傾印資料表的資料 `user_article_views`
 --
 
 INSERT INTO `user_article_views` (`UserID`, `ArticleID`, `ViewTimestamp`) VALUES
 (1, 21, '2025-05-29 01:38:25'),
+(1, 27, '2025-05-30 02:09:46'),
+(1, 28, '2025-05-30 02:09:33'),
 (3, 11, '2025-05-29 12:21:43'),
 (3, 21, '2025-05-28 16:42:15'),
 (6, 11, '2025-05-29 11:25:52'),
@@ -645,24 +652,24 @@ INSERT INTO `user_article_views` (`UserID`, `ArticleID`, `ViewTimestamp`) VALUES
 (7, 28, '2025-05-29 11:05:13');
 
 --
--- 转储表的索引
+-- 已傾印資料表的索引
 --
 
 --
--- 表的索引 `achievement`
+-- 資料表索引 `achievement`
 --
 ALTER TABLE `achievement`
   ADD PRIMARY KEY (`UserID`);
 
 --
--- 表的索引 `article`
+-- 資料表索引 `article`
 --
 ALTER TABLE `article`
   ADD PRIMARY KEY (`ArticleID`),
   ADD KEY `UserID` (`UserID`);
 
 --
--- 表的索引 `choicequiz`
+-- 資料表索引 `choicequiz`
 --
 ALTER TABLE `choicequiz`
   ADD PRIMARY KEY (`choiceID`),
@@ -670,14 +677,14 @@ ALTER TABLE `choicequiz`
   ADD KEY `fk_choicequiz_article` (`ArticleID`);
 
 --
--- 表的索引 `choicerec`
+-- 資料表索引 `choicerec`
 --
 ALTER TABLE `choicerec`
   ADD PRIMARY KEY (`choiceID`,`UserID`),
   ADD KEY `UserID` (`UserID`);
 
 --
--- 表的索引 `commentarea`
+-- 資料表索引 `commentarea`
 --
 ALTER TABLE `commentarea`
   ADD PRIMARY KEY (`CommentID`),
@@ -685,7 +692,7 @@ ALTER TABLE `commentarea`
   ADD KEY `UserID` (`UserID`);
 
 --
--- 表的索引 `communitypost`
+-- 資料表索引 `communitypost`
 --
 ALTER TABLE `communitypost`
   ADD PRIMARY KEY (`PostID`),
@@ -693,7 +700,7 @@ ALTER TABLE `communitypost`
   ADD KEY `fk_communitypost_article` (`ArticleID`);
 
 --
--- 表的索引 `fillquiz`
+-- 資料表索引 `fillquiz`
 --
 ALTER TABLE `fillquiz`
   ADD PRIMARY KEY (`fillID`),
@@ -701,46 +708,46 @@ ALTER TABLE `fillquiz`
   ADD KEY `fk_fillquiz_article` (`ArticleID`);
 
 --
--- 表的索引 `fillrec`
+-- 資料表索引 `fillrec`
 --
 ALTER TABLE `fillrec`
   ADD PRIMARY KEY (`fillID`,`UserID`),
   ADD KEY `UserID` (`UserID`);
 
 --
--- 表的索引 `merchandise`
+-- 資料表索引 `merchandise`
 --
 ALTER TABLE `merchandise`
   ADD PRIMARY KEY (`ItemID`);
 
 --
--- 表的索引 `password_resets`
+-- 資料表索引 `password_resets`
 --
 ALTER TABLE `password_resets`
   ADD PRIMARY KEY (`id`);
 
 --
--- 表的索引 `purchase`
+-- 資料表索引 `purchase`
 --
 ALTER TABLE `purchase`
   ADD PRIMARY KEY (`UserID`,`ItemID`),
   ADD KEY `ItemID` (`ItemID`);
 
 --
--- 表的索引 `system_settings`
+-- 資料表索引 `system_settings`
 --
 ALTER TABLE `system_settings`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `setting_key` (`setting_key`);
 
 --
--- 表的索引 `teacher_achievement`
+-- 資料表索引 `teacher_achievement`
 --
 ALTER TABLE `teacher_achievement`
   ADD PRIMARY KEY (`UserID`);
 
 --
--- 表的索引 `teacher_questions`
+-- 資料表索引 `teacher_questions`
 --
 ALTER TABLE `teacher_questions`
   ADD PRIMARY KEY (`question_id`),
@@ -748,7 +755,7 @@ ALTER TABLE `teacher_questions`
   ADD KEY `userID` (`userID`);
 
 --
--- 表的索引 `tfquiz`
+-- 資料表索引 `tfquiz`
 --
 ALTER TABLE `tfquiz`
   ADD PRIMARY KEY (`tfID`),
@@ -756,107 +763,107 @@ ALTER TABLE `tfquiz`
   ADD KEY `fk_tfquiz_article` (`ArticleID`);
 
 --
--- 表的索引 `tfrec`
+-- 資料表索引 `tfrec`
 --
 ALTER TABLE `tfrec`
   ADD PRIMARY KEY (`tfID`,`UserID`),
   ADD KEY `UserID` (`UserID`);
 
 --
--- 表的索引 `user`
+-- 資料表索引 `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`UserID`);
 
 --
--- 表的索引 `user_article_views`
+-- 資料表索引 `user_article_views`
 --
 ALTER TABLE `user_article_views`
   ADD PRIMARY KEY (`UserID`,`ArticleID`),
   ADD KEY `ArticleID` (`ArticleID`);
 
 --
--- 在导出的表使用AUTO_INCREMENT
+-- 在傾印的資料表使用自動遞增(AUTO_INCREMENT)
 --
 
 --
--- 使用表AUTO_INCREMENT `article`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `article`
 --
 ALTER TABLE `article`
   MODIFY `ArticleID` int(11) NOT NULL AUTO_INCREMENT COMMENT '文章編號 (PK)', AUTO_INCREMENT=30;
 
 --
--- 使用表AUTO_INCREMENT `choicequiz`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `choicequiz`
 --
 ALTER TABLE `choicequiz`
-  MODIFY `choiceID` int(11) NOT NULL AUTO_INCREMENT COMMENT '選擇題編號 (PK)', AUTO_INCREMENT=8;
+  MODIFY `choiceID` int(11) NOT NULL AUTO_INCREMENT COMMENT '選擇題編號 (PK)', AUTO_INCREMENT=10;
 
 --
--- 使用表AUTO_INCREMENT `commentarea`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `commentarea`
 --
 ALTER TABLE `commentarea`
   MODIFY `CommentID` int(11) NOT NULL AUTO_INCREMENT COMMENT '留言編號 (PK)', AUTO_INCREMENT=6;
 
 --
--- 使用表AUTO_INCREMENT `communitypost`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `communitypost`
 --
 ALTER TABLE `communitypost`
   MODIFY `PostID` int(11) NOT NULL AUTO_INCREMENT COMMENT '貼文編號 (PK)', AUTO_INCREMENT=9;
 
 --
--- 使用表AUTO_INCREMENT `fillquiz`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `fillquiz`
 --
 ALTER TABLE `fillquiz`
   MODIFY `fillID` int(11) NOT NULL AUTO_INCREMENT COMMENT '填充題編號 (PK)', AUTO_INCREMENT=8;
 
 --
--- 使用表AUTO_INCREMENT `merchandise`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `merchandise`
 --
 ALTER TABLE `merchandise`
   MODIFY `ItemID` int(11) NOT NULL AUTO_INCREMENT COMMENT '商品編號 (PK)', AUTO_INCREMENT=23;
 
 --
--- 使用表AUTO_INCREMENT `password_resets`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `password_resets`
 --
 ALTER TABLE `password_resets`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- 使用表AUTO_INCREMENT `system_settings`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `system_settings`
 --
 ALTER TABLE `system_settings`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- 使用表AUTO_INCREMENT `teacher_questions`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `teacher_questions`
 --
 ALTER TABLE `teacher_questions`
-  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
--- 使用表AUTO_INCREMENT `tfquiz`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `tfquiz`
 --
 ALTER TABLE `tfquiz`
-  MODIFY `tfID` int(11) NOT NULL AUTO_INCREMENT COMMENT '是非題編號 (PK)', AUTO_INCREMENT=9;
+  MODIFY `tfID` int(11) NOT NULL AUTO_INCREMENT COMMENT '是非題編號 (PK)', AUTO_INCREMENT=10;
 
 --
--- 使用表AUTO_INCREMENT `user`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `user`
 --
 ALTER TABLE `user`
   MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT COMMENT '使用者編號 (PK)', AUTO_INCREMENT=8;
 
 --
--- 限制导出的表
+-- 已傾印資料表的限制式
 --
 
 --
--- 限制表 `communitypost`
+-- 資料表的限制式 `communitypost`
 --
 ALTER TABLE `communitypost`
   ADD CONSTRAINT `fk_communitypost_article` FOREIGN KEY (`ArticleID`) REFERENCES `article` (`ArticleID`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- 限制表 `teacher_achievement`
+-- 資料表的限制式 `teacher_achievement`
 --
 ALTER TABLE `teacher_achievement`
   ADD CONSTRAINT `teacher_achievement_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`) ON DELETE CASCADE ON UPDATE CASCADE;

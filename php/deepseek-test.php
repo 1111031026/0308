@@ -350,13 +350,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 .then(data => {
                     if (data.success) {
                         alert('題目儲存成功！');
-                        if (confirm('是否要查看已儲存的題目？')) {
-                            const articleId = new URLSearchParams(window.location.search).get('article_id');
-                            window.location.href = 'view-all-qusetion.php?article_id=' + articleId;
-                        } else {
-                            form.reset();
-                            document.getElementById('question_type').dispatchEvent(new Event('change'));
-                        }
+                        // 清空所有 input、textarea、select 欄位內容
+                        form.querySelectorAll('input[type="text"], textarea').forEach(el => el.value = '');
+                        form.querySelectorAll('select').forEach(el => el.selectedIndex = 0);
+                        document.getElementById('question_type').dispatchEvent(new Event('change'));
                     } else {
                         alert('儲存失敗: ' + (data.error || '未知錯誤'));
                     }

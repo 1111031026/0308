@@ -111,7 +111,7 @@
                         <div class="article-content">
                             <?php
                             require_once 'db_connect.php';
-                            $sql = "SELECT * FROM article WHERE Category = 'sdg15' ORDER BY created_at DESC";
+                            $sql = "SELECT * FROM article WHERE Category = 'sdg15' ORDER BY created_at DESC  LIMIT 5";
                             $result = $conn->query($sql);
                             if ($result->num_rows > 0) {
                                 while ($row = $result->fetch_assoc()) {

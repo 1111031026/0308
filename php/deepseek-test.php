@@ -181,6 +181,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     if (isset($_POST['user_input'])) {
         $userInput = $_POST['user_input'];
+        
+        // 根據選擇的題型添加對應的提示
+        $questionType = $_POST['ai_question_type'] ?? 'none';
+        
+        if ($questionType !== 'none') {
+            $promptPrefix = '';
+            
+            switch ($questionType) {
+                case 'choice':
+                    $promptPrefix = "請根據文章生成一道選擇題，包含四個選項(A、B、C、D)，並標明正確答案。";
+                    break;
+                case 'fill':
+                    $promptPrefix = "請根據文章根據文章生成一道問答題，並提供參考答案。";
+                    break;
+                case 'tf':
+                    $promptPrefix = "請根據文章生成一道是非題，並標明正確答案是「是」還是「否」。";
+                    break;
+            }
+            
+            if (!empty($promptPrefix)) {
+                $userInput = $promptPrefix . "\n\n" . $userInput;
+            }
+        }
+        
         if ($article_url) {
             $userInput .= "\n\n請根據這篇文章的內容來出題：" . $article_url;
         }
@@ -368,6 +392,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="api-chat">
             <h2>出題助手</h2>
             <form method="post">
+                <div class="question-type-selector">
+                    <label for="ai_question_type">請選擇您想出的題型：</label>
+                    <select name="ai_question_type" id="ai_question_type">
+                        <option value="none">無 (編輯問題時可用)</option>
+                        <option value="choice">選擇題</option>
+                        <option value="fill">問答題</option>
+                        <option value="tf">是非題</option>
+                    </select>
+                </div>
                 <input type="text" name="user_input" placeholder="輸入你的問題..." required>
                 <button type="submit">送出</button>
             </form>
@@ -380,6 +413,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php endif; ?>
         </div>
     </div>
+
+    <!-- 加載動畫覆蓋層移到 body 最底部，預設不顯示 -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <img src="../img/loading-earth.svg" class="loading-earth" alt="載入中">
+        <div class="loading-text">
+            <span>L</span>
+            <span>O</span>
+            <span>A</span>
+            <span>D</span>
+            <span>I</span>
+            <span>N</span>
+            <span>G</span>
+            <span>.</span>
+            <span>.</span>
+            <span>.</span>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('.api-chat form');
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            
+            form.addEventListener('submit', function() {
+                loadingOverlay.classList.add('active');
+            });
+        });
+    </script>
 </body>
 
 </html>

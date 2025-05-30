@@ -12,136 +12,33 @@ $user_id = $_SESSION['user_id'] ?? 0;
     <link rel="icon" type="image/png" href="../img/icon.png">
     <link rel="stylesheet" href="../css/nav.css">
     <link rel="stylesheet" href="../css/index.css">
-    <style>
-        body {
-            background-color: #e9ecef;
-            font-family: 'Microsoft JhengHei', '微軟正黑體', Arial, sans-serif;
-        }
-        
-        .crawler-form {
-            max-width: 800px;
-            margin: 30px auto;
-            padding: 35px;
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .url-input {
-            width: 100%;
-            padding: 12px 15px;
-            margin-bottom: 15px;
-            border: 2px solid #dee2e6;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            background-color: #ffffff;
-        }
-
-        .url-input:focus {
-            outline: none;
-            border-color: #4CAF50;
-            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15);
-            background-color: #ffffff;
-        }
-
-        textarea.url-input {
-            min-height: 120px;
-            resize: vertical;
-            line-height: 1.5;
-        }
-
-        select.url-input {
-            background-color: white;
-            cursor: pointer;
-            appearance: none;
-            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
-            background-repeat: no-repeat;
-            background-position: right 12px center;
-            background-size: 12px auto;
-        }
-
-        input[type="file"].url-input {
-            padding: 10px;
-            background-color: #f8f9fa;
-            border: 2px dashed #4CAF50;
-        }
-
-        input[type="file"].url-input:hover {
-            background-color: #f0f0f0;
-        }
-
-        .submit-btn {
-            padding: 12px 25px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            width: 100%;
-            margin-top: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .submit-btn:hover {
-            background-color: #45a049;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        .submit-btn:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .content-display {
-            margin-top: 30px;
-            padding: 30px;
-            border: none;
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .content-display h2 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-            font-size: 24px;
-            font-weight: 600;
-        }
-
-        .content-display p {
-            color: #34495e;
-            line-height: 1.6;
-            margin-bottom: 15px;
-        }
-
-        .content-display a {
-            color: #4CAF50;
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        .content-display a:hover {
-            color: #45a049;
-            text-decoration: underline;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/crawler.css">
 </head>
 <body>
     <header>
         <?php include "nav.php"; ?>
     </header>
 
+    <!-- 加載動畫覆蓋層 -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <img src="../img/loading-earth.svg" class="loading-earth" alt="載入中">
+        <div class="loading-text">
+            <span>L</span>
+            <span>O</span>
+            <span>A</span>
+            <span>D</span>
+            <span>I</span>
+            <span>N</span>
+            <span>G</span>
+            <span>.</span>
+            <span>.</span>
+            <span>.</span>
+        </div>
+    </div>
+
     <main>
         <div class="crawler-form">
-            <form method="POST" action="" enctype="multipart/form-data">
+            <form method="POST" action="" enctype="multipart/form-data" id="crawlerForm">
                 <input type="text" name="title" class="url-input" placeholder="請輸入文章標題" required>
                 <textarea name="description" class="url-input" placeholder="請輸入文章簡介" required></textarea>
                 <select name="category" class="url-input" required>
@@ -272,5 +169,16 @@ $user_id = $_SESSION['user_id'] ?? 0;
             ?>
         </div>
     </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('crawlerForm');
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            
+            form.addEventListener('submit', function() {
+                loadingOverlay.classList.add('active');
+            });
+        });
+    </script>
 </body>
 </html>

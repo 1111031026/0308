@@ -51,6 +51,7 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <title>重點整理重點整理編輯 - <?php echo htmlspecialchars($title); ?></title>
+    <link rel="icon" type="image/png" href="../img/icon.png">
     <link rel="stylesheet" href="../css/nav3.css">
     <link rel="stylesheet" href="../css/ai_summary_editor.css">
 </head>

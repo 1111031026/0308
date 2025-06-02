@@ -190,13 +190,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             switch ($questionType) {
                 case 'choice':
-                    $promptPrefix = "請根據文章生成一道選擇題，包含四個選項(A、B、C、D)，並標明正確答案。";
+                    $promptPrefix = "請根據文章生成一道適合國中或國小學生程度的選擇題，包含四個選項(A、B、C、D)，並標明正確答案。\n\n請注意以下幾點：\n1. 題目難度要符合國中或國小學生的認知發展階段\n2. 用詞要簡單易懂，避免過於複雜的專業術語\n3. 選項要清晰明確，避免模糊不清的表述\n4. 題目內容要貼近學生的生活經驗\n\n請參考 Bloom 認知領域修訂版本來設計題目，確保題目能評估學生的認知能力層次：\n\n1. 記憶（Remembering）：回想、辨識和重現資訊\n2. 理解（Understanding）：解釋、描述和闡明訊息意義\n3. 應用（Applying）：將概念或技能運用於新情境\n4. 分析（Analyzing）：將資訊細分並分析關係\n5. 評鑑（Evaluating）：進行批判性判斷和評價\n6. 創造（Creating）：整合元素產出新的觀點\n\n請在生成題目後，以以下格式說明題目的認知層次分析：\n\n【認知層次分析】\n- 主要評估層次：[請選擇上述六個層次中的一個或多個]\n- 評估原因：[說明為什麼選擇這些層次]\n- 教學價值：[說明此題目如何幫助學生發展這些認知能力]\n- 適合年級：[說明此題目最適合哪個年級的學生，以及原因]";
                     break;
                 case 'fill':
-                    $promptPrefix = "請根據文章根據文章生成一道問答題，並提供參考答案。";
+                    $promptPrefix = "請根據文章生成一道適合國中或國小學生程度的問答題，並提供參考答案。\n\n請注意以下幾點：\n1. 題目難度要符合國中或國小學生的認知發展階段\n2. 用詞要簡單易懂，避免過於複雜的專業術語\n3. 問題要具體明確，避免過於抽象或複雜的思考\n4. 題目內容要貼近學生的生活經驗\n\n請參考 Bloom 認知領域修訂版本來設計題目，確保題目能評估學生的認知能力層次：\n\n1. 記憶（Remembering）：回想、辨識和重現資訊\n2. 理解（Understanding）：解釋、描述和闡明訊息意義\n3. 應用（Applying）：將概念或技能運用於新情境\n4. 分析（Analyzing）：將資訊細分並分析關係\n5. 評鑑（Evaluating）：進行批判性判斷和評價\n6. 創造（Creating）：整合元素產出新的觀點\n\n請在生成題目後，以以下格式說明題目的認知層次分析：\n\n【認知層次分析】\n- 主要評估層次：[請選擇上述六個層次中的一個或多個]\n- 評估原因：[說明為什麼選擇這些層次]\n- 教學價值：[說明此題目如何幫助學生發展這些認知能力]\n- 適合年級：[說明此題目最適合哪個年級的學生，以及原因]";
                     break;
                 case 'tf':
-                    $promptPrefix = "請根據文章生成一道是非題，並標明正確答案是「是」還是「否」。";
+                    $promptPrefix = "請根據文章生成一道適合國中或國小學生程度的是非題，並標明正確答案是「是」還是「否」。\n\n請注意以下幾點：\n1. 題目難度要符合國中或國小學生的認知發展階段\n2. 用詞要簡單易懂，避免過於複雜的專業術語\n3. 是非判斷要明確，避免模稜兩可的表述\n4. 題目內容要貼近學生的生活經驗\n\n請參考 Bloom 認知領域修訂版本來設計題目，確保題目能評估學生的認知能力層次：\n\n1. 記憶（Remembering）：回想、辨識和重現資訊\n2. 理解（Understanding）：解釋、描述和闡明訊息意義\n3. 應用（Applying）：將概念或技能運用於新情境\n4. 分析（Analyzing）：將資訊細分並分析關係\n5. 評鑑（Evaluating）：進行批判性判斷和評價\n6. 創造（Creating）：整合元素產出新的觀點\n\n請在生成題目後，以以下格式說明題目的認知層次分析：\n\n【認知層次分析】\n- 主要評估層次：[請選擇上述六個層次中的一個或多個]\n- 評估原因：[說明為什麼選擇這些層次]\n- 教學價值：[說明此題目如何幫助學生發展這些認知能力]\n- 適合年級：[說明此題目最適合哪個年級的學生，以及原因]";
                     break;
             }
             
@@ -407,7 +407,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <?php if ($responseText): ?>
             <h3>回應：</h3>
-            <div class="response-container">
+            <div class="response-container" style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; box-sizing: border-box; overflow-x: hidden; max-height: 400px; overflow-y: auto;">
                 <?php echo htmlspecialchars($responseText); ?>
             </div>
         <?php endif; ?>

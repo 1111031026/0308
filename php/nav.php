@@ -14,7 +14,6 @@ if (session_status() === PHP_SESSION_NONE) {
         <li><a href="climate.php" style="font-size: 16px;">氣候永續</a></li>
         <li><a href="landscape.php" style="font-size: 16px; ">陸域永續</a></li>
         <li><a href="ocean.php" style="font-size: 16px;">海洋永續</a></li>
-        <li><a href="all_forums.php" style="font-size: 16px;">論壇</a></li>
         <?php if (isset($_SESSION['login_session']) && $_SESSION['login_session'] === true): ?>
             <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'Teacher'): ?>
                 <li><a href="crawler.php">文章編輯區</a></li>
@@ -23,6 +22,9 @@ if (session_status() === PHP_SESSION_NONE) {
                 <li><a href="view-all-qusetion.php">查看所有編輯中題目</a></li>
                 <li><a href="merchandise_manage.php">商品管理</a></li>
             <?php endif; ?>
+        <?php endif; ?>
+        <li><a href="all_forums.php" style="font-size: 16px;">論壇</a></li>
+        <?php if (isset($_SESSION['login_session']) && $_SESSION['login_session'] === true): ?>
             <li><a href="shop.php">商城</a></li>
         <?php endif; ?>
     </ul>

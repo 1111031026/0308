@@ -407,7 +407,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <?php if ($responseText): ?>
             <h3>回應：</h3>
-            <div class="response-container" style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; box-sizing: border-box; overflow-x: hidden; max-height: 480px; overflow-y: auto;">
+            <div class="response-container" style="word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; box-sizing: border-box; overflow-x: hidden; max-height: 400px; overflow-y: auto;">
                 <?php echo htmlspecialchars($responseText); ?>
             </div>
         <?php endif; ?>

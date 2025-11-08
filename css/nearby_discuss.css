@@ -1,0 +1,33 @@
+/* 附近討論貼文詳情頁面樣式 */
+
+.location-section {
+    margin: 20px 0;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #4CAF50;
+}
+
+.location-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.location-header i {
+    color: #4CAF50;
+    font-size: 18px;
+}
+
+.location-name {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 16px;
+}
+
+#postMap {
+    border: 2px solid #e0e0e0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+

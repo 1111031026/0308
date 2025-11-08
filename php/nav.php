@@ -24,6 +24,7 @@ if (session_status() === PHP_SESSION_NONE) {
             <?php endif; ?>
         <?php endif; ?>
         <li><a href="all_forums.php" style="font-size: 16px;">論壇</a></li>
+        <li><a href="nearby_discussion.php" style="font-size: 16px;">附近討論</a></li>
         <?php if (isset($_SESSION['login_session']) && $_SESSION['login_session'] === true): ?>
             <li><a href="shop.php">商城</a></li>
         <?php endif; ?>

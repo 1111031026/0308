@@ -1,0 +1,103 @@
+/* 附近討論發文頁面樣式補充 */
+
+.location-section {
+    margin-bottom: 25px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 2px solid #e0e0e0;
+}
+
+.location-toggle {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.location-toggle input[type="checkbox"] {
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.location-toggle label {
+    font-weight: 600;
+    color: #34495e;
+    cursor: pointer;
+    margin: 0;
+}
+
+.location-inputs {
+    display: none;
+    margin-top: 15px;
+    animation: fadeIn 0.3s;
+}
+
+.location-inputs.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#map {
+    width: 100%;
+    height: 300px;
+    border-radius: 8px;
+    margin-top: 15px;
+    border: 2px solid #e0e0e0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.location-info {
+    margin-top: 10px;
+    padding: 12px;
+    background: #e8f5e9;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #2e7d32;
+    display: none;
+    border-left: 4px solid #4CAF50;
+}
+
+.location-info i {
+    margin-right: 8px;
+}
+
+.get-location-btn {
+    background: #2196F3;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 10px;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.get-location-btn:hover {
+    background: #1976D2;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+}
+
+.get-location-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+

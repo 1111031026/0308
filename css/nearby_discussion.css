@@ -382,6 +382,16 @@
     border-left: 4px solid #e53e3e;
 }
 
+.success-message {
+    background: #f0fff4;
+    color: #2f855a;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border-left: 4px solid #2f855a;
+    font-weight: 500;
+}
+
 /* 響應式設計 */
 @media (max-width: 1024px) {
     .content-wrapper {

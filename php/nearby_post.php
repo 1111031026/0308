@@ -29,7 +29,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($stmt) {
             $stmt->bind_param("ssiddss", $title, $content, $user_id, $latitude, $longitude, $location_name, $post_date);
             if ($stmt->execute()) {
-                $success_message = "貼文已成功發佈！";
+                // 給予點數獎勵
+                $user_role = $_SESSION['role'] ?? 'Student';
+                $points_table = ($user_role === 'Teacher') ? 'teacher_achievement' : 'achievement';
+                
+                // 從系統設定讀取發表貼文的點數（預設 5 點）
+                $points_per_post = 5; // 預設值
+                $settings_stmt = $conn->prepare("SELECT setting_value FROM system_settings WHERE setting_key = 'points_per_nearby_post'");
+                if ($settings_stmt) {
+                    $settings_stmt->execute();
+                    $settings_result = $settings_stmt->get_result();
+                    if ($settings_row = $settings_result->fetch_assoc()) {
+                        $points_per_post = intval($settings_row['setting_value']);
+                    }
+                    $settings_stmt->close();
+                }
+                
+                // 更新用戶點數
+                $updatePointsSql = "INSERT INTO {$points_table} (UserID, TotalPoints";
+                if ($user_role === 'Student') {
+                    $updatePointsSql .= ", ArticlesViewed, ChoiceQuestionsCorrect, TFQuestionsCorrect, FillinQuestionsCorrect) VALUES (?, ?, 0, 0, 0, 0) ON DUPLICATE KEY UPDATE TotalPoints = TotalPoints + ?";
+                } else {
+                    $updatePointsSql .= ", SDG13ArticlesPublished, SDG14ArticlesPublished, SDG15ArticlesPublished) VALUES (?, ?, 0, 0, 0) ON DUPLICATE KEY UPDATE TotalPoints = TotalPoints + ?";
+                }
+                
+                $updatePointsStmt = $conn->prepare($updatePointsSql);
+                if ($updatePointsStmt) {
+                    if ($user_role === 'Student') {
+                        $updatePointsStmt->bind_param("iii", $user_id, $points_per_post, $points_per_post);
+                    } else {
+                        $updatePointsStmt->bind_param("iii", $user_id, $points_per_post, $points_per_post);
+                    }
+                    $updatePointsStmt->execute();
+                    $updatePointsStmt->close();
+                }
+                
+                $success_message = "貼文已成功發佈！獲得 {$points_per_post} 點數！";
                 // 重定向到附近討論頁面
                 header('Location: nearby_discussion.php?success=1');
                 exit;

@@ -3,9 +3,15 @@ session_start();
 require_once 'db_connect.php';
 
 $error_message = '';
+$success_message = '';
 $location_permission = false;
 $user_lat = null;
 $user_lng = null;
+
+// 檢查是否有成功訊息
+if (isset($_GET['success']) && $_GET['success'] == '1') {
+    $success_message = "貼文已成功發佈！";
+}
 
 // 只從 Cookie 取得位置（不在 URL 顯示）
 if (isset($_COOKIE['user_lat']) && isset($_COOKIE['user_lng'])) {
@@ -121,6 +127,9 @@ $conn->close();
 
         <?php if (!empty($error_message)): ?>
             <div class="error-message"><?php echo $error_message; ?></div>
+        <?php endif; ?>
+        <?php if (!empty($success_message)): ?>
+            <div class="success-message"><?php echo $success_message; ?></div>
         <?php endif; ?>
     </div>
 

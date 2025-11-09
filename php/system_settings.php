@@ -27,6 +27,7 @@ $default_settings = [
     'points_per_correct_answer' => ['value' => '5', 'description' => '答對題目獲得的點數'],
     'points_per_article_view' => ['value' => '1', 'description' => '閱讀文章獲得的點數'],
     'points_per_article_publish' => ['value' => '10', 'description' => '發布文章獲得的點數'],
+    'points_per_nearby_post' => ['value' => '5', 'description' => '發表附近討論貼文獲得的點數'],
     'maintenance_mode' => ['value' => '0', 'description' => '維護模式（1=開啟，0=關閉）'],
     'max_upload_size' => ['value' => '5242880', 'description' => '最大上傳文件大小（字節）'],
     'allowed_file_types' => ['value' => 'jpg,jpeg,png,gif', 'description' => '允許上傳的文件類型']
@@ -109,6 +110,9 @@ $settings = $result->fetch_all(MYSQLI_ASSOC);
                             break;
                         case 'points_per_article_publish':
                             echo '用戶發布文章時獲得的獎勵點數';
+                            break;
+                        case 'points_per_nearby_post':
+                            echo '用戶發表附近討論貼文時獲得的獎勵點數';
                             break;
                         case 'max_upload_size':
                             echo '上傳文件的最大大小（以字節為單位，5242880 = 5MB）';

@@ -35,10 +35,7 @@ if (!$post) {
     exit();
 }
 
-// 處理評論提交（使用 commentarea 表，但需要確認 PostID 是否會衝突）
-// 為了避免衝突，我們可以創建一個新的 nearby_comment 表，或者使用現有的 commentarea
-// 這裡先使用 commentarea，但需要確保 PostID 不會與 communitypost 衝突
-// 更好的做法是創建新的 nearby_comment 表，但為了簡化，這裡先使用 commentarea
+// 處理評論提交（使用 nearby_comment 表，避免與 commentarea 的 PostID 衝突）
 $comment_error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['user_id'])) {
     $comment = trim($_POST['comment'] ?? '');
@@ -49,9 +46,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['user_id'])) {
         $comment_error = '評論內容不能超過1000字元';
     } else {
         $user_id = $_SESSION['user_id'];
-        // 注意：這裡使用 commentarea 表，但 PostID 可能會與 communitypost 衝突
-        // 建議未來創建 nearby_comment 表
-        $sql = "INSERT INTO commentarea (PostID, UserID, Content, CommentTime) VALUES (?, ?, ?, NOW())";
+        // 使用 nearby_comment 表，避免 PostID 衝突
+        $sql = "INSERT INTO nearby_comment (PostID, UserID, Content, CommentTime) VALUES (?, ?, ?, NOW())";
         $stmt = mysqli_prepare($conn, $sql);
         
         if ($stmt === false) {
@@ -70,12 +66,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['user_id'])) {
     }
 }
 
-// 查詢評論列表
-$sql = "SELECT ca.CommentID, ca.Content, ca.CommentTime, u.UserID, u.Username, u.Status, u.AvatarURL 
-        FROM commentarea ca 
-        JOIN user u ON ca.UserID = u.UserID 
-        WHERE ca.PostID = ? 
-        ORDER BY ca.CommentTime ASC";
+// 查詢評論列表（使用 nearby_comment 表）
+$sql = "SELECT nc.CommentID, nc.Content, nc.CommentTime, u.UserID, u.Username, u.Status, u.AvatarURL 
+        FROM nearby_comment nc 
+        JOIN user u ON nc.UserID = u.UserID 
+        WHERE nc.PostID = ? 
+        ORDER BY nc.CommentTime ASC";
 $stmt = mysqli_prepare($conn, $sql);
 
 if ($stmt === false) {

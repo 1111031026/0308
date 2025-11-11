@@ -10,7 +10,7 @@ $user_lng = null;
 
 // 檢查是否有成功訊息
 if (isset($_GET['success']) && $_GET['success'] == '1') {
-    $success_message = "貼文已成功發佈！";
+    $success_message = "貼文已成功發佈！ 獲得5點數！";
 }
 
 // 只從 Cookie 取得位置（不在 URL 顯示）

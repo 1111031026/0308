@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 127.0.0.1
--- 生成日期： 2025-11-09 15:44:31
+-- 生成日期： 2026-01-04 13:32:29
 -- 服务器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -29,6 +29,7 @@ USE `sustain`;
 -- 表的结构 `achievement`
 --
 -- 创建时间： 2025-11-08 14:25:24
+-- 最后更新： 2026-01-04 09:49:41
 --
 
 DROP TABLE IF EXISTS `achievement`;
@@ -42,10 +43,6 @@ CREATE TABLE `achievement` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 表的关系 `achievement`:
---
-
---
 -- 插入之前先把表清空（truncate） `achievement`
 --
 
@@ -55,7 +52,7 @@ TRUNCATE TABLE `achievement`;
 --
 
 INSERT INTO `achievement` (`UserID`, `TotalPoints`, `ArticlesViewed`, `ChoiceQuestionsCorrect`, `TFQuestionsCorrect`, `FillinQuestionsCorrect`) VALUES
-(1, 5, 4, 2, 3, 1),
+(1, 30, 9, 4, 4, 1),
 (3, 0, 2, 0, 0, 0),
 (6, 8682, 2, 0, 0, 0),
 (7, 35, 3, 2, 2, 3);
@@ -81,10 +78,6 @@ CREATE TABLE `article` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `teacher_summary` longtext CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '老師重點整理'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- 表的关系 `article`:
---
 
 --
 -- 插入之前先把表清空（truncate） `article`
@@ -162,10 +155,6 @@ CREATE TABLE `choicequiz` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 表的关系 `choicequiz`:
---
-
---
 -- 插入之前先把表清空（truncate） `choicequiz`
 --
 
@@ -190,6 +179,7 @@ INSERT INTO `choicequiz` (`choiceID`, `QuestionText`, `OptionA`, `OptionB`, `Opt
 -- 表的结构 `choicerec`
 --
 -- 创建时间： 2025-11-08 14:25:25
+-- 最后更新： 2026-01-04 09:49:09
 --
 
 DROP TABLE IF EXISTS `choicerec`;
@@ -200,10 +190,6 @@ CREATE TABLE `choicerec` (
   `FinishTime` datetime DEFAULT current_timestamp() COMMENT '完成時間',
   `isCorrect` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- 表的关系 `choicerec`:
---
 
 --
 -- 插入之前先把表清空（truncate） `choicerec`
@@ -220,7 +206,9 @@ INSERT INTO `choicerec` (`choiceID`, `UserID`, `UserAnswer`, `FinishTime`, `isCo
 (2, 1, 'B', '2025-06-01 17:38:26', 1),
 (2, 7, 'C', '2025-06-01 16:35:38', 0),
 (3, 1, 'D', '2025-06-01 17:38:30', 1),
-(3, 7, 'D', '2025-06-01 16:35:42', 1);
+(3, 7, 'D', '2025-06-01 16:35:42', 1),
+(8, 1, 'C', '2026-01-04 17:49:08', 1),
+(9, 1, 'D', '2026-01-04 17:49:09', 1);
 
 -- --------------------------------------------------------
 
@@ -228,7 +216,6 @@ INSERT INTO `choicerec` (`choiceID`, `UserID`, `UserAnswer`, `FinishTime`, `isCo
 -- 表的结构 `commentarea`
 --
 -- 创建时间： 2025-11-08 14:25:26
--- 最后更新： 2025-11-09 14:43:19
 --
 
 DROP TABLE IF EXISTS `commentarea`;
@@ -240,10 +227,6 @@ CREATE TABLE `commentarea` (
   `CommentTime` datetime DEFAULT current_timestamp() COMMENT '留言時間',
   `Status` enum('PENDING','APPROVED','DELETED') DEFAULT 'PENDING' COMMENT '留言狀態 (待審核/已通過/已刪除)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- 表的关系 `commentarea`:
---
 
 --
 -- 插入之前先把表清空（truncate） `commentarea`
@@ -281,12 +264,6 @@ CREATE TABLE `communitypost` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 表的关系 `communitypost`:
---   `ArticleID`
---       `article` -> `ArticleID`
---
-
---
 -- 插入之前先把表清空（truncate） `communitypost`
 --
 
@@ -303,7 +280,8 @@ INSERT INTO `communitypost` (`PostID`, `Content`, `ImageURL`, `PostDate`, `Title
 (6, '有人知道這題答案嗎?\r\n每年大約有多少噸的塑膠垃圾進入海洋？', NULL, '2025-05-29 13:12:51', '有問題', 7, 21),
 (7, '剛讀了華藝報馬仔一篇關於SDG15陸域生命的文章，孫烜駿老師從昆蟲生態切入，強調棲地維護對生物多樣性的重要性。文章提到臺灣60%的森林覆蓋率和19%的保護區面積領先全球，但保護區外的野生動物仍面臨人為活動挑戰。我覺得文中提到監測是保育第一步的觀點很關鍵，尤其是透過埋葬蟲等生物了解生態平衡，讓人重新思考保護區的角色。臺灣在這方面做得很好，但如何在經濟發展和保育間取得平衡，確實是個挑戰。大家覺得保護區外的棲地維護該怎麼更有效？', NULL, '2025-05-29 13:20:28', '內容引人省思', 5, 11),
 (8, '請簡述「生態系服務」與棲地保護的關聯性，並舉一例說明。幫助我回答這題 快!', NULL, '2025-05-29 13:27:07', '再線求救', 6, 11),
-(9, '文章揭示了海洋塑料污染的嚴重影響，解釋了塑料如何危害海洋生物和生態系統。這是一個適合孩子和成人的絕佳資源，內容清晰且配有生動的圖片。讓我們一起討論如何提高意識並減少塑料廢物，保護我們的海洋！', NULL, '2025-06-01 11:39:51', '心得', 1, 21);
+(9, '文章揭示了海洋塑料污染的嚴重影響，解釋了塑料如何危害海洋生物和生態系統。這是一個適合孩子和成人的絕佳資源，內容清晰且配有生動的圖片。讓我們一起討論如何提高意識並減少塑料廢物，保護我們的海洋！', NULL, '2025-06-01 11:39:51', '心得', 1, 21),
+(10, '這篇關於海洋塑料污染的文章太值得一讀！它清楚解釋了塑料如何傷害海洋生態，並提供了一些簡單的減塑建議。無論是大人還是小孩，都能從中學到東西。你有哪些減少使用塑膠的好方法？快來交流吧！', NULL, '2025-11-11 11:25:41', '太棒啦!!!', 4, NULL);
 
 -- --------------------------------------------------------
 
@@ -321,10 +299,6 @@ CREATE TABLE `fillquiz` (
   `UserID` int(11) NOT NULL COMMENT '出題者 (FK to User)',
   `ArticleID` int(11) DEFAULT NULL COMMENT 'FK to Article'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- 表的关系 `fillquiz`:
---
 
 --
 -- 插入之前先把表清空（truncate） `fillquiz`
@@ -361,10 +335,6 @@ CREATE TABLE `fillrec` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 表的关系 `fillrec`:
---
-
---
 -- 插入之前先把表清空（truncate） `fillrec`
 --
 
@@ -399,10 +369,6 @@ CREATE TABLE `merchandise` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 表的关系 `merchandise`:
---
-
---
 -- 插入之前先把表清空（truncate） `merchandise`
 --
 
@@ -431,10 +397,35 @@ INSERT INTO `merchandise` (`ItemID`, `Name`, `Description`, `PointsRequired`, `C
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `monthly_ranking_rewards`
+--
+-- 创建时间： 2026-01-04 12:31:08
+--
+
+DROP TABLE IF EXISTS `monthly_ranking_rewards`;
+CREATE TABLE `monthly_ranking_rewards` (
+  `RewardID` int(11) NOT NULL COMMENT '獎勵編號 (PK)',
+  `UserID` int(11) NOT NULL COMMENT '學生編號 (FK to User)',
+  `Region` varchar(20) NOT NULL COMMENT '地區',
+  `Month` varchar(7) NOT NULL COMMENT '月份 (格式: YYYY-MM)',
+  `Rank` tinyint(4) NOT NULL COMMENT '排名 (1-3)',
+  `PointsAwarded` int(11) NOT NULL DEFAULT 0 COMMENT '獲得的點數',
+  `AwardedDate` datetime DEFAULT NULL COMMENT '領取日期',
+  `Status` enum('PENDING','CLAIMED') DEFAULT 'PENDING' COMMENT '狀態 (待領取/已領取)',
+  `CreatedDate` datetime DEFAULT current_timestamp() COMMENT '建立日期'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='每月排名獎勵表';
+
+--
+-- 插入之前先把表清空（truncate） `monthly_ranking_rewards`
+--
+
+TRUNCATE TABLE `monthly_ranking_rewards`;
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `nearby_comment`
 --
 -- 创建时间： 2025-11-09 14:43:13
--- 最后更新： 2025-11-09 14:43:57
 --
 
 DROP TABLE IF EXISTS `nearby_comment`;
@@ -448,14 +439,6 @@ CREATE TABLE `nearby_comment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='附近討論留言表';
 
 --
--- 表的关系 `nearby_comment`:
---   `PostID`
---       `nearby_post` -> `PostID`
---   `UserID`
---       `user` -> `UserID`
---
-
---
 -- 插入之前先把表清空（truncate） `nearby_comment`
 --
 
@@ -465,7 +448,8 @@ TRUNCATE TABLE `nearby_comment`;
 --
 
 INSERT INTO `nearby_comment` (`CommentID`, `PostID`, `UserID`, `Content`, `CommentTime`, `Status`) VALUES
-(1, 1, 1, '我也有去', '2025-11-09 22:43:57', 'PENDING');
+(1, 1, 1, '我也有去', '2025-11-09 22:43:57', 'PENDING'),
+(2, 1, 4, '這次的淨灘活動很有趣', '2025-11-11 18:28:45', 'PENDING');
 
 -- --------------------------------------------------------
 
@@ -473,7 +457,7 @@ INSERT INTO `nearby_comment` (`CommentID`, `PostID`, `UserID`, `Content`, `Comme
 -- 表的结构 `nearby_post`
 --
 -- 创建时间： 2025-11-08 15:20:12
--- 最后更新： 2025-11-09 14:43:44
+-- 最后更新： 2026-01-04 07:50:08
 --
 
 DROP TABLE IF EXISTS `nearby_post`;
@@ -490,12 +474,6 @@ CREATE TABLE `nearby_post` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='附近討論貼文表';
 
 --
--- 表的关系 `nearby_post`:
---   `UserID`
---       `user` -> `UserID`
---
-
---
 -- 插入之前先把表清空（truncate） `nearby_post`
 --
 
@@ -505,7 +483,9 @@ TRUNCATE TABLE `nearby_post`;
 --
 
 INSERT INTO `nearby_post` (`PostID`, `Title`, `Content`, `UserID`, `Latitude`, `Longitude`, `LocationName`, `ImageURL`, `PostDate`) VALUES
-(1, '在青年高中淨攤', '淨攤', 2, 24.08448000, 120.69765120, '青年高中', NULL, '2025-11-08 16:40:43');
+(1, '在青年高中淨攤', '淨攤', 2, 24.08448000, 120.69765120, '青年高中', NULL, '2025-11-08 16:40:43'),
+(10, '小琉球淨灘', '2/3有舉辦淨灘活動有人要一起嗎', 1, 22.33452600, 120.36013888, '蛤板灣(威尼斯沙灘)', NULL, '2026-01-04 08:47:20'),
+(11, '空氣很差，記得戴口罩', '青年高中2-3月在施工，空氣會很差，記得戴口罩', 1, 24.08730149, 120.69123617, '青年高中', NULL, '2026-01-04 08:50:08');
 
 -- --------------------------------------------------------
 
@@ -523,10 +503,6 @@ CREATE TABLE `password_resets` (
   `expiry` datetime NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- 表的关系 `password_resets`:
---
 
 --
 -- 插入之前先把表清空（truncate） `password_resets`
@@ -548,10 +524,6 @@ CREATE TABLE `purchase` (
   `PurchaseTime` datetime DEFAULT current_timestamp() COMMENT '購買時間',
   `SpentPoints` int(11) NOT NULL DEFAULT 0 COMMENT '消費點數'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- 表的关系 `purchase`:
---
 
 --
 -- 插入之前先把表清空（truncate） `purchase`
@@ -584,6 +556,57 @@ INSERT INTO `purchase` (`UserID`, `ItemID`, `PurchaseTime`, `SpentPoints`) VALUE
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `region_leaderboard`
+--
+-- 创建时间： 2026-01-04 09:36:53
+-- 最后更新： 2026-01-04 09:56:01
+--
+
+DROP TABLE IF EXISTS `region_leaderboard`;
+CREATE TABLE `region_leaderboard` (
+  `Region` varchar(20) NOT NULL COMMENT '地區名稱 (PK)',
+  `TotalPoints` int(11) NOT NULL DEFAULT 0 COMMENT '地區總分（該地區所有學生的總點數）',
+  `AveragePoints` decimal(10,2) NOT NULL DEFAULT 0.00 COMMENT '地區平均分（該地區學生的平均點數）',
+  `StudentCount` int(11) NOT NULL DEFAULT 0 COMMENT '參與學生數量',
+  `LastUpdated` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT '最後更新時間'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='地區排行榜統計表';
+
+--
+-- 插入之前先把表清空（truncate） `region_leaderboard`
+--
+
+TRUNCATE TABLE `region_leaderboard`;
+--
+-- 转存表中的数据 `region_leaderboard`
+--
+
+INSERT INTO `region_leaderboard` (`Region`, `TotalPoints`, `AveragePoints`, `StudentCount`, `LastUpdated`) VALUES
+('南投縣', 0, 0.00, 0, '2026-01-04 17:36:53'),
+('台中市', 8712, 4356.00, 2, '2026-01-04 17:55:24'),
+('台北市', 35, 35.00, 1, '2026-01-04 17:56:01'),
+('台南市', 0, 0.00, 0, '2026-01-04 17:36:53'),
+('台東縣', 0, 0.00, 0, '2026-01-04 17:36:53'),
+('嘉義市', 0, 0.00, 0, '2026-01-04 17:36:53'),
+('嘉義縣', 0, 0.00, 0, '2026-01-04 17:36:53'),
+('基隆市', 0, 0.00, 0, '2026-01-04 17:36:53'),
+('宜蘭縣', 0, 0.00, 0, '2026-01-04 17:36:53'),
+('屏東縣', 0, 0.00, 0, '2026-01-04 17:36:53'),
+('彰化縣', 0, 0.00, 0, '2026-01-04 17:36:53'),
+('新北市', 0, 0.00, 0, '2026-01-04 17:36:53'),
+('新竹市', 0, 0.00, 0, '2026-01-04 17:36:53'),
+('新竹縣', 0, 0.00, 0, '2026-01-04 17:36:53'),
+('桃園市', 0, 0.00, 0, '2026-01-04 17:36:53'),
+('澎湖縣', 0, 0.00, 0, '2026-01-04 17:36:53'),
+('花蓮縣', 0, 0.00, 0, '2026-01-04 17:36:53'),
+('苗栗縣', 0, 0.00, 0, '2026-01-04 17:36:53'),
+('連江縣', 0, 0.00, 0, '2026-01-04 17:36:53'),
+('金門縣', 0, 0.00, 0, '2026-01-04 17:36:53'),
+('雲林縣', 0, 0.00, 0, '2026-01-04 17:36:53'),
+('高雄市', 0, 0.00, 0, '2026-01-04 17:36:53');
+
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `system_settings`
 --
 -- 创建时间： 2025-11-08 14:25:27
@@ -598,10 +621,6 @@ CREATE TABLE `system_settings` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- 表的关系 `system_settings`:
---
 
 --
 -- 插入之前先把表清空（truncate） `system_settings`
@@ -628,7 +647,6 @@ INSERT INTO `system_settings` (`id`, `setting_key`, `setting_value`, `descriptio
 -- 表的结构 `teacher_achievement`
 --
 -- 创建时间： 2025-11-08 14:25:28
--- 最后更新： 2025-11-09 14:37:15
 --
 
 DROP TABLE IF EXISTS `teacher_achievement`;
@@ -641,12 +659,6 @@ CREATE TABLE `teacher_achievement` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 表的关系 `teacher_achievement`:
---   `UserID`
---       `user` -> `UserID`
---
-
---
 -- 插入之前先把表清空（truncate） `teacher_achievement`
 --
 
@@ -656,8 +668,8 @@ TRUNCATE TABLE `teacher_achievement`;
 --
 
 INSERT INTO `teacher_achievement` (`UserID`, `TotalPoints`, `SDG13ArticlesPublished`, `SDG14ArticlesPublished`, `SDG15ArticlesPublished`) VALUES
-(2, 115, 0, 1, 6),
-(4, 45, 0, 7, 1),
+(2, 135, 0, 1, 6),
+(4, 65, 0, 7, 1),
 (5, 35, 7, 0, 0);
 
 -- --------------------------------------------------------
@@ -685,10 +697,6 @@ CREATE TABLE `teacher_questions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 表的关系 `teacher_questions`:
---
-
---
 -- 插入之前先把表清空（truncate） `teacher_questions`
 --
 
@@ -713,10 +721,6 @@ CREATE TABLE `tfquiz` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- 表的关系 `tfquiz`:
---
-
---
 -- 插入之前先把表清空（truncate） `tfquiz`
 --
 
@@ -739,6 +743,7 @@ INSERT INTO `tfquiz` (`tfID`, `QuestionText`, `OptionA`, `OptionB`, `CorrectAnsw
 -- 表的结构 `tfrec`
 --
 -- 创建时间： 2025-11-08 14:25:26
+-- 最后更新： 2026-01-04 09:49:41
 --
 
 DROP TABLE IF EXISTS `tfrec`;
@@ -749,10 +754,6 @@ CREATE TABLE `tfrec` (
   `FinishTime` datetime DEFAULT current_timestamp() COMMENT '完成時間',
   `isCorrect` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- 表的关系 `tfrec`:
---
 
 --
 -- 插入之前先把表清空（truncate） `tfrec`
@@ -770,14 +771,16 @@ INSERT INTO `tfrec` (`tfID`, `UserID`, `UserAnswer`, `FinishTime`, `isCorrect`) 
 (3, 1, 0, '2025-06-01 17:38:50', 1),
 (3, 7, 0, '2025-06-01 16:40:55', 1),
 (4, 1, 0, '2025-06-01 17:38:53', 1),
-(4, 7, 0, '2025-06-01 16:40:55', 0);
+(4, 7, 0, '2025-06-01 16:40:55', 0),
+(9, 1, 0, '2026-01-04 17:49:41', 1);
 
 -- --------------------------------------------------------
 
 --
 -- 表的结构 `user`
 --
--- 创建时间： 2025-11-08 14:25:27
+-- 创建时间： 2026-01-04 09:36:27
+-- 最后更新： 2026-01-04 09:56:01
 --
 
 DROP TABLE IF EXISTS `user`;
@@ -788,15 +791,12 @@ CREATE TABLE `user` (
   `Password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '密碼 (加密儲存)',
   `JoinDate` datetime DEFAULT current_timestamp() COMMENT '註冊時間',
   `Status` enum('Student','Teacher','Admin') NOT NULL DEFAULT 'Student' COMMENT '使用者身份',
+  `Region` varchar(20) DEFAULT NULL COMMENT '地區/縣市（用於地區排行榜）',
   `reset_token` varchar(255) DEFAULT NULL,
   `token_expire` datetime DEFAULT NULL,
   `AvatarURL` varchar(255) DEFAULT NULL,
   `BackgroundURL` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- 表的关系 `user`:
---
 
 --
 -- 插入之前先把表清空（truncate） `user`
@@ -807,14 +807,14 @@ TRUNCATE TABLE `user`;
 -- 转存表中的数据 `user`
 --
 
-INSERT INTO `user` (`UserID`, `Username`, `Email`, `Password`, `JoinDate`, `Status`, `reset_token`, `token_expire`, `AvatarURL`, `BackgroundURL`) VALUES
-(1, 'alex', 'alex@gmail.com', '$2y$10$nUwpGDahd4Rla88tuy3mUOtmGX.yVDNtgKWqQeAngMncP4XvfvTQ6', '2025-05-28 22:22:00', 'Student', NULL, NULL, 'uploads/merchandise/68355939cf66e_image_head3.jpeg', 'uploads/merchandise/merchandise_683749815c5e5.png'),
-(2, 'hank', 'hank@gmail.com', '$2y$10$2dGIFIbmOL65KEA./lxvBe.3nHIySVjqH3D9kCZvGhMHk17m4BVfq', '2025-05-28 22:23:07', 'Teacher', NULL, NULL, NULL, NULL),
-(3, 'admin', 'admin@gmail.com', '$2y$10$pULs337051YRBXNcDyRWDeJHNeLJM6xc8OjKLJ1rlU44j/fO7Nrla', '2025-05-28 22:51:36', 'Admin', NULL, NULL, NULL, NULL),
-(4, 'ben', 'ed@gmail.com', '$2y$10$9ACtLuvG9Lu7eZQQ13E3d.gO7WyADT0KfkJl9.x/aKJKNnak7GSR2', '2025-05-28 22:53:54', 'Teacher', NULL, NULL, 'uploads/merchandise/683559ea0794c_image_head4.jpeg', NULL),
-(5, 'brenden', 'brenden1070146@gmail.com', '$2y$10$pPeAfYxQjgSFLcxGbAL6IOKLvyQZAVDkj1UJMlLHxZtqCme4P610m', '2025-05-29 00:41:32', 'Teacher', NULL, NULL, NULL, NULL),
-(6, 'richguy', 'r@g', '$2y$10$QvgX9QEeftORqXFMPsY4wuzUyeGp9vxCrRBMELRpEbMqEf4d/EWsO', '2025-05-29 01:31:09', 'Student', NULL, NULL, 'uploads/merchandise/683559ea0794c_image_head4.jpeg', 'uploads/merchandise/merchandise_6837499fa3b86.png'),
-(7, 'lollol', 'lolol@gmail.com', '$2y$10$8hk5VRP04OGMPf0TsR8r9.Bb1m08jBhaCamjwiZZ3q7MruF1RMLzW', '2025-05-29 19:04:18', 'Student', NULL, NULL, NULL, NULL);
+INSERT INTO `user` (`UserID`, `Username`, `Email`, `Password`, `JoinDate`, `Status`, `Region`, `reset_token`, `token_expire`, `AvatarURL`, `BackgroundURL`) VALUES
+(1, 'alex', 'alex@gmail.com', '$2y$10$nUwpGDahd4Rla88tuy3mUOtmGX.yVDNtgKWqQeAngMncP4XvfvTQ6', '2025-05-28 22:22:00', 'Student', '台中市', NULL, NULL, 'uploads/merchandise/68355939cf66e_image_head3.jpeg', 'uploads/merchandise/merchandise_683749815c5e5.png'),
+(2, 'hank', 'hank@gmail.com', '$2y$10$2dGIFIbmOL65KEA./lxvBe.3nHIySVjqH3D9kCZvGhMHk17m4BVfq', '2025-05-28 22:23:07', 'Teacher', NULL, NULL, NULL, NULL, NULL),
+(3, 'admin', 'admin@gmail.com', '$2y$10$pULs337051YRBXNcDyRWDeJHNeLJM6xc8OjKLJ1rlU44j/fO7Nrla', '2025-05-28 22:51:36', 'Admin', NULL, NULL, NULL, NULL, NULL),
+(4, 'ben', 'ed@gmail.com', '$2y$10$9ACtLuvG9Lu7eZQQ13E3d.gO7WyADT0KfkJl9.x/aKJKNnak7GSR2', '2025-05-28 22:53:54', 'Teacher', NULL, NULL, NULL, 'uploads/merchandise/683559ea0794c_image_head4.jpeg', NULL),
+(5, 'brenden', 'brenden1070146@gmail.com', '$2y$10$pPeAfYxQjgSFLcxGbAL6IOKLvyQZAVDkj1UJMlLHxZtqCme4P610m', '2025-05-29 00:41:32', 'Teacher', NULL, NULL, NULL, NULL, NULL),
+(6, 'richguy', 'r@g', '$2y$10$QvgX9QEeftORqXFMPsY4wuzUyeGp9vxCrRBMELRpEbMqEf4d/EWsO', '2025-05-29 01:31:09', 'Student', '台中市', NULL, NULL, 'uploads/merchandise/683559ea0794c_image_head4.jpeg', 'uploads/merchandise/merchandise_6837499fa3b86.png'),
+(7, 'lollol', 'lolol@gmail.com', '$2y$10$8hk5VRP04OGMPf0TsR8r9.Bb1m08jBhaCamjwiZZ3q7MruF1RMLzW', '2025-05-29 19:04:18', 'Student', '台北市', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -822,6 +822,7 @@ INSERT INTO `user` (`UserID`, `Username`, `Email`, `Password`, `JoinDate`, `Stat
 -- 表的结构 `user_article_views`
 --
 -- 创建时间： 2025-11-08 14:25:26
+-- 最后更新： 2026-01-04 08:57:23
 --
 
 DROP TABLE IF EXISTS `user_article_views`;
@@ -830,10 +831,6 @@ CREATE TABLE `user_article_views` (
   `ArticleID` int(11) NOT NULL,
   `ViewTimestamp` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- 表的关系 `user_article_views`:
---
 
 --
 -- 插入之前先把表清空（truncate） `user_article_views`
@@ -846,9 +843,14 @@ TRUNCATE TABLE `user_article_views`;
 
 INSERT INTO `user_article_views` (`UserID`, `ArticleID`, `ViewTimestamp`) VALUES
 (1, 11, '2025-05-31 07:21:24'),
+(1, 15, '2025-11-11 10:09:25'),
+(1, 16, '2025-11-11 10:09:20'),
+(1, 19, '2025-11-11 10:09:12'),
+(1, 20, '2026-01-04 08:57:23'),
 (1, 21, '2025-06-01 09:38:09'),
 (1, 27, '2025-05-30 02:09:46'),
 (1, 28, '2025-05-30 02:09:33'),
+(1, 36, '2025-11-11 10:08:20'),
 (3, 11, '2025-05-29 12:21:43'),
 (3, 21, '2025-05-28 16:42:15'),
 (6, 11, '2025-05-29 11:25:52'),
@@ -927,6 +929,16 @@ ALTER TABLE `merchandise`
   ADD PRIMARY KEY (`ItemID`);
 
 --
+-- 表的索引 `monthly_ranking_rewards`
+--
+ALTER TABLE `monthly_ranking_rewards`
+  ADD PRIMARY KEY (`RewardID`),
+  ADD KEY `UserID` (`UserID`),
+  ADD KEY `Region` (`Region`),
+  ADD KEY `Month` (`Month`),
+  ADD KEY `Status` (`Status`);
+
+--
 -- 表的索引 `nearby_comment`
 --
 ALTER TABLE `nearby_comment`
@@ -954,6 +966,14 @@ ALTER TABLE `password_resets`
 ALTER TABLE `purchase`
   ADD PRIMARY KEY (`UserID`,`ItemID`),
   ADD KEY `ItemID` (`ItemID`);
+
+--
+-- 表的索引 `region_leaderboard`
+--
+ALTER TABLE `region_leaderboard`
+  ADD PRIMARY KEY (`Region`),
+  ADD KEY `idx_total_points` (`TotalPoints`),
+  ADD KEY `idx_average_points` (`AveragePoints`);
 
 --
 -- 表的索引 `system_settings`
@@ -1012,7 +1032,7 @@ ALTER TABLE `user_article_views`
 -- 使用表AUTO_INCREMENT `article`
 --
 ALTER TABLE `article`
-  MODIFY `ArticleID` int(11) NOT NULL AUTO_INCREMENT COMMENT '文章編號 (PK)', AUTO_INCREMENT=37;
+  MODIFY `ArticleID` int(11) NOT NULL AUTO_INCREMENT COMMENT '文章編號 (PK)', AUTO_INCREMENT=42;
 
 --
 -- 使用表AUTO_INCREMENT `choicequiz`
@@ -1030,7 +1050,7 @@ ALTER TABLE `commentarea`
 -- 使用表AUTO_INCREMENT `communitypost`
 --
 ALTER TABLE `communitypost`
-  MODIFY `PostID` int(11) NOT NULL AUTO_INCREMENT COMMENT '貼文編號 (PK)', AUTO_INCREMENT=10;
+  MODIFY `PostID` int(11) NOT NULL AUTO_INCREMENT COMMENT '貼文編號 (PK)', AUTO_INCREMENT=11;
 
 --
 -- 使用表AUTO_INCREMENT `fillquiz`
@@ -1045,16 +1065,22 @@ ALTER TABLE `merchandise`
   MODIFY `ItemID` int(11) NOT NULL AUTO_INCREMENT COMMENT '商品編號 (PK)', AUTO_INCREMENT=23;
 
 --
+-- 使用表AUTO_INCREMENT `monthly_ranking_rewards`
+--
+ALTER TABLE `monthly_ranking_rewards`
+  MODIFY `RewardID` int(11) NOT NULL AUTO_INCREMENT COMMENT '獎勵編號 (PK)';
+
+--
 -- 使用表AUTO_INCREMENT `nearby_comment`
 --
 ALTER TABLE `nearby_comment`
-  MODIFY `CommentID` int(11) NOT NULL AUTO_INCREMENT COMMENT '留言編號 (PK)', AUTO_INCREMENT=2;
+  MODIFY `CommentID` int(11) NOT NULL AUTO_INCREMENT COMMENT '留言編號 (PK)', AUTO_INCREMENT=3;
 
 --
 -- 使用表AUTO_INCREMENT `nearby_post`
 --
 ALTER TABLE `nearby_post`
-  MODIFY `PostID` int(11) NOT NULL AUTO_INCREMENT COMMENT '貼文編號 (PK)', AUTO_INCREMENT=7;
+  MODIFY `PostID` int(11) NOT NULL AUTO_INCREMENT COMMENT '貼文編號 (PK)', AUTO_INCREMENT=12;
 
 --
 -- 使用表AUTO_INCREMENT `password_resets`
@@ -1095,6 +1121,12 @@ ALTER TABLE `user`
 --
 ALTER TABLE `communitypost`
   ADD CONSTRAINT `fk_communitypost_article` FOREIGN KEY (`ArticleID`) REFERENCES `article` (`ArticleID`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- 限制表 `monthly_ranking_rewards`
+--
+ALTER TABLE `monthly_ranking_rewards`
+  ADD CONSTRAINT `monthly_ranking_rewards_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`) ON DELETE CASCADE;
 
 --
 -- 限制表 `nearby_comment`

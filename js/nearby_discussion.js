@@ -5,6 +5,9 @@ let userMarker;
 let postMarkers = [];
 let userLocation = null;
 let currentTileLayer = null; // 當前的地圖圖層
+let currentLocationCircle = null; // 當前位置圓圈
+let isUsingCurrentLocation = true; // 是否使用目前位置
+let geoapifyApiKey = '909bbe471da94f1a8eee1bd450c5c4bf'; // Geoapify API Key
 
 // Cookie 工具函數
 function setCookie(name, value, days) {
@@ -81,7 +84,13 @@ function initMap(location) {
     // 添加圓圈顯示搜尋範圍
     const radiusSelect = document.getElementById('radiusSelect');
     const radius = radiusSelect ? parseFloat(radiusSelect.value) : 5;
-    L.circle([location.lat, location.lng], {
+    
+    // 清除舊圓圈
+    if (currentLocationCircle) {
+        map.removeLayer(currentLocationCircle);
+    }
+    
+    currentLocationCircle = L.circle([location.lat, location.lng], {
         radius: radius * 1000, // 轉換為公尺
         color: '#4285F4',
         fillColor: '#4285F4',
@@ -103,13 +112,101 @@ function addMapTileLayer(mapStyle) {
         map.removeLayer(currentTileLayer);
     }
     
-    const geoapifyApiKey = '909bbe471da94f1a8eee1bd450c5c4bf';
     currentTileLayer = L.tileLayer(`https://maps.geoapify.com/v1/tile/${mapStyle}/{z}/{x}/{y}.png?apiKey=${geoapifyApiKey}`, {
         attribution: 'Powered by <a href="https://www.geoapify.com/" target="_blank">Geoapify</a>',
         maxZoom: 19
     });
     
     currentTileLayer.addTo(map);
+}
+
+// 更新位置顯示文字
+function updateLocationDisplay(lat, lng, locationName = null) {
+    const displayText = document.getElementById('locationDisplayText');
+    if (displayText) {
+        if (locationName) {
+            displayText.textContent = locationName;
+        } else {
+            displayText.textContent = `緯度: ${lat.toFixed(6)}, 經度: ${lng.toFixed(6)}`;
+        }
+    }
+}
+
+// 地點搜尋功能
+function searchLocation(query) {
+    if (!query || query.trim() === '') {
+        return;
+    }
+    
+    const searchBtn = document.getElementById('locationSearchBtn');
+    const searchResults = document.getElementById('locationSearchResults');
+    
+    searchBtn.disabled = true;
+    searchBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 搜尋中...';
+    searchResults.innerHTML = '';
+    searchResults.classList.remove('active');
+    
+    // 使用 Geoapify Geocoding API
+    const url = `https://api.geoapify.com/v1/geocode/search?text=${encodeURIComponent(query)}&lang=zh&limit=5&apiKey=${geoapifyApiKey}`;
+    
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            searchBtn.disabled = false;
+            searchBtn.innerHTML = '<i class="fas fa-search"></i> 搜尋';
+            
+            if (data.features && data.features.length > 0) {
+                searchResults.innerHTML = '';
+                data.features.forEach(feature => {
+                    const resultItem = document.createElement('div');
+                    resultItem.className = 'search-result-item';
+                    
+                    const name = feature.properties.name || feature.properties.formatted;
+                    const address = feature.properties.formatted || '';
+                    
+                    resultItem.innerHTML = `
+                        <div class="result-name">${escapeHtml(name)}</div>
+                        <div class="result-address">${escapeHtml(address)}</div>
+                    `;
+                    
+                    resultItem.addEventListener('click', function() {
+                        const lat = feature.geometry.coordinates[1];
+                        const lng = feature.geometry.coordinates[0];
+                        
+                        // 更新位置
+                        userLocation = { lat, lng };
+                        isUsingCurrentLocation = false;
+                        
+                        // 更新地圖
+                        initMap(userLocation);
+                        
+                        // 載入該位置的附近貼文
+                        const radiusSelect = document.getElementById('radiusSelect');
+                        const radius = radiusSelect ? parseFloat(radiusSelect.value) : 5;
+                        fetchNearbyPosts(lat, lng, radius);
+                        
+                        // 更新顯示
+                        updateLocationDisplay(lat, lng, name);
+                        
+                        // 隱藏搜尋結果
+                        searchResults.classList.remove('active');
+                        document.getElementById('locationSearchInput').value = name;
+                    });
+                    
+                    searchResults.appendChild(resultItem);
+                });
+                searchResults.classList.add('active');
+            } else {
+                searchResults.innerHTML = '<div class="search-result-item" style="color: #999; text-align: center; cursor: default;">找不到相關地點</div>';
+                searchResults.classList.add('active');
+            }
+        })
+        .catch(error => {
+            console.error('搜尋錯誤:', error);
+            searchBtn.disabled = false;
+            searchBtn.innerHTML = '<i class="fas fa-search"></i> 搜尋';
+            alert('搜尋失敗，請稍後再試');
+        });
 }
 
 // 顯示貼文列表
@@ -263,6 +360,7 @@ document.getElementById('enableLocationBtn')?.addEventListener('click', function
                 // 初始化地圖並載入貼文（不顯示在 URL）
                 document.getElementById('locationPrompt').style.display = 'none';
                 document.getElementById('contentWrapper').style.display = 'block';
+                document.getElementById('locationSearchSection').style.display = 'block';
                 
                 // 延遲一點時間確保容器已顯示
                 setTimeout(function() {
@@ -270,6 +368,7 @@ document.getElementById('enableLocationBtn')?.addEventListener('click', function
                     const radiusSelect = document.getElementById('radiusSelect');
                     const radius = radiusSelect ? parseFloat(radiusSelect.value) : 5;
                     fetchNearbyPosts(lat, lng, radius);
+                    updateLocationDisplay(lat, lng);
                 }, 100);
             },
             function(error) {
@@ -294,16 +393,23 @@ document.getElementById('refreshLocationBtn')?.addEventListener('click', functio
                 const lat = position.coords.latitude;
                 const lng = position.coords.longitude;
                 userLocation = { lat, lng };
+                isUsingCurrentLocation = true;
                 
                 // 更新 cookie
                 setCookie('user_lat', lat, 30);
                 setCookie('user_lng', lng, 30);
+                
+                // 切換到「目前位置」標籤
+                document.getElementById('currentLocationTab').click();
                 
                 // 重新初始化地圖並載入貼文（不顯示在 URL）
                 initMap(userLocation);
                 const radiusSelect = document.getElementById('radiusSelect');
                 const radius = radiusSelect ? parseFloat(radiusSelect.value) : 5;
                 fetchNearbyPosts(lat, lng, radius);
+                
+                // 更新顯示
+                updateLocationDisplay(lat, lng);
                 
                 document.getElementById('refreshLocationBtn').innerHTML = '<i class="fas fa-sync-alt"></i> 重新定位';
                 document.getElementById('refreshLocationBtn').disabled = false;
@@ -317,6 +423,50 @@ document.getElementById('refreshLocationBtn')?.addEventListener('click', functio
     }
 });
 
+// 標籤切換功能
+document.getElementById('currentLocationTab')?.addEventListener('click', function() {
+    // 切換標籤樣式
+    this.classList.add('active');
+    document.getElementById('searchLocationTab').classList.remove('active');
+    
+    // 切換內容面板
+    document.getElementById('currentLocationContent').classList.add('active');
+    document.getElementById('searchLocationContent').classList.remove('active');
+    
+    // 如果使用目前位置，重新載入貼文
+    if (isUsingCurrentLocation && userLocation) {
+        const radiusSelect = document.getElementById('radiusSelect');
+        const radius = radiusSelect ? parseFloat(radiusSelect.value) : 5;
+        fetchNearbyPosts(userLocation.lat, userLocation.lng, radius);
+        updateLocationDisplay(userLocation.lat, userLocation.lng);
+    }
+});
+
+document.getElementById('searchLocationTab')?.addEventListener('click', function() {
+    // 切換標籤樣式
+    this.classList.add('active');
+    document.getElementById('currentLocationTab').classList.remove('active');
+    
+    // 切換內容面板
+    document.getElementById('currentLocationContent').classList.remove('active');
+    document.getElementById('searchLocationContent').classList.add('active');
+});
+
+// 地點搜尋按鈕
+document.getElementById('locationSearchBtn')?.addEventListener('click', function() {
+    const query = document.getElementById('locationSearchInput').value.trim();
+    searchLocation(query);
+});
+
+// 按 Enter 鍵搜尋
+document.getElementById('locationSearchInput')?.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        const query = this.value.trim();
+        searchLocation(query);
+    }
+});
+
 // 搜尋範圍變更
 document.getElementById('radiusSelect')?.addEventListener('change', function() {
     if (userLocation) {
@@ -326,16 +476,14 @@ document.getElementById('radiusSelect')?.addEventListener('change', function() {
         fetchNearbyPosts(userLocation.lat, userLocation.lng, radius);
         
         // 重新繪製地圖圓圈
-        if (map) {
+        if (map && userLocation) {
             // 清除舊圓圈
-            map.eachLayer(function(layer) {
-                if (layer instanceof L.Circle) {
-                    map.removeLayer(layer);
-                }
-            });
+            if (currentLocationCircle) {
+                map.removeLayer(currentLocationCircle);
+            }
             
             // 添加新圓圈
-            L.circle([userLocation.lat, userLocation.lng], {
+            currentLocationCircle = L.circle([userLocation.lat, userLocation.lng], {
                 radius: radius * 1000,
                 color: '#4285F4',
                 fillColor: '#4285F4',

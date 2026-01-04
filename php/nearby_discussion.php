@@ -69,6 +69,36 @@ $conn->close();
                 </button>
             </div>
         </div>
+        
+        <!-- 地點搜尋區域 -->
+        <div class="location-search-section" id="locationSearchSection" style="display: <?php echo $location_permission ? 'block' : 'none'; ?>;">
+            <div class="search-tabs">
+                <button class="search-tab active" id="currentLocationTab">
+                    <i class="fas fa-crosshairs"></i> 目前位置
+                </button>
+                <button class="search-tab" id="searchLocationTab">
+                    <i class="fas fa-search"></i> 搜尋其他地點
+                </button>
+            </div>
+            
+            <div class="search-content" id="searchContent">
+                <div id="currentLocationContent" class="search-panel active">
+                    <p class="location-info-text">
+                        <i class="fas fa-info-circle"></i> 顯示您目前位置附近的討論
+                    </p>
+                </div>
+                
+                <div id="searchLocationContent" class="search-panel">
+                    <div class="location-search-box">
+                        <input type="text" id="locationSearchInput" class="search-input" placeholder="搜尋地點，例如：小琉球、墾丁、花蓮、台東...">
+                        <button type="button" class="search-submit-btn" id="locationSearchBtn">
+                            <i class="fas fa-search"></i> 搜尋
+                        </button>
+                    </div>
+                    <div id="locationSearchResults" class="search-results-list"></div>
+                </div>
+            </div>
+        </div>
 
         <div class="location-prompt" id="locationPrompt" style="display: <?php echo $location_permission ? 'none' : 'block'; ?>;">
             <div class="prompt-content">
@@ -111,6 +141,10 @@ $conn->close();
                             </select>
                         </label>
                     </div>
+                </div>
+                <div class="current-location-display" id="currentLocationDisplay">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span id="locationDisplayText">載入中...</span>
                 </div>
             </div>
 

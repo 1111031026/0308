@@ -67,6 +67,24 @@ function recordAnswer($userId, $questionId, $questionType, $userAnswer, $isCorre
         $stmtAchieve->bind_param('iiiiiiiii', $userId, $pointsIncrement, $choiceIncrement, $tfIncrement, $fillinIncrement, $pointsIncrement, $choiceIncrement, $tfIncrement, $fillinIncrement);
         if (!$stmtAchieve->execute()) {
             error_log("Execute update achievement failed for UserID $userId: " . $stmtAchieve->error);
+        } else {
+            // 答題成功後，更新用戶所在地區的統計數據
+            $user_region_sql = "SELECT Region FROM user WHERE UserID = ? AND Status = 'Student'";
+            $user_region_stmt = $conn->prepare($user_region_sql);
+            if ($user_region_stmt) {
+                $user_region_stmt->bind_param('i', $userId);
+                $user_region_stmt->execute();
+                $user_region_result = $user_region_stmt->get_result();
+                if ($user_region_row = $user_region_result->fetch_assoc()) {
+                    $user_region = $user_region_row['Region'];
+                    if ($user_region) {
+                        // 更新該地區的統計（非同步，避免影響答題回應速度）
+                        require_once 'update_region_stats.php';
+                        updateRegionStats($user_region);
+                    }
+                }
+                $user_region_stmt->close();
+            }
         }
         $stmtAchieve->close();
     }

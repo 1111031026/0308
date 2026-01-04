@@ -1,0 +1,651 @@
+:root {
+    --primary-color: #4CAF50;
+    --primary-hover: #45a049;
+    --secondary-color: #2196F3;
+    --text-dark: #333;
+    --text-muted: #666;
+    --text-light: #888;
+    --bg-light: #f8f9fa;
+    --border-color: #e0e0e0;
+    --success-color: #4CAF50;
+    --error-color: #f44336;
+    --warning-color: #ff9800;
+}
+
+.leaderboard-container {
+    max-width: 1200px;
+    margin: 80px auto 40px;
+    padding: 20px;
+}
+
+.leaderboard-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.leaderboard-header h1 {
+    font-size: 36px;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.leaderboard-header h1 i {
+    color: #FFD700;
+}
+
+.leaderboard-header .subtitle {
+    font-size: 16px;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+/* 地區設定頁面 */
+.region-setup-section {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.setup-card {
+    background: white;
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.setup-card h2 {
+    font-size: 28px;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.setup-card h2 i {
+    color: var(--primary-color);
+}
+
+.setup-description {
+    color: var(--text-muted);
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+.setup-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.setup-option {
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    transition: all 0.3s;
+    background: var(--bg-light);
+}
+
+.setup-option:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+}
+
+.option-icon {
+    font-size: 48px;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.setup-option h3 {
+    font-size: 20px;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+}
+
+.setup-option p {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.region-select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 16px;
+    margin-bottom: 15px;
+    transition: border-color 0.3s;
+}
+
+.region-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.get-location-btn {
+    width: 100%;
+    padding: 12px 20px;
+    background: var(--secondary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.get-location-btn:hover {
+    background: #1976D2;
+}
+
+.get-location-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 12px 20px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.submit-btn:hover {
+    background: var(--primary-hover);
+}
+
+.location-status {
+    margin-top: 15px;
+    min-height: 20px;
+}
+
+.error-message {
+    color: var(--error-color);
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+/* 排行榜顯示頁面 */
+.leaderboard-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.user-rank-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px;
+    padding: 30px;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.rank-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.rank-header h2 {
+    font-size: 24px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-region-badge {
+    background: rgba(255,255,255,0.2);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.rank-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.rank-item {
+    background: rgba(255,255,255,0.1);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.rank-label {
+    font-size: 14px;
+    opacity: 0.9;
+    margin-bottom: 10px;
+}
+
+.rank-value {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.rank-number {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 5px;
+}
+
+.rank-icon {
+    font-size: 36px;
+}
+
+.rank-total {
+    font-size: 18px;
+    opacity: 0.8;
+}
+
+.points {
+    color: #FFD700;
+}
+
+.average {
+    color: #87CEEB;
+}
+
+/* 排行榜表格 */
+.leaderboard-section {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.section-header {
+    margin-bottom: 25px;
+}
+
+.section-header h2 {
+    font-size: 24px;
+    color: var(--text-dark);
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-header h2 i {
+    color: #FFD700;
+}
+
+.section-description {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin: 0;
+}
+
+.no-data {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-muted);
+}
+
+.no-data i {
+    font-size: 48px;
+    margin-bottom: 15px;
+    opacity: 0.5;
+}
+
+.leaderboard-table {
+    overflow-x: auto;
+}
+
+.table-header {
+    display: grid;
+    grid-template-columns: 80px 1fr 150px 150px 120px;
+    gap: 15px;
+    padding: 15px;
+    background: var(--bg-light);
+    border-radius: 8px;
+    font-weight: 600;
+    color: var(--text-dark);
+    font-size: 14px;
+}
+
+/* 地區個人排名表格（3欄） */
+.leaderboard-section:first-of-type .table-header {
+    grid-template-columns: 80px 1fr 150px;
+}
+
+.leaderboard-section:first-of-type .table-row {
+    grid-template-columns: 80px 1fr 150px;
+}
+
+.table-body {
+    margin-top: 10px;
+}
+
+.table-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 150px 150px 120px;
+    gap: 15px;
+    padding: 20px 15px;
+    border-bottom: 1px solid var(--border-color);
+    transition: background 0.2s;
+    align-items: center;
+}
+
+.table-row:hover {
+    background: var(--bg-light);
+}
+
+.table-row.user-region {
+    background: #e8f5e9;
+    border-left: 4px solid var(--primary-color);
+}
+
+.col-rank {
+    text-align: center;
+}
+
+.medal {
+    font-size: 24px;
+}
+
+.medal-1 {
+    color: #FFD700;
+}
+
+.medal-2 {
+    color: #C0C0C0;
+}
+
+.medal-3 {
+    color: #CD7F32;
+}
+
+.rank-number {
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.col-region {
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.my-region-badge {
+    color: var(--primary-color);
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.col-total,
+.col-average,
+.col-students {
+    text-align: right;
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.col-username {
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.user-info-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-avatar-small {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.default-avatar-small {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.username-text {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.current-user-badge {
+    background: var(--primary-color);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.table-row.current-user {
+    background: #e8f5e9;
+    border-left: 4px solid var(--primary-color);
+    font-weight: 500;
+}
+
+/* 時間範圍切換 */
+.time-range-selector {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.range-btn {
+    flex: 1;
+    padding: 12px 20px;
+    text-align: center;
+    text-decoration: none;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-dark);
+    font-weight: 500;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.range-btn:hover {
+    border-color: var(--primary-color);
+    background: #f8f9fa;
+}
+
+.range-btn.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* 每月獎勵區塊 */
+.monthly-rewards-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 30px;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.rewards-header {
+    margin-bottom: 20px;
+}
+
+.rewards-header h2 {
+    font-size: 24px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rewards-header h2 i {
+    color: #FFD700;
+}
+
+.rewards-description {
+    font-size: 14px;
+    opacity: 0.9;
+    margin: 0;
+}
+
+.rewards-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.reward-item {
+    background: rgba(255,255,255,0.15);
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+}
+
+.reward-item.claimed {
+    opacity: 0.7;
+}
+
+.reward-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.reward-rank {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rank-text {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.reward-points {
+    font-size: 18px;
+    font-weight: bold;
+    color: #FFD700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.claim-form {
+    margin: 0;
+}
+
+.claim-btn {
+    padding: 10px 20px;
+    background: #FFD700;
+    color: #333;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.claim-btn:hover {
+    background: #FFC107;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.claimed-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.8);
+    font-size: 14px;
+}
+
+.claimed-date {
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .setup-options {
+        grid-template-columns: 1fr;
+    }
+    
+    .table-header,
+    .table-row {
+        grid-template-columns: 60px 1fr 100px 100px 80px;
+        font-size: 12px;
+    }
+    
+    .rank-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .time-range-selector {
+        flex-direction: column;
+    }
+    
+    .reward-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .reward-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .claim-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+

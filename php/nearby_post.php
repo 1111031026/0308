@@ -146,6 +146,85 @@ $conn->close();
         .get-location-btn:hover {
             background: #1976D2;
         }
+        .location-options {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .location-option-btn {
+            flex: 1;
+            padding: 10px 15px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        .location-option-btn:hover {
+            border-color: #2196F3;
+            background: #f5f5f5;
+        }
+        .location-option-btn.active {
+            background: #2196F3;
+            color: white;
+            border-color: #2196F3;
+        }
+        .location-section-content {
+            margin-bottom: 15px;
+        }
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .search-box input {
+            flex: 1;
+        }
+        .search-btn {
+            padding: 8px 20px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .search-btn:hover {
+            background: #45a049;
+        }
+        .search-results {
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            background: white;
+            display: none;
+        }
+        .search-results.active {
+            display: block;
+        }
+        .search-result-item {
+            padding: 10px 15px;
+            cursor: pointer;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.2s;
+        }
+        .search-result-item:hover {
+            background: #f5f5f5;
+        }
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+        .search-result-item .result-name {
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 3px;
+        }
+        .search-result-item .result-address {
+            font-size: 12px;
+            color: #666;
+        }
     </style>
 </head>
 <body>
@@ -180,15 +259,39 @@ $conn->close();
                 </div>
                 
                 <div class="location-inputs" id="locationInputs">
-                    <button type="button" class="get-location-btn" id="getLocationBtn">
-                        <i class="fas fa-map-marker-alt"></i> 取得目前位置
-                    </button>
+                    <div class="location-options">
+                        <button type="button" class="location-option-btn active" id="useCurrentLocationBtn">
+                            <i class="fas fa-map-marker-alt"></i> 使用目前位置
+                        </button>
+                        <button type="button" class="location-option-btn" id="searchLocationBtn">
+                            <i class="fas fa-search"></i> 搜尋其他地點
+                        </button>
+                    </div>
+                    
+                    <!-- 目前位置選項 -->
+                    <div id="currentLocationSection" class="location-section-content">
+                        <button type="button" class="get-location-btn" id="getLocationBtn">
+                            <i class="fas fa-crosshairs"></i> 取得目前位置
+                        </button>
+                    </div>
+                    
+                    <!-- 搜尋地點選項 -->
+                    <div id="searchLocationSection" class="location-section-content" style="display: none;">
+                        <div class="search-box">
+                            <input type="text" id="locationSearch" class="form-control" placeholder="搜尋地點，例如：小琉球、墾丁、花蓮...">
+                            <button type="button" class="search-btn" id="searchBtn">
+                                <i class="fas fa-search"></i> 搜尋
+                            </button>
+                        </div>
+                        <div id="searchResults" class="search-results"></div>
+                    </div>
+                    
                     <div id="map"></div>
                     <input type="hidden" id="latitude" name="latitude">
                     <input type="hidden" id="longitude" name="longitude">
                     <div class="form-group" style="margin-top: 15px;">
                         <label for="location_name">地點名稱（選填）</label>
-                        <input type="text" id="location_name" name="location_name" class="form-control" placeholder="例如：大安森林公園">
+                        <input type="text" id="location_name" name="location_name" class="form-control" placeholder="例如：小琉球海灘、大安森林公園">
                     </div>
                     <div class="location-info" id="locationInfo" style="display: none;">
                         <i class="fas fa-check-circle"></i> 位置已設定
@@ -204,9 +307,24 @@ $conn->close();
     </div>
 
     <script>
+        // Geoapify API Key
+        const geoapifyApiKey = '909bbe471da94f1a8eee1bd450c5c4bf';
+        
         let map;
         let marker;
         let userLocation = null;
+
+        // Cookie 工具函數
+        function getCookie(name) {
+            const nameEQ = name + "=";
+            const ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
 
         // 初始化地圖（使用 Geoapify + Leaflet）
         function initMap() {
@@ -217,18 +335,6 @@ $conn->close();
             map = L.map('map').setView(defaultLocation, 15);
             
             // 取得地圖樣式（從 Cookie 或預設值）
-            function getCookie(name) {
-                const nameEQ = name + "=";
-                const ca = document.cookie.split(';');
-                for (let i = 0; i < ca.length; i++) {
-                    let c = ca[i];
-                    while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-                    if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
-                }
-                return null;
-            }
-            
-            const geoapifyApiKey = '909bbe471da94f1a8eee1bd450c5c4bf';
             const mapStyle = getCookie('map_style') || 'osm-bright';
             L.tileLayer(`https://maps.geoapify.com/v1/tile/${mapStyle}/{z}/{x}/{y}.png?apiKey=${geoapifyApiKey}`, {
                 attribution: 'Powered by <a href="https://www.geoapify.com/" target="_blank">Geoapify</a>',
@@ -265,6 +371,22 @@ $conn->close();
             document.getElementById('locationInfo').style.display = 'block';
         }
 
+        // 切換位置選項（目前位置 vs 搜尋地點）
+        document.getElementById('useCurrentLocationBtn').addEventListener('click', function() {
+            this.classList.add('active');
+            document.getElementById('searchLocationBtn').classList.remove('active');
+            document.getElementById('currentLocationSection').style.display = 'block';
+            document.getElementById('searchLocationSection').style.display = 'none';
+            document.getElementById('searchResults').classList.remove('active');
+        });
+        
+        document.getElementById('searchLocationBtn').addEventListener('click', function() {
+            this.classList.add('active');
+            document.getElementById('useCurrentLocationBtn').classList.remove('active');
+            document.getElementById('currentLocationSection').style.display = 'none';
+            document.getElementById('searchLocationSection').style.display = 'block';
+        });
+        
         // 取得目前位置
         document.getElementById('getLocationBtn').addEventListener('click', function() {
             if (navigator.geolocation) {
@@ -277,12 +399,12 @@ $conn->close();
                         const lng = position.coords.longitude;
                         setLocation(lat, lng);
                         
-                        document.getElementById('getLocationBtn').textContent = '✓ 位置已取得';
+                        document.getElementById('getLocationBtn').innerHTML = '<i class="fas fa-check-circle"></i> 位置已取得';
                         document.getElementById('getLocationBtn').disabled = false;
                     },
                     function(error) {
                         alert('無法取得位置：' + error.message);
-                        document.getElementById('getLocationBtn').textContent = '取得目前位置';
+                        document.getElementById('getLocationBtn').innerHTML = '<i class="fas fa-crosshairs"></i> 取得目前位置';
                         document.getElementById('getLocationBtn').disabled = false;
                     }
                 );
@@ -290,18 +412,87 @@ $conn->close();
                 alert('您的瀏覽器不支援地理定位功能');
             }
         });
-
-        // Cookie 工具函數
-        function getCookie(name) {
-            const nameEQ = name + "=";
-            const ca = document.cookie.split(';');
-            for (let i = 0; i < ca.length; i++) {
-                let c = ca[i];
-                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+        
+        // 地點搜尋功能（使用 Geoapify Geocoding API）
+        function searchLocation(query) {
+            if (!query || query.trim() === '') {
+                return;
             }
-            return null;
+            
+            const searchBtn = document.getElementById('searchBtn');
+            const searchResults = document.getElementById('searchResults');
+            
+            searchBtn.disabled = true;
+            searchBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 搜尋中...';
+            searchResults.innerHTML = '';
+            searchResults.classList.remove('active');
+            
+            // 使用 Geoapify Geocoding API
+            const url = `https://api.geoapify.com/v1/geocode/search?text=${encodeURIComponent(query)}&lang=zh&limit=5&apiKey=${geoapifyApiKey}`;
+            
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    searchBtn.disabled = false;
+                    searchBtn.innerHTML = '<i class="fas fa-search"></i> 搜尋';
+                    
+                    if (data.features && data.features.length > 0) {
+                        searchResults.innerHTML = '';
+                        data.features.forEach(feature => {
+                            const resultItem = document.createElement('div');
+                            resultItem.className = 'search-result-item';
+                            
+                            const name = feature.properties.name || feature.properties.formatted;
+                            const address = feature.properties.formatted || '';
+                            
+                            resultItem.innerHTML = `
+                                <div class="result-name">${name}</div>
+                                <div class="result-address">${address}</div>
+                            `;
+                            
+                            resultItem.addEventListener('click', function() {
+                                const lat = feature.geometry.coordinates[1];
+                                const lng = feature.geometry.coordinates[0];
+                                setLocation(lat, lng);
+                                
+                                // 自動填入地點名稱
+                                document.getElementById('location_name').value = name;
+                                
+                                // 隱藏搜尋結果
+                                searchResults.classList.remove('active');
+                                document.getElementById('locationSearch').value = name;
+                            });
+                            
+                            searchResults.appendChild(resultItem);
+                        });
+                        searchResults.classList.add('active');
+                    } else {
+                        searchResults.innerHTML = '<div class="search-result-item" style="color: #999; text-align: center;">找不到相關地點</div>';
+                        searchResults.classList.add('active');
+                    }
+                })
+                .catch(error => {
+                    console.error('搜尋錯誤:', error);
+                    searchBtn.disabled = false;
+                    searchBtn.innerHTML = '<i class="fas fa-search"></i> 搜尋';
+                    alert('搜尋失敗，請稍後再試');
+                });
         }
+        
+        // 搜尋按鈕點擊事件
+        document.getElementById('searchBtn').addEventListener('click', function() {
+            const query = document.getElementById('locationSearch').value.trim();
+            searchLocation(query);
+        });
+        
+        // 按 Enter 鍵搜尋
+        document.getElementById('locationSearch').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const query = this.value.trim();
+                searchLocation(query);
+            }
+        });
 
         // 切換位置分享
         document.getElementById('shareLocation').addEventListener('change', function() {
@@ -317,16 +508,14 @@ $conn->close();
                 const cookieLng = getCookie('user_lng');
                 
                 if (cookieLat && cookieLng) {
-                    // 如果有 Cookie，自動設定位置
+                    // 如果有 Cookie，自動設定位置（使用目前位置模式）
                     const lat = parseFloat(cookieLat);
                     const lng = parseFloat(cookieLng);
                     setLocation(lat, lng);
                     
-                    // 隱藏「取得目前位置」按鈕，因為已經有位置了
-                    document.getElementById('getLocationBtn').style.display = 'none';
-                } else {
-                    // 沒有 Cookie，顯示「取得目前位置」按鈕
-                    document.getElementById('getLocationBtn').style.display = 'inline-block';
+                    // 切換到「使用目前位置」模式
+                    document.getElementById('useCurrentLocationBtn').click();
+                    document.getElementById('getLocationBtn').innerHTML = '<i class="fas fa-check-circle"></i> 位置已取得';
                 }
             } else {
                 locationInputs.classList.remove('active');

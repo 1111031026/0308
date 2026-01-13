@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_question'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $userInput = $_POST['user_input'] ?? '';
 
-    $url = 'https://api.deepseek.com/chat/completions';
+    $url = 'https://api.deepseek.com/v1/chat/completions';
 
     $data = [
         'model' => 'deepseek-chat',

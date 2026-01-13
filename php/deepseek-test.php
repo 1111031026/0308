@@ -209,7 +209,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $userInput .= "\n\n請根據這篇文章的內容來出題：" . $article_url;
         }
 
-        $url = 'https://api.deepseek.com/chat/completions';
+        $url = 'https://api.deepseek.com/v1/chat/completions';
 
         $data = [
             'model' => 'deepseek-chat',
